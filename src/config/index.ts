@@ -4,21 +4,21 @@ export const SITE_CONFIG: SiteConfig = {
   title: "Shifa Amankwa-Gabbey - Official Portfolio",
   author: "Shifa Amankwa-Gabbey",
   description:
-    "“I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
+    "I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
-    { text: "Experience", href: "#experience" },
-    { text: "Projects", href: "#projects" },
-    { text: "About", href: "#about" },
-    { text: "Profile", href: "#profile" },
-    { text: "Skills", href: "#skills" },
-    { text: "Beyond Engineering", href: "#beyondengineering" },
-    { text: "Initiatives and Service", href: "#initiativesandservice" },
+    { text: "experience", href: "#experience" },
+    { text: "projects", href: "#projects" },
+    { text: "profile", href: "#profile" },
+    { text: "skills", href: "#skills" },
+    { text: "beyond engineering", href: "#beyondengineering" },
+    { text: "initiatives and service", href: "#initiativesandservice" },
   ],
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
     { text: "Github", href: "https://github.com/shiiifa" },
+    { text: "Email", href: "shifa.gabbey@ashesi.edu.gh" },
   ],
   socialImage: "/zen-og.png",
   canonicalURL: "https://shifagabbey.vercel.app",
@@ -26,11 +26,11 @@ export const SITE_CONFIG: SiteConfig = {
 
 export const SITE_CONTENT: SiteContent = {
   hero: {
-    name: "Alejandro Múnez",
+    name: "Shifa Amankwa-Gabbey",
     specialty: "Mobile & Web Developer",
     summary:
-      "Developer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
-    email: "example@email.com",
+      "I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
+    email: "shifa.gabbey@ashesi.edu.gh",
   },
   experience: [
     {
@@ -88,9 +88,11 @@ export const SITE_CONTENT: SiteContent = {
   ],
   about: {
     description: `
-      Hi, I’m Alejandro Múnez, a passionate Mobile and Web Developer with a knack for crafting seamless digital experiences. With a strong background in both Android and iOS development, as well as front-end web technologies, I thrive in the intersection where creativity meets technology.
+      I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design. My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects.
 
-      Over the years, I’ve honed my skills in building robust, user-friendly applications that not only meet the needs of users but also push the boundaries of what’s possible. My projects range from innovative mobile applications to responsive web designs, all with a focus on performance, security, and scalability.
+In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment. From coursework to team projects, I’ve gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
+
+Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.
     `,
     image: "/alejandro-big.jpg",
   },
