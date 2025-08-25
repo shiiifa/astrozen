@@ -1,5 +1,13 @@
 import type { SiteConfig, SiteContent } from "../types";
 
+
+
+
+
+
+
+
+
 export const SITE_CONFIG: SiteConfig = {
   title: "Shifa Amankwa-Gabbey - Official Portfolio",
   author: "Shifa Amankwa-Gabbey",
@@ -15,34 +23,65 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "beyond engineering", href: "#beyondengineering" },
     { text: "initiatives and service", href: "#initiativesandservice" },
   ],
+
+
+
+
+
+
+
+
+
+
+
+
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
     { text: "Github", href: "https://github.com/shiiifa" },
     { text: "Email", href: "shifa.gabbey@ashesi.edu.gh" },
   ],
+
+
+
+
+
+
+
   socialImage: "/zen-og.png",
   canonicalURL: "https://shifagabbey.vercel.app",
 };
 
+
+
+
+
+
+
+
+
+
 export const SITE_CONTENT: SiteContent = {
   hero: {
     name: "Shifa Amankwa-Gabbey",
-    specialty: "Mobile & Web Developer",
+    specialty: "Technology | Creativity",
     summary:
       "I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
     email: "shifa.gabbey@ashesi.edu.gh",
   },
   experience: [
     {
-      company: "Zalmart",
-      position: "Lead Android Developer",
-      startDate: "May 2018",
-      endDate: "Sept 2020",
+      company: "Kuapa Kokoo Limited",
+      position: "Management Information Systems Intern",
+      startDate: "June 2025",
+      endDate: "August 2025",
       summary: [
-        "Implemented advanced memory management and code optimization techniques, resulting in a reduction in application load time by 40% and a decrease in crashes by 25%. This significantly improved user experience and increased user retention by 20%.",
-        "I led a team of developers in building and integrating new features using Jetpack Android components such as LiveData and ViewModel. This enabled us to build scalable and maintainable applications, reducing the crash rate by 20% and speeding up the time to delivery of new features by 15%.",
-        "Integrated Google Pay for in-app purchases, resulting in a 35% increase in mobile transaction revenue. Additionally, implemented Firebase Analytics to gain insights into user behavior, enabling data-driven optimizations and a 30% increase in user retention.",
+        "Gained first-time exposure to professional IT systems, database management, and server operations.",
+        "Contributed to district-level data reporting, SQL database structuring (via phpMyAdmin), QR code generation with JavaScript, and network/software maintenance",
+        "Extended into an attachment role, supporting the development of an asset and inventory tracking system for the company.",
       ],
+
+
+
     },
     {
       company: "Bankit",
@@ -63,28 +102,39 @@ export const SITE_CONTENT: SiteContent = {
         "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
     },
   ],
+  
   projects: [
     {
-      name: "Spotifu Music",
-      summary: "A music streaming app that emulates Spotify's core features.",
+      name: "Ashesi Multipurpose Reservation System",
+      summary: "Developed a centralised platform with a team of three to streamline student access to Ashesi’s resources. The system validated logins and organised reservations into Human-Based Services (e.g., Career Services, Peer Tutoring) and Remote Services (e.g., Housing, Classroom Booking). By redirecting users seamlessly to the right URLs, the platform simplified navigation, improved efficiency, and addressed a common challenge for students managing multiple resource portals.",
       linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
+      linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
       image: "/spotifu.png",
     },
     {
-      name: "Shopp App",
-      summary: "An e-commerce platform that replicates Shopify's key features.",
+      name: "Ashesi Student Information System",
+      summary: "Worked with a team of three to prototype a system modeled after Ashesi’s CAMU Student Information System. The project applied propositional logic from discrete mathematics to guide course enrollment decisions by validating user inputs, checking prerequisites, GPA, and grades, and automating decision-making. The system also featured robust error-handling for credentials, ensuring reliability and accuracy.",
       linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
+      linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/shopify-clon.png",
     },
     {
-      name: "ClonTagram",
-      summary: "A social network that replicates the features of Instagram",
+      name: "ShellTrivia",
+      summary: "Developed a GUI-based trivia game with four levels, testing players on music, film, sports, current affairs, and general knowledge. The game awarded or deducted “shells” (points) based on correct or incorrect answers, allowed users to select categories, and featured a Leaderboard to track high scores. Built using Tkinter, the project applied concepts of iteration, persistence, and data structures while strengthening my skills in interactive application design.",
       linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
+      linkSource: "https://github.com/shiiifa/ShellTrivia",
       image: "/clone-ig.png",
     },
+
+        {
+      name: "Cyber Threat Dynamics in VANETs",
+      summary: "Modeled malware spread in Vehicular Ad-Hoc Networks (VANETs) using an SEIR-S framework, analyzing key parameters and wireless modes (Wi-Fi, Bluetooth, Cellular). Findings highlighted vulnerabilities in connected cars like Tesla and pointed to strategies for stronger vehicular cybersecurity.",
+      linkPreview: "/",
+      linkSource: "https://github.com/shiiifa/MalwareSimulation",
+      image: "/clone-ig.png",
+    },
+
+
   ],
   about: {
     description: `
