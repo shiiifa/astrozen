@@ -1,26 +1,27 @@
 import type { SiteConfig, SiteContent } from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Alejandro Múnez — Mobile & Web Developer",
-  author: "Alejandro Múnez Cuntez",
+  title: "Shifa Amankwa-Gabbey - Official Portfolio",
+  author: "Shifa Amankwa-Gabbey",
   description:
-    "Software Engineer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
+    "“I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
     { text: "Experience", href: "#experience" },
     { text: "Projects", href: "#projects" },
     { text: "About", href: "#about" },
+    { text: "Profile", href: "#profile" },
+    { text: "Skills", href: "#skills" },
+    { text: "Beyond Engineering", href: "#beyondengineering" },
+    { text: "Initiatives and Service", href: "#initiativesandservice" },
   ],
   socialLinks: [
-    { text: "Twitter", href: "https://github.com/immois/astro-zen" },
-    { text: "LinkedIn", href: "https://github.com/immois/astro-zen" },
-    { text: "Github", href: "https://github.com/immois/astro-zen" },
-    { text: "Youtube", href: "https://github.com/immois/astro-zen" },
-    { text: "Dribbble", href: "https://github.com/immois/astro-zen" },
+    { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
+    { text: "Github", href: "https://github.com/shiiifa" },
   ],
   socialImage: "/zen-og.png",
-  canonicalURL: "https://astro-zen.vercel.app",
+  canonicalURL: "https://shifagabbey.vercel.app",
 };
 
 export const SITE_CONTENT: SiteContent = {
