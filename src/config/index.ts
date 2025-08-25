@@ -20,7 +20,7 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "projects", href: "#projects" },
     { text: "profile", href: "#profile" },
     { text: "skills", href: "#skills" },
-    { text: "beyond engineering", href: "#beyondengineering" },
+    { text: "beyond engineering", href: "/beyond-engineering" },
     { text: "initiatives and service", href: "#initiativesandservice" },
   ],
 
