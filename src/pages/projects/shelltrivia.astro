@@ -1,0 +1,123 @@
+---
+import "../../styles/global.css"; 
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto px-5 py-24">
+    <!-- Back button -->
+    <a href="/#projects" class="inline-flex items-center text-primary hover:text-white mb-8 transition-colors">
+      ← Back to Projects
+    </a>
+    
+    <!-- Project header -->
+    <header class="mb-12">
+      <h1 class="mb-6 font-serif text-5xl font-bold text-white md:text-6xl">
+        ShellTrivia
+      </h1>
+      <p class="text-lg text-neutral leading-relaxed">
+        Developed a GUI-based trivia game with four levels, testing players on music, film, sports, current affairs, and general knowledge. The game awarded or deducted "shells" (points) based on correct or incorrect answers.
+      </p>
+    </header>
+
+    <!-- Project image -->
+    <div class="mb-12 rounded-2xl overflow-hidden bg-[#1c232d]/85 p-8">
+      <Image
+        class="w-full h-auto rounded-xl"
+        src="/clone-ig.png"
+        alt="ShellTrivia Game Interface"
+        width="800"
+        height="600"
+      />
+    </div>
+
+    <!-- Project details section -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Project Overview
+      </h2>
+      <div class="prose prose-invert max-w-none">
+        <p class="text-base text-neutral leading-relaxed mb-6">
+          ShellTrivia is an engaging, interactive trivia game that combines entertainment with learning across diverse knowledge domains. The game features a unique scoring system using "shells" as currency, creating an immersive gaming experience that motivates players to test and expand their knowledge.
+        </p>
+        <p class="text-base text-neutral leading-relaxed mb-6">
+          Built using Python's Tkinter framework, the application demonstrates strong principles of GUI design, user interaction handling, and data management. The game incorporates multiple difficulty levels and category selection, allowing players to customize their trivia experience based on their interests and expertise.
+        </p>
+        <p class="text-base text-neutral leading-relaxed">
+          The development process emphasized iterative design, data persistence for high score tracking, and implementation of core programming concepts including loops, conditionals, and data structures to create a polished, fully-functional gaming application.
+        </p>
+      </div>
+    </section>
+
+    <!-- Technologies used -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Technologies & Tools
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Python</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Tkinter</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">GUI Design</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Data Persistence</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key features -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Key Features
+      </h2>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Four difficulty levels with progressive challenge scaling</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Multiple knowledge categories: music, film, sports, current affairs, and general knowledge</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Dynamic "shells" point system with rewards and penalties</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Persistent leaderboard system tracking high scores across sessions</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Intuitive GUI interface built with Python Tkinter framework</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Links section -->
+    <section class="border-t border-neutral/20 pt-8">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="https://github.com/shiiifa/ShellTrivia"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]"
+        >
+          View Source Code
+        </a>
+        <a
+          href="/"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-full border border-primary text-primary px-8 py-4 font-medium hover:bg-primary hover:text-white transition-colors after:ml-2 after:content-[url(/external.svg)]"
+        >
+          Live Preview
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
