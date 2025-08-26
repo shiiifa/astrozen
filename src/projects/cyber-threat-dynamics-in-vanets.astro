@@ -1,0 +1,134 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto px-5 py-24">
+    <!-- Back button -->
+    <a href="/#projects" class="inline-flex items-center text-primary hover:text-white mb-8 transition-colors">
+      ← Back to Projects
+    </a>
+    
+    <!-- Project header -->
+    <header class="mb-12">
+      <h1 class="mb-6 font-serif text-5xl font-bold text-white md:text-6xl">
+        Cyber Threat Dynamics in VANETs
+      </h1>
+      <p class="text-lg text-neutral leading-relaxed">
+        Modeled malware spread in Vehicular Ad-Hoc Networks (VANETs) using an SEIR-S framework, analyzing key parameters and wireless modes. Findings highlighted vulnerabilities in connected cars and pointed to strategies for stronger vehicular cybersecurity.
+      </p>
+    </header>
+
+    <!-- Project image -->
+    <div class="mb-12 rounded-2xl overflow-hidden bg-[#1c232d]/85 p-8">
+      <Image
+        class="w-full h-auto rounded-xl"
+        src="/clone-ig.png"
+        alt="VANET Cybersecurity Research Visualization"
+        width="800"
+        height="600"
+      />
+    </div>
+
+    <!-- Project details section -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Research Overview
+      </h2>
+      <div class="prose prose-invert max-w-none">
+        <p class="text-base text-neutral leading-relaxed mb-6">
+          This cutting-edge research project explores the critical cybersecurity challenges facing modern vehicular networks. Using sophisticated mathematical modeling techniques, we analyzed how malware propagates through Vehicular Ad-Hoc Networks (VANETs), providing crucial insights for the future of autonomous and connected vehicle security.
+        </p>
+        <p class="text-base text-neutral leading-relaxed mb-6">
+          The SEIR-S (Susceptible-Exposed-Infected-Recovered-Susceptible) epidemiological framework was adapted and applied to model cyberthreat transmission across different wireless communication modes including Wi-Fi, Bluetooth, and cellular networks. This interdisciplinary approach combines network security, mathematical modeling, and automotive technology.
+        </p>
+        <p class="text-base text-neutral leading-relaxed">
+          Our findings reveal significant vulnerabilities in current connected vehicle architectures, particularly in high-end vehicles like Tesla, while proposing evidence-based strategies for enhancing vehicular cybersecurity infrastructure and protocols.
+        </p>
+      </div>
+    </section>
+
+    <!-- Technologies used -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Technologies & Methodologies
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Python</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">MATLAB</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Network Simulation</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Statistical Analysis</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">SEIR-S Modeling</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Cybersecurity</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Data Visualization</span>
+        </div>
+        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
+          <span class="text-white font-medium">Research Methods</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key findings -->
+    <section class="mb-12">
+      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
+        Key Research Findings
+      </h2>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Successfully modeled malware propagation patterns across different wireless communication modes</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Identified critical vulnerabilities in high-end connected vehicles including Tesla's network architecture</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Analyzed transmission dynamics across Wi-Fi, Bluetooth, and cellular communication protocols</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Developed evidence-based recommendations for enhanced vehicular cybersecurity strategies</p>
+        </li>
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
+          <p class="text-neutral">Applied epidemiological modeling techniques to cybersecurity threat assessment</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Links section -->
+    <section class="border-t border-neutral/20 pt-8">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="https://github.com/shiiifa/MalwareSimulation"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]"
+        >
+          View Source Code
+        </a>
+        <a
+          href="/"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-full border border-primary text-primary px-8 py-4 font-medium hover:bg-primary hover:text-white transition-colors after:ml-2 after:content-[url(/external.svg)]"
+        >
+          Research Documentation
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
