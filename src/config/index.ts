@@ -104,6 +104,7 @@ export const SITE_CONTENT: SiteContent = {
   ],
   
   projects: [
+    
     {
       name: "Ashesi Multipurpose Reservation System",
       summary: "Developed a centralised platform with a team of three to streamline student access to Ashesi’s resources. The system validated logins and organised reservations into Human-Based Services (e.g., Career Services, Peer Tutoring) and Remote Services (e.g., Housing, Classroom Booking). By redirecting users seamlessly to the right URLs, the platform simplified navigation, improved efficiency, and addressed a common challenge for students managing multiple resource portals.",
