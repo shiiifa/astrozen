@@ -1,18 +1,40 @@
 ---
+import Section from "@components/Section.astro";
 import { SITE_CONTENT } from "@config";
 import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
 import Projects from "@components/Projects.astro";
 import About from "@components/About.astro";
-
-
 import "../styles/global.css";
 ---
 
 <Layout>
-  <Hero {...SITE_CONTENT.hero} />
+ <Hero {...SITE_CONTENT.hero} />
+  
+  <!-- NEW: Profile Section -->
+  <Section text="Profile" href="profile">
+    <div class="text-neutral">
+      <p>Your personal bio, background, or introduction goes here...</p>
+    </div>
+  </Section>
+  
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
+  
+  <!-- NEW: Skills Section -->
+  <Section text="Skills" href="skills">
+    <div class="text-neutral">
+      <p>Your skills and technologies will go here...</p>
+    </div>
+  </Section>
+  
   <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
+  
+  <!-- NEW: Connect Section -->
+  <Section text="Let's Connect!" href="connect">
+    <div class="text-neutral">
+      <p>Contact form or information will go here...</p>
+    </div>
+  </Section>
 </Layout>

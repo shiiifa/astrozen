@@ -15,14 +15,14 @@ export const SITE_CONFIG: SiteConfig = {
     "I’m a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
-  navLinks: [
-    { text: "experience", href: "#experience" },
-    { text: "projects", href: "#projects" },
-    { text: "profile", href: "#profile" },
-    { text: "skills", href: "#skills" },
-    { text: "beyond engineering", href: "/beyond-engineering" },
-    { text: "initiatives and service", href: "#initiativesandservice" },
-  ],
+navLinks: [
+  { text: "profile", href: "#profile" },
+  { text: "experience", href: "#experience" },
+  { text: "projects", href: "#projects" },
+  { text: "skills", href: "#skills" },
+  { text: "beyond engineering", href: "/beyond-engineering" },
+  { text: "let's connect!", href: "#connect" }
+]
 
 
 
