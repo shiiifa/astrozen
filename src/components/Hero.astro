@@ -2,7 +2,7 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name } = Astro.props; // Removed unused specialty
+const { name } = Astro.props;
 ---
 
 <section class="py-24 md:py-32 text-center relative" id="#hero">
@@ -127,16 +127,15 @@ const { name } = Astro.props; // Removed unused specialty
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const typingText = document.querySelector('.typing-text');
+    const typingText = document.querySelector('.typing-text') as HTMLElement;
     
     if (!typingText) return;
     
     // Check if already animated (using sessionStorage)
     if (sessionStorage.getItem('typingAnimated')) {
-      // Set specialty text immediately
+      // Set specialty text immediately with proper typing
       typingText.textContent = 'Technology | Creativity';
-      typingText.style.width = '100%';
-      typingText.style.borderRight = 'none';
+      typingText.classList.add('typing-complete');
       return;
     }
     
