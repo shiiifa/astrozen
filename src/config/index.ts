@@ -8,7 +8,7 @@ export const SITE_CONFIG: SiteConfig = {
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
-    { text: "profile", href: "#profile" },
+    { text: "profile", href: "#profile" }, // CHANGED TO LOWERCASE
     { text: "experience", href: "#experience" },
     { text: "projects", href: "#projects" },
     { text: "skills", href: "#skills" },
@@ -67,28 +67,28 @@ export const SITE_CONTENT: SiteContent = {
   projects: [
     {
       name: "Ashesi Multipurpose Reservation System",
-      summary: "Centralized platform streamlining student access to campus resources with secure login validation.", // SHORTENED
+      summary: "Centralized platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
       image: "/spotifu.png",
     },
     {
       name: "Ashesi Student Information System",
-      summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.", // SHORTENED
+      summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/shopify-clon.png",
     },
     {
       name: "ShellTrivia",
-      summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.", // SHORTENED
+      summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/ShellTrivia",
       image: "/clone-ig.png",
     },
     {
       name: "Cyber Threat Dynamics in VANETs",
-      summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.", // SHORTENED
+      summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/clone-ig.png",
@@ -119,13 +119,13 @@ export const SITE_CONTENT: SiteContent = {
   ],
 
   about: {
-    description: `
-      I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design. My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects.
+    description: `I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design.
 
-In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment. From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
+My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects. In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment.
 
-Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.
-    `,
+From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
+
+Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.`, // CHANGED FORMATTING
     image: "/alejandro-big.jpg",
   },
 };
