@@ -1,16 +1,15 @@
 ---
 import type { SiteConfig } from "@types";
 
-type Props = Pick<SiteConfig, "author">; // ← ONLY author
+type Props = Pick<SiteConfig, "author">; // ← REMOVE socialLinks from here
 
-const { author } = Astro.props; // ← ONLY author
+const { author } = Astro.props; // ← ONLY author now
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="w-full border-t border-neutral/20 px-5 pt-5 pb-8 text-center text-white">
+  <!-- REMOVE THIS ENTIRE SOCIAL LINKS UL -->
   <p class="text-xs">
-    {author} © {currentYear}. <span class="text-neutral"
-      >Designed & Developed by</span
-    > Moisés Machuca
+    {author} © {currentYear}.
   </p>
 </footer>
