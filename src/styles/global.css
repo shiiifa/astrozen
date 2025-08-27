@@ -7,7 +7,7 @@
   --color-primary: #2563eb;
   --color-neutral: #94a3b8;
   --color-white: #e2e8f0;
-  --color-black: #0e141b;
+  --color-black: #2F0C3A;
 
   --text-xs: 0.875rem;
   --text-xs--line-height: 1.125rem;
@@ -50,4 +50,8 @@
       transform: translateY(0);
     }
   }
+}
+
+body {
+  background-color: #2F0C3A; /* Your deep purple */
 }
