@@ -5,10 +5,17 @@ import type { AboutProps, HeroProps } from "@types";
 type Props = AboutProps & Pick<HeroProps, "name">;
 
 const { description, image, name } = Astro.props;
+
+// Convert the description string into paragraphs by splitting on double newlines
+const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
 <div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
-  <p class="w-auto text-base text-neutral md:pr-5">{description}</p>
+  <div class="w-auto text-base text-neutral md:pr-5">
+    {paragraphs.map(paragraph => (
+      <p class="mb-4">{paragraph}</p>
+    ))}
+  </div>
   <div
     class="h-80 w-64 flex-shrink-0 rotate-[5deg] bg-white p-4 md:rotate-[7deg]"
   >
