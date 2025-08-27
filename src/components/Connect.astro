@@ -7,13 +7,13 @@ type Props = Pick<SiteConfig, "socialLinks">;
 const { socialLinks } = Astro.props;
 ---
 
-<Section text="Let's Connect!" href="connect">
+<Section text="let's connect!" href="connect">
   <div class="text-center"> <!-- ADDED text-center wrapper -->
     <p class="mb-8 text-base text-neutral">
       Feel free to reach out for collaborations or just a friendly hello!
     </p>
     
-    <ul class="flex flex-wrap justify-center gap-6 text-sm"> <!-- CHANGED justify-center -->
+    <ul class="flex flex-wrap justify-center gap-6 text-sm"> <!-- CHANGED to justify-center -->
       {
         socialLinks.map(({ text, href }) => (
           <li>
