@@ -6,11 +6,14 @@ const { name, specialty, summary, email } = Astro.props;
 ---
 
 <section class="py-24 md:py-32" id="#hero">
+  <!-- Animated Name with reduced font size -->
   <h1
-    class="mb-1.5 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-0 md:text-9xl"
+    class="mb-1.5 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:mb-0 md:text-8xl typing-animation"
+    id="animated-name"
   >
     {name}
   </h1>
+  
   <p
     class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
   >
@@ -21,7 +24,57 @@ const { name, specialty, summary, email } = Astro.props;
   </p>
 
   <a
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff]"
-    href={`mailto:${email}`}>Get in Touch</a
+    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff] hover:bg-primary/90 transition-colors duration-300"
+    href={`mailto:${email}`}
   >
+    Get in Touch
+  </a>
 </section>
+
+<style>
+  /* Typing animation */
+  .typing-animation {
+    overflow: hidden;
+    border-right: 3px solid #2563eb; /* Cursor effect */
+    white-space: nowrap;
+    animation: typing 2s steps(20, end), blink-cursor 0.75s step-end infinite;
+    width: 0;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-cursor {
+    from, to { border-color: transparent }
+    50% { border-color: #2563eb; }
+  }
+</style>
+
+<script>
+  // Enhanced typing animation with cleanup
+  document.addEventListener('DOMContentLoaded', () => {
+    const nameElement = document.getElementById('animated-name');
+    if (!nameElement) return;
+    
+    const fullName = nameElement.textContent;
+    nameElement.textContent = '';
+    nameElement.style.width = '0';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < fullName.length) {
+        nameElement.textContent += fullName.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100); // Adjust typing speed (100ms per character)
+      } else {
+        // Keep cursor blinking after typing completes
+        nameElement.style.animation = 'blink-cursor 0.75s step-end infinite';
+      }
+    };
+    
+    // Start animation after a brief delay
+    setTimeout(typeWriter, 500);
+  });
+</script>
