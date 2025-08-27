@@ -14,11 +14,9 @@ import "../styles/global.css";
 <Layout>
   <Hero {...SITE_CONTENT.hero} />
   
-  <!-- PROFILE SECTION (Now contains About Me content) -->
+  <!-- PROFILE SECTION (uses About component but labeled as Profile) -->
   <Section text="Profile" href="profile">
-    <div class="text-neutral">
-      <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
-    </div>
+    <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
   </Section>
   
   <Experience experience={SITE_CONTENT.experience} />
