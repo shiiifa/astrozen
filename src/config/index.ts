@@ -137,6 +137,30 @@ export const SITE_CONTENT: SiteContent = {
 
 
   ],
+
+  skills: [
+  {
+    category: "Graphic Design Software",
+    tools: "Canva, CapCut",
+    proficiency: "Skilled"
+  },
+  {
+    category: "Programming Languages", 
+    tools: "Python, Java, MATLAB, C-Programming",
+    proficiency: "Intermediate proficiency"
+  },
+  {
+    category: "Microsoft Office Suite",
+    tools: "Word, Excel, PowerPoint",
+    proficiency: "Skilled"
+  },
+  {
+    category: "Computer-Aided Design Software",
+    tools: "SolidWorks, Proteus, Autodesk Fusion 360, Kicad",
+    proficiency: "Intermediate proficiency"
+  }
+],
+
   about: {
     description: `
       I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design. My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects.
