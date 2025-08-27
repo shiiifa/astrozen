@@ -4,15 +4,15 @@ import type { HeaderProps } from "@types";
 
 type Props = HeaderProps;
 
-const { navLinks } = Astro.props; // Removed siteLogo since we're not using it
+const { navLinks } = Astro.props;
 ---
 
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Enlarged flickering name in header */}
-  <a href="/" aria-label="Home link" class="flicker-header-name text-xl font-bold">
-    Shifa Amankwa-Gabbey
+  {/* Function syntax with proper typing effect */}
+  <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
+    <span class="typing-effect">shifa_amankwa_gabbey();</span>
   </a>
 
   <button
@@ -46,42 +46,57 @@ const { navLinks } = Astro.props; // Removed siteLogo since we're not using it
   </nav>
 
 <style>
-  /* Enlarged flickering effect for header name */
-  .flicker-header-name {
-    font-family: var(--font-serif);
+  /* Programming/coding font style with yellow color */
+  .typing-header-name {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace';
     font-weight: bold;
-    color: white;
+    color: #E1AD01;
     text-decoration: none;
-    font-size: 1.25rem; /* Larger text size */
-    animation: header-flicker 4s ease-in-out infinite;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    display: inline-block;
+    min-width: 20ch; /* Fixed width to prevent layout shift */
+    height: 1.5rem; /* Fixed height */
   }
 
-  @keyframes header-flicker {
-    0%, 100% {
-      opacity: 1;
-      filter: brightness(1.1);
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+  /* Typing effect container */
+  .typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid transparent; /* No cursor */
+    width: 0;
+    animation: typing-loop 12s infinite;
+  }
+
+  @keyframes typing-loop {
+    /* Type for 3s (0% to 25%) */
+    0% {
+      width: 0;
     }
     20% {
-      opacity: 0.9;
-      filter: brightness(0.95);
-      text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff;
+      width: 20ch;
     }
-    40% {
-      opacity: 1;
-      filter: brightness(1.15);
-      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
+    25% {
+      width: 20ch;
     }
-    60% {
-      opacity: 0.95;
-      filter: brightness(1);
-      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    /* Pause for 3s (25% to 50%) */
+    45% {
+      width: 20ch;
     }
-    80% {
-      opacity: 1;
-      filter: brightness(1.08);
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    50% {
+      width: 20ch;
+    }
+    /* Erase for 3s (50% to 75%) */
+    70% {
+      width: 0;
+    }
+    75% {
+      width: 0;
+    }
+    /* Pause for 3s (75% to 100%) */
+    100% {
+      width: 0;
     }
   }
 </style>
@@ -103,7 +118,7 @@ const { navLinks } = Astro.props; // Removed siteLogo since we're not using it
     item?.addEventListener("click", toggleMenu);
   });
 
-  // Update navigation based on scroll position with Intersection Observer
+  // Update the navigation based on scroll position with Intersection Observer
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
