@@ -4,14 +4,14 @@ import type { HeaderProps } from "@types";
 
 type Props = HeaderProps;
 
-const { navLinks } = Astro.props; // Removed siteLogo since we're not using it
+const { navLinks } = Astro.props;
 ---
 
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Enlarged flickering name in header */}
-  <a href="/" aria-label="Home link" class="flicker-header-name text-xl font-bold">
+  {/* Programming font and enlarged flickering name in header */}
+  <a href="/" aria-label="Home link" class="flicker-header-name text-2xl font-bold tracking-tight">
     Shifa Amankwa-Gabbey
   </a>
 
@@ -46,42 +46,43 @@ const { navLinks } = Astro.props; // Removed siteLogo since we're not using it
   </nav>
 
 <style>
-  /* Enlarged flickering effect for header name */
+  /* Programming/coding font style with larger size */
   .flicker-header-name {
-    font-family: var(--font-serif);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace'; /* Coding fonts */
     font-weight: bold;
     color: white;
     text-decoration: none;
-    font-size: 1.25rem; /* Larger text size */
+    font-size: 1.5rem; /* Even larger - text-2xl */
+    letter-spacing: -0.5px; /* Tighter letter spacing like code */
     animation: header-flicker 4s ease-in-out infinite;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
   }
 
   @keyframes header-flicker {
     0%, 100% {
       opacity: 1;
       filter: brightness(1.1);
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
     }
     20% {
       opacity: 0.9;
       filter: brightness(0.95);
-      text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff;
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
     }
     40% {
       opacity: 1;
       filter: brightness(1.15);
-      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
+      text-shadow: 0 0 7px #ffffff, 0 0 14px #ffffff;
     }
     60% {
       opacity: 0.95;
       filter: brightness(1);
-      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
     }
     80% {
       opacity: 1;
       filter: brightness(1.08);
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
     }
   }
 </style>
