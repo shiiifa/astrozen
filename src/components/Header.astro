@@ -10,7 +10,7 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Function syntax with yellow color and smooth typing */}
+  {/* Function syntax with stepped typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
     <span class="typing-container">shifa_amankwa_gabbey();</span>
   </a>
@@ -63,7 +63,7 @@ const { navLinks } = Astro.props;
     position: relative;
   }
 
-  /* Create typing effect using pseudo-element */
+  /* Create stepped typing effect using pseudo-element */
   .typing-container::before {
     content: 'shifa_amankwa_gabbey();';
     position: absolute;
@@ -75,7 +75,7 @@ const { navLinks } = Astro.props;
     background: #240C2C;
     overflow: hidden;
     white-space: nowrap;
-    animation: typing-erase 9s ease-in-out infinite;
+    animation: typing-erase 9s linear infinite;
   }
 
   /* Make original text invisible - only pseudo-element shows */
@@ -84,24 +84,54 @@ const { navLinks } = Astro.props;
   }
 
   @keyframes typing-erase {
-    /* Type for 3s (0% to 33.3%) */
+    /* Type for 3s - stepped animation (character by character) */
     0% {
       width: 0;
     }
     33.3% {
       width: 100%;
     }
-    /* Pause for 3s (33.3% to 66.6%) */
+    /* Pause for 3s with full text visible */
     50% {
       width: 100%;
     }
     66.6% {
       width: 100%;
     }
-    /* Erase for 3s (66.6% to 100%) */
+    /* Erase for 3s - stepped animation (character by character) */
     100% {
       width: 0;
     }
+  }
+
+  /* Step-based typing animation */
+  .typing-container::before {
+    animation: 
+      typing 3s steps(22, end) forwards,
+      pause 3s 3s forwards,
+      erasing 3s 6s steps(22, end) forwards,
+      final-pause 3s 9s forwards;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes pause {
+    from { width: 100%; }
+    to { width: 100%; }
+  }
+
+  @keyframes erasing {
+    from { width: 100%; }
+    to { width: 0; }
+  }
+
+  @keyframes final-pause {
+    from { width: 0; }
+    to { width: 0; }
   }
 </style>
 
