@@ -5,14 +5,16 @@ import type { HeaderProps } from "@types";
 type Props = HeaderProps;
 
 const { navLinks } = Astro.props;
+
+const functionName = "shifa_amankwa_gabbey();";
 ---
 
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Function syntax with stepped typing effect */}
+  {/* Function syntax with real typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
-    <span class="typing-container">shifa_amankwa_gabbey();</span>
+    <span id="typing-text"></span>
   </a>
 
   <button
@@ -55,87 +57,71 @@ const { navLinks } = Astro.props;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
     display: inline-block;
-  }
-
-  /* Typing container */
-  .typing-container {
-    display: inline-block;
-    position: relative;
-  }
-
-  /* Create stepped typing effect using pseudo-element */
-  .typing-container::before {
-    content: 'shifa_amankwa_gabbey();';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    color: #E1AD01;
-    background: #240C2C;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing-erase 9s linear infinite;
-  }
-
-  /* Make original text invisible - only pseudo-element shows */
-  .typing-container {
-    color: transparent;
-  }
-
-  @keyframes typing-erase {
-    /* Type for 3s - stepped animation (character by character) */
-    0% {
-      width: 0;
-    }
-    33.3% {
-      width: 100%;
-    }
-    /* Pause for 3s with full text visible */
-    50% {
-      width: 100%;
-    }
-    66.6% {
-      width: 100%;
-    }
-    /* Erase for 3s - stepped animation (character by character) */
-    100% {
-      width: 0;
-    }
-  }
-
-  /* Step-based typing animation */
-  .typing-container::before {
-    animation: 
-      typing 3s steps(22, end) forwards,
-      pause 3s 3s forwards,
-      erasing 3s 6s steps(22, end) forwards,
-      final-pause 3s 9s forwards;
-    animation-iteration-count: infinite;
-  }
-
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  @keyframes pause {
-    from { width: 100%; }
-    to { width: 100%; }
-  }
-
-  @keyframes erasing {
-    from { width: 100%; }
-    to { width: 0; }
-  }
-
-  @keyframes final-pause {
-    from { width: 0; }
-    to { width: 0; }
+    min-height: 1.5rem; /* Prevent layout shift */
   }
 </style>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const typingElement = document.getElementById('typing-text');
+    if (!typingElement) return;
+
+    const fullText = "shifa_amankwa_gabbey();";
+    let currentState = 'typing';
+    let currentIndex = 0;
+    let lastUpdateTime = 0;
+    const typeSpeed = 100; // ms per character
+    const eraseSpeed = 80; // ms per character (slightly faster)
+    const pauseDuration = 3000; // 3 seconds pause
+
+    function updateTyping(timestamp) {
+      if (!lastUpdateTime) lastUpdateTime = timestamp;
+      
+      const elapsed = timestamp - lastUpdateTime;
+      const requiredTime = currentState === 'typing' ? typeSpeed : eraseSpeed;
+
+      if (elapsed >= requiredTime) {
+        lastUpdateTime = timestamp;
+
+        if (currentState === 'typing') {
+          if (currentIndex <= fullText.length) {
+            typingElement.textContent = fullText.slice(0, currentIndex);
+            currentIndex++;
+          } else {
+            currentState = 'pausing';
+            lastUpdateTime = timestamp;
+          }
+        } 
+        else if (currentState === 'pausing') {
+          if (elapsed >= pauseDuration) {
+            currentState = 'erasing';
+            lastUpdateTime = timestamp;
+          }
+        }
+        else if (currentState === 'erasing') {
+          if (currentIndex > 0) {
+            currentIndex--;
+            typingElement.textContent = fullText.slice(0, currentIndex);
+          } else {
+            currentState = 'final-pause';
+            lastUpdateTime = timestamp;
+          }
+        }
+        else if (currentState === 'final-pause') {
+          if (elapsed >= pauseDuration) {
+            currentState = 'typing';
+            lastUpdateTime = timestamp;
+          }
+        }
+      }
+
+      requestAnimationFrame(updateTyping);
+    }
+
+    // Start the animation
+    requestAnimationFrame(updateTyping);
+  });
+
   // Toggle mobile menu
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
