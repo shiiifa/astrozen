@@ -2,13 +2,13 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name, specialty } = Astro.props;
+const { name } = Astro.props; // Removed unused specialty
 ---
 
 <section class="py-24 md:py-32 text-center relative" id="#hero">
-  {/* Flickering Name */}
+  {/* Continuous Flickering Name */}
   <h1
-    class="mb-9 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:text-8xl flicker-text"
+    class="mb-9 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:text-8xl continuous-flicker"
     id="animated-name"
   >
     {name}
@@ -25,117 +25,72 @@ const { name, specialty } = Astro.props;
 </section>
 
 <style>
-  /* Light Bulb Flicker Effect */
-  .flicker-text {
-    opacity: 0;
-    animation: lightbulb-flicker 2.5s ease-out forwards;
+  /* Continuous Flicker Effect with White Glow */
+  .continuous-flicker {
+    animation: continuous-flicker 3s ease-in-out infinite;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
   }
 
-  @keyframes lightbulb-flicker {
-    0% {
-      opacity: 0;
-      text-shadow: 0 0 0px #E1AD01;
-      filter: brightness(0);
+  @keyframes continuous-flicker {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1.2);
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
     }
-    5% {
-      opacity: 0.1;
-      text-shadow: 0 0 2px #E1AD01;
-      filter: brightness(0.2);
+    2% {
+      opacity: 0.8;
+      filter: brightness(0.9);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    4% {
+      opacity: 1;
+      filter: brightness(1.3);
+      text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 45px #ffffff;
+    }
+    6% {
+      opacity: 0.9;
+      filter: brightness(1);
+      text-shadow: 0 0 8px #ffffff, 0 0 16px #ffffff;
+    }
+    8% {
+      opacity: 1;
+      filter: brightness(1.1);
+      text-shadow: 0 0 12px #ffffff, 0 0 24px #ffffff, 0 0 36px #ffffff;
     }
     10% {
-      opacity: 0;
-      text-shadow: 0 0 0px #E1AD01;
-      filter: brightness(0);
-    }
-    15% {
-      opacity: 0.3;
-      text-shadow: 0 0 5px #E1AD01;
-      filter: brightness(0.4);
-    }
-    20% {
-      opacity: 0.1;
-      text-shadow: 0 0 2px #E1AD01;
-      filter: brightness(0.2);
-    }
-    25% {
-      opacity: 0.5;
-      text-shadow: 0 0 8px #E1AD01, 0 0 16px #E1AD0140;
-      filter: brightness(0.7);
-    }
-    30% {
-      opacity: 0.2;
-      text-shadow: 0 0 3px #E1AD01;
-      filter: brightness(0.3);
-    }
-    35% {
-      opacity: 0.7;
-      text-shadow: 0 0 12px #E1AD01, 0 0 24px #E1AD0160;
-      filter: brightness(0.9);
-    }
-    40% {
-      opacity: 0.4;
-      text-shadow: 0 0 6px #E1AD01;
-      filter: brightness(0.5);
-    }
-    45% {
-      opacity: 0.9;
-      text-shadow: 0 0 15px #E1AD01, 0 0 30px #E1AD0180;
-      filter: brightness(1.1);
+      opacity: 0.95;
+      filter: brightness(1.05);
+      text-shadow: 0 0 9px #ffffff, 0 0 18px #ffffff;
     }
     50% {
-      opacity: 0.6;
-      text-shadow: 0 0 8px #E1AD01;
-      filter: brightness(0.7);
-    }
-    55% {
       opacity: 1;
-      text-shadow: 0 0 20px #E1AD01, 0 0 40px #E1AD01;
-      filter: brightness(1.3);
+      filter: brightness(1.1);
+      text-shadow: 0 0 11px #ffffff, 0 0 22px #ffffff, 0 0 33px #ffffff;
+    }
+    52% {
+      opacity: 0.85;
+      filter: brightness(0.95);
+      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
+    }
+    54% {
+      opacity: 1;
+      filter: brightness(1.25);
+      text-shadow: 0 0 14px #ffffff, 0 0 28px #ffffff, 0 0 42px #ffffff;
+    }
+    56% {
+      opacity: 0.92;
+      filter: brightness(1.02);
+      text-shadow: 0 0 7px #ffffff, 0 0 14px #ffffff;
+    }
+    58% {
+      opacity: 1;
+      filter: brightness(1.15);
+      text-shadow: 0 0 13px #ffffff, 0 0 26px #ffffff, 0 0 39px #ffffff;
     }
     60% {
-      opacity: 0.8;
-      text-shadow: 0 0 12px #E1AD01;
-      filter: brightness(1);
-    }
-    65% {
-      opacity: 1;
-      text-shadow: 0 0 18px #E1AD01, 0 0 36px #E1AD01;
-      filter: brightness(1.2);
-    }
-    70% {
-      opacity: 0.9;
-      text-shadow: 0 0 14px #E1AD01;
-      filter: brightness(1);
-    }
-    75% {
-      opacity: 1;
-      text-shadow: 0 0 16px #E1AD01, 0 0 32px #E1AD01;
-      filter: brightness(1.1);
-    }
-    80% {
-      opacity: 1;
-      text-shadow: 0 0 15px #E1AD01, 0 0 30px #E1AD01;
-      filter: brightness(1);
-    }
-    85% {
-      opacity: 1;
-      text-shadow: 0 0 14px #E1AD01, 0 0 28px #E1AD01;
-      filter: brightness(1);
-    }
-    90% {
-      opacity: 1;
-      text-shadow: 0 0 12px #E1AD01, 0 0 24px #E1AD01;
-      filter: brightness(1);
-    }
-    95% {
-      opacity: 1;
-      text-shadow: 0 0 10px #E1AD01, 0 0 20px #E1AD01;
-      filter: brightness(1);
-    }
-    100% {
-      opacity: 1;
-      text-shadow: 0 0 8px #E1AD01, 0 0 16px #E1AD01;
-      filter: brightness(1);
+      opacity: 0.97;
+      filter: brightness(1.07);
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
     }
   }
 
@@ -149,14 +104,14 @@ const { name, specialty } = Astro.props;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid #E1AD01;
-    animation: typing 2s steps(30, end) 2.5s forwards, blink-cursor 0.75s step-end infinite 2.5s;
+    border-right: 2px solid #ffffff;
+    animation: typing 2s steps(30, end) 1s forwards, blink-cursor 0.75s step-end infinite 1s;
     width: 0;
   }
 
   .typing-cursor {
     opacity: 0;
-    animation: blink-cursor 0.75s step-end infinite 2.5s;
+    animation: blink-cursor 0.75s step-end infinite 1s;
   }
 
   @keyframes typing {
@@ -172,19 +127,12 @@ const { name, specialty } = Astro.props;
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const nameElement = document.getElementById('animated-name');
-    const specialtyElement = document.getElementById('specialty-text');
     const typingText = document.querySelector('.typing-text');
     
-    if (!nameElement || !typingText) return;
+    if (!typingText) return;
     
     // Check if already animated (using sessionStorage)
-    if (sessionStorage.getItem('nameAnimated')) {
-      nameElement.style.animation = 'none';
-      nameElement.style.opacity = '1';
-      nameElement.style.textShadow = '0 0 8px #E1AD01, 0 0 16px #E1AD01';
-      nameElement.style.filter = 'brightness(1)';
-      
+    if (sessionStorage.getItem('typingAnimated')) {
       // Set specialty text immediately
       typingText.textContent = 'Technology | Creativity';
       typingText.style.width = '100%';
@@ -192,7 +140,7 @@ const { name, specialty } = Astro.props;
       return;
     }
     
-    sessionStorage.setItem('nameAnimated', 'true');
+    sessionStorage.setItem('typingAnimated', 'true');
     
     // Set the text to be typed
     typingText.textContent = 'Technology | Creativity';
