@@ -8,10 +8,17 @@ export interface SiteConfig extends HeaderProps {
   canonicalURL?: string;
 }
 
+export interface BeyondEngineeringProps {
+  name: string;
+  summary: string;
+  image: string;
+  linkDetails: string;
+}
 export interface SiteContent {
   hero: HeroProps;
   experience: ExperienceProps[];
   projects: ProjectProps[];
+  beyondEngineering: BeyondEngineeringProps[];
   about: AboutProps;
 }
 
@@ -36,6 +43,12 @@ export interface ProjectProps {
   image: string;
   linkPreview?: string;
   linkSource?: string;
+}
+export interface BeyondEngineeringProps {
+  name: string;
+  summary: string;
+  image: string;
+  linkDetails: string;
 }
 
 export interface AboutProps {

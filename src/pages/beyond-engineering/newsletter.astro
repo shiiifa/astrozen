@@ -1,0 +1,77 @@
+---
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout>
+  <section class="py-16">
+    <a href="/#beyond-engineering" class="mb-8 inline-flex items-center text-primary hover:underline">
+      <span class="mr-2">←</span>
+      Back to Beyond Engineering
+    </a>
+
+    <div class="mb-12">
+      <h1 class="mb-4 font-serif text-5xl font-bold text-white">Student Editor - Ashesi Law & Humanities Newsletter</h1>
+      <p class="text-xl text-neutral">Lead editorial efforts for the university's law and social sciences publication, curating content and mentoring writers.</p>
+    </div>
+
+    <div class="mb-12">
+      <Image
+        src="/newsletter.jpg"
+        alt="Newsletter Editing"
+        width={800}
+        height={400}
+        class="rounded-xl"
+      />
+    </div>
+
+    <div class="space-y-12 text-neutral">
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Editorial Leadership</h2>
+        <p class="mb-4">As Student Editor for Ashesi's Law & Humanities Newsletter, I spearhead the publication's content strategy while mentoring emerging writers in developing their voice and technical writing skills.</p>
+        <p>This role allows me to bridge my technical background with humanities education, creating content that resonates across disciplines.</p>
+      </div>
+      
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Key Responsibilities</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Lead content planning and editorial calendar management for quarterly publications
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Mentor 15+ student writers through the entire writing process from ideation to publication
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Conduct comprehensive editing and proofreading while maintaining authors' unique voices
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Coordinate with faculty advisors and design teams for seamless publication production
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Publication Impact</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Increased readership by 60% through strategic content distribution and engagement
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Published 4 editions featuring 20+ articles across legal analysis, social commentary, and interdisciplinary research
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Received university recognition for "Excellence in Student Publications"
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
