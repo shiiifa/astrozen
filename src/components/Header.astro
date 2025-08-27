@@ -1,6 +1,5 @@
 ---
 import Menu from "@icons/Menu.astro";
-import { Image } from "astro:assets";
 import type { HeaderProps } from "@types";
 
 type Props = HeaderProps;
@@ -11,14 +10,9 @@ const { siteLogo, navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  <a href="/" aria-label="Home link">
-    <Image
-      class="rounded-full"
-      src={siteLogo}
-      width="45"
-      height="45"
-      alt="website logo"
-    />
+  {/* Replaced circular logo with flickering name */}
+  <a href="/" aria-label="Home link" class="flicker-header-name">
+    Shifa Amankwa-Gabbey
   </a>
 
   <button
@@ -50,6 +44,46 @@ const { siteLogo, navLinks } = Astro.props;
       }
     </ul>
   </nav>
+
+<style>
+  /* Flickering effect for header name */
+  .flicker-header-name {
+    font-family: var(--font-serif);
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    animation: header-flicker 4s ease-in-out infinite;
+    text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+  }
+
+  @keyframes header-flicker {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1.1);
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
+    20% {
+      opacity: 0.9;
+      filter: brightness(0.95);
+      text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff;
+    }
+    40% {
+      opacity: 1;
+      filter: brightness(1.15);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    60% {
+      opacity: 0.95;
+      filter: brightness(1);
+      text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff;
+    }
+    80% {
+      opacity: 1;
+      filter: brightness(1.08);
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
+  }
+</style>
 
 <script>
   // Toggle mobile menu

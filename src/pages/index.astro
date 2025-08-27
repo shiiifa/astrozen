@@ -11,7 +11,7 @@ import Connect from "@components/Connect.astro";
 import { Image } from "astro:assets";
 import "../styles/global.css";
 
-// Beyond Engineering data for horizontal slideshow
+// Beyond Engineering data
 const beyondEngineeringItems = [
   {
     name: "TEDxAshesiUniversity Curator",
@@ -19,7 +19,7 @@ const beyondEngineeringItems = [
     linkPreview: "/beyond-engineering/tedx"
   },
   {
-    name: "Newsletter Editorial Team",
+    name: "Newsletter Editorial Team", 
     image: "/shopify-clon.png",
     linkPreview: "/beyond-engineering/newsletter"
   },
@@ -42,143 +42,46 @@ const beyondEngineeringItems = [
 ---
 
 <Layout>
-  <Hero {...SITE_CONTENT.hero} />
-  
-  <!-- PROFILE SECTION -->
+  {/* PROFILE SECTION AT THE VERY TOP */}
   <Section text="Profile" href="profile">
     <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
   </Section>
   
+  <Hero {...SITE_CONTENT.hero} />
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
   <Skills skills={SITE_CONTENT.skills} />
   
-  <!-- BEYOND ENGINEERING SECTION (Horizontal slideshow with arrows) -->
+  <!-- BEYOND ENGINEERING SECTION -->
   <Section text="Beyond Engineering" href="beyond-engineering">
-    <div class="relative">
-      {/* Navigation Arrows */}
-      <button id="beyondPrevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
-      <button id="beyondNextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Beyond Engineering Container */}
-      <div id="beyondContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
-        {
-          beyondEngineeringItems.map(({ name, image, linkPreview }) => (
-            <a
-              href={linkPreview}
-              class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
-            >
-              {/* Background pattern */}
-              <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
-              
-              {/* Image Only - No Text */}
-              <div class="relative z-10 w-full h-full">
-                <Image
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  src={image}
-                  alt={name}
-                  width={256}
-                  height={256}
-                  loading="lazy"
-                />
-              </div>
-              
-              {/* Hover overlay effect */}
-              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
-              
-              {/* Hidden title for accessibility */}
-              <span class="sr-only">{name}</span>
-            </a>
-          ))
-        }
-      </div>
+    <div class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+      {
+        beyondEngineeringItems.map(({ name, image, linkPreview }) => (
+          <a
+            href={linkPreview}
+            class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+          >
+            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 w-full h-full">
+              <Image
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src={image}
+                alt={name}
+                width={256}
+                height={256}
+                loading="lazy"
+              />
+            </div>
+            
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+            
+            <span class="sr-only">{name}</span>
+          </a>
+        ))
+      }
     </div>
   </Section>
   
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
 </Layout>
-
-<style>
-  /* Custom animations */
-  .group {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-  
-  .group:hover {
-    transform: translateY(-4px) scale(1.02);
-  }
-  
-  .group::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, transparent, var(--color-primary)/10, transparent);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    border-radius: 1rem;
-  }
-  
-  .group:hover::before {
-    opacity: 1;
-  }
-
-  /* Hide scrollbar but keep functionality */
-  #beyondContainer {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  #beyondContainer::-webkit-scrollbar {
-    display: none;
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const beyondContainer = document.getElementById('beyondContainer');
-    const beyondPrevBtn = document.getElementById('beyondPrevBtn');
-    const beyondNextBtn = document.getElementById('beyondNextBtn');
-    const beyondItemWidth = 256 + 24; // Width + gap
-
-    if (!beyondContainer || !beyondPrevBtn || !beyondNextBtn) return;
-
-    // Scroll to next item
-    beyondNextBtn.addEventListener('click', () => {
-      beyondContainer.scrollBy({ left: beyondItemWidth, behavior: 'smooth' });
-    });
-
-    // Scroll to previous item
-    beyondPrevBtn.addEventListener('click', () => {
-      beyondContainer.scrollBy({ left: -beyondItemWidth, behavior: 'smooth' });
-    });
-
-    // Hide arrows when at edges
-    const checkBeyondArrows = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
-      beyondPrevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
-      beyondNextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
-    };
-
-    beyondContainer.addEventListener('scroll', checkBeyondArrows);
-    checkBeyondArrows(); // Initial check
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        beyondContainer.scrollBy({ left: -beyondItemWidth, behavior: 'smooth' });
-      } else if (e.key === 'ArrowRight') {
-        beyondContainer.scrollBy({ left: beyondItemWidth, behavior: 'smooth' });
-      }
-    });
-  });
-</script>
