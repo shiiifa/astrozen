@@ -55,6 +55,8 @@ const { navLinks } = Astro.props;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
     display: inline-block;
+    min-width: 20ch; /* Fixed width to prevent layout shift */
+    height: 1.5rem; /* Fixed height */
   }
 
   /* Typing effect container */
@@ -64,32 +66,38 @@ const { navLinks } = Astro.props;
     white-space: nowrap;
     border-right: 2px solid transparent; /* No cursor */
     width: 0;
-    animation: 
-      typing 3s steps(22, end) forwards,
-      pause 3s 3s forwards,
-      erasing 3s 6s steps(22, end) forwards,
-      final-pause 3s 9s forwards;
-    animation-iteration-count: infinite;
+    animation: typing-loop 12s infinite;
   }
 
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 20ch; } /* 20 characters wide */
-  }
-
-  @keyframes pause {
-    from { width: 20ch; }
-    to { width: 20ch; }
-  }
-
-  @keyframes erasing {
-    from { width: 20ch; }
-    to { width: 0; }
-  }
-
-  @keyframes final-pause {
-    from { width: 0; }
-    to { width: 0; }
+  @keyframes typing-loop {
+    /* Type for 3s (0% to 25%) */
+    0% {
+      width: 0;
+    }
+    20% {
+      width: 20ch;
+    }
+    25% {
+      width: 20ch;
+    }
+    /* Pause for 3s (25% to 50%) */
+    45% {
+      width: 20ch;
+    }
+    50% {
+      width: 20ch;
+    }
+    /* Erase for 3s (50% to 75%) */
+    70% {
+      width: 0;
+    }
+    75% {
+      width: 0;
+    }
+    /* Pause for 3s (75% to 100%) */
+    100% {
+      width: 0;
+    }
   }
 </style>
 
@@ -110,7 +118,7 @@ const { navLinks } = Astro.props;
     item?.addEventListener("click", toggleMenu);
   });
 
-  // Update the navigation based on scroll position with Intersection Observer
+  // Update navigation based on scroll position with Intersection Observer
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
