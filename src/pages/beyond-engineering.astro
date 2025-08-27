@@ -1,11 +1,122 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Section from "@components/Section.astro";
+import { Image } from "astro:assets";
+import type { ProjectProps } from "@types";
+
+// Create some placeholder data for the duplicated projects
+const placeholderProjects = [
+  {
+    name: "Beyond Engineering Project 1",
+    summary: "This is a placeholder project for the Beyond Engineering section. We'll customize this content later.",
+    image: "/alejandro-big.jpg", // Using your existing image as placeholder
+    linkPreview: "/",
+    linkSource: "#"
+  },
+  {
+    name: "Beyond Engineering Project 2", 
+    summary: "Another placeholder project for the Beyond Engineering section. We'll replace this with actual content during customization.",
+    image: "/alejandro-big.jpg", // Using your existing image as placeholder
+    linkPreview: "/",
+    linkSource: "#"
+  }
+];
 ---
 
 <Layout>
-  <h1 class="text-4xl font-bold mb-6">Beyond Engineering</h1>
-  <p>
-    Add your experiences, stories, or anything you want to share beyond engineering here!
-  </p>
-  <!-- You can add more sections, images, or lists below -->
+  <Section text="Beyond Engineering" href="beyond-engineering">
+    <!-- First set of projects (duplicated from Featured Projects) -->
+    {
+      placeholderProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+        const top = 98 + index * 40;
+        return (
+          <div
+            style={`top: ${top}px;`}
+            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+          >
+            <div class="bg-difu relative z-[1] grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
+              <div class="px-6 pt-12">
+                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
+                  {name}
+                </h3>
+                <p class="text-base text-neutral">{summary}</p>
+                <div class="flex gap-5 pt-10 text-white">
+                  <a
+                    href={linkSource}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Source
+                  </a>
+                  <a
+                    href={linkPreview}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Preview
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-end justify-end overflow-hidden">
+                <Image
+                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="483"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+    
+    <!-- Second set of projects (another duplicate) -->
+    {
+      placeholderProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+        const top = 98 + (index + placeholderProjects.length) * 40;
+        return (
+          <div
+            style={`top: ${top}px;`}
+            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+          >
+            <div class="bg-difu relative z-[1] grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
+              <div class="px-6 pt-12">
+                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
+                  {name}
+                </h3>
+                <p class="text-base text-neutral">{summary}</p>
+                <div class="flex gap-5 pt-10 text-white">
+                  <a
+                    href={linkSource}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Source
+                  </a>
+                  <a
+                    href={linkPreview}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Preview
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-end justify-end overflow-hidden">
+                <Image
+                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="483"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </Section>
 </Layout>
