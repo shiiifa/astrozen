@@ -1,40 +1,95 @@
 ---
 import Section from "@components/Section.astro";
-import { SITE_CONTENT } from "@config";
+import { SITE_CONTENT, SITE_CONFIG } from "@config";
 import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
 import Projects from "@components/Projects.astro";
+import Skills from "@components/Skills.astro";
 import About from "@components/About.astro";
+import Connect from "@components/Connect.astro";
+import { Image } from "astro:assets";
 import "../styles/global.css";
+
+// Placeholder data for Beyond Engineering section
+const beyondEngineeringProjects = [
+  {
+    name: "Beyond Engineering Project 1",
+    summary: "This is a placeholder project for the Beyond Engineering section. We'll customize this content later.",
+    image: "/alejandro-big.jpg",
+    linkPreview: "/",
+    linkSource: "#"
+  },
+  {
+    name: "Beyond Engineering Project 2", 
+    summary: "Another placeholder project for the Beyond Engineering section. We'll replace this with actual content during customization.",
+    image: "/alejandro-big.jpg",
+    linkPreview: "/",
+    linkSource: "#"
+  }
+];
 ---
 
 <Layout>
- <Hero {...SITE_CONTENT.hero} />
+  <Hero {...SITE_CONTENT.hero} />
   
-  <!-- NEW: Profile Section -->
+  <!-- PROFILE SECTION -->
   <Section text="Profile" href="profile">
-    <div class="text-neutral">
-      <p>Your personal bio, background, or introduction goes here...</p>
-    </div>
+    <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
   </Section>
   
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
+  <Skills skills={SITE_CONTENT.skills} />
   
-  <!-- NEW: Skills Section -->
-  <Section text="Skills" href="skills">
-    <div class="text-neutral">
-      <p>Your skills and technologies will go here...</p>
-    </div>
+  <!-- BEYOND ENGINEERING SECTION -->
+  <Section text="Beyond Engineering" href="beyond-engineering">
+    {
+      beyondEngineeringProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+        const top = 98 + index * 40;
+        return (
+          <div
+            style={`top: ${top}px;`}
+            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+          >
+            <div class="bg-difu relative z-[1] grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
+              <div class="px-6 pt-12">
+                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
+                  {name}
+                </h3>
+                <p class="text-base text-neutral">{summary}</p>
+                <div class="flex gap-5 pt-10 text-white">
+                  <a
+                    href={linkSource}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Source
+                  </a>
+                  <a
+                    href={linkPreview}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    Preview
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-end justify-end overflow-hidden">
+                <Image
+                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="483"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
   </Section>
   
-  <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
-  
-  <!-- NEW: Connect Section -->
-  <Section text="Let's Connect!" href="connect">
-    <div class="text-neutral">
-      <p>Contact form or information will go here...</p>
-    </div>
-  </Section>
+  <Connect socialLinks={SITE_CONFIG.socialLinks} />
 </Layout>

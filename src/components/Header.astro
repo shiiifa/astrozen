@@ -9,7 +9,7 @@ const { siteLogo, navLinks } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6"
+  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
   <a href="/" aria-label="Home link">
     <Image
@@ -32,7 +32,7 @@ const { siteLogo, navLinks } = Astro.props;
   </button>
 
   <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-black px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
+    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-[#240C2C] px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
     id="main-menu"
   >
     <ul class="gap-2 sm:flex">
@@ -50,7 +50,6 @@ const { siteLogo, navLinks } = Astro.props;
       }
     </ul>
   </nav>
-</header>
 
 <script>
   // Toggle mobile menu
@@ -109,3 +108,4 @@ const { siteLogo, navLinks } = Astro.props;
     animation-range: 0 650px;
   }
 </style>
+</header>
