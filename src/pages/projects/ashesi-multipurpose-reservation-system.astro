@@ -1,13 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
 
 const project = SITE_CONTENT.projects.find(p => 
   p.name === "Ashesi Multipurpose Reservation System"
 );
+
+// Null check
 if (!project) {
   return Response.redirect('/404', 404);
 }
+
+// Dummy media files
+const mediaItems = [
+  "/clone-ig.png",
+  "/shopify-clon.png", 
+  "/spotifu.png",
+  "/alejandro-big.jpg",
+  "/clone-ig.png",
+  "/shopify-clon.png",
+  "/spotifu.png",
+  "/alejandro-big.jpg"
+];
 ---
 
 <Layout>
@@ -22,22 +37,63 @@ if (!project) {
     </header>
 
     <div class="prose prose-invert max-w-none">
-      <!-- Add your detailed project content here -->
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
-        <p class="text-neutral">Detailed description of the project...</p>
+        <p class="text-neutral">Developed a centralized platform with a team of three to streamline student access to Ashesi's resources. The system validated logins and organized reservations into Human-Based Services (e.g., Career Services, Peer Tutoring) and Remote Services (e.g., Housing, Classroom Booking).</p>
       </section>
 
       <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technologies Used</h2>
-        <p class="text-neutral">List of technologies and tools...</p>
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Features</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Secure login validation and user authentication</li>
+          <li>Dual reservation system for human and remote services</li>
+          <li>Seamless URL redirection to appropriate resource portals</li>
+          <li>User-friendly interface for easy navigation</li>
+          <li>Centralized access to multiple campus resources</li>
+        </ul>
       </section>
 
-      <div class="flex gap-4">
-        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90">
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Project media ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Frontend development with modern web technologies</li>
+          <li>Backend API integration for reservation management</li>
+          <li>Database design for user and resource management</li>
+          <li>Security protocols for user authentication</li>
+          <li>Responsive design for cross-device compatibility</li>
+        </ul>
+      </section>
+
+      <div class="flex gap-4 justify-center">
+        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
           View Source Code
         </a>
-        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10">
+        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
           Live Preview
         </a>
       </div>

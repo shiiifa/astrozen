@@ -44,88 +44,80 @@ export const SITE_CONTENT: SiteContent = {
         "Extended into an attachment role, supporting the development of an asset and inventory tracking system for the company.",
       ],
     },
-    {
-      company: "Bankit",
-      position: "Mobile Developer",
-      startDate: "Feb 2017",
-      endDate: "May 2018",
-      summary: [
-        "I designed and developed a mobile application using Flutter, allowing it to be deployed on both Android and iOS with a single codebase. This reduced development time by 50% and maintenance costs by 30%, facilitating a consistent user experience on both platforms.",
-        "I integrated biometric authentication and data encryption, significantly improving the security of user data. This implementation resulted in a 40% increase in user trust and a 25% reduction in unauthorized access attempts.",
-      ],
-    },
-    {
-      company: "Driveer",
-      position: "Frontend Developer",
-      startDate: "Jun 2015",
-      endDate: "Oct 2016",
-      summary:
-        "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
-    },
+    
   ],
   
   projects: [
     {
       name: "Ashesi Multipurpose Reservation System",
-      summary: "Centralized platform streamlining student access to campus resources with secure login validation.", // SHORTENED
+      summary: "Centralized platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
       image: "/spotifu.png",
     },
     {
       name: "Ashesi Student Information System",
-      summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.", // SHORTENED
+      summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/shopify-clon.png",
     },
     {
       name: "ShellTrivia",
-      summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.", // SHORTENED
+      summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/ShellTrivia",
       image: "/clone-ig.png",
     },
     {
       name: "Cyber Threat Dynamics in VANETs",
-      summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.", // SHORTENED
+      summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/clone-ig.png",
     },
+    {
+      name: "Arduino Buzzer Timer",
+      summary: "Countdown timer with 7-segment LED displays, buzzer, and potentiometer control for Circuits & Electronics.",
+      linkPreview: "/",
+      linkSource: "https://lnkd.in/dcDTycNE",
+      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
+    },
+    {
+      name: "Hydrogel Soil Analysis",
+      summary: "Statistical study of water retention capacity in different soils using hydrogel technology.",
+      linkPreview: "/",
+      linkSource: "#",
+      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
+    },
   ],
 
   skills: [
-    {
-      category: "Graphic Design Software",
-      tools: "Canva, CapCut",
-      proficiency: "Skilled"
-    },
-    {
-      category: "Programming Languages", 
-      tools: "Python, Java, MATLAB, C-Programming",
-      proficiency: "Intermediate proficiency"
-    },
-    {
-      category: "Microsoft Office Suite",
-      tools: "Word, Excel, PowerPoint",
-      proficiency: "Skilled"
-    },
-    {
-      category: "Computer-Aided Design Software",
-      tools: "SolidWorks, Proteus, Autodesk Fusion 360, Kicad",
-      proficiency: "Intermediate proficiency"
-    }
-  ],
+  {
+    category: "Technical Skills",
+    tools: "Programming Languages, CAD, PCB Design, Prototyping",
+    proficiency: "Advanced"
+  },
+  {
+    category: "Design & Creative Skills", 
+    tools: "Graphic Design, UI/UX, Creative Writing",
+    proficiency: "Skilled"
+  },
+  {
+    category: "Professional Skills",
+    tools: "Office Suite, Technical Writing, Collaboration Tools",
+    proficiency: "Expert"
+  }
+],
 
   about: {
-    description: `
-      I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design. My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects.
+    description: `I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design.
 
-In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment. From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
+My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects. In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment.
 
-Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.
-    `,
+From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
+
+Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.`,
     image: "/alejandro-big.jpg",
   },
 };

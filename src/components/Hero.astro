@@ -2,82 +2,106 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name, specialty } = Astro.props; // REMOVED summary and email
+const { name } = Astro.props;
 ---
 
-<section class="py-24 md:py-32 text-center" id="#hero">
-  <!-- Animated Name -->
+<section class="py-24 md:py-32 text-center relative" id="#hero">
+  {/* Continuous Flickering Name - Slower and Softer */}
   <h1
-    class="mb-1.5 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:mb-0 md:text-8xl"
+    class="mb-9 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:text-8xl continuous-flicker"
     id="animated-name"
   >
     {name}
   </h1>
-  
-  <p
-    class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
-  >
-    {specialty}
-  </p>
-  <!-- Summary text removed -->
 </section>
 
 <style>
-  /* Typing animation */
-  .typing-animation {
-    overflow: hidden;
-    border-right: 3px solid #E1AD01;
-    white-space: nowrap;
-    animation: typing 2.5s steps(30, end), blink-cursor 0.75s step-end infinite;
-    width: 0;
+  /* Continuous Flicker Effect with Softer White Glow */
+  .continuous-flicker {
+    animation: continuous-flicker 5s ease-in-out infinite; /* Slower frequency */
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff; /* Softer glow */
   }
 
-  .typing-complete {
-    border-right: none; /* Remove cursor after typing */
-    animation: none;
-    width: 100%;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink-cursor {
-    from, to { border-color: transparent }
-    50% { border-color: #E1AD01; }
+  @keyframes continuous-flicker {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1.1);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    5% {
+      opacity: 0.9;
+      filter: brightness(0.95);
+      text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff;
+    }
+    10% {
+      opacity: 1;
+      filter: brightness(1.15);
+      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
+    }
+    15% {
+      opacity: 0.95;
+      filter: brightness(1);
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
+    20% {
+      opacity: 1;
+      filter: brightness(1.08);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    25% {
+      opacity: 0.98;
+      filter: brightness(1.04);
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.06);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    55% {
+      opacity: 0.92;
+      filter: brightness(0.97);
+      text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff;
+    }
+    60% {
+      opacity: 1;
+      filter: brightness(1.18);
+      text-shadow: 0 0 7px #ffffff, 0 0 14px #ffffff;
+    }
+    65% {
+      opacity: 0.96;
+      filter: brightness(1.03);
+      text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
+    70% {
+      opacity: 1;
+      filter: brightness(1.12);
+      text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff;
+    }
+    75% {
+      opacity: 0.99;
+      filter: brightness(1.05);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    80% {
+      opacity: 1;
+      filter: brightness(1.09);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    85% {
+      opacity: 1;
+      filter: brightness(1.07);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    90% {
+      opacity: 1;
+      filter: brightness(1.05);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    95% {
+      opacity: 1;
+      filter: brightness(1.03);
+      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
   }
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const nameElement = document.getElementById('animated-name');
-    if (!nameElement) return;
-    
-    // Check if already animated (using sessionStorage)
-    if (sessionStorage.getItem('nameAnimated')) {
-      return; // Skip animation if already done in this session
-    }
-    
-    const fullName = nameElement.textContent;
-    nameElement.textContent = '';
-    nameElement.classList.add('typing-animation');
-    
-    let i = 0;
-    const typeWriter = () => {
-      if (i < fullName.length) {
-        nameElement.textContent += fullName.charAt(i);
-        i++;
-        setTimeout(typeWriter, 80); // Faster typing speed
-      } else {
-        // Animation complete
-        nameElement.classList.remove('typing-animation');
-        nameElement.classList.add('typing-complete');
-        sessionStorage.setItem('nameAnimated', 'true'); // Mark as animated
-      }
-    };
-    
-    // Start animation
-    setTimeout(typeWriter, 300);
-  });
-</script>

@@ -1,7 +1,6 @@
 ---
 import Section from "@components/Section.astro";
 import { SITE_CONTENT, SITE_CONFIG } from "@config";
-import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
 import Projects from "@components/Projects.astro";
@@ -11,29 +10,38 @@ import Connect from "@components/Connect.astro";
 import { Image } from "astro:assets";
 import "../styles/global.css";
 
-// Placeholder data for Beyond Engineering section
-const beyondEngineeringProjects = [
+// Beyond Engineering data
+const beyondEngineeringItems = [
   {
-    name: "Beyond Engineering Project 1",
-    summary: "This is a placeholder project for the Beyond Engineering section. We'll customize this content later.",
-    image: "/alejandro-big.jpg",
-    linkPreview: "/",
-    linkSource: "#"
+    name: "TEDxAshesiUniversity Curator",
+    image: "/clone-ig.png",
+    linkPreview: "/beyond-engineering/tedx"
   },
   {
-    name: "Beyond Engineering Project 2", 
-    summary: "Another placeholder project for the Beyond Engineering section. We'll replace this with actual content during customization.",
+    name: "Newsletter Editorial Team", 
+    image: "/shopify-clon.png",
+    linkPreview: "/beyond-engineering/newsletter"
+  },
+  {
+    name: "Spelling Bee Volunteer",
+    image: "/spotifu.png",
+    linkPreview: "/beyond-engineering/spelling-bee"
+  },
+  {
+    name: "Sage Literacy Foundation",
     image: "/alejandro-big.jpg",
-    linkPreview: "/",
-    linkSource: "#"
+    linkPreview: "/beyond-engineering/sage-foundation"
+  },
+  {
+    name: "Writer, Comma Period",
+    image: "/clone-ig.png",
+    linkPreview: "/beyond-engineering/writer"
   }
 ];
 ---
 
 <Layout>
-  <Hero {...SITE_CONTENT.hero} />
-  
-  <!-- PROFILE SECTION -->
+  {/* PROFILE SECTION AT THE VERY TOP */}
   <Section text="Profile" href="profile">
     <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
   </Section>
@@ -44,51 +52,33 @@ const beyondEngineeringProjects = [
   
   <!-- BEYOND ENGINEERING SECTION -->
   <Section text="Beyond Engineering" href="beyond-engineering">
-    {
-      beyondEngineeringProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
-        const top = 98 + index * 40;
-        return (
-          <div
-            style={`top: ${top}px;`}
-            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+    <div class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+      {
+        beyondEngineeringItems.map(({ name, image, linkPreview }) => (
+          <a
+            href={linkPreview}
+            class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
           >
-            <div class="bg-difu relative z-[1] grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
-              <div class="px-6 pt-12">
-                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
-                  {name}
-                </h3>
-                <p class="text-base text-neutral">{summary}</p>
-                <div class="flex gap-5 pt-10 text-white">
-                  <a
-                    href={linkSource}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    Source
-                  </a>
-                  <a
-                    href={linkPreview}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    Preview
-                  </a>
-                </div>
-              </div>
-              <div class="flex items-end justify-end overflow-hidden">
-                <Image
-                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
-                  src={image}
-                  alt={name}
-                  width="736"
-                  height="483"
-                />
-              </div>
+            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 w-full h-full">
+              <Image
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src={image}
+                alt={name}
+                width={256}
+                height={256}
+                loading="lazy"
+              />
             </div>
-          </div>
-        );
-      })
-    }
+            
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+            
+            <span class="sr-only">{name}</span>
+          </a>
+        ))
+      }
+    </div>
   </Section>
   
   <Connect socialLinks={SITE_CONFIG.socialLinks} />

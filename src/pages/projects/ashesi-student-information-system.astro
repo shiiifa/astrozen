@@ -1,13 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
 
 const project = SITE_CONTENT.projects.find(p => 
   p.name === "Ashesi Student Information System"
 );
+
+// Null check
 if (!project) {
   return Response.redirect('/404', 404);
 }
+
+// Dummy media files
+const mediaItems = [
+  "/clone-ig.png",
+  "/shopify-clon.png", 
+  "/spotifu.png",
+  "/alejandro-big.jpg",
+  "/clone-ig.png",
+  "/shopify-clon.png",
+  "/spotifu.png",
+  "/alejandro-big.jpg"
+];
 ---
 
 <Layout>
@@ -24,7 +39,7 @@ if (!project) {
     <div class="prose prose-invert max-w-none">
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
-        <p class="text-neutral">A comprehensive student information system prototype modeled after Ashesi's CAMU platform, designed to streamline course enrollment and academic management.</p>
+        <p class="text-neutral">Worked with a team of three to prototype a system modeled after Ashesi's CAMU Student Information System. The project applied propositional logic from discrete mathematics to guide course enrollment decisions by validating user inputs, checking prerequisites, GPA, and grades.</p>
       </section>
 
       <section class="mb-12">
@@ -32,18 +47,45 @@ if (!project) {
         <ul class="text-neutral list-disc list-inside space-y-2">
           <li>Propositional logic-based course enrollment validation</li>
           <li>Automated prerequisite checking and GPA requirements</li>
-          <li>Robust error handling for credential verification</li>
+          <li>Robust error-handling for credential verification</li>
           <li>User-friendly interface for academic planning</li>
+          <li>Decision automation for course registration</li>
         </ul>
       </section>
 
+      <!-- MEDIA GALLERY SECTION -->
       <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technologies Used</h2>
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Project media ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Python</li>
-          <li>Discrete Mathematics Logic Systems</li>
-          <li>Data Structures & Algorithms</li>
-          <li>User Interface Design</li>
+          <li>Discrete mathematics logic systems implementation</li>
+          <li>Python programming for core functionality</li>
+          <li>Data structures for course and student management</li>
+          <li>User interface design for academic planning</li>
+          <li>Error handling and validation systems</li>
         </ul>
       </section>
 

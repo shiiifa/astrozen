@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+// Dummy media files
+const mediaItems = [
+  "/clone-ig.png",
+  "/shopify-clon.png", 
+  "/spotifu.png",
+  "/alejandro-big.jpg",
+  "/clone-ig.png",
+  "/shopify-clon.png",
+  "/spotifu.png",
+  "/alejandro-big.jpg"
+];
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    <header class="mb-12 text-center">
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        TEDxAshesiUniversity Curator
+      </h1>
+      <p class="text-lg text-neutral">
+        Guide speakers in composing and refining their speeches to ensure impactful and engaging presentations.
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Role Overview</h2>
+        <p class="text-neutral">As a curator for TEDxAshesiUniversity, I work closely with speakers to develop and refine their ideas into compelling TED-style talks. This involves guiding them through the process of storytelling, message structuring, and delivery techniques to create presentations that inspire and engage audiences.</p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Responsibilities</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Mentor speakers in speech composition and narrative development</li>
+          <li>Provide feedback on content structure and delivery style</li>
+          <li>Ensure talks align with TEDx standards and themes</li>
+          <li>Coordinate rehearsal sessions and provide performance coaching</li>
+          <li>Collaborate with the organizing team on event planning</li>
+        </ul>
+      </section>
+
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`TEDx media ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Impact & Learning</h2>
+        <p class="text-neutral">This role has enhanced my skills in public speaking, communication, and leadership. It's been rewarding to help speakers transform their ideas into powerful narratives and contribute to the spread of innovative ideas within the Ashesi community.</p>
+      </section>
+
+      <div class="flex gap-4 justify-center">
+        <a href="https://www.ted.com/tedx/events" target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
+          Learn About TEDx
+        </a>
+        <a href="#contact" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
+          Get Involved
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
