@@ -1,13 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
 
 const project = SITE_CONTENT.projects.find(p => 
   p.name === "ShellTrivia"
 );
+
+// Null check
 if (!project) {
   return Response.redirect('/404', 404);
 }
+
+// Dummy media files
+const mediaItems = [
+  "/clone-ig.png",
+  "/shopify-clon.png", 
+  "/spotifu.png",
+  "/alejandro-big.jpg",
+  "/clone-ig.png",
+  "/shopify-clon.png",
+  "/spotifu.png",
+  "/alejandro-big.jpg"
+];
 ---
 
 <Layout>
@@ -24,7 +39,7 @@ if (!project) {
     <div class="prose prose-invert max-w-none">
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Game Overview</h2>
-        <p class="text-neutral">An engaging GUI-based trivia game with multiple difficulty levels, testing players across various knowledge domains including music, film, sports, and current affairs.</p>
+        <p class="text-neutral">Developed a GUI-based trivia game with four levels, testing players on music, film, sports, current affairs, and general knowledge. The game awarded or deducted "shells" (points) based on correct or incorrect answers.</p>
       </section>
 
       <section class="mb-12">
@@ -38,13 +53,39 @@ if (!project) {
         </ul>
       </section>
 
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Project media ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technologies Used</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Tkinter (Python GUI)</li>
-          <li>Python Data Structures</li>
-          <li>File I/O for persistence</li>
-          <li>Object-Oriented Programming</li>
+          <li>Tkinter (Python GUI framework)</li>
+          <li>Python Data Structures for question management</li>
+          <li>File I/O for persistence and score tracking</li>
+          <li>Object-Oriented Programming principles</li>
+          <li>Event-driven programming for user interactions</li>
         </ul>
       </section>
 
