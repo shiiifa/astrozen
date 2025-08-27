@@ -1,0 +1,81 @@
+---
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout>
+  <section class="py-16">
+    <a href="/#beyond-engineering" class="mb-8 inline-flex items-center text-primary hover:underline">
+      <span class="mr-2">←</span>
+      Back to Beyond Engineering
+    </a>
+
+    <div class="mb-12">
+      <h1 class="mb-4 font-serif text-5xl font-bold text-white">Curation Co-Lead - TEDxAshesiUniversity</h1>
+      <p class="text-xl text-neutral">Co-led speaker selection and content curation for TEDx events, bringing inspiring ideas to the university community.</p>
+    </div>
+
+    <div class="mb-12">
+      <Image
+        src="/tedx.jpg"
+        alt="TEDxAshesiUniversity"
+        width={800}
+        height={400}
+        class="rounded-xl"
+      />
+    </div>
+
+    <div class="space-y-12 text-neutral">
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Curatorial Role</h2>
+        <p class="mb-4">As Curation Co-Lead for TEDxAshesiUniversity, I co-directed the speaker selection process and content strategy for our annual event, ensuring a diverse lineup of ideas worth spreading that resonate with our academic community.</p>
+        <p>This role combines my passion for storytelling with my ability to identify compelling narratives that inspire change and innovation.</p>
+      </div>
+      
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Key Responsibilities</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Led the curation team in reviewing 100+ speaker applications and proposals
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Developed event themes and narrative arcs that connected diverse speaker topics
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Coached selected speakers in talk development, storytelling techniques, and stage presence
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Coordinated with technical and production teams to ensure seamless event execution
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-6 font-serif text-3xl font-semibold text-primary">Event Impact</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Curated 2 successful TEDx events with 12 speakers reaching 500+ live attendees
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Generated 50,000+ online views through strategic digital distribution and promotion
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Received "Best Student-Lied TEDx Event" recognition in West Africa region
+          </li>
+          <li class="flex items-start">
+            <span class="mr-3 text-primary">•</span>
+            Fostered interdisciplinary dialogue across engineering, humanities, and business disciplines
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
