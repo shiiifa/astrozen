@@ -8,13 +8,6 @@ export interface SiteConfig extends HeaderProps {
   canonicalURL?: string;
 }
 
-export interface SiteContent {
-  hero: HeroProps;
-  experience: ExperienceProps[];
-  projects: ProjectProps[];
-  about: AboutProps;
-  skills: SkillProps[];
-}
 
 export interface HeroProps {
   name: string;
@@ -50,6 +43,13 @@ export interface SkillProps {
   proficiency: string;
 }
 
+export interface SiteContent {
+  hero: HeroProps;
+  experience: ExperienceProps[];
+  projects: ProjectProps[];
+  about: AboutProps;
+  skills: SkillProps[];
+}
 
 export interface HeaderProps {
   siteLogo: string;
