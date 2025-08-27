@@ -93,27 +93,22 @@ export const SITE_CONTENT: SiteContent = {
   ],
 
   skills: [
-    {
-      category: "Graphic Design Software",
-      tools: "Canva, CapCut",
-      proficiency: "Skilled"
-    },
-    {
-      category: "Programming Languages", 
-      tools: "Python, Java, MATLAB, C-Programming",
-      proficiency: "Intermediate proficiency"
-    },
-    {
-      category: "Microsoft Office Suite",
-      tools: "Word, Excel, PowerPoint",
-      proficiency: "Skilled"
-    },
-    {
-      category: "Computer-Aided Design Software",
-      tools: "SolidWorks, Proteus, Autodesk Fusion 360, Kicad",
-      proficiency: "Intermediate proficiency"
-    }
-  ],
+  {
+    category: "Technical Skills",
+    tools: "Programming Languages, CAD, PCB Design, Prototyping",
+    proficiency: "Advanced"
+  },
+  {
+    category: "Design & Creative Skills", 
+    tools: "Graphic Design, UI/UX, Creative Writing",
+    proficiency: "Skilled"
+  },
+  {
+    category: "Professional Skills",
+    tools: "Office Suite, Technical Writing, Collaboration Tools",
+    proficiency: "Expert"
+  }
+],
 
   about: {
     description: `I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design.

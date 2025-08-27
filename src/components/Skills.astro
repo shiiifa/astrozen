@@ -7,29 +7,71 @@ interface Props {
 }
 
 const { skills } = Astro.props;
+
+// Group skills into the three categories
+const technicalSkills = [
+  "Programming Languages: Python, Java, HTML, MATLAB, C",
+  "Data Analysis & Visualization: Excel, MATLAB",
+  "Computer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
+  "PCB Design & Simulation: KiCad (advanced)",
+  "Prototyping & Hardware: 3D Printing, Arduino (UNO)"
+];
+
+const designSkills = [
+  "Graphic Design & Video Editing: Canva, CapCut",
+  "UI/UX & Web Tools: Wix, Wordpress, Vercel, Canva",
+  "Creative Writing: Freelance writing, Content Development"
+];
+
+const professionalSkills = [
+  "Microsoft Office Suite: Word, Excel, PowerPoint",
+  "Technical Writing & Documentation",
+  "Collaboration Tools: Slack, Microsoft Teams, Google Workspace"
+];
 ---
 
 <Section text="Skills" href="skills">
-  {
-    skills.map(({ category, tools, proficiency }) => (
-      <div class="mb-10">
-        <h3 class="mb-1.5 font-serif text-2xl font-semibold text-white">
-          {category}
-        </h3>
-        <div class="flex flex-col items-start pb-5">
-          <h4 class="mb-0.5 font-serif text-2xl font-medium text-primary">
-            {tools}
-          </h4>
-          <span class="pb-[2px] text-sm text-white/70">
-            {proficiency}
-          </span>
-        </div>
-        <ul class="list-none">
-  <li class="relative mb-3 pl-8 text-base text-neutral before:absolute before:top-1 before:left-0 before:content-[url(/check.svg)]">
-    Proficiency: {proficiency}
-  </li>
-</ul>
-      </div>
-    ))
-  }
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {/* Technical Skills Column */}
+    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
+      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
+        Technical Skills
+      </h3>
+      <ul class="space-y-4">
+        {technicalSkills.map((skill) => (
+          <li class="text-neutral text-sm leading-relaxed">
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Design & Creative Skills Column */}
+    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
+      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
+        Design & Creative Skills
+      </h3>
+      <ul class="space-y-4">
+        {designSkills.map((skill) => (
+          <li class="text-neutral text-sm leading-relaxed">
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Professional Skills Column */}
+    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
+      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
+        Professional & Collaboration Skills
+      </h3>
+      <ul class="space-y-4">
+        {professionalSkills.map((skill) => (
+          <li class="text-neutral text-sm leading-relaxed">
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
 </Section>
