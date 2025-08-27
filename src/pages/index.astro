@@ -9,10 +9,9 @@ import Skills from "@components/Skills.astro";
 import About from "@components/About.astro";
 import Connect from "@components/Connect.astro";
 import { Image } from "astro:assets";
-import type { ProjectProps } from "@types";
 import "../styles/global.css";
 
-// Create placeholder data for Beyond Engineering section
+// Placeholder data for Beyond Engineering section
 const beyondEngineeringProjects = [
   {
     name: "Beyond Engineering Project 1",
@@ -43,7 +42,7 @@ const beyondEngineeringProjects = [
   <Projects projects={SITE_CONTENT.projects} />
   <Skills skills={SITE_CONTENT.skills} />
   
-  <!-- BEYOND ENGINEERING SECTION (added here) -->
+  <!-- BEYOND ENGINEERING SECTION -->
   <Section text="Beyond Engineering" href="beyond-engineering">
     {
       beyondEngineeringProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
