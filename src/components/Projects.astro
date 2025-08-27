@@ -13,9 +13,9 @@ const { projects } = Astro.props;
 <Section text="Featured Projects" href="projects">
   <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
     {
-      projects.map(({ name, summary, image, linkPreview, linkSource }) => (
+      projects.map(({ name, summary, image }) => ( // REMOVED linkPreview, linkSource
         <a
-          href={`/projects/${name.toLowerCase().replace(/\s+/g, '-')}`} <!-- CHANGED: Link to project detail page -->
+          href={`/projects/${name.toLowerCase().replace(/\s+/g, '-')}`}
           class="group relative block overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
         >
           {/* Background pattern */}

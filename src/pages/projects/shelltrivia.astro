@@ -5,6 +5,9 @@ import { SITE_CONTENT } from "@config";
 const project = SITE_CONTENT.projects.find(p => 
   p.name === "ShellTrivia"
 );
+if (!project) {
+  return Response.redirect('/404', 404);
+}
 ---
 
 <Layout>
