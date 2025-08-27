@@ -11,47 +11,42 @@ import Connect from "@components/Connect.astro";
 import { Image } from "astro:assets";
 import "../styles/global.css";
 
-// Beyond Engineering data with circular tiles
+// Beyond Engineering data with same tile layout as Featured Projects
 const beyondEngineeringItems = [
   {
-    name: "TEDx Curator",
-    shortText: "TEDx",
-    summary: "Guide speakers in composing and refining their speeches to ensure impactful and engaging presentations.",
+    name: "TEDxAshesiUniversity Curator",
+    summary: "Guide speakers in composing and refining speeches for impactful presentations.",
     image: "/clone-ig.png",
-    media: ["/clone-ig.png", "/shopify-clon.png", "/spotifu.png", "/alejandro-big.jpg"],
-    link: "/beyond-engineering/tedx"
+    linkPreview: "/beyond-engineering/tedx",
+    linkSource: "#"
   },
   {
-    name: "Newsletter Editor",
-    shortText: "Editor",
-    summary: "Editorial Team Member - Assist in preparing the official newsletter by writing articles and ensuring content quality before publication.",
+    name: "Newsletter Editorial Team",
+    summary: "Write articles and ensure content quality for Ashesi Law and Humanities Newsletter.",
     image: "/clone-ig.png",
-    media: ["/clone-ig.png", "/shopify-clon.png", "/spotifu.png", "/alejandro-big.jpg"],
-    link: "/beyond-engineering/newsletter"
+    linkPreview: "/beyond-engineering/newsletter",
+    linkSource: "#"
   },
   {
     name: "Spelling Bee Volunteer",
-    shortText: "Volunteer",
-    summary: "Serve seasonally on the judges' panel as a recorder, ensuring accurate documentation and minimizing scoring discrepancies.",
+    summary: "Judge panel recorder ensuring accurate documentation and scoring at The Spelling Bee, Ghana.",
     image: "/clone-ig.png",
-    media: ["/clone-ig.png", "/shopify-clon.png", "/spotifu.png", "/alejandro-big.jpg"],
-    link: "/beyond-engineering/spelling-bee"
+    linkPreview: "/beyond-engineering/spelling-bee",
+    linkSource: "#"
   },
   {
-    name: "Sage Foundation",
-    shortText: "Founder",
-    summary: "Donated books to schools and organized English Language workshops for educational development.",
+    name: "Sage Literacy Foundation",
+    summary: "Founder donating books and organizing English workshops for educational development.",
     image: "/clone-ig.png",
-    media: ["/clone-ig.png", "/shopify-clon.png", "/spotifu.png", "/alejandro-big.jpg"],
-    link: "/beyond-engineering/sage-foundation"
+    linkPreview: "/beyond-engineering/sage-foundation",
+    linkSource: "#"
   },
   {
-    name: "Writer",
-    shortText: "Writer",
-    summary: "A blog where I share thinkpieces, thoughts, and personal experiences through writing.",
+    name: "Writer, Comma Period",
+    summary: "Blog sharing thinkpieces, thoughts, and personal experiences through writing.",
     image: "/clone-ig.png",
-    media: ["/clone-ig.png", "/shopify-clon.png", "/spotifu.png", "/alejandro-big.jpg"],
-    link: "/beyond-engineering/writer"
+    linkPreview: "/beyond-engineering/writer",
+    linkSource: "#"
   }
 ];
 ---
@@ -68,63 +63,54 @@ const beyondEngineeringItems = [
   <Projects projects={SITE_CONTENT.projects} />
   <Skills skills={SITE_CONTENT.skills} />
   
-  <!-- BEYOND ENGINEERING SECTION (Circular tiles with popups) -->
+  <!-- BEYOND ENGINEERING SECTION (Same style as Featured Projects) -->
   <Section text="Beyond Engineering" href="beyond-engineering">
-    <div class="flex flex-wrap justify-center gap-12 py-8">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {
-        beyondEngineeringItems.map((item, index) => (
-          <div class="group relative flex flex-col items-center">
-            {/* Circular Tile */}
-            <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/20 transition-all duration-500 group-hover:border-primary/60 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-primary/20">
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={128}
-                height={128}
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-primary/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-            </div>
+        beyondEngineeringItems.map(({ name, summary, image, linkPreview, linkSource }) => (
+          <a
+            href={linkPreview}
+            class="group relative block overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+          >
+            {/* Background pattern */}
+            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
             
-            {/* Short Text Below Circle */}
-            <p class="mt-4 text-sm font-medium text-white transition-colors duration-300 group-hover:text-primary">
-              {item.shortText}
-            </p>
-
-            {/* Popup on Hover */}
-            <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-6 w-80 bg-[#1c232d] border border-primary/30 rounded-2xl shadow-2xl shadow-primary/20 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 z-50">
-              <div class="p-6">
-                <h3 class="font-serif text-xl font-semibold text-primary mb-3">
-                  {item.name}
+            {/* Content */}
+            <div class="relative z-10 flex h-full flex-col p-6">
+              {/* Image */}
+              <div class="mb-6 overflow-hidden rounded-xl">
+                <Image
+                  class="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  src={image}
+                  alt={name}
+                  width={400}
+                  height={300}
+                  loading="lazy"
+                />
+              </div>
+              
+              {/* Text Content */}
+              <div class="flex flex-1 flex-col">
+                <h3 class="mb-3 font-serif text-xl font-medium text-primary transition-colors duration-300 group-hover:text-white">
+                  {name}
                 </h3>
-                <p class="text-sm text-neutral mb-4">
-                  {item.summary}
+                <p class="mb-4 flex-1 text-sm text-neutral group-hover:text-white/80 transition-colors duration-300">
+                  {summary}
                 </p>
                 
-                {/* Media Gallery Preview */}
-                <div class="grid grid-cols-2 gap-2 mb-4">
-                  {item.media.slice(0, 4).map((media, mediaIndex) => (
-                    <Image
-                      src={media}
-                      alt={`${item.name} media ${mediaIndex + 1}`}
-                      width={80}
-                      height={80}
-                      class="w-full h-20 object-cover rounded-lg border border-neutral/20"
-                    />
-                  ))}
+                {/* Links */}
+                <div class="flex gap-4 pt-4 text-xs text-white/70">
+                  <span class="flex items-center gap-1 transition-all duration-300 group-hover:text-primary">
+                    <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
+                    View Details
+                  </span>
                 </div>
-                
-                {/* View More Link */}
-                <a 
-                  href={item.link}
-                  class="inline-flex items-center gap-2 text-primary text-sm font-medium hover:text-white transition-colors"
-                >
-                  View Details
-                  <span class="inline-block h-3 w-3 content-[url(/external.svg)]"></span>
-                </a>
               </div>
             </div>
-          </div>
+            
+            {/* Hover overlay effect */}
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+          </a>
         ))
       }
     </div>
@@ -134,17 +120,27 @@ const beyondEngineeringItems = [
 </Layout>
 
 <style>
-  /* Custom animations for circular tiles */
-  .group:hover .rounded-full {
-    transform: scale(1.1);
+  /* Custom animations */
+  .group {
+    transform-style: preserve-3d;
+    perspective: 1000px;
   }
   
-  /* Ensure popup stays visible when hovering over it */
-  .group .absolute {
-    pointer-events: none;
+  .group:hover {
+    transform: translateY(-4px) scale(1.02);
   }
   
-  .group:hover .absolute {
-    pointer-events: auto;
+  .group::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, var(--color-primary)/10, transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 1rem;
+  }
+  
+  .group:hover::before {
+    opacity: 1;
   }
 </style>
