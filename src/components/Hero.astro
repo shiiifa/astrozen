@@ -35,7 +35,7 @@ const { name, specialty, summary, email } = Astro.props;
   /* Typing animation */
   .typing-animation {
     overflow: hidden;
-    border-right: 3px solid #2563eb;
+    border-right: 3px solid #E1AD01; /* CHANGED TO GOLD */
     white-space: nowrap;
     animation: typing 2.5s steps(30, end), blink-cursor 0.75s step-end infinite;
     width: 0;
@@ -54,7 +54,7 @@ const { name, specialty, summary, email } = Astro.props;
 
   @keyframes blink-cursor {
     from, to { border-color: transparent }
-    50% { border-color: #2563eb; }
+    50% { border-color: #E1AD01; } /* CHANGED TO GOLD */
   }
 </style>
 
