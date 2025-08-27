@@ -6,9 +6,9 @@ const { name, specialty, summary, email } = Astro.props;
 ---
 
 <section class="py-24 md:py-32" id="#hero">
-  <!-- Animated Name with reduced font size -->
+  <!-- Animated Name -->
   <h1
-    class="mb-1.5 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:mb-0 md:text-8xl typing-animation"
+    class="mb-1.5 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:mb-0 md:text-8xl"
     id="animated-name"
   >
     {name}
@@ -35,10 +35,16 @@ const { name, specialty, summary, email } = Astro.props;
   /* Typing animation */
   .typing-animation {
     overflow: hidden;
-    border-right: 3px solid #2563eb; /* Cursor effect */
+    border-right: 3px solid #2563eb;
     white-space: nowrap;
-    animation: typing 2s steps(20, end), blink-cursor 0.75s step-end infinite;
+    animation: typing 2.5s steps(30, end), blink-cursor 0.75s step-end infinite;
     width: 0;
+  }
+
+  .typing-complete {
+    border-right: none; /* Remove cursor after typing */
+    animation: none;
+    width: 100%;
   }
 
   @keyframes typing {
@@ -53,28 +59,34 @@ const { name, specialty, summary, email } = Astro.props;
 </style>
 
 <script>
-  // Enhanced typing animation with cleanup
   document.addEventListener('DOMContentLoaded', () => {
     const nameElement = document.getElementById('animated-name');
     if (!nameElement) return;
     
+    // Check if already animated (using sessionStorage)
+    if (sessionStorage.getItem('nameAnimated')) {
+      return; // Skip animation if already done in this session
+    }
+    
     const fullName = nameElement.textContent;
     nameElement.textContent = '';
-    nameElement.style.width = '0';
+    nameElement.classList.add('typing-animation');
     
     let i = 0;
     const typeWriter = () => {
       if (i < fullName.length) {
         nameElement.textContent += fullName.charAt(i);
         i++;
-        setTimeout(typeWriter, 100); // Adjust typing speed (100ms per character)
+        setTimeout(typeWriter, 80); // Faster typing speed
       } else {
-        // Keep cursor blinking after typing completes
-        nameElement.style.animation = 'blink-cursor 0.75s step-end infinite';
+        // Animation complete
+        nameElement.classList.remove('typing-animation');
+        nameElement.classList.add('typing-complete');
+        sessionStorage.setItem('nameAnimated', 'true'); // Mark as animated
       }
     };
     
-    // Start animation after a brief delay
-    setTimeout(typeWriter, 500);
+    // Start animation
+    setTimeout(typeWriter, 300);
   });
 </script>
