@@ -1,77 +1,68 @@
 ---
 import Section from "./Section.astro";
-import type { SkillProps } from "@types";
 
-interface Props {
-  skills: SkillProps[];
-}
+// Vector icons for each skill category (using emojis as placeholders)
+const skillIcons = {
+  technical: "⚙️",    // Gear icon for technical skills
+  design: "🎨",       // Art palette icon for design skills  
+  professional: "🤝"  // Handshake icon for professional skills
+};
 
-const { skills } = Astro.props;
-
-// Group skills into the three categories
-const technicalSkills = [
-  "Programming Languages: Python, Java, HTML, MATLAB, C",
-  "Data Analysis & Visualization: Excel, MATLAB",
-  "Computer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
-  "PCB Design & Simulation: KiCad (advanced)",
-  "Prototyping & Hardware: 3D Printing, Arduino (UNO)"
-];
-
-const designSkills = [
-  "Graphic Design & Video Editing: Canva, CapCut",
-  "UI/UX & Web Tools: Wix, Wordpress, Vercel, Canva",
-  "Creative Writing: Freelance writing, Content Development"
-];
-
-const professionalSkills = [
-  "Microsoft Office Suite: Word, Excel, PowerPoint",
-  "Technical Writing & Documentation",
-  "Collaboration Tools: Slack, Microsoft Teams, Google Workspace"
+// Skill data with categories
+const skillCategories = [
+  {
+    icon: skillIcons.technical,
+    title: "Technical Skills",
+    skills: [
+      "Programming Languages: Python, Java, HTML, MATLAB, C",
+      "Data Analysis & Visualization: Excel, MATLAB",
+      "Computer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
+      "PCB Design & Simulation: KiCad (advanced)",
+      "Prototyping & Hardware: 3D Printing, Arduino (UNO)"
+    ]
+  },
+  {
+    icon: skillIcons.design,
+    title: "Design & Creative Skills",
+    skills: [
+      "Graphic Design & Video Editing: Canva, CapCut",
+      "UI/UX & Web Tools: Wix, Wordpress, Vercel, Canva",
+      "Creative Writing: Freelance writing, Content Development"
+    ]
+  },
+  {
+    icon: skillIcons.professional,
+    title: "Professional & Collaboration Skills",
+    skills: [
+      "Microsoft Office Suite: Word, Excel, PowerPoint",
+      "Technical Writing & Documentation",
+      "Collaboration Tools: Slack, Microsoft Teams, Google Workspace"
+    ]
+  }
 ];
 ---
 
 <Section text="Skills" href="skills">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    {/* Technical Skills Column */}
-    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
-      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
-        Technical Skills
-      </h3>
-      <ul class="space-y-4">
-        {technicalSkills.map((skill) => (
-          <li class="text-neutral text-sm leading-relaxed">
-            {skill}
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Design & Creative Skills Column */}
-    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
-      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
-        Design & Creative Skills
-      </h3>
-      <ul class="space-y-4">
-        {designSkills.map((skill) => (
-          <li class="text-neutral text-sm leading-relaxed">
-            {skill}
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Professional Skills Column */}
-    <div class="bg-[#1c232d]/50 rounded-2xl p-6 border border-neutral/20">
-      <h3 class="font-serif text-2xl font-semibold text-primary mb-6 text-center">
-        Professional & Collaboration Skills
-      </h3>
-      <ul class="space-y-4">
-        {professionalSkills.map((skill) => (
-          <li class="text-neutral text-sm leading-relaxed">
-            {skill}
-          </li>
-        ))}
-      </ul>
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+    {skillCategories.map((category) => (
+      <div class="text-center">
+        {/* Icon */}
+        <div class="text-4xl mb-4">{category.icon}</div>
+        
+        {/* Category Title */}
+        <h3 class="font-serif text-xl font-semibold text-primary mb-4">
+          {category.title}
+        </h3>
+        
+        {/* Skills List - Compact */}
+        <ul class="space-y-2">
+          {category.skills.map((skill) => (
+            <li class="text-neutral text-sm leading-tight">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
 </Section>
