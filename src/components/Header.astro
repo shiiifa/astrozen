@@ -10,9 +10,9 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Typing/erasing animation with quotes and semicolon */}
+  {/* Function syntax with yellow color and smooth typing */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight" id="header-name">
-    "shifa amankwa-gabbey";
+    shifa_amankwa_gabbey();
   </a>
 
   <button
@@ -46,71 +46,56 @@ const { navLinks } = Astro.props;
   </nav>
 
 <style>
-  /* Programming/coding font style */
+  /* Programming/coding font style with yellow color */
   .typing-header-name {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace';
     font-weight: bold;
-    color: white;
+    color: #E1AD01; /* Yellow color */
     text-decoration: none;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
-    min-width: 280px; /* Adjusted for quotes and semicolon */
+    min-width: 300px; /* Width for function syntax */
   }
 
-  /* Smooth typing and erasing animation */
+  /* Smooth continuous typing animation */
   #header-name {
-    animation: 
-      typing 3s ease-in-out forwards,
-      pause 3s 3s forwards,
-      erasing 3s 6s ease-in-out forwards,
-      final-pause 3s 9s forwards;
-    animation-iteration-count: infinite;
+    animation: typing-erase 9s ease-in-out infinite;
   }
 
-  @keyframes typing {
-    from { 
+  @keyframes typing-erase {
+    /* Type for 3s (0% to 33.3%) */
+    0% {
       width: 0;
-      opacity: 0.8;
-    }
-    to { 
-      width: 280px;
       opacity: 1;
     }
-  }
-
-  @keyframes pause {
-    from { 
-      width: 280px;
+    16.6% {
+      width: 150px;
       opacity: 1;
     }
-    to { 
-      width: 280px;
+    33.3% {
+      width: 300px;
       opacity: 1;
     }
-  }
-
-  @keyframes erasing {
-    from { 
-      width: 280px;
+    /* Pause for 3s (33.3% to 66.6%) */
+    50% {
+      width: 300px;
       opacity: 1;
     }
-    to { 
-      width: 0;
-      opacity: 0.8;
+    66.6% {
+      width: 300px;
+      opacity: 1;
     }
-  }
-
-  @keyframes final-pause {
-    from { 
-      width: 0;
-      opacity: 0.8;
+    /* Erase for 3s (66.6% to 100%) */
+    83.3% {
+      width: 150px;
+      opacity: 1;
     }
-    to { 
+    100% {
       width: 0;
-      opacity: 0.8;
+      opacity: 1;
     }
   }
 </style>
