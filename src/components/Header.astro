@@ -10,10 +10,9 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Code typing effect for name in header */}
-  <a href="/" aria-label="Home link" class="coding-font text-2xl font-bold">
-    <span class="typewriter" id="typewriter-text">shifa amankwa-gabbey</span>
-    <span class="blinking-cursor">_</span>
+  {/* Typing/erasing animation header name */}
+  <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight" id="header-name">
+    shifa amankwa-gabbey
   </a>
 
   <button
@@ -48,59 +47,51 @@ const { navLinks } = Astro.props;
 
 <style>
   /* Programming/coding font style */
-  .coding-font {
+  .typing-header-name {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace';
     font-weight: bold;
-    color: #E1AD01; /* Code yellow color */
+    color: white;
     text-decoration: none;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
-  }
-
-  /* Typewriter effect */
-  .typewriter {
-    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid #E1AD01;
-    animation: typing 3s steps(22, end) infinite, 
-               erase 3s steps(22, end) 3s infinite,
-               blink-cursor 0.75s step-end infinite;
+    display: inline-block;
+    min-width: 240px; /* Fixed width to prevent layout shift */
   }
 
-  .blinking-cursor {
-    color: #E1AD01;
-    animation: blink-cursor 0.75s step-end infinite;
+  /* Typing and erasing animation */
+  #header-name {
+    animation: 
+      typing 3s steps(22, end) forwards,
+      pause 3s 3s forwards,
+      erasing 3s 6s forwards,
+      final-pause 3s 9s forwards;
+    animation-iteration-count: infinite;
   }
 
   @keyframes typing {
-    0% { width: 0; }
-    50% { width: 100%; }
-    100% { width: 100%; }
+    from { width: 0; }
+    to { width: 240px; }
   }
 
-  @keyframes erase {
-    0% { width: 100%; }
-    50% { width: 0; }
-    100% { width: 0; }
+  @keyframes pause {
+    from { width: 240px; }
+    to { width: 240px; }
   }
 
-  @keyframes blink-cursor {
-    from, to { opacity: 0; }
-    50% { opacity: 1; }
+  @keyframes erasing {
+    from { width: 240px; }
+    to { width: 0; }
+  }
+
+  @keyframes final-pause {
+    from { width: 0; }
+    to { width: 0; }
   }
 </style>
 
 <script>
-  // Typewriter animation
-  document.addEventListener('DOMContentLoaded', () => {
-    const typewriter = document.getElementById('typewriter-text');
-    if (!typewriter) return;
-    
-    // Set the text content
-    typewriter.textContent = 'shifa amankwa-gabbey';
-  });
-
   // Toggle mobile menu
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
