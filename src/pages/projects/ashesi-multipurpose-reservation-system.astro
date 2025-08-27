@@ -1,119 +1,43 @@
 ---
-import "../../styles/global.css"; 
-import Layout from "@layouts/Layout.astro";
-import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { SITE_CONTENT } from "@config";
+
+const project = SITE_CONTENT.projects.find(p => 
+  p.name === "Ashesi Multipurpose Reservation System"
+);
 ---
 
 <Layout>
-  <div class="max-w-4xl mx-auto px-5 py-24">
-    <!-- Back button -->
-    <a href="/#projects" class="inline-flex items-center text-primary hover:text-white mb-8 transition-colors">
-      ← Back to Projects
-    </a>
-    
-    <!-- Project header -->
-    <header class="mb-12">
-      <h1 class="mb-6 font-serif text-5xl font-bold text-white md:text-6xl">
-        Ashesi Multipurpose Reservation System
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    <header class="mb-12 text-center">
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        {project.name}
       </h1>
-      <p class="text-lg text-neutral leading-relaxed">
-        Developed a centralised platform with a team of three to streamline student access to Ashesi's resources. The system validated logins and organised reservations into Human-Based Services (e.g., Career Services, Peer Tutoring) and Remote Services (e.g., Housing, Classroom Booking).
+      <p class="text-lg text-neutral">
+        {project.summary}
       </p>
     </header>
 
-    <!-- Project image -->
-    <div class="mb-12 rounded-2xl overflow-hidden bg-[#1c232d]/85 p-8">
-      <Image
-        class="w-full h-auto rounded-xl"
-        src="/spotifu.png"
-        alt="Ashesi Multipurpose Reservation System"
-        width="800"
-        height="600"
-      />
-    </div>
+    <div class="prose prose-invert max-w-none">
+      <!-- Add your detailed project content here -->
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
+        <p class="text-neutral">Detailed description of the project...</p>
+      </section>
 
-    <!-- Project details section -->
-    <section class="mb-12">
-      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
-        Project Overview
-      </h2>
-      <div class="prose prose-invert max-w-none">
-        <p class="text-base text-neutral leading-relaxed mb-6">
-          This comprehensive reservation system was built to solve a critical problem at Ashesi University - the fragmented approach to accessing various campus resources. Students previously had to navigate multiple portals and systems to book services, creating confusion and inefficiency.
-        </p>
-        <p class="text-base text-neutral leading-relaxed mb-6">
-          Our solution centralizes all reservation needs into a single, intuitive platform. The system intelligently categorizes services and redirects users to the appropriate booking interfaces, while maintaining a consistent user experience throughout the process.
-        </p>
-        <p class="text-base text-neutral leading-relaxed">
-          Working in a team of three, we focused on creating a scalable architecture that could accommodate future services while ensuring robust security through proper login validation and user authentication systems.
-        </p>
-      </div>
-    </section>
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technologies Used</h2>
+        <p class="text-neutral">List of technologies and tools...</p>
+      </section>
 
-    <!-- Technologies used -->
-    <section class="mb-12">
-      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
-        Technologies & Tools
-      </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
-          <span class="text-white font-medium">React</span>
-        </div>
-        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
-          <span class="text-white font-medium">Node.js</span>
-        </div>
-        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
-          <span class="text-white font-medium">MongoDB</span>
-        </div>
-        <div class="bg-[#1c232d]/50 rounded-lg p-4 text-center">
-          <span class="text-white font-medium">Express</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key features -->
-    <section class="mb-12">
-      <h2 class="mb-6 font-serif text-3xl font-medium text-primary">
-        Key Features
-      </h2>
-      <ul class="space-y-4">
-        <li class="flex items-start">
-          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
-          <p class="text-neutral">Centralized login validation system for secure user authentication</p>
-        </li>
-        <li class="flex items-start">
-          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
-          <p class="text-neutral">Smart service categorization (Human-Based vs Remote Services)</p>
-        </li>
-        <li class="flex items-start">
-          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
-          <p class="text-neutral">Seamless URL redirection to appropriate booking portals</p>
-        </li>
-        <li class="flex items-start">
-          <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-4 flex-shrink-0"></div>
-          <p class="text-neutral">Intuitive interface designed for student workflow optimization</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Links section -->
-    <section class="border-t border-neutral/20 pt-8">
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a
-          href="https://github.com/shiiifa/Multipurpose-Reservation-Platform"
-          target="_blank"
-          class="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]"
-        >
+      <div class="flex gap-4">
+        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90">
           View Source Code
         </a>
-        <a
-          href="/"
-          target="_blank"
-          class="inline-flex items-center justify-center rounded-full border border-primary text-primary px-8 py-4 font-medium hover:bg-primary hover:text-white transition-colors after:ml-2 after:content-[url(/external.svg)]"
-        >
+        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10">
           Live Preview
         </a>
       </div>
-    </section>
-  </div>
+    </div>
+  </article>
 </Layout>
