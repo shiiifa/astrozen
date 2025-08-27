@@ -11,8 +11,8 @@ const { navLinks } = Astro.props;
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
   {/* Function syntax with yellow color and smooth typing */}
-  <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight" id="header-name">
-    shifa_amankwa_gabbey();
+  <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
+    <span class="typing-container">shifa_amankwa_gabbey();</span>
   </a>
 
   <button
@@ -50,52 +50,57 @@ const { navLinks } = Astro.props;
   .typing-header-name {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace';
     font-weight: bold;
-    color: #E1AD01; /* Yellow color */
+    color: #E1AD01;
     text-decoration: none;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
-    overflow: hidden;
-    white-space: nowrap;
     display: inline-block;
-    min-width: 300px; /* Width for function syntax */
   }
 
-  /* Smooth continuous typing animation */
-  #header-name {
+  /* Typing container */
+  .typing-container {
+    display: inline-block;
+    position: relative;
+  }
+
+  /* Create typing effect using pseudo-element */
+  .typing-container::before {
+    content: 'shifa_amankwa_gabbey();';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: #E1AD01;
+    background: #240C2C;
+    overflow: hidden;
+    white-space: nowrap;
     animation: typing-erase 9s ease-in-out infinite;
+  }
+
+  /* Make original text invisible - only pseudo-element shows */
+  .typing-container {
+    color: transparent;
   }
 
   @keyframes typing-erase {
     /* Type for 3s (0% to 33.3%) */
     0% {
       width: 0;
-      opacity: 1;
-    }
-    16.6% {
-      width: 150px;
-      opacity: 1;
     }
     33.3% {
-      width: 300px;
-      opacity: 1;
+      width: 100%;
     }
     /* Pause for 3s (33.3% to 66.6%) */
     50% {
-      width: 300px;
-      opacity: 1;
+      width: 100%;
     }
     66.6% {
-      width: 300px;
-      opacity: 1;
+      width: 100%;
     }
     /* Erase for 3s (66.6% to 100%) */
-    83.3% {
-      width: 150px;
-      opacity: 1;
-    }
     100% {
       width: 0;
-      opacity: 1;
     }
   }
 </style>
