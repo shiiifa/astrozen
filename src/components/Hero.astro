@@ -5,47 +5,26 @@ type Props = HeroProps;
 const { name, specialty } = Astro.props;
 ---
 
-<section class="py-24 md:py-32 text-center relative overflow-hidden" id="#hero">
-  {/* Animated Circuit Background */}
-  <div class="absolute inset-0 z-0 opacity-20">
-    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path class="animate-circuit-path" d="M10,10 L90,10 L90,90 L10,90 Z" 
-            stroke="#E1AD01" stroke-width="0.2" fill="none" />
-      <path class="animate-circuit-path" d="M30,30 L70,30 L70,70 L30,70 Z" 
-            stroke="#E1AD01" stroke-width="0.1" fill="none" style="animation-delay: 1s" />
-      <path class="animate-circuit-path" d="M40,40 L60,40 L60,60 L40,60 Z" 
-            stroke="#E1AD01" stroke-width="0.05" fill="none" style="animation-delay: 2s" />
-    </svg>
-  </div>
-
+<section class="py-24 md:py-32 text-center relative" id="#hero">
   {/* Flickering Name */}
   <h1
-    class="mb-9 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:text-8xl relative z-10 flicker-text"
+    class="mb-9 font-serif text-6xl font-bold tracking-tightest text-white sm:text-7xl md:text-8xl flicker-text"
     id="animated-name"
   >
     {name}
   </h1>
   
-  {/* Specialty Text */}
+  {/* Specialty Text with Typing Effect */}
   <p
-    class="font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl relative z-10"
+    class="font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl typing-container"
+    id="specialty-text"
   >
-    {specialty}
+    <span class="typing-text"></span>
+    <span class="typing-cursor">|</span>
   </p>
 </section>
 
 <style>
-  /* Circuit Board Animation */
-  .animate-circuit-path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw-circuit 6s ease-in-out infinite;
-  }
-
-  @keyframes draw-circuit {
-    to { stroke-dashoffset: 0; }
-  }
-
   /* Light Bulb Flicker Effect */
   .flicker-text {
     opacity: 0;
@@ -159,12 +138,45 @@ const { name, specialty } = Astro.props;
       filter: brightness(1);
     }
   }
+
+  /* Typing Effect */
+  .typing-container {
+    display: inline-block;
+    position: relative;
+  }
+
+  .typing-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #E1AD01;
+    animation: typing 2s steps(30, end) 2.5s forwards, blink-cursor 0.75s step-end infinite 2.5s;
+    width: 0;
+  }
+
+  .typing-cursor {
+    opacity: 0;
+    animation: blink-cursor 0.75s step-end infinite 2.5s;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; border-right: none; }
+  }
+
+  @keyframes blink-cursor {
+    from, to { opacity: 0; }
+    50% { opacity: 1; }
+  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const nameElement = document.getElementById('animated-name');
-    if (!nameElement) return;
+    const specialtyElement = document.getElementById('specialty-text');
+    const typingText = document.querySelector('.typing-text');
+    
+    if (!nameElement || !typingText) return;
     
     // Check if already animated (using sessionStorage)
     if (sessionStorage.getItem('nameAnimated')) {
@@ -172,9 +184,17 @@ const { name, specialty } = Astro.props;
       nameElement.style.opacity = '1';
       nameElement.style.textShadow = '0 0 8px #E1AD01, 0 0 16px #E1AD01';
       nameElement.style.filter = 'brightness(1)';
+      
+      // Set specialty text immediately
+      typingText.textContent = 'Technology | Creativity';
+      typingText.style.width = '100%';
+      typingText.style.borderRight = 'none';
       return;
     }
     
     sessionStorage.setItem('nameAnimated', 'true');
+    
+    // Set the text to be typed
+    typingText.textContent = 'Technology | Creativity';
   });
 </script>
