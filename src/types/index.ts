@@ -18,7 +18,7 @@ export interface SiteContent {
   hero: HeroProps;
   experience: ExperienceProps[];
   projects: ProjectProps[];
-  beyondEngineering: BeyondEngineeringProps[];
+  beyondEngineering?: BeyondEngineeringProps[];
   about: AboutProps;
 }
 
