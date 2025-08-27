@@ -10,9 +10,9 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Typing/erasing animation header name */}
+  {/* Typing/erasing animation with quotes and semicolon */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight" id="header-name">
-    shifa amankwa-gabbey
+    "shifa amankwa-gabbey";
   </a>
 
   <button
@@ -57,37 +57,61 @@ const { navLinks } = Astro.props;
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
-    min-width: 240px; /* Fixed width to prevent layout shift */
+    min-width: 280px; /* Adjusted for quotes and semicolon */
   }
 
-  /* Typing and erasing animation */
+  /* Smooth typing and erasing animation */
   #header-name {
     animation: 
-      typing 3s steps(22, end) forwards,
+      typing 3s ease-in-out forwards,
       pause 3s 3s forwards,
-      erasing 3s 6s forwards,
+      erasing 3s 6s ease-in-out forwards,
       final-pause 3s 9s forwards;
     animation-iteration-count: infinite;
   }
 
   @keyframes typing {
-    from { width: 0; }
-    to { width: 240px; }
+    from { 
+      width: 0;
+      opacity: 0.8;
+    }
+    to { 
+      width: 280px;
+      opacity: 1;
+    }
   }
 
   @keyframes pause {
-    from { width: 240px; }
-    to { width: 240px; }
+    from { 
+      width: 280px;
+      opacity: 1;
+    }
+    to { 
+      width: 280px;
+      opacity: 1;
+    }
   }
 
   @keyframes erasing {
-    from { width: 240px; }
-    to { width: 0; }
+    from { 
+      width: 280px;
+      opacity: 1;
+    }
+    to { 
+      width: 0;
+      opacity: 0.8;
+    }
   }
 
   @keyframes final-pause {
-    from { width: 0; }
-    to { width: 0; }
+    from { 
+      width: 0;
+      opacity: 0.8;
+    }
+    to { 
+      width: 0;
+      opacity: 0.8;
+    }
   }
 </style>
 
