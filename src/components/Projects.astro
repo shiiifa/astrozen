@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 
 <Section text="Featured Projects" href="projects">
   {
-    projects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+    projects.map(({ name, summary, image }, index) => {
       const top = 98 + index * 40;
       // Create URL-friendly slug from project name
       const projectSlug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
