@@ -19,23 +19,14 @@ const { name, specialty, summary, email } = Astro.props;
   >
     {specialty}
   </p>
-  <p class="mb-16 text-base font-normal text-neutral md:text-lg">
-    {summary}
-  </p>
-
-  <a
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff] hover:bg-primary/90 transition-colors duration-300"
-    href={`mailto:${email}`}
-  >
-    Get in Touch
-  </a>
+  <!-- Summary text removed -->
 </section>
 
 <style>
   /* Typing animation */
   .typing-animation {
     overflow: hidden;
-    border-right: 3px solid #E1AD01; /* CHANGED TO GOLD */
+    border-right: 3px solid #E1AD01;
     white-space: nowrap;
     animation: typing 2.5s steps(30, end), blink-cursor 0.75s step-end infinite;
     width: 0;
@@ -54,7 +45,7 @@ const { name, specialty, summary, email } = Astro.props;
 
   @keyframes blink-cursor {
     from, to { border-color: transparent }
-    50% { border-color: #E1AD01; } /* CHANGED TO GOLD */
+    50% { border-color: #E1AD01; }
   }
 </style>
 

@@ -38,7 +38,7 @@ navLinks: [
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
     { text: "Github", href: "https://github.com/shiiifa" },
-    { text: "Email", href: "shifa.gabbey@ashesi.edu.gh" },
+    { text: "Email", href: "mailto:shifa.gabbey@ashesi.edu.gh" },
   ],
 
 
