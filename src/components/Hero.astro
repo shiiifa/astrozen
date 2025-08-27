@@ -11,7 +11,11 @@ const { name, specialty } = Astro.props;
     <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
       <path class="animate-circuit-path" d="M10,10 L90,10 L90,90 L10,90 Z" 
             stroke="#E1AD01" stroke-width="0.2" fill="none" />
-      {/* Multiple circuit paths with different animations */}
+      {/* Additional circuit paths */}
+      <path class="animate-circuit-path" d="M30,30 L70,30 L70,70 L30,70 Z" 
+            stroke="#E1AD01" stroke-width="0.1" fill="none" style="animation-delay: 1s" />
+      <path class="animate-circuit-path" d="M40,40 L60,40 L60,60 L40,60 Z" 
+            stroke="#E1AD01" stroke-width="0.05" fill="none" style="animation-delay: 2s" />
     </svg>
   </div>
 
@@ -42,7 +46,6 @@ const { name, specialty } = Astro.props;
     {Array.from({ length: 144 }).map((_, i) => (
       <div class="circuit-node group" style={`--index: ${i}`}>
         <div class="node-dot"></div>
-        <div class="node-connection"></div>
       </div>
     ))}
   </div>
@@ -121,41 +124,39 @@ const { name, specialty } = Astro.props;
     transition: all 0.3s ease;
   }
 
-  .node-connection {
-    position: absolute;
-    background: #E1AD01;
-    opacity: 0.3;
-    transition: all 0.3s ease;
-  }
-
   .circuit-node:hover .node-dot {
     width: 8px;
     height: 8px;
     box-shadow: 0 0 10px #E1AD01;
   }
-
-  .circuit-node:hover ~ .circuit-node .node-connection {
-    opacity: 0.8;
-  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Make grid nodes interactive
-    const nodes = document.querySelectorAll('.circuit-node');
+    const nameElement = document.getElementById('animated-name');
+    if (!nameElement) return;
     
-    nodes.forEach(node => {
-      node.addEventListener('mouseenter', () => {
-        const index = parseInt(node.style.getPropertyValue('--index'));
-        activateCircuitPath(index);
-      });
-    });
-
-    function activateCircuitPath(startIndex) {
-      // Create temporary circuit connections between nodes
-      // This would require more complex logic for actual circuit simulation
+    // Check if already animated (using sessionStorage)
+    if (sessionStorage.getItem('nameAnimated')) {
+      return; // Skip animation if already done in this session
     }
-
-    // Existing typing animation code here...
+    
+    const fullName = nameElement.textContent;
+    nameElement.textContent = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < fullName.length) {
+        nameElement.textContent += fullName.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80);
+      } else {
+        // Animation complete
+        sessionStorage.setItem('nameAnimated', 'true');
+      }
+    };
+    
+    // Start animation
+    setTimeout(typeWriter, 300);
   });
 </script>
