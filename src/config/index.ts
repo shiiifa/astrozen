@@ -20,7 +20,7 @@ navLinks: [
   { text: "experience", href: "#experience" },
   { text: "projects", href: "#projects" },
   { text: "skills", href: "#skills" },
-  { text: "beyond engineering", href: "/beyond-engineering" },
+  { text: "beyond engineering", href: "#beyond-engineering" },
   { text: "let's connect!", href: "#connect" }
 ],
 
