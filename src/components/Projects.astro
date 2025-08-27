@@ -13,20 +13,20 @@ const { projects } = Astro.props;
 <Section text="Featured Projects" href="projects">
   <div class="relative">
     {/* Navigation Arrows */}
-    <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+    <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors opacity-0 md:opacity-100">
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     
-    <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+    <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors opacity-0 md:opacity-100">
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
     {/* Projects Container */}
-    <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+    <div id="projectsContainer" class="flex overflow-x-auto scroll-smooth space-x-6 py-4 md:overflow-x-hidden">
       {
         projects.map(({ name, summary, image }) => (
           <a
@@ -107,10 +107,23 @@ const { projects } = Astro.props;
   #projectsContainer {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    cursor: grab;
   }
   
   #projectsContainer::-webkit-scrollbar {
     display: none;
+  }
+
+  #projectsContainer:active {
+    cursor: grabbing;
+  }
+
+  /* Show arrows on hover for desktop */
+  @media (min-width: 768px) {
+    .relative:hover #prevBtn,
+    .relative:hover #nextBtn {
+      opacity: 1 !important;
+    }
   }
 </style>
 
@@ -122,6 +135,65 @@ const { projects } = Astro.props;
     const projectWidth = 320; // Width of each project card + gap
 
     if (!container || !prevBtn || !nextBtn) return;
+
+    // Touch/swipe variables
+    let startX;
+    let scrollLeft;
+    let isDragging = false;
+
+    // Touch start event
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+      container.style.scrollBehavior = 'auto'; // Disable smooth scroll during drag
+    });
+
+    // Touch move event
+    container.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch end event
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+      container.style.scrollBehavior = 'smooth';
+    });
+
+    // Mouse drag events for desktop touch devices
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+      container.style.scrollBehavior = 'auto';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+      container.style.scrollBehavior = 'smooth';
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+      container.style.scrollBehavior = 'smooth';
+    });
 
     // Scroll to next project
     nextBtn.addEventListener('click', () => {
@@ -151,5 +223,12 @@ const { projects } = Astro.props;
         container.scrollBy({ left: projectWidth, behavior: 'smooth' });
       }
     });
+
+    // Show arrows on container hover (desktop only)
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      container.parentElement.addEventListener('mouseenter', () => {
+        checkArrows();
+      });
+    }
   });
 </script>
