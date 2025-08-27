@@ -1,6 +1,6 @@
 ---
 import Section from "@components/Section.astro";
-import { SITE_CONTENT, SITE_CONFIG } from "@config"; // Import both
+import { SITE_CONTENT, SITE_CONFIG } from "@config";
 import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
@@ -14,18 +14,15 @@ import "../styles/global.css";
 <Layout>
   <Hero {...SITE_CONTENT.hero} />
   
+  <!-- PROFILE SECTION (Now contains About Me content) -->
   <Section text="Profile" href="profile">
     <div class="text-neutral">
-      <p>Your personal bio, background, or introduction goes here...</p>
+      <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
     </div>
   </Section>
   
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
   <Skills skills={SITE_CONTENT.skills} />
-  
-  <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
-  
-  <!-- Use whichever config has socialLinks -->
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
 </Layout>
