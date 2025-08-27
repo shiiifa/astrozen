@@ -44,24 +44,7 @@ export const SITE_CONTENT: SiteContent = {
         "Extended into an attachment role, supporting the development of an asset and inventory tracking system for the company.",
       ],
     },
-    {
-      company: "Bankit",
-      position: "Mobile Developer",
-      startDate: "Feb 2017",
-      endDate: "May 2018",
-      summary: [
-        "I designed and developed a mobile application using Flutter, allowing it to be deployed on both Android and iOS with a single codebase. This reduced development time by 50% and maintenance costs by 30%, facilitating a consistent user experience on both platforms.",
-        "I integrated biometric authentication and data encryption, significantly improving the security of user data. This implementation resulted in a 40% increase in user trust and a 25% reduction in unauthorized access attempts.",
-      ],
-    },
-    {
-      company: "Driveer",
-      position: "Frontend Developer",
-      startDate: "Jun 2015",
-      endDate: "Oct 2016",
-      summary:
-        "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
-    },
+    
   ],
   
   projects: [
@@ -92,6 +75,20 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/clone-ig.png",
+    },
+    {
+      name: "Arduino Buzzer Timer",
+      summary: "Countdown timer with 7-segment LED displays, buzzer, and potentiometer control for Circuits & Electronics.",
+      linkPreview: "/",
+      linkSource: "https://lnkd.in/dcDTycNE",
+      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
+    },
+    {
+      name: "Hydrogel Soil Analysis",
+      summary: "Statistical study of water retention capacity in different soils using hydrogel technology.",
+      linkPreview: "/",
+      linkSource: "#",
+      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
     },
   ],
 
