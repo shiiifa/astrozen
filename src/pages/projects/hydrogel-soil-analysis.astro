@@ -7,9 +7,9 @@ const project = SITE_CONTENT.projects.find(p =>
   p.name === "Water Release Dynamics of Agricultural Hydrogels"
 );
 
-// Null check
+// Fixed null check
 if (!project) {
-  return Response.redirect('/404', 404);
+  return Astro.redirect('/404');
 }
 
 // Dummy media files (using existing images)

@@ -12,10 +12,14 @@ if (!project) {
   return Astro.redirect('/404');
 }
 
-// Dummy media files
+// Dummy media files (using existing images)
 const mediaItems = [
   "/clone-ig.png",
   "/shopify-clon.png", 
+  "/spotifu.png",
+  "/alejandro-big.jpg",
+  "/clone-ig.png",
+  "/shopify-clon.png",
   "/spotifu.png",
   "/alejandro-big.jpg"
 ];
@@ -40,8 +44,68 @@ const mediaItems = [
         <p class="text-neutral mt-4">What made this project particularly exciting was that it served as our entry for the Engineering and CS Final Semester Hackathon - marking our first participation in such an event and creating an unforgettable learning experience that combined theoretical knowledge with practical implementation.</p>
       </section>
 
-      <!-- Rest of your content remains the same -->
-      <!-- ... -->
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Features</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Four-digit 7-segment displays built from individual LEDs</li>
+          <li>Arduino Uno microcontroller for precise timing control</li>
+          <li>Audible buzzer alarm system for countdown completion</li>
+          <li>Potentiometer for adjustable and precise time settings</li>
+          <li>Custom PCB design and circuit implementation</li>
+          <li>Hackathon competition entry showcasing practical engineering skills</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Arduino C++ programming for timer logic and display control</li>
+          <li>LED multiplexing for efficient 7-segment display operation</li>
+          <li>Analog input processing from potentiometer</li>
+          <li>PWM (Pulse Width Modulation) for buzzer control</li>
+          <li>Circuit design and prototyping</li>
+          <li>Hardware-software integration</li>
+        </ul>
+      </section>
+
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Project media ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Learning Outcomes</h2>
+        <p class="text-neutral">This project provided hands-on experience with embedded systems, circuit design, and real-time programming. It demonstrated the practical application of electronics principles learned in class and developed skills in problem-solving, teamwork, and project management under the pressure of a hackathon environment.</p>
+      </section>
+
+      <div class="flex gap-4 justify-center">
+        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
+          View Project Details
+        </a>
+        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
+          Demo Video
+        </a>
+      </div>
     </div>
   </article>
 </Layout>
