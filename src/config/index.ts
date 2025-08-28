@@ -53,7 +53,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "Centralized platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
-      image: "/multipurpose-reservation-platform.jpg",
+      image: "/multipurpose-reservation-platform.png",
     },
     {
       name: "Ashesi Student Information System",
