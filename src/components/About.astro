@@ -10,8 +10,8 @@ const { description, image, name } = Astro.props;
 const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
-<div class="relative min-h-[600px] flex items-center justify-center py-12">
-  {/* Central Photo - No glow effects */}
+<div class="relative min-h-[700px] flex items-center justify-center py-16">
+  {/* Central Photo - No effects */}
   <div class="relative z-10">
     <Image
       class="h-80 w-64 object-cover rounded-lg"
@@ -22,45 +22,31 @@ const paragraphs = description.split('\n\n').filter(p => p.trim());
     />
   </div>
 
-  {/* Top Left Text Box - More spacing, fixed size */}
-  <div class="absolute top-2 left-2 max-w-xs md:top-16 md:left-16">
-    <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 h-32 w-64 overflow-hidden">
+  {/* Top Left Text Box - Much further out */}
+  <div class="absolute top-2 left-2 max-w-xs md:top-4 md:left-4 lg:top-8 lg:left-12">
+    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
       <p class="leading-relaxed">{paragraphs[0]}</p>
-      <div class="absolute -top-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Top Right Text Box - More spacing, fixed size */}
-  <div class="absolute top-2 right-2 max-w-xs md:top-16 md:right-16">
-    <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 h-32 w-64 overflow-hidden">
+  {/* Top Right Text Box - Much further out */}
+  <div class="absolute top-2 right-2 max-w-xs md:top-4 md:right-4 lg:top-8 lg:right-12">
+    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
       <p class="leading-relaxed">{paragraphs[1]}</p>
-      <div class="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Bottom Left Text Box - More spacing, fixed size */}
-  <div class="absolute bottom-2 left-2 max-w-xs md:bottom-16 md:left-16">
-    <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 h-32 w-64 overflow-hidden">
+  {/* Bottom Left Text Box - Much further out */}
+  <div class="absolute bottom-2 left-2 max-w-xs md:bottom-4 md:left-4 lg:bottom-8 lg:left-12">
+    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
       <p class="leading-relaxed">{paragraphs[2]}</p>
-      <div class="absolute -bottom-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Bottom Right Text Box - More spacing, fixed size */}
-  <div class="absolute bottom-2 right-2 max-w-xs md:bottom-16 md:right-16">
-    <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 h-32 w-64 overflow-hidden">
+  {/* Bottom Right Text Box - Much further out */}
+  <div class="absolute bottom-2 right-2 max-w-xs md:bottom-4 md:right-4 lg:bottom-8 lg:right-12">
+    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
       <p class="leading-relaxed">{paragraphs[3]}</p>
-      <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-    </div>
-  </div>
-
-  {/* Connecting lines - Adjusted for maximum spacing */}
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div class="w-0.5 h-32 bg-primary/20 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full"></div>
-      <div class="w-32 h-0.5 bg-primary/20 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full"></div>
-      <div class="w-0.5 h-32 bg-primary/20 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"></div>
-      <div class="w-32 h-0.5 bg-primary/20 absolute right-0 top-1/2 -translate-y-1/2 translate-x-full"></div>
     </div>
   </div>
 </div>
