@@ -3,9 +3,9 @@ import Section from "./Section.astro";
 
 // Vector icons for each skill category (using emojis as placeholders)
 const skillIcons = {
-  technical: "⚙️",    // Gear icon for technical skills
-  design: "🎨",       // Art palette icon for design skills  
-  professional: "🤝"  // Handshake icon for professional skills
+  technical: "⚙",    // Gear icon for technical skills
+  design: "🖌",       // Art palette icon for design skills  
+  professional: "𓂫"  // Handshake icon for professional skills
 };
 
 // Skill data with categories
@@ -14,40 +14,40 @@ const skillCategories = [
     icon: skillIcons.technical,
     title: "Technical Skills",
     skills: [
-      "Programming Languages: Python, Java, HTML, MATLAB, C",
-      "Data Analysis & Visualization: Excel, MATLAB",
-      "Computer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
-      "PCB Design & Simulation: KiCad (advanced)",
-      "Prototyping & Hardware: 3D Printing, Arduino (UNO)"
+      "<strong>Programming Languages:</strong> Python, Java, HTML, MATLAB, C",
+      "<strong>Data Analysis & Visualization:</strong> Excel, MATLAB",
+      "<strong>Computer-Aided Design (CAD) Software:</strong> SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
+      "<strong>PCB Design & Simulation:</strong> KiCad (advanced)",
+      "<strong>Prototyping & Hardware:</strong> 3D Printing, Arduino (UNO)"
     ]
   },
   {
     icon: skillIcons.design,
     title: "Design & Creative Skills",
     skills: [
-      "Graphic Design & Video Editing: Canva, CapCut",
-      "UI/UX & Web Tools: Wix, Wordpress, Vercel, Canva",
-      "Creative Writing: Freelance writing, Content Development"
+      "<strong>Graphic Design & Video Editing:</strong> Canva, CapCut",
+      "<strong>UI/UX & Web Tools:</strong> Wix, Wordpress, Vercel, Canva",
+      "<strong>Creative Writing:</strong> Freelance writing, Content Development"
     ]
   },
   {
     icon: skillIcons.professional,
     title: "Professional & Collaboration Skills",
     skills: [
-      "Microsoft Office Suite: Word, Excel, PowerPoint",
+      "<strong>Microsoft Office Suite:</strong> Word, Excel, PowerPoint",
       "Technical Writing & Documentation",
-      "Collaboration Tools: Slack, Microsoft Teams, Google Workspace"
+      "<strong>Collaboration Tools:</strong> Slack, Microsoft Teams, Google Workspace"
     ]
   }
 ];
 ---
 
-<Section text="Skills" href="skills">
+<Section text="skills" href="skills">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
     {skillCategories.map((category) => (
       <div class="text-center">
-        {/* Icon */}
-        <div class="text-4xl mb-4">{category.icon}</div>
+        {/* Icon - Made white */}
+        <div class="text-4xl mb-4 text-white">{category.icon}</div>
         
         {/* Category Title */}
         <h3 class="font-serif text-xl font-semibold text-primary mb-4">
@@ -57,9 +57,7 @@ const skillCategories = [
         {/* Skills List - Compact */}
         <ul class="space-y-2">
           {category.skills.map((skill) => (
-            <li class="text-neutral text-sm leading-tight">
-              {skill}
-            </li>
+            <li class="text-neutral text-sm leading-tight" set:html={skill} />
           ))}
         </ul>
       </div>

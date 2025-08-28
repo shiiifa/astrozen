@@ -10,9 +10,9 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Function syntax with proper typing effect */}
+  {/* Function syntax with yellow color and classic typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
-    <span class="typing-effect">shifa_amankwa_gabbey();</span>
+    <span class="typing-container">shifa_amankwa_gabbey();</span>
   </a>
 
   <button
@@ -55,49 +55,75 @@ const { navLinks } = Astro.props;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
     display: inline-block;
-    min-width: 20ch; /* Fixed width to prevent layout shift */
-    height: 1.5rem; /* Fixed height */
   }
 
-  /* Typing effect container */
-  .typing-effect {
+  /* Typing container */
+  .typing-container {
     display: inline-block;
+    position: relative;
+  }
+
+  /* Create classic typewriter effect */
+  .typing-container::before {
+    content: 'shifa_amankwa_gabbey();';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: #E1AD01;
+    background: #240C2C;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid transparent; /* No cursor */
-    width: 0;
-    animation: typing-loop 12s infinite;
+    border-right: 2px solid #E1AD01;
+    animation: typing 9s steps(22, end) infinite;
   }
 
-  @keyframes typing-loop {
-    /* Type for 3s (0% to 25%) */
+  /* Make original text invisible - only pseudo-element shows */
+  .typing-container {
+    color: transparent;
+  }
+
+  @keyframes typing {
+    /* Type for 3s (0% to 33.3%) */
     0% {
       width: 0;
+      border-right-color: #E1AD01;
     }
-    20% {
-      width: 20ch;
+    22.2% {
+      width: 100%;
+      border-right-color: #E1AD01;
     }
-    25% {
-      width: 20ch;
+    /* Pause with cursor blinking for 3s (33.3% to 66.6%) */
+    33.3% {
+      width: 100%;
+      border-right-color: #E1AD01;
     }
-    /* Pause for 3s (25% to 50%) */
-    45% {
-      width: 20ch;
+    44.4%, 50% {
+      border-right-color: transparent;
     }
-    50% {
-      width: 20ch;
+    55.6% {
+      border-right-color: #E1AD01;
     }
-    /* Erase for 3s (50% to 75%) */
-    70% {
-      width: 0;
+    66.6% {
+      width: 100%;
+      border-right-color: #E1AD01;
     }
-    75% {
-      width: 0;
+    /* Erase for 3s (66.6% to 100%) */
+    77.8% {
+      width: 100%;
+      border-right-color: #E1AD01;
     }
-    /* Pause for 3s (75% to 100%) */
     100% {
       width: 0;
+      border-right-color: #E1AD01;
     }
+  }
+
+  /* Cursor blink animation during pause */
+  @keyframes blink {
+    0%, 100% { border-right-color: #E1AD01; }
+    50% { border-right-color: transparent; }
   }
 </style>
 
@@ -118,7 +144,7 @@ const { navLinks } = Astro.props;
     item?.addEventListener("click", toggleMenu);
   });
 
-  // Update the navigation based on scroll position with Intersection Observer
+  // Update navigation based on scroll position with Intersection Observer
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
