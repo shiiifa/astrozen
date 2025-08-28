@@ -7,19 +7,15 @@ const project = SITE_CONTENT.projects.find(p =>
   p.name === "Cyber Threat Dynamics in VANETs"
 );
 
-// Null check
+// Fixed null check - use Astro.redirect instead of Response.redirect
 if (!project) {
-  return Response.redirect('/404', 404);
+  return Astro.redirect('/404');
 }
 
 // Dummy media files
 const mediaItems = [
   "/clone-ig.png",
   "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
   "/spotifu.png",
   "/alejandro-big.jpg"
 ];
