@@ -1,38 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { SITE_CONTENT } from "@config";
-import { Image } from "astro:assets";
-
-const project = SITE_CONTENT.projects.find(p => 
-  p.name === "Water Release Dynamics of Agricultural Hydrogels"
-);
-
-// Fixed null check
-if (!project) {
-  return Astro.redirect('/404');
-}
-
-// Dummy media files (using existing images)
-const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
-];
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
     <header class="mb-12 text-center">
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
-        {project.name}
+        Water Release Dynamics of Agricultural Hydrogels
       </h1>
       <p class="text-lg text-neutral">
-        {project.summary}
+        A statistical study of hydrogel-based water release in agriculture.
       </p>
     </header>
 
@@ -40,7 +17,6 @@ const mediaItems = [
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Research Overview</h2>
         <p class="text-neutral">This statistical research project focused on analyzing the water retention capabilities of different soil types when combined with hydrogel technology. The study aimed to understand how hydrogel polymers interact with various soil compositions and their potential applications in agriculture and water conservation.</p>
-        
         <p class="text-neutral mt-4">Through rigorous experimental design and statistical analysis, we measured and compared the water holding capacity across multiple soil samples, providing valuable insights into sustainable water management practices and soil improvement techniques.</p>
       </section>
 
@@ -56,31 +32,6 @@ const mediaItems = [
         </ul>
       </section>
 
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Project media ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Statistical Tools & Techniques</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
@@ -89,7 +40,6 @@ const mediaItems = [
           <li>Regression analysis for relationship modeling</li>
           <li>Correlation analysis between soil properties and water retention</li>
           <li>Data visualization for pattern recognition</li>
-          <li>Statistical software (R, Python, or specialized tools)</li>
         </ul>
       </section>
 
@@ -110,12 +60,9 @@ const mediaItems = [
         <p class="text-neutral">The research findings have practical applications in sustainable agriculture, particularly in regions facing water scarcity. The statistical models developed can help farmers and agricultural engineers optimize water usage, improve crop yields, and implement more efficient irrigation strategies using hydrogel technology.</p>
       </section>
 
-      <div class="flex gap-4 justify-center">
-        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
+      <div class="flex justify-center">
+        <a href="https://drive.google.com/file/d/1hnxXGPdoD94UqAhUOo6pSdqGZ0cmSASf/view?usp=sharing" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
           Research Paper
-        </a>
-        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
-          Data Analysis
         </a>
       </div>
     </div>

@@ -2,26 +2,34 @@
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
+// Media files for Spelling Bee
 const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
+  "/spelling1.jpg",
+  "/spelling2.jpg", 
+  "/spelling3.jpg",
+  "/spelling4.jpg"
 ];
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
     <header class="mb-12 text-center">
+      {/* Cover Photo */}
+      <div class="mb-8 rounded-2xl overflow-hidden">
+        <Image
+          src="/spelling1.jpg"
+          alt="The Spelling Bee, Ghana - Volunteer"
+          width={800}
+          height={400}
+          class="w-full h-64 object-cover"
+        />
+      </div>
+      
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
         The Spelling Bee, Ghana - Volunteer
       </h1>
       <p class="text-lg text-neutral">
-        Serve seasonally on the judges' panel as a recorder, ensuring accurate documentation.
+        As a volunteer for The Spelling Bee Ghana, I serve on the judges' panel as a recorder during seasonal competitions. My role involves ensuring accurate documentation of spellers' words and minimizing scoring discrepancies.
       </p>
     </header>
 
@@ -29,31 +37,6 @@ const mediaItems = [
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Volunteer Role</h2>
         <p class="text-neutral">As a volunteer for The Spelling Bee Ghana, I serve on the judges' panel as a recorder during seasonal competitions. My role involves ensuring accurate documentation of spellers' words and minimizing scoring discrepancies, while also helping maintain a positive atmosphere for participants.</p>
-      </section>
-
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Spelling Bee media ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
-        </div>
       </section>
 
       <section class="mb-12">
@@ -67,14 +50,30 @@ const mediaItems = [
         </ul>
       </section>
 
-      <div class="flex gap-4 justify-center">
-        <a href="https://thespellingbeeghana.com" target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
-          Official Website
-        </a>
-        <a href="#contact" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
-          Volunteer Info
-        </a>
-      </div>
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Spelling Bee event photo ${index + 1}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   </article>
 </Layout>

@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 // Media files for ASIS project
-const imageMedia = [
+const mediaItems = [
   "/asis1.jpg",
   "/asis2.jpg", 
   "/asis3.jpg",
@@ -11,8 +11,6 @@ const imageMedia = [
   "/asis5.jpg",
   "/asis6.jpg"
 ];
-
-const videoMedia = "/asis7.mp4";
 ---
 
 <Layout>
@@ -46,24 +44,8 @@ const videoMedia = "/asis7.mp4";
       <!-- MEDIA GALLERY SECTION -->
       <section class="mb-12">
         <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Project Visualizations</h2>
-        
-        {/* Video Preview */}
-        <div class="mb-8">
-          <h3 class="mb-4 font-serif text-xl font-semibold text-primary">System Demo</h3>
-          <video 
-            controls 
-            class="w-full rounded-lg border border-neutral/20"
-            poster="/asis1.jpg"
-          >
-            <source src={videoMedia} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        {/* Image Gallery */}
-        <h3 class="mb-4 font-serif text-xl font-semibold text-primary">Screenshots</h3>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {imageMedia.map((media, index) => (
+          {mediaItems.map((media, index) => (
             <a 
               href={media} 
               target="_blank" 
@@ -95,11 +77,10 @@ const videoMedia = "/asis7.mp4";
         </ul>
       </section>
 
-      <div class="flex gap-4 justify-center">
-        <a href="https://github.com/shiiifa?tab=repositories" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
+      <div class="flex justify-center">
+        <a href="https://github.com/shiiifa/SystemSpecifications" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
           View Source Code
         </a>
-        {/* Live Preview button removed as requested */}
       </div>
     </div>
   </article>
