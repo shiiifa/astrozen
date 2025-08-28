@@ -1,22 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+
+// Media files for TEDx - including tedx1 as a tile
+const mediaItems = [
+  "/tedx1.jpg"
+];
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
     <header class="mb-12 text-center">
-      {/* Cover Photo */}
-      <div class="mb-8 rounded-2xl overflow-hidden">
-        <Image
-          src="/tedx1.jpg"
-          alt="TEDxAshesiUniversity Curator"
-          width={800}
-          height={400}
-          class="w-full h-64 object-cover"
-        />
-      </div>
-      
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
         TEDxAshesiUniversity Curator
       </h1>
@@ -40,6 +34,31 @@ import { Image } from "astro:assets";
           <li>Coordinate rehearsal sessions and provide performance coaching</li>
           <li>Collaborate with the organizing team on event planning</li>
         </ul>
+      </section>
+
+      <!-- MEDIA GALLERY SECTION - tedx1 as a tile -->
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Gallery</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {mediaItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`TEDxAshesiUniversity event ${index + 1}`}
+                width={300}
+                height={200}
+                class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
     </div>
   </article>
