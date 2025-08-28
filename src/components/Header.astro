@@ -131,7 +131,7 @@ const { navLinks } = Astro.props;
     observer.observe(section);
   });
 
-  // Cleanups observer
+  // Cleanup observer
   document.onvisibilitychange = () => {
     if (document.visibilityState === "hidden") {
       observer.disconnect();
