@@ -11,7 +11,7 @@ const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
 <div class="flex flex-col items-center gap-12 md:flex-row md:gap-12">
-  <div class="w-auto text-base text-neutral md:pr-8">
+  <div class="w-full text-base text-neutral md:w-2/3 md:pr-8">  {/* Changed to wider container */}
     {paragraphs.map(paragraph => (
       <p class="mb-4">{paragraph}</p>
     ))}
