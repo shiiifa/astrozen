@@ -67,7 +67,10 @@ const beyondEngineeringItems = [
       </button>
 
       {/* Beyond Engineering Container */}
-      <div id="beyondContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+      <div 
+        id="beyondContainer" 
+        class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing"
+      >
         {
           beyondEngineeringItems.map(({ name, image, linkPreview }) => (
             <a
@@ -100,14 +103,14 @@ const beyondEngineeringItems = [
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
 
   <script>
-    // Beyond Engineering Carousel Functionality
     document.addEventListener('DOMContentLoaded', () => {
       const beyondContainer = document.getElementById('beyondContainer');
       const beyondPrevBtn = document.getElementById('beyondPrevBtn');
       const beyondNextBtn = document.getElementById('beyondNextBtn');
-      const itemWidth = 280; // Width of each item + gap
-
+      
       if (!beyondContainer || !beyondPrevBtn || !beyondNextBtn) return;
+
+      const itemWidth = 280; // Width of each item + gap
 
       // Scroll to next item
       beyondNextBtn.addEventListener('click', () => {
@@ -118,44 +121,6 @@ const beyondEngineeringItems = [
       beyondPrevBtn.addEventListener('click', () => {
         beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
       });
-
-      // Touch sliding functionality
-      let startX, scrollLeft, isDown = false;
-
-      beyondContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - beyondContainer.offsetLeft;
-        scrollLeft = beyondContainer.scrollLeft;
-      });
-
-      beyondContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-      });
-
-      beyondContainer.addEventListener('mouseup', () => {
-        isDown = false;
-      });
-
-      beyondContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - beyondContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        beyondContainer.scrollLeft = scrollLeft - walk;
-      });
-
-      // Touch events for mobile
-      beyondContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - beyondContainer.offsetLeft;
-        scrollLeft = beyondContainer.scrollLeft;
-      }, { passive: true });
-
-      beyondContainer.addEventListener('touchmove', (e) => {
-        if (!e.touches.length) return;
-        const x = e.touches[0].pageX - beyondContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        beyondContainer.scrollLeft = scrollLeft - walk;
-      }, { passive: true });
 
       // Hide arrows when at edges
       const checkBeyondArrows = () => {
@@ -169,27 +134,68 @@ const beyondEngineeringItems = [
 
       // Add keyboard navigation
       document.addEventListener('keydown', (e) => {
-        if (e.target.closest('#beyondContainer')) {
-          if (e.key === 'ArrowLeft') {
-            beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-          } else if (e.key === 'ArrowRight') {
-            beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
-          }
+        if (e.key === 'ArrowLeft') {
+          beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+        } else if (e.key === 'ArrowRight') {
+          beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
         }
+      });
+
+      // Touch sliding functionality
+      let startX: number;
+      let scrollLeft: number;
+      let isDown = false;
+
+      beyondContainer.addEventListener('mousedown', (e: MouseEvent) => {
+        isDown = true;
+        startX = e.pageX - beyondContainer.offsetLeft;
+        scrollLeft = beyondContainer.scrollLeft;
+        beyondContainer.classList.add('active');
+      });
+
+      beyondContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        beyondContainer.classList.remove('active');
+      });
+
+      beyondContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        beyondContainer.classList.remove('active');
+      });
+
+      beyondContainer.addEventListener('mousemove', (e: MouseEvent) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - beyondContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        beyondContainer.scrollLeft = scrollLeft - walk;
+      });
+
+      // Touch events for mobile
+      beyondContainer.addEventListener('touchstart', (e: TouchEvent) => {
+        isDown = true;
+        startX = e.touches[0].pageX - beyondContainer.offsetLeft;
+        scrollLeft = beyondContainer.scrollLeft;
+      });
+
+      beyondContainer.addEventListener('touchend', () => {
+        isDown = false;
+      });
+
+      beyondContainer.addEventListener('touchmove', (e: TouchEvent) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - beyondContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        beyondContainer.scrollLeft = scrollLeft - walk;
       });
     });
   </script>
 
   <style>
-    /* Hide scrollbar but keep functionality for beyond engineering */
+    /* Hide scrollbar but keep functionality */
     #beyondContainer {
       -ms-overflow-style: none;
       scrollbar-width: none;
-      cursor: grab;
-    }
-    
-    #beyondContainer:active {
-      cursor: grabbing;
     }
     
     #beyondContainer::-webkit-scrollbar {
