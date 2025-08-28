@@ -5,7 +5,7 @@ import Section from "./Section.astro";
 const skillIcons = {
   technical: "⚙",    // Gear icon for technical skills
   design: "🖌",       // Art palette icon for design skills  
-  professional: "🤝"  // Handshake icon for professional skills
+  professional: "𓂫"  // Handshake icon for professional skills
 };
 
 // Skill data with categories
@@ -46,8 +46,8 @@ const skillCategories = [
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
     {skillCategories.map((category) => (
       <div class="text-center">
-        {/* Icon */}
-        <div class="text-4xl mb-4">{category.icon}</div>
+        {/* Icon - Made white */}
+        <div class="text-4xl mb-4 text-white">{category.icon}</div>
         
         {/* Category Title */}
         <h3 class="font-serif text-xl font-semibold text-primary mb-4">
