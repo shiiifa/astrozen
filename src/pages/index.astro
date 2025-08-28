@@ -41,10 +41,8 @@ const beyondEngineeringItems = [
 ---
 
 <Layout>
-  {/* PROFILE SECTION AT THE VERY TOP */}
-  <Section text="Profile" href="profile">
-    <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
-  </Section>
+  {/* ABOUT SECTION AT THE VERY TOP - NO HEADING */}
+  <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
   
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
