@@ -4,17 +4,22 @@ import type { AboutProps, HeroProps } from "@types";
 
 type Props = AboutProps & Pick<HeroProps, "name">;
 
-const { description, image, name } = Astro.props;
-
-// Convert the description string into paragraphs by splitting on double newlines
-const paragraphs = description.split('\n\n').filter(p => p.trim());
+const { image, name } = Astro.props;
 ---
 
 <div class="flex flex-col items-center gap-12 md:flex-row md:gap-12">
-  <div class="w-full text-base text-neutral md:w-2/3 md:pr-8">  {/* Changed to wider container */}
-    {paragraphs.map(paragraph => (
-      <p class="mb-4">{paragraph}</p>
-    ))}
+  <div class="w-full text-base text-neutral md:w-2/3 md:pr-8">
+    <p class="mb-4">
+      A BSc. Computer Engineering student at Ashesi University with a strong passion for visual design. My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects.
+    </p>
+    
+    <p class="mb-4">
+      From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, honing my skills in turning complex ideas into accessible outputs.
+    </p>
+    
+    <p class="mb-4">
+      Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity and problem-solving, that will continue to guide my journey as a designer and engineer.
+    </p>
   </div>
   <div class="flex-shrink-0">
     <Image
