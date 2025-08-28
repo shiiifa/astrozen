@@ -53,7 +53,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "Centralized platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
-      image: "/spotifu.png",
+      image: "/multipurpose-reservation-platform.jpg",
     },
     {
       name: "Ashesi Student Information System",
@@ -96,17 +96,17 @@ export const SITE_CONTENT: SiteContent = {
   {
     category: "Technical Skills",
     tools: "Programming Languages, CAD, PCB Design, Prototyping",
-    proficiency: "Advanced"
+    proficiency: "Intermediate"
   },
   {
     category: "Design & Creative Skills", 
     tools: "Graphic Design, UI/UX, Creative Writing",
-    proficiency: "Skilled"
+    proficiency: "Intermediate"
   },
   {
     category: "Professional Skills",
     tools: "Office Suite, Technical Writing, Collaboration Tools",
-    proficiency: "Expert"
+    proficiency: "Advanced"
   }
 ],
 
