@@ -87,7 +87,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "A statistical study of hydrogel-based water release in agriculture.",
       linkPreview: "/projects/hydrogel-soil-analysis",
       linkSource: "#",
-      image: "/hydrogel-analysis.png",
+      image: "/hydrogel.png",
     },
   ],
 
