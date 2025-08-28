@@ -1,13 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
-
-// Media files for hydrogel research
-const mediaItems = [
-  "/hydrogel1.jpg",
-  "/hydrogel2.jpg", 
-  "/hydrogel3.jpg"
-];
 ---
 
 <Layout>
@@ -38,31 +30,6 @@ const mediaItems = [
           <li>Statistical sampling and experimental controls</li>
           <li>Multiple trial repetitions for data reliability</li>
         </ul>
-      </section>
-
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Research Visualizations</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Hydrogel research visualization ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
-        </div>
       </section>
 
       <section class="mb-12">
