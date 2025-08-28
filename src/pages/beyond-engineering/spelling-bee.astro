@@ -1,6 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+
+// Media files for Spelling Bee
+const galleryItems = [
+  "/spelling2.jpg", 
+  "/spelling3.jpg",
+  "/spelling4.jpg"
+];
 ---
 
 <Layout>
@@ -15,7 +22,7 @@ import { Image } from "astro:assets";
     </header>
 
     <div class="prose prose-invert max-w-none">
-      {/* Spelling Bee Photo Display Tile */}
+      {/* Main Spelling Bee Photo Display Tile */}
       <div class="mb-12 text-center">
         <div class="inline-block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30 max-w-md">
           <Image
@@ -27,6 +34,31 @@ import { Image } from "astro:assets";
           />
         </div>
       </div>
+
+      {/* Additional Gallery Photos */}
+      <section class="mb-12">
+        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {galleryItems.map((media, index) => (
+            <a 
+              href={media} 
+              target="_blank" 
+              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            >
+              <Image
+                src={media}
+                alt={`Spelling Bee event photo ${index + 2}`}
+                width={200}
+                height={200}
+                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <span class="text-white text-sm font-medium">View Full Size</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   </article>
 </Layout>
