@@ -4,12 +4,12 @@ import { SITE_CONTENT } from "@config";
 import { Image } from "astro:assets";
 
 const project = SITE_CONTENT.projects.find(p => 
-  p.name === "Arduino Buzzer Timer"
+  p.name === "LED-Based Countdown Timer"  // Changed to match your new project name
 );
 
-// Null check
+// Fixed null check - use Astro.redirect instead of Response.redirect
 if (!project) {
-  return Response.redirect('/404', 404);
+  return Astro.redirect('/404');
 }
 
 // Dummy media files (using existing images)
