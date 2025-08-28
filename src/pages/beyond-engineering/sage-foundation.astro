@@ -2,15 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
-const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
+// Display photos for Sage Foundation
+const displayPhotos = [
+  "/sage1.jpg",
+  "/sage2.jpg", 
+  "/sage3.jpg",
+  "/sage4.jpg"
 ];
 ---
 
@@ -26,53 +23,40 @@ const mediaItems = [
     </header>
 
     <div class="prose prose-invert max-w-none">
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Foundation Overview</h2>
-        <p class="text-neutral">Sage Literacy Foundation is an initiative I founded to promote literacy and education in underserved communities. Through book donations and educational workshops, we aim to provide resources and opportunities for students to develop their reading and language skills.</p>
-      </section>
-
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
+      {/* Display Photos Gallery */}
+      <div class="mb-12">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
+          {displayPhotos.map((photo, index) => (
+            <div class="overflow-hidden rounded-lg border border-neutral/20">
               <Image
-                src={media}
-                alt={`Sage Foundation media ${index + 1}`}
+                src={photo}
+                alt={`Sage Literacy Foundation initiative ${index + 1}`}
                 width={200}
                 height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                class="h-40 w-full object-cover"
               />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
+            </div>
           ))}
         </div>
+      </div>
+
+      <section class="mb-12 text-center">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Foundation Overview</h2>
+        <p class="text-neutral">Sage Literacy Foundation is an initiative I founded at age 13, to promote literacy and education in underserved communities. Through book donations and educational workshops, we aim to provide resources and opportunities for students to develop their reading and language skills.</p>
       </section>
 
-      <section class="mb-12">
+      <section class="mb-12 text-center">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Initiatives & Impact</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
           <li>Book donations to Nagie's Angels Educational Centre in Kumasi</li>
           <li>One-week English Language workshop at Labadi Presby/Emmause JHS</li>
-          <li>Ongoing literacy programs in multiple schools</li>
-          <li>Partnerships with local educational institutions</li>
           <li>Community engagement and volunteer coordination</li>
         </ul>
       </section>
 
-      <div class="flex gap-4 justify-center">
-        <a href="#contact" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
-          Donate Books
-        </a>
-        <a href="#contact" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
-          Volunteer
+      <div class="flex justify-center">
+        <a href="https://instagram.com/sageliteracyfoundation" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
+          Follow on Instagram
         </a>
       </div>
     </div>
