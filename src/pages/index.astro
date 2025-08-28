@@ -54,20 +54,20 @@ const beyondEngineeringItems = [
   <Section text="Beyond Engineering" href="beyond-engineering">
     <div class="relative">
       {/* Navigation Arrows */}
-      <button id="beyond-prev" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+      <button id="beyondPrevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="beyond-next" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+      <button id="beyondNextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
-      {/* Scrollable Container */}
-      <div id="beyond-container" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+      {/* Beyond Engineering Container with touch support */}
+      <div id="beyondContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing">
         {
           beyondEngineeringItems.map(({ name, image, linkPreview }) => (
             <a
@@ -98,99 +98,110 @@ const beyondEngineeringItems = [
   </Section>
   
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
-
-  {/* Touch/Swipe and Arrow Navigation Script */}
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('beyond-container');
-      const prevBtn = document.getElementById('beyond-prev');
-      const nextBtn = document.getElementById('beyond-next');
-      const itemWidth = 256 + 24; // width + gap
-
-      if (!container || !prevBtn || !nextBtn) return;
-
-      // Arrow navigation
-      nextBtn.addEventListener('click', () => {
-        container.scrollBy({ left: itemWidth, behavior: 'smooth' });
-      });
-
-      prevBtn.addEventListener('click', () => {
-        container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-      });
-
-      // Touch/swipe functionality
-      let startX, scrollLeft, isDown = false;
-
-      container.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-      });
-
-      container.addEventListener('mouseleave', () => {
-        isDown = false;
-      });
-
-      container.addEventListener('mouseup', () => {
-        isDown = false;
-      });
-
-      container.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 2;
-        container.scrollLeft = scrollLeft - walk;
-      });
-
-      // Touch events for mobile
-      container.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-      }, { passive: true });
-
-      container.addEventListener('touchmove', (e) => {
-        if (!startX) return;
-        const x = e.touches[0].pageX - container.offsetLeft;
-        const walk = (x - startX) * 2;
-        container.scrollLeft = scrollLeft - walk;
-      }, { passive: true });
-
-      // Hide arrows when at edges
-      const checkArrows = () => {
-        const { scrollLeft, scrollWidth, clientWidth } = container;
-        prevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
-        nextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
-      };
-
-      container.addEventListener('scroll', checkArrows);
-      checkArrows(); // Initial check
-
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-        } else if (e.key === 'ArrowRight') {
-          container.scrollBy({ left: itemWidth, behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
-
-  <style>
-    /* Hide scrollbar but keep functionality */
-    #beyond-container {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      cursor: grab;
-    }
-    
-    #beyond-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    #beyond-container:active {
-      cursor: grabbing;
-    }
-  </style>
 </Layout>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  #beyondContainer {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  #beyondContainer::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const beyondContainer = document.getElementById('beyondContainer');
+    const beyondPrevBtn = document.getElementById('beyondPrevBtn');
+    const beyondNextBtn = document.getElementById('beyondNextBtn');
+    const beyondItemWidth = 256 + 24; // Width + gap
+
+    if (!beyondContainer || !beyondPrevBtn || !beyondNextBtn) return;
+
+    // Scroll to next item
+    beyondNextBtn.addEventListener('click', () => {
+      beyondContainer.scrollBy({ left: beyondItemWidth, behavior: 'smooth' });
+    });
+
+    // Scroll to previous item
+    beyondPrevBtn.addEventListener('click', () => {
+      beyondContainer.scrollBy({ left: -beyondItemWidth, behavior: 'smooth' });
+    });
+
+    // Hide arrows when at edges
+    const checkBeyondArrows = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
+      beyondPrevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
+      beyondNextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
+    };
+
+    beyondContainer.addEventListener('scroll', checkBeyondArrows);
+    checkBeyondArrows(); // Initial check
+
+    // Touch swipe functionality
+    let startX;
+    let scrollLeft;
+
+    beyondContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].pageX - beyondContainer.offsetLeft;
+      scrollLeft = beyondContainer.scrollLeft;
+      beyondContainer.style.scrollBehavior = 'auto'; // Disable smooth scroll during swipe
+    });
+
+    beyondContainer.addEventListener('touchmove', (e) => {
+      if (!startX) return;
+      const x = e.touches[0].pageX - beyondContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll-fast factor
+      beyondContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    beyondContainer.addEventListener('touchend', () => {
+      startX = null;
+      beyondContainer.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll
+    });
+
+    // Mouse drag functionality for desktop
+    let isDown = false;
+    let startXMouse;
+    let scrollLeftMouse;
+
+    beyondContainer.addEventListener('mousedown', (e) => {
+      isDown = true;
+      beyondContainer.style.cursor = 'grabbing';
+      startXMouse = e.pageX - beyondContainer.offsetLeft;
+      scrollLeftMouse = beyondContainer.scrollLeft;
+      beyondContainer.style.scrollBehavior = 'auto';
+    });
+
+    beyondContainer.addEventListener('mouseleave', () => {
+      isDown = false;
+      beyondContainer.style.cursor = 'grab';
+    });
+
+    beyondContainer.addEventListener('mouseup', () => {
+      isDown = false;
+      beyondContainer.style.cursor = 'grab';
+      beyondContainer.style.scrollBehavior = 'smooth';
+    });
+
+    beyondContainer.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - beyondContainer.offsetLeft;
+      const walk = (x - startXMouse) * 2;
+      beyondContainer.scrollLeft = scrollLeftMouse - walk;
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        beyondContainer.scrollBy({ left: -beyondItemWidth, behavior: 'smooth' });
+      } else if (e.key === 'ArrowRight') {
+        beyondContainer.scrollBy({ left: beyondItemWidth, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
