@@ -10,43 +10,19 @@ const { description, image, name } = Astro.props;
 const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
-<div class="relative min-h-[700px] flex items-center justify-center py-16">
-  {/* Central Photo - No effects */}
-  <div class="relative z-10">
+<div class="flex flex-col items-center gap-12 md:flex-row md:gap-12">
+  <div class="w-auto text-base text-neutral md:pr-8">
+    {paragraphs.map(paragraph => (
+      <p class="mb-4">{paragraph}</p>
+    ))}
+  </div>
+  <div class="flex-shrink-0">
     <Image
-      class="h-80 w-64 object-cover rounded-lg"
+      class="h-96 w-80 object-cover rounded-lg"
       src={image}
-      width="320"
-      height="400"
+      width="400"
+      height="480"
       alt={name}
     />
-  </div>
-
-  {/* Top Left Text Box - Much further out */}
-  <div class="absolute top-2 left-2 max-w-xs md:top-4 md:left-4 lg:top-8 lg:left-12">
-    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
-      <p class="leading-relaxed">{paragraphs[0]}</p>
-    </div>
-  </div>
-
-  {/* Top Right Text Box - Much further out */}
-  <div class="absolute top-2 right-2 max-w-xs md:top-4 md:right-4 lg:top-8 lg:right-12">
-    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
-      <p class="leading-relaxed">{paragraphs[1]}</p>
-    </div>
-  </div>
-
-  {/* Bottom Left Text Box - Much further out */}
-  <div class="absolute bottom-2 left-2 max-w-xs md:bottom-4 md:left-4 lg:bottom-8 lg:left-12">
-    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
-      <p class="leading-relaxed">{paragraphs[2]}</p>
-    </div>
-  </div>
-
-  {/* Bottom Right Text Box - Much further out */}
-  <div class="absolute bottom-2 right-2 max-w-xs md:bottom-4 md:right-4 lg:bottom-8 lg:right-12">
-    <div class="bg-[#1c232d] border border-primary/30 rounded-xl p-5 text-sm text-neutral">
-      <p class="leading-relaxed">{paragraphs[3]}</p>
-    </div>
   </div>
 </div>
