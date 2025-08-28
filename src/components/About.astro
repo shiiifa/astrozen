@@ -10,18 +10,18 @@ const { description, image, name } = Astro.props;
 const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
-<div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
-  <div class="w-auto text-base text-neutral md:pr-5">
+<div class="flex flex-col items-center gap-12 md:flex-row md:gap-12">
+  <div class="w-auto text-base text-neutral md:pr-8">
     {paragraphs.map(paragraph => (
       <p class="mb-4">{paragraph}</p>
     ))}
   </div>
   <div class="flex-shrink-0">
     <Image
-      class="h-80 w-64 object-cover rounded-lg"
+      class="h-96 w-80 object-cover rounded-lg"
       src={image}
-      width="260"
-      height="260"
+      width="400"
+      height="480"
       alt={name}
     />
   </div>
