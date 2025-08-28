@@ -60,7 +60,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa?tab=repositories",
-      image: "asis.jpg",
+      image: "/asis.jpg",
     },
     {
       name: "ShellTrivia",
