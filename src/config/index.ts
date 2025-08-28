@@ -71,7 +71,7 @@ export const SITE_CONTENT: SiteContent = {
     {
       name: "LED-Based Countdown Timer",
       summary: "An Arduino UNO-powered countdown timer with 7-segment LED displays, buzzer, and potentiometer control.",
-      linkPreview: "/projects/led-based-countdown-timer",
+      linkPreview: "/projects/arduino-buzzer-timer",
       linkSource: "https://lnkd.in/dcDTycNE",
       image: "/the-circuit.png",
     },
