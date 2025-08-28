@@ -10,7 +10,7 @@ const { navLinks } = Astro.props;
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
 >
-  {/* Function syntax with yellow color and smooth typing */}
+  {/* Function syntax with yellow color and classic typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
     <span class="typing-container">shifa_amankwa_gabbey();</span>
   </a>
@@ -61,9 +61,10 @@ const { navLinks } = Astro.props;
   .typing-container {
     display: inline-block;
     position: relative;
+    color: transparent; /* Make original text invisible */
   }
 
-  /* Create typing effect using pseudo-element */
+  /* Classic character-by-character typing effect */
   .typing-container::before {
     content: 'shifa_amankwa_gabbey();';
     position: absolute;
@@ -75,33 +76,19 @@ const { navLinks } = Astro.props;
     background: #240C2C;
     overflow: hidden;
     white-space: nowrap;
-    animation: typing-erase 9s ease-in-out infinite;
+    border-right: 2px solid #E1AD01; /* Typing cursor */
+    animation: typing 3s steps(22, end) forwards, 
+               blink-cursor 0.75s step-end infinite 3s;
   }
 
-  /* Make original text invisible - only pseudo-element shows */
-  .typing-container {
-    color: transparent;
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
   }
 
-  @keyframes typing-erase {
-    /* Type for 3s (0% to 33.3%) */
-    0% {
-      width: 0;
-    }
-    33.3% {
-      width: 100%;
-    }
-    /* Pause for 3s (33.3% to 66.6%) */
-    50% {
-      width: 100%;
-    }
-    66.6% {
-      width: 100%;
-    }
-    /* Erase for 3s (66.6% to 100%) */
-    100% {
-      width: 0;
-    }
+  @keyframes blink-cursor {
+    from, to { border-color: transparent; }
+    50% { border-color: #E1AD01; }
   }
 </style>
 
@@ -144,7 +131,7 @@ const { navLinks } = Astro.props;
     observer.observe(section);
   });
 
-  // Cleanup observer
+  // Cleanups observer
   document.onvisibilitychange = () => {
     if (document.visibilityState === "hidden") {
       observer.disconnect();
