@@ -44,72 +44,70 @@ export const SITE_CONTENT: SiteContent = {
         "Extended into an attachment role, supporting the development of an asset and inventory tracking system for the company.",
       ],
     },
-    
   ],
   
   projects: [
     {
       name: "Ashesi Multipurpose Reservation System",
       summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
-      linkPreview: "/",
+      linkPreview: "/projects/ashesi-multipurpose-reservation-system",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
       image: "/multipurpose-reservation-platform.png",
     },
     {
       name: "Cyber Threat Dynamics in VANETs",
       summary: "A mathematical modeling of malware spread in vehicular networks using SEIR-S framework and wireless analysis.",
-      linkPreview: "/",
+      linkPreview: "/projects/cyber-threat-dynamics-vanets",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/vanets.png",
     },
     {
       name: "Ashesi Student Information System",
       summary: "A propositional logic-based CAMU-inspired prototype for automated course enrollment decisions.",
-      linkPreview: "/",
+      linkPreview: "/projects/ashesi-student-information-system",
       linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/asis.jpg",
     },
     {
       name: "LED-Based Countdown Timer",
       summary: "An Arduino UNO-powered countdown timer with 7-segment LED displays, buzzer, and potentiometer control.",
-      linkPreview: "/",
+      linkPreview: "/projects/led-countdown-timer",
       linkSource: "https://lnkd.in/dcDTycNE",
-      image: "/the-circuit.png", // USING SAME IMAGE AS OTHERS
+      image: "/the-circuit.png",
     },
     {
       name: "ShellTrivia",
       summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.",
-      linkPreview: "/",
+      linkPreview: "/projects/shelltrivia",
       linkSource: "https://github.com/shiiifa/ShellTrivia",
       image: "/shell.png",
     },
-    
     {
       name: "Water Release Dynamics of Agricultural Hydrogels",
       summary: "A statistical study of hydrogel-based water release in agriculture.",
-      linkPreview: "/",
+      linkPreview: "/projects/hydrogel-soil-analysis",
       linkSource: "#",
-      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
+      image: "/hydrogel-analysis.png",
     },
   ],
 
   skills: [
-  {
-    category: "Technical Skills",
-    tools: "Programming Languages, CAD, PCB Design, Prototyping",
-    proficiency: "Intermediate"
-  },
-  {
-    category: "Design & Creative Skills", 
-    tools: "Graphic Design, UI/UX, Creative Writing",
-    proficiency: "Intermediate"
-  },
-  {
-    category: "Professional Skills",
-    tools: "Office Suite, Technical Writing, Collaboration Tools",
-    proficiency: "Advanced"
-  }
-],
+    {
+      category: "Technical Skills",
+      tools: "Programming Languages, CAD, PCB Design, Prototyping",
+      proficiency: "Intermediate"
+    },
+    {
+      category: "Design & Creative Skills", 
+      tools: "Graphic Design, UI/UX, Creative Writing",
+      proficiency: "Intermediate"
+    },
+    {
+      category: "Professional Skills",
+      tools: "Office Suite, Technical Writing, Collaboration Tools",
+      proficiency: "Advanced"
+    }
+  ],
 
   about: {
     description: `I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design.
