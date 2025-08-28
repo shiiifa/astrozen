@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 ---
 
 <Layout>
@@ -15,19 +14,6 @@ import { Image } from "astro:assets";
     </header>
 
     <div class="prose prose-invert max-w-none">
-      {/* TEDx Photo Display Tile */}
-      <div class="mb-12 text-center">
-        <div class="inline-block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30 max-w-md">
-          <Image
-            src="/tedx1.jpg"
-            alt="TEDxAshesiUniversity Event"
-            width={400}
-            height={300}
-            class="w-full h-64 object-cover"
-          />
-        </div>
-      </div>
-
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Role Overview</h2>
         <p class="text-neutral">As a curator for TEDxAshesiUniversity, I work closely with speakers to develop and refine their ideas into compelling TED-style talks. This involves guiding them through the process of storytelling, message structuring, and delivery techniques to create presentations that inspire and engage audiences.</p>
