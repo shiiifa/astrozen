@@ -31,10 +31,10 @@ const { projects } = Astro.props;
         projects.map(({ name, summary, image, linkPreview, linkSource }) => (
           <a
             href={linkPreview}
-            class="group relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+            class="group relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
           >
-            {/* Background pattern - ASH-LIKE EFFECT RESTORED */}
-            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[5%] group-hover:opacity-[7%] transition-opacity duration-500"></div>
+            {/* ORIGINAL ASH BACKGROUND RESTORED */}
+            <div class="bg-difu absolute inset-0 z-0 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-['']"></div>
             
             {/* Content */}
             <div class="relative z-10 flex h-full flex-col p-6">
