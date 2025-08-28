@@ -1,109 +1,57 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { SITE_CONTENT } from "@config";
-import { Image } from "astro:assets";
-
-const project = SITE_CONTENT.projects.find(p => 
-  p.name === "LED-Based Countdown Timer"
-);
-
-// Fixed null check
-if (!project) {
-  return Astro.redirect('/404');
-}
-
-// Dummy media files (using existing images)
-const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
-];
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
     <header class="mb-12 text-center">
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
-        {project.name}
+        LED-Based Countdown Timer
       </h1>
-      <p class="text-lg text-neutral">
-        {project.summary}
-      </p>
     </header>
 
     <div class="prose prose-invert max-w-none">
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
-        <p class="text-neutral">For our Circuits and Electronics course, Thandeka and I designed and built a sophisticated countdown timer using four-digit 7-segment displays constructed entirely from individual LEDs. The system was controlled by an Arduino Uno and featured a buzzer alarm along with a potentiometer for precise time control.</p>
-        
-        <p class="text-neutral mt-4">What made this project particularly exciting was that it served as our entry for the Engineering and CS Final Semester Hackathon - marking our first participation in such an event and creating an unforgettable learning experience that combined theoretical knowledge with practical implementation.</p>
+        <p class="text-neutral">Together with my teammate, I designed and built a four-digit countdown timer for our Circuits and Electronics course. The project used custom 7-segment LED displays (each segment assembled from discrete LEDs), controlled by an Arduino Uno, with a potentiometer for time adjustment and a buzzer for alerts.</p>
       </section>
 
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Features</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Four-digit 7-segment displays built from individual LEDs</li>
-          <li>Arduino Uno microcontroller for precise timing control</li>
-          <li>Audible buzzer alarm system for countdown completion</li>
-          <li>Potentiometer for adjustable and precise time settings</li>
-          <li>Custom PCB design and circuit implementation</li>
-          <li>Hackathon competition entry showcasing practical engineering skills</li>
+          <li>Custom four-digit display built from individual LEDs</li>
+          <li>Arduino Uno for countdown logic and display multiplexing</li>
+          <li>Buzzer alarms at halfway, one-minute remaining, and countdown completion</li>
+          <li>Potentiometer input for precise time setting</li>
+          <li>Custom circuit with transistors and capacitors for efficient multiplexing and signal smoothing</li>
         </ul>
       </section>
 
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Arduino C++ programming for timer logic and display control</li>
-          <li>LED multiplexing for efficient 7-segment display operation</li>
-          <li>Analog input processing from potentiometer</li>
-          <li>PWM (Pulse Width Modulation) for buzzer control</li>
-          <li>Circuit design and prototyping</li>
-          <li>Hardware-software integration</li>
+          <li>Multiplexing with NPN transistors to drive four LED digits and a colon indicator</li>
+          <li>Resistor-based current regulation for LED brightness and safety (470 Ω per segment, 1 kΩ at transistor bases)</li>
+          <li>Analog input processing from a 10 kΩ potentiometer for user-controlled time settings</li>
+          <li>PWM control for buzzer signaling</li>
+          <li>Power regulation with a transformer, LM7805 voltage regulator, and smoothing capacitors (100 µF, 470 µF)</li>
+          <li>Arduino C++ programming for countdown logic, LED digit rendering, and alert management</li>
         </ul>
       </section>
 
-      <!-- MEDIA GALLERY SECTION -->
       <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Project media ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
-        </div>
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Challenges & Improvements</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Breadboard wiring complexity: multiplexing required careful layout to avoid messy bundling.</li>
+          <li>LED availability: limited red and green LEDs led us to substitute with yellow.</li>
+          <li>Flickering issues: mitigated by increasing capacitor sizes for better voltage stability.</li>
+          <li>Future improvements include designing a custom PCB for portability, better aesthetics, and reduced wiring complexity.</li>
+        </ul>
       </section>
 
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Learning Outcomes</h2>
-        <p class="text-neutral">This project provided hands-on experience with embedded systems, circuit design, and real-time programming. It demonstrated the practical application of electronics principles learned in class and developed skills in problem-solving, teamwork, and project management under the pressure of a hackathon environment.</p>
-      </section>
-
-      <div class="flex gap-4 justify-center">
-        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
-          View Project Details
-        </a>
-        <a href={project.linkPreview} target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
-          Demo Video
+      <div class="flex justify-center">
+        <a href="https://drive.com" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
+          View Demo Video
         </a>
       </div>
     </div>
