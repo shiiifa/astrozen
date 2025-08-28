@@ -50,42 +50,43 @@ export const SITE_CONTENT: SiteContent = {
   projects: [
     {
       name: "Ashesi Multipurpose Reservation System",
-      summary: "Centralized platform streamlining student access to campus resources with secure login validation.",
+      summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/Multipurpose-Reservation-Platform",
       image: "/multipurpose-reservation-platform.png",
     },
     {
+      name: "Cyber Threat Dynamics in VANETs",
+      summary: "A mathematical modeling of malware spread in vehicular networks using SEIR-S framework and wireless analysis.",
+      linkPreview: "/",
+      linkSource: "https://github.com/shiiifa/MalwareSimulation",
+      image: "/vanets.png",
+    },
+    {
       name: "Ashesi Student Information System",
-      summary: "CAMU-inspired prototype with propositional logic for automated course enrollment decisions.",
+      summary: "A propositional logic-based CAMU-inspired prototype for automated course enrollment decisions.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/asis.jpg",
+    },
+    {
+      name: "LED-Based Countdown Timer",
+      summary: "An Arduino UNO-powered countdown timer with 7-segment LED displays, buzzer, and potentiometer control.",
+      linkPreview: "/",
+      linkSource: "https://lnkd.in/dcDTycNE",
+      image: "/the-circuit.png", // USING SAME IMAGE AS OTHERS
     },
     {
       name: "ShellTrivia",
       summary: "GUI-based trivia game with multiple levels, categories, and interactive scoring system.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/ShellTrivia",
-      image: "/clone-ig.png",
+      image: "/shell.png",
     },
+    
     {
-      name: "Cyber Threat Dynamics in VANETs",
-      summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.",
-      linkPreview: "/",
-      linkSource: "https://github.com/shiiifa/MalwareSimulation",
-      image: "/vanets.png",
-    },
-    {
-      name: "Arduino Buzzer Timer",
-      summary: "Countdown timer with 7-segment LED displays, buzzer, and potentiometer control for Circuits & Electronics.",
-      linkPreview: "/",
-      linkSource: "https://lnkd.in/dcDTycNE",
-      image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
-    },
-    {
-      name: "Hydrogel Soil Analysis",
-      summary: "Statistical study of water retention capacity in different soils using hydrogel technology.",
+      name: "Water Release Dynamics of Agricultural Hydrogels",
+      summary: "A statistical study of hydrogel-based water release in agriculture.",
       linkPreview: "/",
       linkSource: "#",
       image: "/clone-ig.png", // USING SAME IMAGE AS OTHERS
