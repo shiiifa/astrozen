@@ -57,7 +57,7 @@ export const SITE_CONTENT: SiteContent = {
     {
       name: "Cyber Threat Dynamics in VANETs",
       summary: "A mathematical modeling of malware spread in vehicular networks using SEIR-S framework and wireless analysis.",
-      linkPreview: "/projects/cyber-threat-dynamics-vanets",
+      linkPreview: "/projects/cyber-threat-dynamics-in-vanets",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/vanets.png",
     },
