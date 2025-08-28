@@ -28,13 +28,13 @@ const { projects } = Astro.props;
     {/* Projects Container */}
     <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
       {
-        projects.map(({ name, summary, image }) => (
+        projects.map(({ name, summary, image, linkPreview, linkSource }) => (
           <a
-            href={`/projects/${name.toLowerCase().replace(/\s+/g, '-')}`}
+            href={linkPreview}
             class="group relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
           >
-            {/* Background pattern */}
-            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+            {/* Background pattern - ASH-LIKE EFFECT RESTORED */}
+            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[5%] group-hover:opacity-[7%] transition-opacity duration-500"></div>
             
             {/* Content */}
             <div class="relative z-10 flex h-full flex-col p-6">
