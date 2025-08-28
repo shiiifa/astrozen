@@ -50,36 +50,147 @@ const beyondEngineeringItems = [
   <Projects projects={SITE_CONTENT.projects} />
   <Skills skills={SITE_CONTENT.skills} />
   
-  <!-- BEYOND ENGINEERING SECTION -->
+  <!-- BEYOND ENGINEERING SECTION WITH ARROWS & TOUCH -->
   <Section text="Beyond Engineering" href="beyond-engineering">
-    <div class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
-      {
-        beyondEngineeringItems.map(({ name, image, linkPreview }) => (
-          <a
-            href={linkPreview}
-            class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
-          >
-            <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
-            
-            <div class="relative z-10 w-full h-full">
-              <Image
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                src={image}
-                alt={name}
-                width={256}
-                height={256}
-                loading="lazy"
-              />
-            </div>
-            
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
-            
-            <span class="sr-only">{name}</span>
-          </a>
-        ))
-      }
+    <div class="relative">
+      {/* Navigation Arrows */}
+      <button id="beyond-prev" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button id="beyond-next" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Scrollable Container */}
+      <div id="beyond-container" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
+        {
+          beyondEngineeringItems.map(({ name, image, linkPreview }) => (
+            <a
+              href={linkPreview}
+              class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+            >
+              <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+              
+              <div class="relative z-10 w-full h-full">
+                <Image
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  src={image}
+                  alt={name}
+                  width={256}
+                  height={256}
+                  loading="lazy"
+                />
+              </div>
+              
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+              
+              <span class="sr-only">{name}</span>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </Section>
   
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
+
+  {/* Touch/Swipe and Arrow Navigation Script */}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('beyond-container');
+      const prevBtn = document.getElementById('beyond-prev');
+      const nextBtn = document.getElementById('beyond-next');
+      const itemWidth = 256 + 24; // width + gap
+
+      if (!container || !prevBtn || !nextBtn) return;
+
+      // Arrow navigation
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      });
+
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      });
+
+      // Touch/swipe functionality
+      let startX, scrollLeft, isDown = false;
+
+      container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+      });
+
+      container.addEventListener('mouseleave', () => {
+        isDown = false;
+      });
+
+      container.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+      });
+
+      // Touch events for mobile
+      container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+      }, { passive: true });
+
+      container.addEventListener('touchmove', (e) => {
+        if (!startX) return;
+        const x = e.touches[0].pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+      }, { passive: true });
+
+      // Hide arrows when at edges
+      const checkArrows = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        prevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
+        nextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
+      };
+
+      container.addEventListener('scroll', checkArrows);
+      checkArrows(); // Initial check
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+        } else if (e.key === 'ArrowRight') {
+          container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+  <style>
+    /* Hide scrollbar but keep functionality */
+    #beyond-container {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    
+    #beyond-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    #beyond-container:active {
+      cursor: grabbing;
+    }
+  </style>
 </Layout>
