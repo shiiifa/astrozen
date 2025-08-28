@@ -42,7 +42,9 @@ const beyondEngineeringItems = [
 
 <Layout>
   {/* ABOUT SECTION AT THE VERY TOP - NO HEADING */}
-  <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
+  <div class="pt-12"> {/* Added padding top to push content down */}
+    <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
+  </div>
   
   <Experience experience={SITE_CONTENT.experience} />
   <Projects projects={SITE_CONTENT.projects} />
