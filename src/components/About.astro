@@ -11,10 +11,10 @@ const paragraphs = description.split('\n\n').filter(p => p.trim());
 ---
 
 <div class="relative min-h-[600px] flex items-center justify-center py-12">
-  {/* Central Photo */}
+  {/* Central Photo - No hover effect */}
   <div class="relative z-10">
     <Image
-      class="h-80 w-64 object-cover rounded-lg shadow-2xl shadow-primary/20 border-2 border-primary/30 transition-all duration-500 hover:scale-105 hover:shadow-primary/40"
+      class="h-80 w-64 object-cover rounded-lg shadow-2xl shadow-primary/20 border-2 border-primary/30"
       src={image}
       width="320"
       height="400"
@@ -22,63 +22,52 @@ const paragraphs = description.split('\n\n').filter(p => p.trim());
     />
   </div>
 
-  {/* Top Left Text Box */}
-  <div class="absolute top-10 left-10 max-w-xs">
+  {/* Top Left Text Box - Moved further out */}
+  <div class="absolute top-4 left-4 max-w-xs md:top-8 md:left-8">
     <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transform-gpu">
       <p class="leading-relaxed">{paragraphs[0]}</p>
-      <div class="absolute -top-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="absolute -top-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Top Right Text Box */}
-  <div class="absolute top-10 right-10 max-w-xs">
+  {/* Top Right Text Box - Moved further out */}
+  <div class="absolute top-4 right-4 max-w-xs md:top-8 md:right-8">
     <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transform-gpu">
       <p class="leading-relaxed">{paragraphs[1]}</p>
-      <div class="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Bottom Left Text Box */}
-  <div class="absolute bottom-10 left-10 max-w-xs">
+  {/* Bottom Left Text Box - Moved further out */}
+  <div class="absolute bottom-4 left-4 max-w-xs md:bottom-8 md:left-8">
     <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transform-gpu">
       <p class="leading-relaxed">{paragraphs[2]}</p>
-      <div class="absolute -bottom-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="absolute -bottom-2 -left-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Bottom Right Text Box */}
-  <div class="absolute bottom-10 right-10 max-w-xs">
+  {/* Bottom Right Text Box - Moved further out */}
+  <div class="absolute bottom-4 right-4 max-w-xs md:bottom-8 md:right-8">
     <div class="bg-[#1c232d]/90 backdrop-blur-sm border border-primary/20 rounded-xl p-4 text-sm text-neutral transition-all duration-300 hover:bg-[#1c232d] hover:border-primary/40 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transform-gpu">
       <p class="leading-relaxed">{paragraphs[3]}</p>
-      <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
     </div>
   </div>
 
-  {/* Connecting lines (optional decorative element) */}
+  {/* Connecting lines - Adjusted for better spacing */}
   <div class="absolute inset-0 pointer-events-none">
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div class="w-0.5 h-20 bg-primary/20 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full"></div>
-      <div class="w-20 h-0.5 bg-primary/20 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full"></div>
-      <div class="w-0.5 h-20 bg-primary/20 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"></div>
-      <div class="w-20 h-0.5 bg-primary/20 absolute right-0 top-1/2 -translate-y-1/2 translate-x-full"></div>
+      <div class="w-0.5 h-24 bg-primary/20 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full"></div>
+      <div class="w-24 h-0.5 bg-primary/20 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full"></div>
+      <div class="w-0.5 h-24 bg-primary/20 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"></div>
+      <div class="w-24 h-0.5 bg-primary/20 absolute right-0 top-1/2 -translate-y-1/2 translate-x-full"></div>
     </div>
   </div>
 </div>
 
 <style>
-  /* Smooth animations for the text boxes */
-  .group:hover .text-box {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 25px -5px rgba(225, 173, 1, 0.1);
-  }
-  
-  /* Pulse animation for the photo when text boxes are hovered */
-  .text-box:hover ~ .relative .rounded-lg {
-    animation: pulse-photo 1s ease-in-out;
-  }
-  
-  @keyframes pulse-photo {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+  /* Pulse animation for text boxes only */
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
   }
 </style>
