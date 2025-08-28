@@ -74,7 +74,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "Malware spread modeling in vehicular networks using SEIR-S framework and wireless analysis.",
       linkPreview: "/",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
-      image: "/clone-ig.png",
+      image: "/vanets.png",
     },
     {
       name: "Arduino Buzzer Timer",
