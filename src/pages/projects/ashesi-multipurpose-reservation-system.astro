@@ -12,16 +12,12 @@ if (!project) {
   return Response.redirect('/404', 404);
 }
 
-// Dummy media files
+// Updated media files with Java-related images
 const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
+  "/java2.jpg",
+  "/java3.jpg", 
+  "/java4.jpg",
+  "/java5.jpg"
 ];
 ---
 
@@ -66,7 +62,7 @@ const mediaItems = [
             >
               <Image
                 src={media}
-                alt={`Project media ${index + 1}`}
+                alt={`Java project screenshot ${index + 1}`}
                 width={200}
                 height={200}
                 class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
