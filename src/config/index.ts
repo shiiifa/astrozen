@@ -51,7 +51,7 @@ export const SITE_CONTENT: SiteContent = {
       name: "ARCLab Research Project: EMG-Based Prosthetic Control",
       summary: "Contributing to an award-winning prosthetic arm project under the Automation, Robotics and Controls Lab, Ashesi.",
       linkPreview: "/projects/arclab-research-project",
-      image: "",
+      image: "/arclab.png",
     },
     {
       name: "Ashesi Multipurpose Reservation System",
