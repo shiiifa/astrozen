@@ -59,13 +59,13 @@ const isHomepage = Astro.url.pathname === '/';
                       href="/projects/academic"
                       class="block px-4 py-2 text-sm text-neutral hover:text-white hover:bg-primary/10 transition-colors"
                     >
-                      Academic Projects
+                      academic projects
                     </a>
                     <a
                       href="/projects/freelance"
                       class="block px-4 py-2 text-sm text-neutral hover:text-white hover:bg-primary/10 transition-colors"
                     >
-                      Freelance Projects
+                      freelance projects
                     </a>
                   </div>
                 </div>
@@ -224,6 +224,19 @@ const isHomepage = Astro.url.pathname === '/';
         });
       }
     };
+  } else {
+    // Handle projects pages - highlight projects nav item
+    const currentPath = window.location.pathname;
+    if (currentPath.startsWith('/projects')) {
+      navItems.forEach((item) => {
+        const href = item.getAttribute("href");
+        if (href === '#projects' || href === '/#projects' || href === '/projects') {
+          item.classList.add("text-white", "md:after:opacity-100");
+        } else {
+          item.classList.remove("text-white", "md:after:opacity-100");
+        }
+      });
+    }
   }
 </script>
 
