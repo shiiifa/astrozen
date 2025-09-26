@@ -1,0 +1,116 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@components/Section.astro";
+import { Image } from "astro:assets";
+import { SITE_CONTENT } from "@config";
+
+const freelanceProjects = SITE_CONTENT.freelanceProjects;
+---
+
+<Layout>
+  <div class="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <div class="container mx-auto px-6 py-16">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <div class="mb-6">
+          <a href="/projects" class="inline-flex items-center gap-2 text-primary hover:text-white transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Projects
+          </a>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-serif font-bold text-primary mb-6">
+          Freelance Projects
+        </h1>
+        <p class="text-lg text-neutral max-w-2xl mx-auto">
+          Client work, personal projects, and freelance collaborations that showcase practical applications and creative solutions.
+        </p>
+      </div>
+
+      <!-- Coming Soon Notice -->
+      <div class="bg-primary/10 border border-primary/20 rounded-2xl p-8 mb-16 text-center">
+        <div class="mb-4">
+          <svg class="w-16 h-16 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-serif font-semibold text-primary mb-4">
+          Freelance Projects Coming Soon
+        </h2>
+        <p class="text-neutral max-w-2xl mx-auto">
+          I'm currently working on several freelance projects and client collaborations. This section will showcase my practical work, 
+          client projects, and creative solutions. Check back soon to see the latest additions!
+        </p>
+      </div>
+
+      <!-- Preview Projects -->
+      <Section text="upcoming projects" href="#upcoming">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {freelanceProjects.map(({ name, summary, image, linkPreview, linkSource, status }) => (
+            <div class="group relative overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 opacity-75">
+              <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+              
+              <div class="relative z-10 p-6">
+                <div class="mb-6 overflow-hidden rounded-xl -mt-8 relative">
+                  <Image
+                    class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={image}
+                    alt={name}
+                    width={400}
+                    height={300}
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <span class="bg-primary/20 backdrop-blur-sm text-primary px-4 py-2 rounded-full text-sm font-medium">
+                      {status}
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="flex flex-1 flex-col">
+                  <h3 class="font-serif text-xl font-medium text-primary mb-3 group-hover:text-white transition-colors">
+                    {name}
+                  </h3>
+                  <p class="text-sm text-neutral group-hover:text-white/80 transition-colors mb-4 flex-1">
+                    {summary}
+                  </p>
+                  
+                  <div class="flex gap-4 pt-4 text-xs text-white/70">
+                    <span class="flex items-center gap-1 transition-all duration-300 group-hover:text-primary">
+                      <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
+                      {status}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <!-- Contact CTA -->
+      <div class="text-center mt-16">
+        <div class="bg-primary/10 border border-primary/20 rounded-2xl p-8 max-w-2xl mx-auto">
+          <h3 class="text-2xl font-serif font-semibold text-primary mb-4">
+            Interested in Working Together?
+          </h3>
+          <p class="text-neutral mb-6">
+            I'm always excited to take on new freelance projects and collaborate with clients who share a passion for quality and innovation.
+          </p>
+          <a 
+            href="/#connect" 
+            class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary/80 transition-colors"
+          >
+            Get In Touch
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

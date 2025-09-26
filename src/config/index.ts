@@ -97,6 +97,33 @@ export const SITE_CONTENT: SiteContent = {
     },
   ],
 
+  freelanceProjects: [
+    {
+      name: "E-commerce Website Design",
+      summary: "Custom Shopify theme development and branding for a local retail business, featuring responsive design and integrated payment systems.",
+      image: "/shopify-clon.png",
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    },
+    {
+      name: "Portfolio Website Development", 
+      summary: "Modern, responsive portfolio website built with Astro and Tailwind CSS, featuring custom animations and optimized performance.",
+      image: "/clone-ig.png",
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    },
+    {
+      name: "Mobile App UI/UX Design",
+      summary: "Complete UI/UX design for a fitness tracking mobile application, including wireframes, prototypes, and design system.",
+      image: "/spotifu.png", 
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    }
+  ],
+
   skills: [
     {
       category: "Technical Skills",
