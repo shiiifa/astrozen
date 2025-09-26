@@ -1,0 +1,67 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <header class="mb-12 text-center">
+      <div class="mb-8">
+        <img 
+          src="/arclab.jpg" 
+          alt="ARCLab Research Project" 
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
+        />
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        ARCLab Research Project: EMG-Based Prosthetic Control
+      </h1>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Research Overview</h2>
+        <p class="text-neutral leading-relaxed">
+          Under the Automation, Robotics and Controls Lab, currently assisting a <a href="https://www.linkedin.com/feed/update/urn:li:activity:7338558230274453506/" target="_blank" class="text-primary hover:text-white transition-colors underline">graduate student</a> in expanding his award-winning undergraduate capstone project focused on developing affordable prosthetic arms for Ghanaian amputees.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          The project uses surface electromyography (EMG) signals and deep learning for intuitive gesture recognition and continuous control of upper-limb prostheses.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">My Role & Contributions</h2>
+        <p class="text-neutral leading-relaxed">
+          As an undergraduate research assistant, my role involves contributing to the AI pipeline: preprocessing EMG signals and developing lightweight neural architectures for robust gesture classification that can run efficiently on embedded systems.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Recognition</h2>
+        <p class="text-neutral leading-relaxed">
+          This research builds on work that received the Technical Excellence Award for capstone projects in mechatronics engineering at Ashesi University.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Focus</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Surface Electromyography (EMG) Signal Processing</li>
+          <li>Deep Learning for Gesture Recognition</li>
+          <li>Neural Architecture Design for Embedded Systems</li>
+          <li>Continuous Control of Upper-limb Prostheses</li>
+          <li>AI Pipeline Development and Optimization</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</Layout>
