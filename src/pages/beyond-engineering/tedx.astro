@@ -67,9 +67,11 @@ import Layout from "../../layouts/Layout.astro";
   </div>
 
   <script>
-    function openImageModal(src, alt) {
+    function openImageModal(src: string, alt: string) {
       const modal = document.getElementById('imageModal');
-      const modalImage = document.getElementById('modalImage');
+      const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+      
+      if (!modal || !modalImage) return;
       
       modalImage.src = src;
       modalImage.alt = alt;
@@ -79,19 +81,25 @@ import Layout from "../../layouts/Layout.astro";
 
     function closeImageModal() {
       const modal = document.getElementById('imageModal');
+      if (!modal) return;
+      
       modal.classList.add('hidden');
       document.body.style.overflow = 'auto';
     }
 
     // Close modal when clicking outside the image
-    document.getElementById('imageModal').addEventListener('click', (e) => {
-      if (e.target.id === 'imageModal') {
-        closeImageModal();
-      }
-    });
+    const modalElement = document.getElementById('imageModal');
+    if (modalElement) {
+      modalElement.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target && target.id === 'imageModal') {
+          closeImageModal();
+        }
+      });
+    }
 
     // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         closeImageModal();
       }
