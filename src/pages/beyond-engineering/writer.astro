@@ -17,7 +17,7 @@ import { Image } from "astro:assets";
     <div class="prose prose-invert max-w-none">
       {/* Blog Photo Display Tile */}
       <div class="mb-12 text-center">
-        <div class="inline-block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30 max-w-md">
+        <div class="inline-block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30 max-w-md cursor-pointer" onclick="openImageModal('/cmmprd2.jpg', 'comma, period. - Personal Blog')">
           <Image
             src="/cmmprd2.jpg"
             alt="comma, period. - Personal Blog"
@@ -39,4 +39,52 @@ import { Image } from "astro:assets";
       </div>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-[90vh]">
+        <button 
+          id="closeModal" 
+          class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-2xl font-bold z-10"
+          onclick="closeImageModal()"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(src, alt) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+      if (e.target.id === 'imageModal') {
+        closeImageModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
 </Layout>

@@ -25,9 +25,10 @@ const displayPhotos = [
     <div class="prose prose-invert max-w-none">
       {/* Display Photos Gallery */}
       <div class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Media</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           {displayPhotos.map((photo, index) => (
-            <div class="overflow-hidden rounded-lg border border-neutral/20">
+            <div class="overflow-hidden rounded-lg border border-neutral/20 cursor-pointer transition-all duration-300 hover:scale-105 hover:border-primary/30" onclick={`openImageModal('${photo}', 'Sage Literacy Foundation initiative ${index + 1}')`}>
               <Image
                 src={photo}
                 alt={`Sage Literacy Foundation initiative ${index + 1}`}
@@ -61,4 +62,52 @@ const displayPhotos = [
       </div>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-[90vh]">
+        <button 
+          id="closeModal" 
+          class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-2xl font-bold z-10"
+          onclick="closeImageModal()"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(src, alt) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+      if (e.target.id === 'imageModal') {
+        closeImageModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
 </Layout>
