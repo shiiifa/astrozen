@@ -48,6 +48,12 @@ export const SITE_CONTENT: SiteContent = {
   
   projects: [
     {
+      name: "ARCLab Research Project: EMG-Based Prosthetic Control",
+      summary: "Under the Automation, Robotics and Controls Lab, currently assisting a graduate student in expanding his award-winning undergraduate capstone project focused on developing affordable prosthetic arms for Ghanaian amputees. The project uses surface electromyography (EMG) signals and deep learning for intuitive gesture recognition and continuous control of upper-limb prostheses. As an undergraduate research assistant, my role involves contributing to the AI pipeline: preprocessing EMG signals and developing lightweight neural architectures for robust gesture classification that can run efficiently on embedded systems. This research builds on work that received the Technical Excellence Award for capstone projects in mechatronics engineering at Ashesi University.",
+      linkPreview: "https://www.linkedin.com/feed/update/urn:li:activity:7338558230274453506/",
+      image: "/arclab.jpg",
+    },
+    {
       name: "Ashesi Multipurpose Reservation System",
       summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/projects/ashesi-multipurpose-reservation-system",
