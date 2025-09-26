@@ -36,7 +36,7 @@ const { projects } = Astro.props;
       <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none">
          {/* Academic Projects Preview */}
          {
-           projects.map(({ name, summary, image, linkPreview }) => (
+           projects.map(({ name, summary, image }) => (
              <a
                href="#projects"
                class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
@@ -375,10 +375,10 @@ const { projects } = Astro.props;
        const events = await response.json();
        
        // Process events to create contribution data
-       const contributions = {};
+       const contributions: Record<string, number> = {};
        const currentYear = new Date().getFullYear();
        
-       events.forEach(event => {
+       events.forEach((event: any) => {
          const date = new Date(event.created_at);
          if (date.getFullYear() === currentYear) {
            const dateStr = date.toISOString().split('T')[0];
@@ -388,18 +388,25 @@ const { projects } = Astro.props;
        
        // Generate contribution graph
        const graphContainer = document.getElementById('githubGraph');
-       const totalContributions = Object.values(contributions).reduce((sum, count) => sum + count, 0);
+       const totalContributionsElement = document.getElementById('totalContributions');
        
-       document.getElementById('totalContributions').textContent = totalContributions;
+       if (!graphContainer || !totalContributionsElement) {
+         console.error('Required DOM elements not found');
+         return;
+       }
+       
+       const totalContributions = Object.values(contributions).reduce((sum: number, count: number) => sum + count, 0);
+       
+       totalContributionsElement.textContent = totalContributions.toString();
        
        // Create weeks
-       const weeks = [];
+       const weeks: Array<Array<{ date: string; count: number }>> = [];
        const startDate = new Date(currentYear, 0, 1);
        const endDate = new Date(currentYear, 11, 31);
        
        let currentDate = new Date(startDate);
        while (currentDate <= endDate) {
-         const week = [];
+         const week: Array<{ date: string; count: number }> = [];
          for (let i = 0; i < 7; i++) {
            const dateStr = currentDate.toISOString().split('T')[0];
            const count = contributions[dateStr] || 0;
@@ -441,7 +448,10 @@ const { projects } = Astro.props;
        
      } catch (error) {
        console.error('Error loading GitHub contributions:', error);
-       document.getElementById('totalContributions').textContent = 'Error loading data';
+       const totalContributionsElement = document.getElementById('totalContributions');
+       if (totalContributionsElement) {
+         totalContributionsElement.textContent = 'Error loading data';
+       }
      }
    }
    
