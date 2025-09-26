@@ -14,10 +14,10 @@ const { projects } = Astro.props;
   <div class="space-y-12">
     {/* Academic Projects Section */}
     <div class="relative">
-      {/* Academic Subtitle */}
-      <div class="mb-6">
-        <h3 class="text-primary text-lg font-medium opacity-80">academic</h3>
-      </div>
+       {/* Academic Subtitle */}
+       <div class="mb-6 text-center">
+         <h3 class="text-primary text-xl font-bold opacity-80">academic</h3>
+       </div>
 
       {/* Navigation Arrows */}
       <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
@@ -34,13 +34,13 @@ const { projects } = Astro.props;
 
       {/* Academic Projects Container */}
       <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none">
-        {/* Academic Projects Preview */}
-        {
-          projects.slice(0, 3).map(({ name, summary, image, linkPreview }) => (
-            <a
-              href={linkPreview}
-              class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
-            >
+         {/* Academic Projects Preview */}
+         {
+           projects.map(({ name, summary, image, linkPreview }) => (
+             <a
+               href="#projects"
+               class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+             >
               {/* ORIGINAL ASH BACKGROUND RESTORED */}
               <div class="bg-difu absolute inset-0 z-0 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-['']"></div>
               
@@ -87,10 +87,10 @@ const { projects } = Astro.props;
 
     {/* Freelance Projects Section */}
     <div class="relative">
-      {/* Freelance Subtitle */}
-      <div class="mb-6">
-        <h3 class="text-primary text-lg font-medium opacity-80">freelance</h3>
-      </div>
+       {/* Freelance Subtitle */}
+       <div class="mb-6 text-center">
+         <h3 class="text-primary text-xl font-bold opacity-80">freelance</h3>
+       </div>
 
       {/* Placeholder for future freelance projects */}
       <div class="flex items-center justify-center py-12">
