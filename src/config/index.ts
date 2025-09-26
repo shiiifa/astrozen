@@ -8,12 +8,12 @@ export const SITE_CONFIG: SiteConfig = {
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
-    { text: "profile", href: "#profile" },
-    { text: "experience", href: "#experience" },
-    { text: "projects", href: "#projects" },
-    { text: "skills", href: "#skills" },
-    { text: "beyond engineering", href: "#beyond-engineering" },
-    { text: "let's connect!", href: "#connect" }
+    { text: "profile", href: "/#profile" },
+    { text: "experience", href: "/#experience" },
+    { text: "projects", href: "/#projects" },
+    { text: "skills", href: "/#skills" },
+    { text: "beyond engineering", href: "/#beyond-engineering" },
+    { text: "let's connect!", href: "/#connect" }
   ],
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
