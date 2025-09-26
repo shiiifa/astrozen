@@ -120,8 +120,8 @@ body {
   }
 }
 
-/* Exclude header completely */
-header *, .typing-header-name, .typing-container {
+/* Exclude header and footer completely */
+header *, footer *, .typing-header-name, .typing-container {
   animation: none !important;
   opacity: 1 !important;
 }

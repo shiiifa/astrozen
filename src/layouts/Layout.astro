@@ -74,8 +74,8 @@ const ogImgUrl = canonicalURL + socialImage;
         // Auto-add fade-in classes to common elements
         const autoFadeElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, a, img, section > div');
         autoFadeElements.forEach(el => {
-          // Skip header elements
-          if (!el.closest('header')) {
+          // Skip header and footer elements
+          if (!el.closest('header') && !el.closest('footer')) {
             if (el.tagName === 'IMG') {
               el.classList.add('fade-in-image');
             } else if (el.closest('.group') || el.classList.contains('group')) {
