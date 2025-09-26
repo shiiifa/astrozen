@@ -116,10 +116,11 @@ const { projects } = Astro.props;
         {/* Embedded GitHub Contribution Graph - Yellow Theme */}
         <div class="w-full max-w-4xl">
           <img 
-            src="https://ghchart.rshah.org/E1AD01/94a3b8/shiiifa" 
+            src="https://ghchart.rshah.org/E1AD01/shiiifa" 
             alt="GitHub contribution graph for shiiifa"
             class="w-full h-auto"
             loading="lazy"
+            onerror="this.src='https://ghchart.rshah.org/shiiifa'"
           />
         </div>
         
