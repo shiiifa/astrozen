@@ -26,7 +26,7 @@ const { projects } = Astro.props;
     </button>
 
     {/* Projects Container */}
-    <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x">
+    <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none">
       {
         projects.map(({ name, summary, image, linkPreview }) => (
           <a
@@ -39,7 +39,7 @@ const { projects } = Astro.props;
             {/* Content */}
             <div class="relative z-10 flex h-full flex-col p-6">
               {/* Image */}
-              <div class="mb-6 overflow-hidden rounded-xl">
+              <div class="mb-6 overflow-hidden rounded-xl -mt-2">
                 <Image
                   class="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   src={image}
@@ -160,6 +160,7 @@ const { projects } = Astro.props;
     let velocity = 0;
     let lastX: number;
     let lastTime: number;
+    let isScrolling = false;
 
     const snapToItem = () => {
       const currentScroll = container.scrollLeft;
@@ -174,6 +175,7 @@ const { projects } = Astro.props;
 
     const handleStart = (clientX: number) => {
       isDown = true;
+      isScrolling = false;
       startX = clientX - container.offsetLeft;
       scrollLeft = container.scrollLeft;
       startTime = Date.now();
@@ -187,8 +189,9 @@ const { projects } = Astro.props;
     const handleMove = (clientX: number) => {
       if (!isDown) return;
       
+      isScrolling = true;
       const x = clientX - container.offsetLeft;
-      const walk = (x - startX) * 1.5;
+      const walk = (x - startX) * 1.2; // Reduced sensitivity for better control
       container.scrollLeft = scrollLeft - walk;
       
       // Calculate velocity for momentum
@@ -211,9 +214,9 @@ const { projects } = Astro.props;
       container.classList.remove('active');
       container.style.scrollBehavior = 'smooth';
       
-      // Apply momentum if velocity is significant
-      if (Math.abs(velocity) > 0.5) {
-        const momentum = velocity * 200;
+      // Only apply momentum if user was actually scrolling
+      if (isScrolling && Math.abs(velocity) > 0.3) {
+        const momentum = velocity * 150; // Reduced momentum for better control
         const currentScroll = container.scrollLeft;
         const targetScroll = currentScroll - momentum;
         
@@ -223,8 +226,8 @@ const { projects } = Astro.props;
         });
         
         // Snap to item after momentum
-        setTimeout(snapToItem, 300);
-      } else {
+        setTimeout(snapToItem, 250);
+      } else if (isScrolling) {
         // Snap to nearest item
         snapToItem();
       }
@@ -244,7 +247,7 @@ const { projects } = Astro.props;
       handleMove(e.clientX);
     });
 
-    // Touch events
+    // Touch events with improved mobile handling
     container.addEventListener('touchstart', (e: TouchEvent) => {
       e.preventDefault();
       handleStart(e.touches[0].clientX);
@@ -259,5 +262,18 @@ const { projects } = Astro.props;
       e.preventDefault();
       handleMove(e.touches[0].clientX);
     }, { passive: false });
+
+    // Prevent default touch behaviors that interfere with scrolling
+    container.addEventListener('touchstart', (e: TouchEvent) => {
+      // Allow single taps to work normally
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.closest('a')) {
+          // Don't prevent default for links
+          return;
+        }
+      }
+    }, { passive: true });
   });
 </script>
