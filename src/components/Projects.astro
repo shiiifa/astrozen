@@ -248,32 +248,62 @@ const { projects } = Astro.props;
     });
 
     // Touch events with improved mobile handling
+    let touchStartTime: number;
+    let touchStartX: number;
+    let touchStartY: number;
+    let isTouchScrolling = false;
+
     container.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      handleStart(e.touches[0].clientX);
-    }, { passive: false });
-
-    container.addEventListener('touchend', (e: TouchEvent) => {
-      e.preventDefault();
-      handleEnd();
-    }, { passive: false });
-
-    container.addEventListener('touchmove', (e: TouchEvent) => {
-      e.preventDefault();
-      handleMove(e.touches[0].clientX);
-    }, { passive: false });
-
-    // Prevent default touch behaviors that interfere with scrolling
-    container.addEventListener('touchstart', (e: TouchEvent) => {
-      // Allow single taps to work normally
       if (e.touches.length === 1) {
         const touch = e.touches[0];
         const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        
+        // If touching a link, don't interfere with the click
         if (element && element.closest('a')) {
-          // Don't prevent default for links
+          return;
+        }
+        
+        touchStartTime = Date.now();
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isTouchScrolling = false;
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const deltaX = Math.abs(touch.clientX - touchStartX);
+        const deltaY = Math.abs(touch.clientY - touchStartY);
+        
+        // If horizontal movement is significant, treat as scroll
+        if (deltaX > 10 || deltaY > 10) {
+          isTouchScrolling = true;
+          e.preventDefault();
+          handleStart(touch.clientX);
+          handleMove(touch.clientX);
+        }
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', (e: TouchEvent) => {
+      const touchDuration = Date.now() - touchStartTime;
+      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      
+      // If it was a quick tap with minimal movement, allow link clicks
+      if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !isTouchScrolling) {
+        const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        if (element && element.closest('a')) {
+          // Let the link handle the click
           return;
         }
       }
-    }, { passive: true });
+      
+      if (isTouchScrolling) {
+        e.preventDefault();
+        handleEnd();
+      }
+    }, { passive: false });
   });
 </script>

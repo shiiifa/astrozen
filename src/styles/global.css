@@ -81,8 +81,58 @@ main a { animation-delay: 0.7s; }
   }
 }
 
+/* Mobile-specific fade-in adjustments */
+@media (max-width: 768px) {
+  main * {
+    animation: fadeInMobile 0.6s ease-in-out forwards;
+  }
+  
+  main h1 { animation-delay: 0.05s; }
+  main h2 { animation-delay: 0.1s; }
+  main h3 { animation-delay: 0.15s; }
+  main h4 { animation-delay: 0.2s; }
+  main p { animation-delay: 0.25s; }
+  main li { animation-delay: 0.3s; }
+  main a { animation-delay: 0.35s; }
+}
+
+@keyframes fadeInMobile {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Exclude header completely */
 header *, .typing-header-name, .typing-container {
   animation: none !important;
   opacity: 1 !important;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  a, button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  /* Ensure project tiles are clickable on mobile */
+  .group {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improve touch targets */
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
