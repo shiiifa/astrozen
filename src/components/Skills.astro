@@ -9,7 +9,7 @@ interface Props {
 const { skills } = Astro.props;
 
 // Vector icons for each skill category (using emojis as placeholders)
-const skillIcons = {
+const skillIcons: Record<string, string> = {
   "Technical Skills": "⚙",    // Gear icon for technical skills
   "Design & Creative Skills": "🖌",       // Art palette icon for design skills  
   "Professional & Collaboration Skills": "𓂫"  // Handshake icon for professional skills
