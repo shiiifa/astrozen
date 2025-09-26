@@ -14,7 +14,7 @@ const { socialLinks } = Astro.props;
     <ul class="flex flex-wrap justify-center gap-6 text-sm"> {/* Center aligned buttons */}
       {
         socialLinks.map(({ text, href }) => (
-          <li>
+          <li class="fade-in-element">
             <a
               href={href}
               target="_blank"
