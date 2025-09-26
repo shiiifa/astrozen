@@ -94,17 +94,17 @@ export const SITE_CONTENT: SiteContent = {
   skills: [
     {
       category: "Technical Skills",
-      tools: "Programming Languages, CAD, PCB Design, Prototyping",
+      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nData Analysis & Visualization: Excel, MATLAB\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad\nPrototyping & Hardware: 3D Printing, Arduino (UNO)",
       proficiency: "Intermediate"
     },
     {
       category: "Design & Creative Skills", 
-      tools: "Graphic Design, UI/UX, Creative Writing",
+      tools: "Graphic Design & Video Editing: Canva, CapCut\nUI/UX & Web Tools: Wix, Wordpress, Vercel, Canva\nCreative Writing: Freelance writing, Content Development",
       proficiency: "Intermediate"
     },
     {
-      category: "Professional Skills",
-      tools: "Office Suite, Technical Writing, Collaboration Tools",
+      category: "Professional & Collaboration Skills",
+      tools: "Microsoft Office Suite: Word, Excel, PowerPoint\nTechnical Writing & Documentation\nCollaboration Tools: Slack, Notion, Microsoft Teams, Google Workspace",
       proficiency: "Advanced"
     }
   ],

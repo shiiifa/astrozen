@@ -1,65 +1,39 @@
 ---
 import Section from "./Section.astro";
+import type { SkillProps } from "@types";
+
+interface Props {
+  skills: SkillProps[];
+}
+
+const { skills } = Astro.props;
 
 // Vector icons for each skill category (using emojis as placeholders)
 const skillIcons = {
-  technical: "⚙",    // Gear icon for technical skills
-  design: "🖌",       // Art palette icon for design skills  
-  professional: "𓂫"  // Handshake icon for professional skills
+  "Technical Skills": "⚙",    // Gear icon for technical skills
+  "Design & Creative Skills": "🖌",       // Art palette icon for design skills  
+  "Professional & Collaboration Skills": "𓂫"  // Handshake icon for professional skills
 };
-
-// Skill data with categories
-const skillCategories = [
-  {
-    icon: skillIcons.technical,
-    title: "Technical Skills",
-    skills: [
-      "<strong>Programming Languages:</strong> Python, Java, HTML, MATLAB, C",
-      "<strong>Data Analysis & Visualization:</strong> Excel, MATLAB",
-      "<strong>Computer-Aided Design (CAD) Software:</strong> SolidWorks, Proteus, Autodesk Fusion 360, KiCad",
-      "<strong>PCB Design & Simulation:</strong> KiCad (advanced)",
-      "<strong>Prototyping & Hardware:</strong> 3D Printing, Arduino (UNO)"
-    ]
-  },
-  {
-    icon: skillIcons.design,
-    title: "Design & Creative Skills",
-    skills: [
-      "<strong>Graphic Design & Video Editing:</strong> Canva, CapCut",
-      "<strong>UI/UX & Web Tools:</strong> Wix, Wordpress, Vercel, Canva",
-      "<strong>Creative Writing:</strong> Freelance writing, Content Development"
-    ]
-  },
-  {
-    icon: skillIcons.professional,
-    title: "Professional & Collaboration Skills",
-    skills: [
-      "<strong>Microsoft Office Suite:</strong> Word, Excel, PowerPoint",
-      "Technical Writing & Documentation",
-      "<strong>Collaboration Tools:</strong> Slack, Microsoft Teams, Google Workspace"
-    ]
-  }
-];
 ---
 
 <Section text="skills" href="skills">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-    {skillCategories.map((category) => (
+    {skills.map((skill) => (
       <div class="text-center">
-        {/* Icon - Made white */}
-        <div class="text-4xl mb-4 text-white">{category.icon}</div>
+        {/* Icon */}
+        <div class="text-4xl mb-4 text-white">{skillIcons[skill.category]}</div>
         
         {/* Category Title */}
         <h3 class="font-serif text-xl font-semibold text-primary mb-4">
-          {category.title}
+          {skill.category}
         </h3>
         
-        {/* Skills List - Compact */}
-        <ul class="space-y-2">
-          {category.skills.map((skill) => (
-            <li class="text-neutral text-sm leading-tight" set:html={skill} />
+        {/* Skills List - Justified text */}
+        <div class="text-neutral text-sm leading-relaxed text-justify">
+          {skill.tools.split('\n').map((tool) => (
+            <div class="mb-2" set:html={tool.replace(/^([^:]+):/, '<strong>$1:</strong>')} />
           ))}
-        </ul>
+        </div>
       </div>
     ))}
   </div>
