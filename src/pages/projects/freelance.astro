@@ -53,16 +53,27 @@ import { Image } from "astro:assets";
     <!-- Featured Project -->
     <section class="py-16 px-6">
       <div class="max-w-7xl mx-auto">
-        <div class="text-left mb-12">
+        <div class="text-center mb-12">
           <h2 class="text-3xl font-serif font-bold text-primary mb-4">Portfolio Optimisation</h2>
         </div>
         
         {/* Project Description */}
-        <div class="max-w-4xl mx-auto mb-12">
+        <div class="max-w-4xl mx-auto mb-8">
           <p class="text-neutral/80 text-center max-w-3xl mx-auto">
             Currently building a modern and responsive portfolio website with Next.js and Tailwind CSS for a graduate student. 
             Features include optimized performance, smooth animations, and a clean, academia and research-oriented design that showcases work effectively.
           </p>
+        </div>
+
+        {/* Technologies Used */}
+        <div class="max-w-4xl mx-auto mb-12 text-center">
+          <h4 class="text-sm font-medium text-neutral/60 mb-4">Technologies Used:</h4>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Next.js</span>
+            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Tailwind CSS</span>
+            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">TypeScript</span>
+            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Vercel</span>
+          </div>
         </div>
         
         {/* Full-width Embedded Website */}
@@ -79,31 +90,17 @@ import { Image } from "astro:assets";
         </div>
 
         {/* Project Details */}
-        <div class="max-w-4xl mx-auto">
-          
-          {/* Technologies Used */}
-          <div class="mb-8 text-center">
-            <h4 class="text-sm font-medium text-neutral/60 mb-4">Technologies Used:</h4>
-            <div class="flex flex-wrap gap-2 justify-center">
-              <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Next.js</span>
-              <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Tailwind CSS</span>
-              <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">TypeScript</span>
-              <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Vercel</span>
-            </div>
-          </div>
-          
-          <div class="text-center">
-            <a 
-              href="https://obedbabington.vercel.app" 
-              target="_blank"
-              class="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors"
-            >
-              Visit Live Site
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
-            </a>
-          </div>
+        <div class="max-w-4xl mx-auto text-center">
+          <a 
+            href="https://obedbabington.vercel.app" 
+            target="_blank"
+            class="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors"
+          >
+            Visit Live Site
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
