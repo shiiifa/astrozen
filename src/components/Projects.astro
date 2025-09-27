@@ -93,36 +93,43 @@ const { projects } = Astro.props;
        </div>
 
       {/* Freelance Projects Preview */}
-      <div class="flex flex-col items-center justify-center py-8">
-        <div class="text-center mb-6">
-          <h4 class="text-primary text-lg font-medium mb-2">Recent Work</h4>
-          <p class="text-neutral/70 text-sm">Portfolio website development and optimization</p>
-        </div>
-        
-        {/* Minimalist Preview */}
-        <div class="w-full max-w-2xl">
-          <div class="bg-[#1c232d]/85 rounded-2xl p-8 border border-neutral/20 hover:border-primary/30 transition-all duration-500 text-center">
-            <div class="mb-6">
-              <svg class="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/>
-              </svg>
-              <h3 class="text-xl font-serif font-bold text-primary mb-2">Portfolio Optimization</h3>
-              <p class="text-neutral/80 text-sm">
-                Custom portfolio website development with modern technologies and optimized performance
-              </p>
+      <div class="flex justify-center py-8">
+        <a 
+          href="/projects/freelance" 
+          class="group w-full max-w-4xl bg-[#1c232d]/85 rounded-2xl border border-neutral/20 hover:border-primary/30 transition-all duration-500 overflow-hidden"
+        >
+          <div class="grid md:grid-cols-2 gap-0">
+            {/* Thumbnail */}
+            <div class="relative h-48 md:h-full min-h-[200px] overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5"></div>
+              <iframe 
+                src="https://obedbabington.vercel.app" 
+                class="w-full h-full scale-50 origin-top-left"
+                loading="lazy"
+                title="Portfolio Preview"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
             </div>
             
-            <a 
-              href="/projects/freelance" 
-              class="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors"
-            >
-              View Full Page
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
-            </a>
+            {/* Content */}
+            <div class="p-8 flex flex-col justify-center">
+              <div class="mb-4">
+                <h4 class="text-primary text-lg font-medium mb-2">recent work</h4>
+                <h3 class="text-xl font-serif font-bold text-white mb-3">Portfolio Optimisation</h3>
+                <p class="text-neutral/80 text-sm leading-relaxed">
+                  Currently building a modern and responsive portfolio website with Next.js and Tailwind CSS for a graduate student. Features include optimised performance and clean, academia-oriented design.
+                </p>
+              </div>
+              
+              <div class="flex items-center gap-2 text-primary text-sm font-medium">
+                <span>View Full Page</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
