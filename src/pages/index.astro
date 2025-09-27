@@ -243,6 +243,11 @@ const beyondEngineeringItems = [
 
       // Mouse events for Beyond Engineering
       beyondContainer.addEventListener('mousedown', (e: MouseEvent) => {
+        // Only prevent default if not clicking on a link
+        const element = e.target as Element;
+        if (element && element.closest('a')) {
+          return; // Let the link handle the click
+        }
         e.preventDefault();
         handleBeyondStart(e.clientX);
       });
@@ -251,15 +256,18 @@ const beyondEngineeringItems = [
       beyondContainer.addEventListener('mouseup', handleBeyondEnd);
 
       beyondContainer.addEventListener('mousemove', (e: MouseEvent) => {
-        e.preventDefault();
-        handleBeyondMove(e.clientX);
+        if (beyondIsDown) {
+          e.preventDefault();
+          handleBeyondMove(e.clientX);
+        }
       });
 
-      // Touch events for Beyond Engineering
+      // Enhanced touch events for Beyond Engineering
       let beyondTouchStartTime: number;
       let beyondTouchStartX: number;
       let beyondTouchStartY: number;
       let beyondIsTouchScrolling = false;
+      let beyondTouchMoved = false;
 
       beyondContainer.addEventListener('touchstart', (e: TouchEvent) => {
         if (e.touches.length === 1) {
@@ -275,7 +283,9 @@ const beyondEngineeringItems = [
           beyondTouchStartX = touch.clientX;
           beyondTouchStartY = touch.clientY;
           beyondIsTouchScrolling = false;
+          beyondTouchMoved = false;
           beyondContainer.style.scrollBehavior = 'auto';
+          beyondContainer.style.cursor = 'grabbing';
         }
       }, { passive: true });
 
@@ -285,11 +295,15 @@ const beyondEngineeringItems = [
           const deltaX = Math.abs(touch.clientX - beyondTouchStartX);
           const deltaY = Math.abs(touch.clientY - beyondTouchStartY);
           
-          // If horizontal movement is significant, treat as scroll
-          if (deltaX > 10 && deltaX > deltaY) {
+          // More sensitive touch detection for mobile
+          if (deltaX > 5 && deltaX > deltaY) {
+            beyondTouchMoved = true;
             beyondIsTouchScrolling = true;
             e.preventDefault();
-            handleBeyondStart(touch.clientX);
+            
+            if (!beyondIsDown) {
+              handleBeyondStart(touch.clientX);
+            }
             handleBeyondMove(touch.clientX);
           }
         }
@@ -300,8 +314,11 @@ const beyondEngineeringItems = [
         const deltaX = Math.abs(e.changedTouches[0].clientX - beyondTouchStartX);
         const deltaY = Math.abs(e.changedTouches[0].clientY - beyondTouchStartY);
         
+        // Reset cursor
+        beyondContainer.style.cursor = 'grab';
+        
         // If it was a quick tap with minimal movement, allow link clicks
-        if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !beyondIsTouchScrolling) {
+        if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !beyondTouchMoved) {
           const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
           if (element && (element.closest('a') || element.closest('button'))) {
             // Let the link/button handle the click
@@ -309,12 +326,21 @@ const beyondEngineeringItems = [
           }
         }
         
-        if (beyondIsTouchScrolling) {
+        if (beyondIsTouchScrolling || beyondTouchMoved) {
           e.preventDefault();
           beyondContainer.style.scrollBehavior = 'smooth';
           handleBeyondEnd();
         }
        }, { passive: false });
+
+      // Add touch cancel event for better mobile handling
+      beyondContainer.addEventListener('touchcancel', () => {
+        beyondContainer.style.cursor = 'grab';
+        beyondContainer.style.scrollBehavior = 'smooth';
+        if (beyondIsDown) {
+          handleBeyondEnd();
+        }
+      }, { passive: true });
     let startX: number;
     let scrollLeft: number;
     let isDown = false;
