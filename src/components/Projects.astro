@@ -20,14 +20,14 @@ const { projects } = Astro.props;
        </div>
 
       {/* Navigation Arrows */}
-      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
+        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
+        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
@@ -181,20 +181,34 @@ const { projects } = Astro.props;
     if (!container || !prevBtn || !nextBtn) return;
 
     // Scroll to next project
-    nextBtn.addEventListener('click', () => {
-      container.scrollBy({ left: projectWidth, behavior: 'smooth' });
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      if (scrollLeft < scrollWidth - clientWidth - 5) {
+        container.scrollBy({ left: projectWidth, behavior: 'smooth' });
+      }
     });
 
     // Scroll to previous project
-    prevBtn.addEventListener('click', () => {
-      container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const { scrollLeft } = container;
+      if (scrollLeft > 5) {
+        container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
+      }
     });
 
     // Hide arrows when at edges
     const checkArrows = () => {
       const { scrollLeft, scrollWidth, clientWidth } = container;
-      prevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
-      nextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
+      const isAtStart = scrollLeft <= 5;
+      const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
+      
+      prevBtn.style.opacity = isAtStart ? '0.5' : '1';
+      nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+      
+      prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
     };
 
     container.addEventListener('scroll', checkArrows);
@@ -304,17 +318,121 @@ const { projects } = Astro.props;
       handleMove(e.clientX);
     });
 
-    // Simplified touch events for better mobile compatibility
+    // Enhanced touch and mouse sliding functionality
+    let startX: number;
+    let scrollLeft: number;
+    let isDown = false;
+    let startTime: number;
+    let velocity = 0;
+    let lastX: number;
+    let lastTime: number;
+    let isScrolling = false;
+
+    const snapToItem = () => {
+      const currentScroll = container.scrollLeft;
+      const targetIndex = Math.round(currentScroll / projectWidth);
+      const targetScroll = targetIndex * projectWidth;
+      
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    };
+
+    const handleStart = (clientX: number) => {
+      isDown = true;
+      isScrolling = false;
+      startX = clientX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      startTime = Date.now();
+      lastX = clientX;
+      lastTime = startTime;
+      velocity = 0;
+      container.classList.add('active');
+      container.style.scrollBehavior = 'auto';
+    };
+
+    const handleMove = (clientX: number) => {
+      if (!isDown) return;
+      
+      isScrolling = true;
+      const x = clientX - container.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      container.scrollLeft = scrollLeft - walk;
+      
+      // Calculate velocity for momentum
+      const currentTime = Date.now();
+      const deltaX = clientX - lastX;
+      const deltaTime = currentTime - lastTime;
+      
+      if (deltaTime > 0) {
+        velocity = deltaX / deltaTime;
+      }
+      
+      lastX = clientX;
+      lastTime = currentTime;
+    };
+
+    const handleEnd = () => {
+      if (!isDown) return;
+      
+      isDown = false;
+      container.classList.remove('active');
+      container.style.scrollBehavior = 'smooth';
+      
+      // Only apply momentum if user was actually scrolling
+      if (isScrolling && Math.abs(velocity) > 0.3) {
+        const momentum = velocity * 150;
+        const currentScroll = container.scrollLeft;
+        const targetScroll = currentScroll - momentum;
+        
+        container.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+        
+        // Snap to item after momentum
+        setTimeout(snapToItem, 250);
+      } else if (isScrolling) {
+        // Snap to nearest item
+        snapToItem();
+      }
+    };
+
+    // Mouse events
+    container.addEventListener('mousedown', (e: MouseEvent) => {
+      e.preventDefault();
+      handleStart(e.clientX);
+    });
+
+    container.addEventListener('mouseleave', handleEnd);
+    container.addEventListener('mouseup', handleEnd);
+
+    container.addEventListener('mousemove', (e: MouseEvent) => {
+      e.preventDefault();
+      handleMove(e.clientX);
+    });
+
+    // Touch events with improved mobile handling
+    let touchStartTime: number;
     let touchStartX: number;
     let touchStartY: number;
-    let isDragging = false;
+    let isTouchScrolling = false;
 
     container.addEventListener('touchstart', (e: TouchEvent) => {
       if (e.touches.length === 1) {
         const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        
+        // If touching a link, don't interfere with the click
+        if (element && element.closest('a')) {
+          return;
+        }
+        
+        touchStartTime = Date.now();
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
-        isDragging = false;
+        isTouchScrolling = false;
       }
     }, { passive: true });
 
@@ -324,21 +442,35 @@ const { projects } = Astro.props;
         const deltaX = Math.abs(touch.clientX - touchStartX);
         const deltaY = Math.abs(touch.clientY - touchStartY);
         
-        // Only prevent default for horizontal scrolling
-        if (deltaX > deltaY && deltaX > 10) {
-          isDragging = true;
-          // Allow native horizontal scrolling
+        // If horizontal movement is significant, treat as scroll
+        if (deltaX > 10 && deltaX > deltaY) {
+          isTouchScrolling = true;
+          e.preventDefault();
+          handleStart(touch.clientX);
+          handleMove(touch.clientX);
         }
       }
-    }, { passive: true });
+    }, { passive: false });
 
     container.addEventListener('touchend', (e: TouchEvent) => {
-      if (!isDragging) {
-        // Allow normal touch interactions for links
-        return;
+      const touchDuration = Date.now() - touchStartTime;
+      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      
+      // If it was a quick tap with minimal movement, allow link clicks
+      if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !isTouchScrolling) {
+        const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        if (element && element.closest('a')) {
+          // Let the link handle the click
+          return;
+        }
       }
-      isDragging = false;
-    }, { passive: true });
+      
+      if (isTouchScrolling) {
+        e.preventDefault();
+        handleEnd();
+      }
+     }, { passive: false });
    });
 
  </script>

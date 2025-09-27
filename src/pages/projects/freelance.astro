@@ -87,15 +87,16 @@ import { Image } from "astro:assets";
         {/* Contribution Activity */}
         <div class="mb-8">
           <h3 class="fade-in-element text-lg font-medium text-white mb-4 text-center">contribution activity</h3>
-          <div class="fade-in-element overflow-hidden rounded-lg bg-white/5 p-4">
-            <img 
-              src="https://ghchart.rshah.org/E1AD01/shiiifa" 
-              alt="GitHub contribution graph for shiiifa"
-              class="w-full h-auto max-w-full"
-              loading="lazy"
-              onerror="this.src='https://ghchart.rshah.org/shiiifa'"
-              style="min-height: 120px;"
-            />
+          <div class="fade-in-element overflow-hidden rounded-lg bg-white/5 p-2 sm:p-4">
+            <div class="overflow-x-auto">
+              <img 
+                src="https://ghchart.rshah.org/E1AD01/shiiifa" 
+                alt="GitHub contribution graph for shiiifa"
+                class="w-full h-auto min-w-[600px] sm:min-w-0"
+                loading="lazy"
+                onerror="this.src='https://ghchart.rshah.org/shiiifa'"
+              />
+            </div>
           </div>
         </div>
       </div>
