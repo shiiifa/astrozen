@@ -36,9 +36,9 @@ const { projects } = Astro.props;
       <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none" style="touch-action: pan-x; -webkit-overflow-scrolling: touch;">
          {/* Academic Projects Preview */}
          {
-           projects.map(({ name, summary, image }) => (
+           projects.map(({ name, summary, image, linkPreview }) => (
              <a
-               href="#projects"
+               href={linkPreview}
                class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
              >
               {/* ORIGINAL ASH BACKGROUND RESTORED */}
