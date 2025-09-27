@@ -95,13 +95,13 @@ const { projects } = Astro.props;
       {/* Freelance Projects Preview */}
       <div class="flex flex-col items-center justify-center py-8">
         <div class="text-center mb-6">
-          <h4 class="text-primary text-lg font-medium mb-2">Recent Work</h4>
-          <p class="text-neutral/70 text-sm">Portfolio website development</p>
+          <h4 class="text-primary text-lg font-medium mb-2">Portfolio Optimization</h4>
+          <p class="text-neutral/70 text-sm">Custom portfolio website development and optimization</p>
         </div>
         
         {/* Website Preview */}
         <div class="w-full max-w-4xl">
-          <div class="bg-[#1c232d]/85 rounded-2xl p-6 border border-neutral/20">
+          <div class="bg-[#1c232d]/85 rounded-2xl p-6 border border-neutral/20 hover:border-primary/30 transition-all duration-500">
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,6 +125,26 @@ const { projects } = Astro.props;
                 title="Obed Babington Portfolio Preview"
                 sandbox="allow-scripts allow-same-origin"
               ></iframe>
+            </div>
+            
+            {/* Project Description */}
+            <div class="mt-6 space-y-4">
+              <h3 class="text-xl font-serif font-bold text-primary">Portfolio Website Development</h3>
+              <p class="text-neutral/80">
+                A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features include optimized performance, 
+                smooth animations, and a clean, professional design that showcases work effectively.
+              </p>
+              
+              {/* Technologies Used */}
+              <div>
+                <h4 class="text-sm font-medium text-neutral/60 mb-3">Technologies Used:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Next.js</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Tailwind CSS</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">TypeScript</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Vercel</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
