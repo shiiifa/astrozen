@@ -70,7 +70,7 @@ import { Image } from "astro:assets";
             <div class="overflow-hidden rounded-lg border border-neutral/20">
               <iframe 
                 src="https://obedbabington.vercel.app" 
-                class="w-full h-80"
+                class="w-full h-96"
                 loading="lazy"
                 title="Obed Babington Portfolio Preview"
                 sandbox="allow-scripts allow-same-origin"
@@ -99,43 +99,17 @@ import { Image } from "astro:assets";
             </a>
           </div>
           
-          {/* GitHub Stats Grid */}
-          <div class="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Contribution Graph */}
-            <div>
-              <h3 class="text-lg font-medium text-white mb-4">Contribution Activity</h3>
-              <div class="overflow-hidden rounded-lg">
-                <img 
-                  src="https://ghchart.rshah.org/E1AD01/shiiifa" 
-                  alt="GitHub contribution graph for shiiifa"
-                  class="w-full h-auto"
-                  loading="lazy"
-                  onerror="this.src='https://ghchart.rshah.org/shiiifa'"
-                />
-              </div>
-            </div>
-            
-            {/* GitHub Stats */}
-            <div>
-              <h3 class="text-lg font-medium text-white mb-4">Repository Stats</h3>
-              <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
-                  <span class="text-neutral/80">Total Repositories</span>
-                  <span class="text-primary font-bold">9</span>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
-                  <span class="text-neutral/80">Total Stars</span>
-                  <span class="text-primary font-bold">8</span>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
-                  <span class="text-neutral/80">Followers</span>
-                  <span class="text-primary font-bold">4</span>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
-                  <span class="text-neutral/80">Following</span>
-                  <span class="text-primary font-bold">3</span>
-                </div>
-              </div>
+          {/* Contribution Activity */}
+          <div class="mb-8">
+            <h3 class="text-lg font-medium text-white mb-4 text-center">Contribution Activity</h3>
+            <div class="overflow-hidden rounded-lg">
+              <img 
+                src="https://ghchart.rshah.org/E1AD01/shiiifa" 
+                alt="GitHub contribution graph for shiiifa"
+                class="w-full h-auto"
+                loading="lazy"
+                onerror="this.src='https://ghchart.rshah.org/shiiifa'"
+              />
             </div>
           </div>
           
