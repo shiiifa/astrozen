@@ -1,28 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
     <header class="mb-12 text-center">
-      {/* Cover Photo */}
-      <div class="mb-8 rounded-2xl overflow-hidden">
-        <Image
-          src="/tedx1.jpg"
-          alt="TEDxAshesiUniversity Curator"
-          width={800}
-          height={400}
-          class="w-full h-64 object-cover"
+      <div class="mb-8">
+        <img 
+          src="/tedx1.jpg" 
+          alt="TEDxAshesiUniversity" 
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
         />
       </div>
-      
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
-        TEDxAshesiUniversity Curator
+        Curation Co-Lead, TEDxAshesiUniversity
       </h1>
-      <p class="text-lg text-neutral">
-        Guide speakers in composing and refining their speeches to ensure impactful and engaging presentations.
-      </p>
     </header>
 
     <div class="prose prose-invert max-w-none">
@@ -38,9 +40,77 @@ import { Image } from "astro:assets";
           <li>Provide feedback on content structure and delivery style</li>
           <li>Ensure talks align with TEDx standards and themes</li>
           <li>Coordinate rehearsal sessions and provide performance coaching</li>
-          <li>Collaborate with the organizing team on event planning</li>
+          <li>Collaborate with the organising team on event planning</li>
         </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Media</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="relative overflow-hidden rounded-lg cursor-pointer" onclick="openImageModal('/tedx01.jpg', 'TEDxAshesiUniversity Event')">
+            <img src="/tedx01.jpg" alt="TEDxAshesiUniversity Event" class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />
+          </div>
+          <div class="relative overflow-hidden rounded-lg cursor-pointer" onclick="openImageModal('/tedx02.jpg', 'TEDxAshesiUniversity Event')">
+            <img src="/tedx02.jpg" alt="TEDxAshesiUniversity Event" class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />
+          </div>
+        </div>
       </section>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-[90vh]">
+        <button 
+          id="closeModal" 
+          class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-2xl font-bold z-10"
+          onclick="closeImageModal()"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(src: string, alt: string) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+      
+      if (!modal || !modalImage) return;
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      if (!modal) return;
+      
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    const modalElement = document.getElementById('imageModal');
+    if (modalElement) {
+      modalElement.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target && target.id === 'imageModal') {
+          closeImageModal();
+        }
+      });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
 </Layout>

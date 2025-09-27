@@ -1,0 +1,136 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@components/Section.astro";
+import { Image } from "astro:assets";
+import { SITE_CONTENT } from "@config";
+---
+
+<Layout>
+  <div class="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <div class="container mx-auto px-6 py-16">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-serif font-bold text-primary mb-6">
+          Projects & Research
+        </h1>
+        <p class="text-lg text-neutral max-w-2xl mx-auto">
+          Explore my academic projects, research work, and freelance endeavors that showcase my skills in technology and design.
+        </p>
+      </div>
+
+      <!-- Navigation Cards -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+        <!-- Academic Projects -->
+        <a 
+          href="/projects/academic" 
+          class="group relative overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+        >
+          <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+          
+          <div class="relative z-10 p-8">
+            <div class="mb-6">
+              <Image
+                class="w-16 h-16 object-cover rounded-xl mb-4"
+                src="/arclab.png"
+                alt="Academic Projects"
+                width={64}
+                height={64}
+              />
+              <h2 class="text-2xl font-serif font-semibold text-primary mb-3 group-hover:text-white transition-colors">
+                Academic Projects
+              </h2>
+              <p class="text-neutral group-hover:text-white/80 transition-colors">
+                University coursework, research projects, and academic collaborations that demonstrate technical skills and engineering principles.
+              </p>
+            </div>
+            
+            <div class="flex items-center gap-2 text-sm text-white/70 group-hover:text-primary transition-colors">
+              <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
+              View Academic Projects
+            </div>
+          </div>
+          
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+        </a>
+
+        <!-- Freelance Projects -->
+        <a 
+          href="/projects/freelance" 
+          class="group relative overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+        >
+          <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+          
+          <div class="relative z-10 p-8">
+            <div class="mb-6">
+              <Image
+                class="w-16 h-16 object-cover rounded-xl mb-4"
+                src="/shopify-clon.png"
+                alt="Freelance Projects"
+                width={64}
+                height={64}
+              />
+              <h2 class="text-2xl font-serif font-semibold text-primary mb-3 group-hover:text-white transition-colors">
+                Freelance Projects
+              </h2>
+              <p class="text-neutral group-hover:text-white/80 transition-colors">
+                Client work, personal projects, and freelance collaborations that showcase practical applications and creative solutions.
+              </p>
+            </div>
+            
+            <div class="flex items-center gap-2 text-sm text-white/70 group-hover:text-primary transition-colors">
+              <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
+              View Freelance Projects
+            </div>
+          </div>
+          
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+        </a>
+      </div>
+
+      <!-- Quick Preview Section -->
+      <Section text="featured projects" href="#featured">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {SITE_CONTENT.projects.slice(0, 3).map(({ name, summary, image, linkPreview }) => (
+            <a
+              href={linkPreview}
+              class="group relative overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+            >
+              <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
+              
+              <div class="relative z-10 p-6">
+                <div class="mb-4 overflow-hidden rounded-xl">
+                  <Image
+                    class="w-full h-32 object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={image}
+                    alt={name}
+                    width={300}
+                    height={128}
+                    loading="lazy"
+                  />
+                </div>
+                
+                <h3 class="font-serif text-lg font-medium text-primary mb-2 group-hover:text-white transition-colors">
+                  {name}
+                </h3>
+                <p class="text-sm text-neutral group-hover:text-white/80 transition-colors line-clamp-2">
+                  {summary}
+                </p>
+              </div>
+              
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+            </a>
+          ))}
+        </div>
+      </Section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

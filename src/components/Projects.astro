@@ -10,70 +10,127 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<Section text="featured projects" href="projects">
-  <div class="relative">
-    {/* Navigation Arrows */}
-    <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-    
-    <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
+<Section text="projects and research" href="projects">
+  <div class="space-y-12">
+    {/* Academic Projects Section */}
+    <div class="relative">
+       {/* Academic Subtitle */}
+       <div class="mb-6 text-center">
+         <h3 class="text-primary text-xl font-bold opacity-80">academic</h3>
+       </div>
 
-    {/* Projects Container */}
-    <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4">
-      {
-        projects.map(({ name, summary, image, linkPreview, linkSource }) => (
-          <a
-            href={linkPreview}
-            class="group relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
-          >
-            {/* ORIGINAL ASH BACKGROUND RESTORED */}
-            <div class="bg-difu absolute inset-0 z-0 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-['']"></div>
-            
-            {/* Content */}
-            <div class="relative z-10 flex h-full flex-col p-6">
-              {/* Image */}
-              <div class="mb-6 overflow-hidden rounded-xl">
-                <Image
-                  class="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  src={image}
-                  alt={name}
-                  width={400}
-                  height={300}
-                  loading="lazy"
-                />
-              </div>
+      {/* Navigation Arrows */}
+      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Academic Projects Container */}
+      <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none" style="touch-action: pan-x; -webkit-overflow-scrolling: touch;">
+         {/* Academic Projects Preview */}
+         {
+           projects.map(({ name, summary, image }) => (
+             <a
+               href="#projects"
+               class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+             >
+              {/* ORIGINAL ASH BACKGROUND RESTORED */}
+              <div class="bg-difu absolute inset-0 z-0 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-['']"></div>
               
-              {/* Text Content */}
-              <div class="flex flex-1 flex-col">
-                <h3 class="mb-3 font-serif text-xl font-medium text-primary transition-colors duration-300 group-hover:text-white">
-                  {name}
-                </h3>
-                <p class="mb-4 flex-1 text-sm text-neutral group-hover:text-white/80 transition-colors duration-300">
-                  {summary}
-                </p>
+              {/* Content */}
+              <div class="relative z-10 flex h-full flex-col p-6">
+                {/* Image */}
+                <div class="mb-6 overflow-hidden rounded-xl -mt-8">
+                  <Image
+                    class="fade-in-image h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={image}
+                    alt={name}
+                    width={400}
+                    height={300}
+                    loading="lazy"
+                  />
+                </div>
                 
-                {/* Links */}
-                <div class="flex gap-4 pt-4 text-xs text-white/70">
-                  <span class="flex items-center gap-1 transition-all duration-300 group-hover:text-primary">
-                    <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
-                    View Details
-                  </span>
+                {/* Text Content */}
+                <div class="flex flex-1 flex-col">
+                  <h3 class="fade-in-element mb-3 font-serif text-xl font-medium text-primary transition-colors duration-300 group-hover:text-white">
+                    {name}
+                  </h3>
+                  <p class="fade-in-element mb-4 flex-1 text-sm text-neutral group-hover:text-white/80 transition-colors duration-300">
+                    {summary}
+                  </p>
+                  
+                  {/* Links */}
+                  <div class="fade-in-element flex gap-4 pt-4 text-xs text-white/70">
+                    <span class="flex items-center gap-1 transition-all duration-300 group-hover:text-primary">
+                      <span class="inline-block h-3 w-3 content-[url(/external.svg)] opacity-70 group-hover:opacity-100 transition-opacity"></span>
+                      View Details
+                    </span>
+                  </div>
                 </div>
               </div>
+              
+              {/* Hover overlay effect */}
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Freelance Projects Section */}
+    <div class="relative">
+       {/* Freelance Subtitle */}
+       <div class="mb-6 text-center">
+         <h3 class="text-primary text-xl font-bold opacity-80">freelance</h3>
+       </div>
+
+      {/* Freelance Projects Preview */}
+      <div class="flex justify-center py-8">
+        <a 
+          href="/projects/freelance" 
+          class="group w-full max-w-4xl bg-[#1c232d]/85 rounded-2xl border border-neutral/20 hover:border-primary/30 transition-all duration-500 overflow-hidden"
+        >
+          <div class="grid md:grid-cols-2 gap-0">
+            {/* Thumbnail */}
+            <div class="relative h-48 md:h-full min-h-[200px] overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5"></div>
+              <iframe 
+                src="https://obedbabington.vercel.app" 
+                class="w-full h-full"
+                loading="lazy"
+                title="Portfolio Preview"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
             </div>
             
-            {/* Hover overlay effect */}
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
-          </a>
-        ))
-      }
+            {/* Content */}
+            <div class="p-8 flex flex-col justify-center">
+              <div class="mb-4">
+                <h4 class="text-primary text-lg font-medium mb-2">recent work</h4>
+                <h3 class="text-xl font-serif font-bold text-white mb-3">Portfolio Optimisation</h3>
+                <p class="text-neutral/80 text-sm leading-relaxed">
+                  Currently building a modern and responsive portfolio website with Next.js and Tailwind CSS for a graduate student. Features include optimised performance and clean, academia-oriented design.
+                </p>
+              </div>
+              
+              <div class="flex items-center gap-2 text-primary text-sm font-medium">
+                <span>View Full Page</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </Section>
@@ -107,10 +164,27 @@ const { projects } = Astro.props;
   #projectsContainer {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    /* Enhanced mobile touch scrolling */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
   
   #projectsContainer::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    #projectsContainer {
+      /* More responsive touch handling on mobile */
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 1rem;
+    }
+    
+    #projectsContainer > * {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
   }
 </style>
 
@@ -124,20 +198,34 @@ const { projects } = Astro.props;
     if (!container || !prevBtn || !nextBtn) return;
 
     // Scroll to next project
-    nextBtn.addEventListener('click', () => {
-      container.scrollBy({ left: projectWidth, behavior: 'smooth' });
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      if (scrollLeft < scrollWidth - clientWidth - 5) {
+        container.scrollBy({ left: projectWidth, behavior: 'smooth' });
+      }
     });
 
     // Scroll to previous project
-    prevBtn.addEventListener('click', () => {
-      container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const { scrollLeft } = container;
+      if (scrollLeft > 5) {
+        container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
+      }
     });
 
     // Hide arrows when at edges
     const checkArrows = () => {
       const { scrollLeft, scrollWidth, clientWidth } = container;
-      prevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
-      nextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
+      const isAtStart = scrollLeft <= 5;
+      const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
+      
+      prevBtn.style.opacity = isAtStart ? '0.5' : '1';
+      nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+      
+      prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
     };
 
     container.addEventListener('scroll', checkArrows);
@@ -151,5 +239,181 @@ const { projects } = Astro.props;
         container.scrollBy({ left: projectWidth, behavior: 'smooth' });
       }
     });
-  });
-</script>
+
+    // Enhanced touch and mouse sliding functionality
+    let startX: number;
+    let scrollLeft: number;
+    let isDown = false;
+    let startTime: number;
+    let velocity = 0;
+    let lastX: number;
+    let lastTime: number;
+    let isScrolling = false;
+
+    const snapToItem = () => {
+      const currentScroll = container.scrollLeft;
+      const targetIndex = Math.round(currentScroll / projectWidth);
+      const targetScroll = targetIndex * projectWidth;
+      
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    };
+
+    const handleStart = (clientX: number) => {
+      isDown = true;
+      isScrolling = false;
+      startX = clientX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      startTime = Date.now();
+      lastX = clientX;
+      lastTime = startTime;
+      velocity = 0;
+      container.classList.add('active');
+      container.style.scrollBehavior = 'auto';
+    };
+
+    const handleMove = (clientX: number) => {
+      if (!isDown) return;
+      
+      isScrolling = true;
+      const x = clientX - container.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      container.scrollLeft = scrollLeft - walk;
+      
+      // Calculate velocity for momentum
+      const currentTime = Date.now();
+      const deltaX = clientX - lastX;
+      const deltaTime = currentTime - lastTime;
+      
+      if (deltaTime > 0) {
+        velocity = deltaX / deltaTime;
+      }
+      
+      lastX = clientX;
+      lastTime = currentTime;
+    };
+
+    const handleEnd = () => {
+      if (!isDown) return;
+      
+      isDown = false;
+      container.classList.remove('active');
+      container.style.scrollBehavior = 'smooth';
+      
+      // Only apply momentum if user was actually scrolling
+      if (isScrolling && Math.abs(velocity) > 0.3) {
+        const momentum = velocity * 150;
+        const currentScroll = container.scrollLeft;
+        const targetScroll = currentScroll - momentum;
+        
+        container.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+        
+        // Snap to item after momentum
+        setTimeout(snapToItem, 250);
+      } else if (isScrolling) {
+        // Snap to nearest item
+        snapToItem();
+      }
+    };
+
+    // Mouse events
+    container.addEventListener('mousedown', (e: MouseEvent) => {
+      e.preventDefault();
+      handleStart(e.clientX);
+    });
+
+    container.addEventListener('mouseleave', handleEnd);
+    container.addEventListener('mouseup', handleEnd);
+
+    container.addEventListener('mousemove', (e: MouseEvent) => {
+      e.preventDefault();
+      handleMove(e.clientX);
+    });
+
+    // Enhanced touch events for better mobile sliding
+    let touchStartTime: number;
+    let touchStartX: number;
+    let touchStartY: number;
+    let isTouchScrolling = false;
+    let touchMoved = false;
+
+    container.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        
+        // If touching a link or button, don't interfere with the click
+        if (element && (element.closest('a') || element.closest('button'))) {
+          return;
+        }
+        
+        touchStartTime = Date.now();
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isTouchScrolling = false;
+        touchMoved = false;
+        container.style.scrollBehavior = 'auto';
+        container.style.cursor = 'grabbing';
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const deltaX = Math.abs(touch.clientX - touchStartX);
+        const deltaY = Math.abs(touch.clientY - touchStartY);
+        
+        // More sensitive touch detection for mobile
+        if (deltaX > 5 && deltaX > deltaY) {
+          touchMoved = true;
+          isTouchScrolling = true;
+          e.preventDefault();
+          
+          if (!isDown) {
+            handleStart(touch.clientX);
+          }
+          handleMove(touch.clientX);
+        }
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', (e: TouchEvent) => {
+      const touchDuration = Date.now() - touchStartTime;
+      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      
+      // Reset cursor
+      container.style.cursor = 'grab';
+      
+      // If it was a quick tap with minimal movement, allow link clicks
+      if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !touchMoved) {
+        const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        if (element && (element.closest('a') || element.closest('button'))) {
+          // Let the link/button handle the click
+          return;
+        }
+      }
+      
+      if (isTouchScrolling || touchMoved) {
+        e.preventDefault();
+        container.style.scrollBehavior = 'smooth';
+        handleEnd();
+      }
+     }, { passive: false });
+
+    // Add touch cancel event for better mobile handling
+    container.addEventListener('touchcancel', () => {
+      container.style.cursor = 'grab';
+      container.style.scrollBehavior = 'smooth';
+      if (isDown) {
+        handleEnd();
+      }
+    }, { passive: true });
+   });
+
+ </script>

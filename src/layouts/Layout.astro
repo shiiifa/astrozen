@@ -27,7 +27,7 @@ const ogImgUrl = canonicalURL + socialImage;
     <meta name="description" content={description} />
     <meta name="author" content={author} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/jpeg" href="/alejandro-big.jpg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
@@ -48,5 +48,45 @@ const ogImgUrl = canonicalURL + socialImage;
       <slot />
     </main>
     <Footer author={author} />
+    
+    <script>
+      // Scroll-triggered fade-in animations
+      document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        const fadeElements = document.querySelectorAll('.fade-in-element, .fade-in-image, .fade-in-tile');
+        fadeElements.forEach(el => {
+          observer.observe(el);
+        });
+
+        // Auto-add fade-in classes to common elements
+        const autoFadeElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, a, img, section > div');
+        autoFadeElements.forEach(el => {
+          // Skip header and footer elements
+          if (!el.closest('header') && !el.closest('footer')) {
+            if (el.tagName === 'IMG') {
+              el.classList.add('fade-in-image');
+            } else if (el.closest('.group') || el.classList.contains('group')) {
+              el.classList.add('fade-in-tile');
+            } else {
+              el.classList.add('fade-in-element');
+            }
+            observer.observe(el);
+          }
+        });
+      });
+    </script>
   </body>
 </html>

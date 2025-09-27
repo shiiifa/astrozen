@@ -8,12 +8,12 @@ export const SITE_CONFIG: SiteConfig = {
   lang: "en",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
-    { text: "profile", href: "#profile" },
-    { text: "experience", href: "#experience" },
-    { text: "projects", href: "#projects" },
-    { text: "skills", href: "#skills" },
-    { text: "beyond engineering", href: "#beyond-engineering" },
-    { text: "let's connect!", href: "#connect" }
+    { text: "profile", href: "/#profile" },
+    { text: "experience", href: "/#experience" },
+    { text: "projects", href: "/#projects" },
+    { text: "skills", href: "/#skills" },
+    { text: "beyond engineering", href: "/#beyond-engineering" },
+    { text: "let's connect!", href: "/#connect" }
   ],
   socialLinks: [
     { text: "LinkedIn", href: "https://www.linkedin.com/in/shifaamankwa-gabbey/" },
@@ -47,6 +47,12 @@ export const SITE_CONTENT: SiteContent = {
   ],
   
   projects: [
+    {
+      name: "ARCLab Research Project: EMG-Based Prosthetic Control",
+      summary: "Contributing to an award-winning prosthetic arm project under the Automation, Robotics and Controls Lab, Ashesi.",
+      linkPreview: "/projects/arclab-research-project",
+      image: "/arclab.png",
+    },
     {
       name: "Ashesi Multipurpose Reservation System",
       summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
@@ -91,20 +97,47 @@ export const SITE_CONTENT: SiteContent = {
     },
   ],
 
+  freelanceProjects: [
+    {
+      name: "E-commerce Website Design",
+      summary: "Custom Shopify theme development and branding for a local retail business, featuring responsive design and integrated payment systems.",
+      image: "/shopify-clon.png",
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    },
+    {
+      name: "Portfolio Website Development", 
+      summary: "Modern, responsive portfolio website built with Astro and Tailwind CSS, featuring custom animations and optimized performance.",
+      image: "/clone-ig.png",
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    },
+    {
+      name: "Mobile App UI/UX Design",
+      summary: "Complete UI/UX design for a fitness tracking mobile application, including wireframes, prototypes, and design system.",
+      image: "/spotifu.png", 
+      linkPreview: "#",
+      linkSource: "#",
+      status: "Coming Soon"
+    }
+  ],
+
   skills: [
     {
       category: "Technical Skills",
-      tools: "Programming Languages, CAD, PCB Design, Prototyping",
+      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nData Analysis & Visualization: Excel, MATLAB\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad\nPrototyping & Hardware: 3D Printing, Arduino (UNO)",
       proficiency: "Intermediate"
     },
     {
       category: "Design & Creative Skills", 
-      tools: "Graphic Design, UI/UX, Creative Writing",
+      tools: "Graphic Design & Video Editing: Canva, CapCut\nUI/UX & Web Tools: Wix, Wordpress, Vercel, Canva\nCreative Writing: Freelance writing, Content Development",
       proficiency: "Intermediate"
     },
     {
-      category: "Professional Skills",
-      tools: "Office Suite, Technical Writing, Collaboration Tools",
+      category: "Professional & Collaboration Skills",
+      tools: "Microsoft Office Suite: Word, Excel, PowerPoint\nTechnical Writing & Documentation\nCollaboration Tools: Slack, Notion, Microsoft Teams, Google Workspace",
       proficiency: "Advanced"
     }
   ],

@@ -3,8 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 // Media files for Spelling Bee
-const mediaItems = [
-  "/spelling1.jpg",
+const galleryItems = [
   "/spelling2.jpg", 
   "/spelling3.jpg",
   "/spelling4.jpg"
@@ -13,67 +12,105 @@ const mediaItems = [
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
     <header class="mb-12 text-center">
-      {/* Cover Photo */}
-      <div class="mb-8 rounded-2xl overflow-hidden">
-        <Image
-          src="/spelling1.jpg"
-          alt="The Spelling Bee, Ghana - Volunteer"
-          width={800}
-          height={400}
-          class="w-full h-64 object-cover"
+      <div class="mb-8">
+        <img 
+          src="/spelling1.jpg" 
+          alt="The Spelling Bee, Ghana - Volunteer" 
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
         />
       </div>
-      
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
         The Spelling Bee, Ghana - Volunteer
       </h1>
       <p class="text-lg text-neutral">
-        As a volunteer for The Spelling Bee Ghana, I serve on the judges' panel as a recorder during seasonal competitions. My role involves ensuring accurate documentation of spellers' words and minimizing scoring discrepancies.
+        As a volunteer for The Spelling Bee Ghana, I serve on the judges' panel as a recorder during seasonal competitions. My role involves ensuring accurate documentation of spellers' words and minimising scoring discrepancies.
       </p>
     </header>
 
     <div class="prose prose-invert max-w-none">
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Volunteer Role</h2>
-        <p class="text-neutral">As a volunteer for The Spelling Bee Ghana, I serve on the judges' panel as a recorder during seasonal competitions. My role involves ensuring accurate documentation of spellers' words and minimizing scoring discrepancies, while also helping maintain a positive atmosphere for participants.</p>
-      </section>
 
+      {/* Additional Gallery Photos */}
       <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Responsibilities</h2>
-        <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Accurate documentation of spelled words and scores</li>
-          <li>Minimizing scoring discrepancies and errors</li>
-          <li>Interacting with spellers before they step on-stage</li>
-          <li>Maintaining orderly competition atmosphere</li>
-          <li>Supporting judges with administrative tasks</li>
-        </ul>
-      </section>
-
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Gallery</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Spelling Bee event photo ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Media</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="relative overflow-hidden rounded-lg cursor-pointer" onclick="openImageModal('/spelling2.jpg', 'Spelling Bee event photo 2')">
+            <img src="/spelling2.jpg" alt="Spelling Bee event photo 2" class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />
+          </div>
+          <div class="relative overflow-hidden rounded-lg cursor-pointer" onclick="openImageModal('/spelling3.jpg', 'Spelling Bee event photo 3')">
+            <img src="/spelling3.jpg" alt="Spelling Bee event photo 3" class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />
+          </div>
+          <div class="relative overflow-hidden rounded-lg cursor-pointer" onclick="openImageModal('/spelling4.jpg', 'Spelling Bee event photo 4')">
+            <img src="/spelling4.jpg" alt="Spelling Bee event photo 4" class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" />
+          </div>
         </div>
       </section>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-[90vh]">
+        <button 
+          id="closeModal" 
+          class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-2xl font-bold z-10"
+          onclick="closeImageModal()"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(src: string, alt: string) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+      
+      if (!modal || !modalImage) return;
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      if (!modal) return;
+      
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    const modalElement = document.getElementById('imageModal');
+    if (modalElement) {
+      modalElement.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target && target.id === 'imageModal') {
+          closeImageModal();
+        }
+      });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
 </Layout>

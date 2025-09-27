@@ -32,6 +32,15 @@ export interface ProjectProps {
   linkSource?: string;
 }
 
+export interface FreelanceProjectProps {
+  name: string;
+  summary: string;
+  image: string;
+  linkPreview?: string;
+  linkSource?: string;
+  status?: string;
+}
+
 export interface AboutProps {
   description: string;
   image: string;
@@ -47,6 +56,7 @@ export interface SiteContent {
   hero: HeroProps;
   experience: ExperienceProps[];
   projects: ProjectProps[];
+  freelanceProjects: FreelanceProjectProps[];
   about: AboutProps;
   skills: SkillProps[];
 }

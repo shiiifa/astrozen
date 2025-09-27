@@ -53,25 +53,19 @@ const mediaItems = [
 
       <!-- MEDIA GALLERY SECTION -->
       <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Research Visualizations</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Research Visualizations</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
+            <div 
+              class="relative overflow-hidden rounded-lg cursor-pointer" 
+              onclick={`openImageModal('${media}', 'Research visualization ${index + 1}')`}
             >
-              <Image
-                src={media}
-                alt={`Research visualization ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              <img 
+                src={media} 
+                alt={`Research visualization ${index + 1}`} 
+                class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" 
               />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
+            </div>
           ))}
         </div>
       </section>
@@ -97,4 +91,59 @@ const mediaItems = [
       </div>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+      <button 
+        id="closeModal" 
+        class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+        onclick="closeImageModal()"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+    </div>
+  </div>
 </Layout>
+
+<script>
+  function openImageModal(src: string, alt: string) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+    
+    if (!modal || !modalImage) return;
+    
+    modalImage.src = src;
+    modalImage.alt = alt;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when clicking outside the image
+  document.addEventListener('click', (e: Event) => {
+    const modal = document.getElementById('imageModal');
+    const modalElement = e.target as HTMLElement;
+    
+    if (modal && modalElement && modalElement.id === 'imageModal') {
+      closeImageModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      closeImageModal();
+    }
+  });
+</script>

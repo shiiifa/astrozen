@@ -1,24 +1,23 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-
-const mediaItems = [
-  "/clone-ig.png",
-  "/shopify-clon.png", 
-  "/spotifu.png",
-  "/alejandro-big.jpg",
-  "/clone-ig.png",
-  "/shopify-clon.png",
-  "/spotifu.png",
-  "/alejandro-big.jpg"
-];
 ---
 
 <Layout>
   <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
     <header class="mb-12 text-center">
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">
-        Writer, Comma Period
+        comma, period.
       </h1>
       <p class="text-lg text-neutral">
         A blog where I share thinkpieces, thoughts, and personal experiences through writing.
@@ -26,55 +25,84 @@ const mediaItems = [
     </header>
 
     <div class="prose prose-invert max-w-none">
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Writing Journey</h2>
-        <p class="text-neutral">Comma Period is my personal blog where I explore various topics through writing. From personal reflections to analytical thinkpieces, this platform allows me to share my perspectives, experiences, and insights with a wider audience while honing my writing skills.</p>
-      </section>
-
-      <!-- MEDIA GALLERY SECTION -->
-      <section class="mb-12">
-        <h2 class="mb-8 font-serif text-2xl font-semibold text-primary">Media Gallery</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaItems.map((media, index) => (
-            <a 
-              href={media} 
-              target="_blank" 
-              class="group relative block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30"
-            >
-              <Image
-                src={media}
-                alt={`Writing media ${index + 1}`}
-                width={200}
-                height={200}
-                class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-                <span class="text-white text-sm font-medium">View Full Size</span>
-              </div>
-            </a>
-          ))}
+      {/* Blog Photo Display Tile */}
+      <div class="mb-12 text-center">
+        <div class="inline-block overflow-hidden rounded-lg border border-neutral/20 transition-all duration-300 hover:scale-105 hover:border-primary/30 max-w-md cursor-pointer" onclick="openImageModal('/cmmprd2.jpg', 'comma, period. - Personal Blog')">
+          <Image
+            src="/cmmprd2.jpg"
+            alt="comma, period. - Personal Blog"
+            width={400}
+            height={300}
+            class="w-full h-64 object-cover"
+          />
         </div>
-      </section>
+      </div>
 
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Writing Focus Areas</h2>
-        <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>Personal essays and reflections</li>
-          <li>Social commentary and analysis</li>
-          <li>Technology and innovation insights</li>
-          <li>Educational and developmental topics</li>
-          <li>Creative non-fiction and storytelling</li>
-        </ul>
-      </section>
-
-      <div class="flex gap-4 justify-center">
-        <a href="#" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
+      <div class="text-center">
+        <p class="text-neutral mb-8">
+          As a lover of words and writing, "comma, period." is my favorite escape medium to explore and navigate various thoughts on my mind. This personal blog serves as a creative sanctuary where I delve into reflections, analyze ideas, and share perspectives through the art of written expression. Each piece represents a moment of introspection and discovery in my ongoing journey with words.
+        </p>
+        
+        <a href="https://shiiifa.substack.com" target="_blank" class="rounded-full bg-primary px-8 py-4 text-white font-medium hover:bg-primary/90 transition-colors after:ml-2 after:content-[url(/external.svg)]">
           Read Blog
-        </a>
-        <a href="#contact" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
-          Guest Post
         </a>
       </div>
     </div>
   </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="relative max-w-4xl max-h-[90vh]">
+        <button 
+          id="closeModal" 
+          class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-2xl font-bold z-10"
+          onclick="closeImageModal()"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(src: string, alt: string) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+      
+      if (!modal || !modalImage) return;
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      if (!modal) return;
+      
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    const modalElement = document.getElementById('imageModal');
+    if (modalElement) {
+      modalElement.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target && target.id === 'imageModal') {
+          closeImageModal();
+        }
+      });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+  </script>
 </Layout>

@@ -29,14 +29,16 @@ const { projects } = Astro.props;
                 <a
                   href={linkSource}
                   target="_blank"
-                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline touch-manipulation cursor-pointer"
+                  style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
                 >
                   Source
                 </a>
                 <a
                   href={linkPreview}
                   target="_blank"
-                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline touch-manipulation cursor-pointer"
+                  style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
                 >
                   Preview
                 </a>
