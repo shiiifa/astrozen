@@ -323,6 +323,11 @@ const { projects } = Astro.props;
 
     // Mouse events
     container.addEventListener('mousedown', (e: MouseEvent) => {
+      // Only prevent default if not clicking on a link
+      const element = e.target as Element;
+      if (element && element.closest('a')) {
+        return; // Let the link handle the click
+      }
       e.preventDefault();
       handleStart(e.clientX);
     });
@@ -331,8 +336,10 @@ const { projects } = Astro.props;
     container.addEventListener('mouseup', handleEnd);
 
     container.addEventListener('mousemove', (e: MouseEvent) => {
-      e.preventDefault();
-      handleMove(e.clientX);
+      if (isDown) {
+        e.preventDefault();
+        handleMove(e.clientX);
+      }
     });
 
     // Enhanced touch events for better mobile sliding
