@@ -20,13 +20,13 @@ const { projects } = Astro.props;
        </div>
 
       {/* Navigation Arrows */}
-      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
+      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
+      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -329,8 +329,8 @@ const { projects } = Astro.props;
         const touch = e.touches[0];
         const element = document.elementFromPoint(touch.clientX, touch.clientY);
         
-        // If touching a link, don't interfere with the click
-        if (element && element.closest('a')) {
+        // If touching a link or button, don't interfere with the click
+        if (element && (element.closest('a') || element.closest('button'))) {
           return;
         }
         
@@ -338,6 +338,7 @@ const { projects } = Astro.props;
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         isTouchScrolling = false;
+        container.style.scrollBehavior = 'auto';
       }
     }, { passive: true });
 
@@ -365,14 +366,15 @@ const { projects } = Astro.props;
       // If it was a quick tap with minimal movement, allow link clicks
       if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !isTouchScrolling) {
         const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-        if (element && element.closest('a')) {
-          // Let the link handle the click
+        if (element && (element.closest('a') || element.closest('button'))) {
+          // Let the link/button handle the click
           return;
         }
       }
       
       if (isTouchScrolling) {
         e.preventDefault();
+        container.style.scrollBehavior = 'smooth';
         handleEnd();
       }
      }, { passive: false });

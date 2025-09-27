@@ -42,18 +42,23 @@ const isHomepage = Astro.url.pathname === '/';
           if (link.text === "projects") {
             return (
               <li class="relative group">
-                <a
-                  class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-['•'] hover:text-white`}
-                  href={href}
+                <button
+                  class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-['•'] hover:text-white w-full text-left`}
+                  id="projects-dropdown-btn"
+                  aria-expanded="false"
+                  aria-haspopup="true"
                 >
                   {link.text}
                   <svg class="inline-block w-3 h-3 ml-1 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
-                </a>
+                </button>
                 
                 {/* Dropdown Menu */}
-                <div class="absolute top-full left-0 mt-2 w-48 bg-[#240C2C] border border-neutral/40 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div 
+                  class="absolute top-full left-0 mt-2 w-48 bg-[#240C2C] border border-neutral/40 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                  id="projects-dropdown"
+                >
                   <div class="py-2">
                     <a
                       href={isHomepage ? "#projects" : "/#projects"}
@@ -174,7 +179,7 @@ const isHomepage = Astro.url.pathname === '/';
   // Toggle mobile menu
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
-  const navItems = document.querySelectorAll("#main-menu > ul > li > a");
+  const navItems = document.querySelectorAll("#main-menu > ul > li > a, #main-menu > ul > li > button");
 
   const toggleMenu = () => {
     menu?.classList.toggle("hidden");
@@ -184,7 +189,58 @@ const isHomepage = Astro.url.pathname === '/';
 
   button?.addEventListener("click", toggleMenu);
   navItems.forEach((item) => {
+    // Don't close menu when clicking dropdown buttons
+    if (item.id === "projects-dropdown-btn") {
+      return;
+    }
     item?.addEventListener("click", toggleMenu);
+  });
+
+  // Handle projects dropdown
+  const projectsBtn = document.querySelector("#projects-dropdown-btn");
+  const projectsDropdown = document.querySelector("#projects-dropdown");
+  const projectsLinks = document.querySelectorAll("#projects-dropdown a");
+
+  const toggleProjectsDropdown = () => {
+    const isExpanded = projectsBtn?.getAttribute("aria-expanded") === "true";
+    projectsBtn?.setAttribute("aria-expanded", `${!isExpanded}`);
+    
+    if (projectsDropdown) {
+      if (isExpanded) {
+        projectsDropdown.classList.add("opacity-0", "invisible");
+        projectsDropdown.classList.remove("opacity-100", "visible");
+      } else {
+        projectsDropdown.classList.remove("opacity-0", "invisible");
+        projectsDropdown.classList.add("opacity-100", "visible");
+      }
+    }
+  };
+
+  projectsBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleProjectsDropdown();
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!projectsBtn?.contains(e.target as Node) && !projectsDropdown?.contains(e.target as Node)) {
+      if (projectsDropdown) {
+        projectsDropdown.classList.add("opacity-0", "invisible");
+        projectsDropdown.classList.remove("opacity-100", "visible");
+        projectsBtn?.setAttribute("aria-expanded", "false");
+      }
+    }
+  });
+
+  // Close dropdown when clicking on links
+  projectsLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (projectsDropdown) {
+        projectsDropdown.classList.add("opacity-0", "invisible");
+        projectsDropdown.classList.remove("opacity-100", "visible");
+        projectsBtn?.setAttribute("aria-expanded", "false");
+      }
+    });
   });
 
   // Update navigation based on scroll position with Intersection Observer
