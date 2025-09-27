@@ -1,5 +1,5 @@
-# AstroZen - Personal Portfolio Website
 
+<<<<<<< HEAD
 AstroZen is a minimalist, accessible and responsive portfolio template for your personal portfolio website. It is built with Astro and TailwindCSS.
 
 ![zen-og](https://github.com/user-attachments/assets/7a72aaae-6652-4cd0-becc-8e6a3c224993)
@@ -33,3 +33,5 @@ cd astro-zen
 | `pnpm dev`     | Starts local dev server at `localhost:4321`  |
 | `pnpm build`   | Build your production site to `./dist/`      |
 | `pnpm preview` | Preview your build locally, before deploying |
+=======
+>>>>>>> 07f6f4a66f1df598a368c954992f3d1a4f68a745
