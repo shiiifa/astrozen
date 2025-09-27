@@ -304,26 +304,17 @@ const { projects } = Astro.props;
       handleMove(e.clientX);
     });
 
-    // Touch events with improved mobile handling
-    let touchStartTime: number;
+    // Simplified touch events for better mobile compatibility
     let touchStartX: number;
     let touchStartY: number;
-    let isTouchScrolling = false;
+    let isDragging = false;
 
     container.addEventListener('touchstart', (e: TouchEvent) => {
       if (e.touches.length === 1) {
         const touch = e.touches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-        
-        // If touching a link, don't interfere with the click
-        if (element && element.closest('a')) {
-          return;
-        }
-        
-        touchStartTime = Date.now();
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
-        isTouchScrolling = false;
+        isDragging = false;
       }
     }, { passive: true });
 
@@ -333,35 +324,21 @@ const { projects } = Astro.props;
         const deltaX = Math.abs(touch.clientX - touchStartX);
         const deltaY = Math.abs(touch.clientY - touchStartY);
         
-        // If horizontal movement is significant, treat as scroll
-        if (deltaX > 10 || deltaY > 10) {
-          isTouchScrolling = true;
-          e.preventDefault();
-          handleStart(touch.clientX);
-          handleMove(touch.clientX);
+        // Only prevent default for horizontal scrolling
+        if (deltaX > deltaY && deltaX > 10) {
+          isDragging = true;
+          // Allow native horizontal scrolling
         }
       }
-    }, { passive: false });
+    }, { passive: true });
 
     container.addEventListener('touchend', (e: TouchEvent) => {
-      const touchDuration = Date.now() - touchStartTime;
-      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
-      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
-      
-      // If it was a quick tap with minimal movement, allow link clicks
-      if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !isTouchScrolling) {
-        const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-        if (element && element.closest('a')) {
-          // Let the link handle the click
-          return;
-        }
+      if (!isDragging) {
+        // Allow normal touch interactions for links
+        return;
       }
-      
-      if (isTouchScrolling) {
-        e.preventDefault();
-        handleEnd();
-      }
-     }, { passive: false });
+      isDragging = false;
+    }, { passive: true });
    });
 
  </script>
