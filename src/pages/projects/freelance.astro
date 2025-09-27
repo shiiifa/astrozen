@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 ---
 
@@ -21,37 +21,61 @@ import { Image } from "astro:assets";
     <section class="py-16 px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-serif font-bold text-primary mb-4">Featured Project</h2>
-          <p class="text-neutral/70">Portfolio website development</p>
+          <h2 class="text-3xl font-serif font-bold text-primary mb-4">Portfolio Optimization</h2>
+          <p class="text-neutral/70">Custom portfolio website development and optimization</p>
         </div>
         
-        <div class="bg-[#1c232d]/85 rounded-2xl p-8 border border-neutral/20">
-          <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-3">
-              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/>
-              </svg>
-              <span class="text-white font-medium text-lg">obedbabington.vercel.app</span>
-            </div>
-            <div class="text-neutral/60">
-              <a href="https://obedbabington.vercel.app" target="_blank" class="hover:text-primary transition-colors flex items-center gap-2">
-                Visit Site
+        {/* Horizontal Project Card */}
+        <div class="bg-[#1c232d]/85 rounded-2xl p-8 border border-neutral/20 hover:border-primary/30 transition-all duration-500">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            {/* Project Info */}
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/>
+                </svg>
+                <span class="text-white font-medium text-lg">obedbabington.vercel.app</span>
+              </div>
+              
+              <h3 class="text-2xl font-serif font-bold text-primary mb-4">Portfolio Website Development</h3>
+              <p class="text-neutral/80 mb-6">
+                A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features include optimized performance, 
+                smooth animations, and a clean, professional design that showcases work effectively.
+              </p>
+              
+              {/* Technologies Used */}
+              <div class="mb-6">
+                <h4 class="text-sm font-medium text-neutral/60 mb-3">Technologies Used:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Next.js</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Tailwind CSS</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">TypeScript</span>
+                  <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Vercel</span>
+                </div>
+              </div>
+              
+              <a 
+                href="https://obedbabington.vercel.app" 
+                target="_blank"
+                class="inline-flex items-center gap-2 bg-primary text-black px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors"
+              >
+                Visit Live Site
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                 </svg>
               </a>
             </div>
-          </div>
-          
-          {/* Embedded Website Preview */}
-          <div class="overflow-hidden rounded-lg border border-neutral/20">
-            <iframe 
-              src="https://obedbabington.vercel.app" 
-              class="w-full h-[500px]"
-              loading="lazy"
-              title="Obed Babington Portfolio Preview"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
+            
+            {/* Project Preview */}
+            <div class="overflow-hidden rounded-lg border border-neutral/20">
+              <iframe 
+                src="https://obedbabington.vercel.app" 
+                class="w-full h-80"
+                loading="lazy"
+                title="Obed Babington Portfolio Preview"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -75,19 +99,48 @@ import { Image } from "astro:assets";
             </a>
           </div>
           
-          {/* GitHub Contribution Graph */}
-          <div class="overflow-hidden rounded-lg">
-            <img 
-              src="https://ghchart.rshah.org/E1AD01/shiiifa" 
-              alt="GitHub contribution graph for shiiifa"
-              class="w-full h-auto"
-              loading="lazy"
-              onerror="this.src='https://ghchart.rshah.org/shiiifa'"
-            />
+          {/* GitHub Stats Grid */}
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            {/* Contribution Graph */}
+            <div>
+              <h3 class="text-lg font-medium text-white mb-4">Contribution Activity</h3>
+              <div class="overflow-hidden rounded-lg">
+                <img 
+                  src="https://ghchart.rshah.org/E1AD01/shiiifa" 
+                  alt="GitHub contribution graph for shiiifa"
+                  class="w-full h-auto"
+                  loading="lazy"
+                  onerror="this.src='https://ghchart.rshah.org/shiiifa'"
+                />
+              </div>
+            </div>
+            
+            {/* GitHub Stats */}
+            <div>
+              <h3 class="text-lg font-medium text-white mb-4">Repository Stats</h3>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
+                  <span class="text-neutral/80">Total Repositories</span>
+                  <span class="text-primary font-bold">9</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
+                  <span class="text-neutral/80">Total Stars</span>
+                  <span class="text-primary font-bold">8</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
+                  <span class="text-neutral/80">Followers</span>
+                  <span class="text-primary font-bold">4</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-neutral/10 rounded-lg">
+                  <span class="text-neutral/80">Following</span>
+                  <span class="text-primary font-bold">3</span>
+                </div>
+              </div>
+            </div>
           </div>
           
           {/* Legend */}
-          <div class="flex items-center justify-between mt-6 text-sm text-neutral/60">
+          <div class="flex items-center justify-between text-sm text-neutral/60">
             <span>Less</span>
             <div class="flex gap-2">
               <div class="w-4 h-4 bg-neutral/20 rounded-sm"></div>
