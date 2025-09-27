@@ -33,7 +33,7 @@ const { projects } = Astro.props;
       </button>
 
       {/* Academic Projects Container */}
-      <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none">
+      <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none" style="touch-action: pan-x; -webkit-overflow-scrolling: touch;">
          {/* Academic Projects Preview */}
          {
            projects.map(({ name, summary, image }) => (
@@ -164,10 +164,27 @@ const { projects } = Astro.props;
   #projectsContainer {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    /* Enhanced mobile touch scrolling */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
   
   #projectsContainer::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    #projectsContainer {
+      /* More responsive touch handling on mobile */
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 1rem;
+    }
+    
+    #projectsContainer > * {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
   }
 </style>
 
@@ -318,11 +335,12 @@ const { projects } = Astro.props;
       handleMove(e.clientX);
     });
 
-    // Touch events with improved mobile handling
+    // Enhanced touch events for better mobile sliding
     let touchStartTime: number;
     let touchStartX: number;
     let touchStartY: number;
     let isTouchScrolling = false;
+    let touchMoved = false;
 
     container.addEventListener('touchstart', (e: TouchEvent) => {
       if (e.touches.length === 1) {
@@ -338,7 +356,9 @@ const { projects } = Astro.props;
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         isTouchScrolling = false;
+        touchMoved = false;
         container.style.scrollBehavior = 'auto';
+        container.style.cursor = 'grabbing';
       }
     }, { passive: true });
 
@@ -348,11 +368,15 @@ const { projects } = Astro.props;
         const deltaX = Math.abs(touch.clientX - touchStartX);
         const deltaY = Math.abs(touch.clientY - touchStartY);
         
-        // If horizontal movement is significant, treat as scroll
-        if (deltaX > 10 && deltaX > deltaY) {
+        // More sensitive touch detection for mobile
+        if (deltaX > 5 && deltaX > deltaY) {
+          touchMoved = true;
           isTouchScrolling = true;
           e.preventDefault();
-          handleStart(touch.clientX);
+          
+          if (!isDown) {
+            handleStart(touch.clientX);
+          }
           handleMove(touch.clientX);
         }
       }
@@ -363,8 +387,11 @@ const { projects } = Astro.props;
       const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
       const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
       
+      // Reset cursor
+      container.style.cursor = 'grab';
+      
       // If it was a quick tap with minimal movement, allow link clicks
-      if (touchDuration < 200 && deltaX < 10 && deltaY < 10 && !isTouchScrolling) {
+      if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !touchMoved) {
         const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
         if (element && (element.closest('a') || element.closest('button'))) {
           // Let the link/button handle the click
@@ -372,12 +399,21 @@ const { projects } = Astro.props;
         }
       }
       
-      if (isTouchScrolling) {
+      if (isTouchScrolling || touchMoved) {
         e.preventDefault();
         container.style.scrollBehavior = 'smooth';
         handleEnd();
       }
      }, { passive: false });
+
+    // Add touch cancel event for better mobile handling
+    container.addEventListener('touchcancel', () => {
+      container.style.cursor = 'grab';
+      container.style.scrollBehavior = 'smooth';
+      if (isDown) {
+        handleEnd();
+      }
+    }, { passive: true });
    });
 
  </script>
