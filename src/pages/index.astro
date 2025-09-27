@@ -59,13 +59,13 @@ const beyondEngineeringItems = [
   <Section text="beyond engineering" href="beyond-engineering">
     <div class="relative">
       {/* Navigation Arrows */}
-      <button id="beyondPrevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+      <button id="beyondPrevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="beyondNextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-colors">
+      <button id="beyondNextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -117,20 +117,34 @@ const beyondEngineeringItems = [
       const itemWidth = 280; // Width of each item + gap
 
       // Scroll to next item
-      beyondNextBtn.addEventListener('click', () => {
-        beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      beyondNextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
+        if (scrollLeft < scrollWidth - clientWidth - 5) {
+          beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
+        }
       });
 
       // Scroll to previous item
-      beyondPrevBtn.addEventListener('click', () => {
-        beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      beyondPrevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const { scrollLeft } = beyondContainer;
+        if (scrollLeft > 5) {
+          beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+        }
       });
 
       // Hide arrows when at edges
       const checkBeyondArrows = () => {
         const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
-        beyondPrevBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
-        beyondNextBtn.style.opacity = scrollLeft < scrollWidth - clientWidth - 10 ? '1' : '0.5';
+        const isAtStart = scrollLeft <= 5;
+        const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
+        
+        beyondPrevBtn.style.opacity = isAtStart ? '0.5' : '1';
+        beyondNextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+        
+        beyondPrevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        beyondNextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
       };
 
       beyondContainer.addEventListener('scroll', checkBeyondArrows);
