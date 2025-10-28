@@ -74,12 +74,12 @@ const beyondEngineeringItems = [
       {/* Beyond Engineering Container */}
       <div 
         id="beyondContainer" 
-        class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none"
+        class="flex overflow-x-hidden scroll-smooth space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none"
         style="touch-action: pan-x; -webkit-overflow-scrolling: touch;"
       >
         {
           beyondEngineeringItems.map(({ name, image, linkPreview }) => (
-            <div class="group relative flex-shrink-0 w-64 h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20">
+            <div class="group relative flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20">
               <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
               
               <div class="relative z-10 w-full h-full">
@@ -115,7 +115,19 @@ const beyondEngineeringItems = [
       
       if (!beyondContainer || !beyondPrevBtn || !beyondNextBtn) return;
 
-      const itemWidth = 280; // Width of each item + gap
+      // Calculate responsive item width based on screen size
+      const getItemWidth = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 640) { // Mobile
+          return 192 + 12; // w-48 (192px) + space-x-3 (12px)
+        } else if (screenWidth < 768) { // Small tablet
+          return 224 + 24; // w-56 (224px) + space-x-6 (24px)
+        } else { // Desktop
+          return 256 + 24; // w-64 (256px) + space-x-6 (24px)
+        }
+      };
+      
+      let itemWidth = getItemWidth();
 
       // Scroll to next item
       beyondNextBtn.addEventListener('click', (e) => {
@@ -151,12 +163,18 @@ const beyondEngineeringItems = [
       beyondContainer.addEventListener('scroll', checkBeyondArrows);
       checkBeyondArrows(); // Initial check
 
+      // Update item width on resize
+      window.addEventListener('resize', () => {
+        itemWidth = getItemWidth();
+        checkBeyondArrows();
+      });
+
       // Add keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
-          beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+          beyondContainer.scrollBy({ left: -getItemWidth(), behavior: 'smooth' });
         } else if (e.key === 'ArrowRight') {
-          beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
+          beyondContainer.scrollBy({ left: getItemWidth(), behavior: 'smooth' });
         }
       });
 
@@ -171,9 +189,10 @@ const beyondEngineeringItems = [
       let beyondIsScrolling = false;
 
       const snapToBeyondItem = () => {
+        const currentItemWidth = getItemWidth();
         const currentScroll = beyondContainer.scrollLeft;
-        const targetIndex = Math.round(currentScroll / itemWidth);
-        const targetScroll = targetIndex * itemWidth;
+        const targetIndex = Math.round(currentScroll / currentItemWidth);
+        const targetScroll = targetIndex * currentItemWidth;
         
         beyondContainer.scrollTo({
           left: targetScroll,
@@ -351,10 +370,10 @@ const beyondEngineeringItems = [
     let isScrolling = false;
 
     const snapToItem = () => {
-      const itemWidth = 280;
+      const currentItemWidth = getItemWidth();
       const currentScroll = beyondContainer.scrollLeft;
-      const targetIndex = Math.round(currentScroll / itemWidth);
-      const targetScroll = targetIndex * itemWidth;
+      const targetIndex = Math.round(currentScroll / currentItemWidth);
+      const targetScroll = targetIndex * currentItemWidth;
 
       beyondContainer.scrollTo({
         left: targetScroll,
