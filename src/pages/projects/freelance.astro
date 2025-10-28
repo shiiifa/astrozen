@@ -98,6 +98,55 @@ import { Image } from "astro:assets";
       </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="py-16 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="fade-in-element text-3xl font-serif font-bold text-primary mb-4">in their words</h2>
+          <p class="fade-in-element text-neutral/60 text-sm">what clients say about working with me</p>
+        </div>
+        
+        <div class="fade-in-element bg-[#1c232d]/85 border border-neutral/20 rounded-2xl p-8 relative overflow-hidden">
+          {/* Background pattern */}
+          <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
+          
+          {/* Quote icon */}
+          <div class="relative z-10 mb-6">
+            <svg class="w-8 h-8 text-primary/60 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+            </svg>
+          </div>
+          
+          {/* Testimonial content */}
+          <div class="relative z-10 text-center">
+            <blockquote class="text-lg text-neutral/90 leading-relaxed mb-6 italic">
+              "Shifa is a dynamic blend of intelligence, professionalism, and creativity. At a time when I was dissatisfied with my own portfolio site but lacked the time to improve it, I was relieved to discover her skill. Despite still being a student, she worked with the pace and quality of a full-time professional. The site speaks for itself."
+            </blockquote>
+            
+            <blockquote class="text-lg text-neutral/90 leading-relaxed mb-6 italic">
+              "She transformed my site from merely informative to genuinely classy. It achieved the goal of being a digital encapsulation of what I do – and in that regard, expectations were exceeded!"
+            </blockquote>
+            
+            <blockquote class="text-lg text-neutral/90 leading-relaxed mb-8 italic">
+              "Her ability to understand my vision, preferences, and feedback for the site, even with limited interaction, and to deliver quick, high-quality revisions was impressive."
+            </blockquote>
+            
+            {/* Client info */}
+            <div class="border-t border-neutral/20 pt-6">
+              <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                  <span class="text-primary font-bold text-lg">OA</span>
+                </div>
+                <div class="text-left">
+                  <div class="font-medium text-white">Obed Allotey Babington</div>
+                  <div class="text-sm text-neutral/60">Portfolio Website Client</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Collaboration CTA -->
     <section class="py-8 px-6">
