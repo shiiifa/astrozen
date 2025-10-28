@@ -82,20 +82,18 @@ const beyondEngineeringItems = [
             <div class="group relative flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20">
               <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
               
-              <div class="relative z-10 w-full h-full">
-                <a href={linkPreview} class="block w-full h-full">
-                  <Image
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
-                    src={image}
-                    alt={name}
-                    width={256}
-                    height={256}
-                    loading="lazy"
-                  />
-                </a>
-              </div>
+              <a href={linkPreview} class="relative z-20 block w-full h-full">
+                <Image
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                  src={image}
+                  alt={name}
+                  width={256}
+                  height={256}
+                  loading="lazy"
+                />
+              </a>
               
-              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+              <div class="absolute inset-0 z-10 rounded-2xl bg-gradient-to-b from-transparent via-primary/5 to-primary/10 opacity-0 transition-all duration-500 group-hover:opacity-100 pointer-events-none"></div>
               
               <span class="sr-only">{name}</span>
             </div>
