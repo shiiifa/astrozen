@@ -49,13 +49,29 @@ import { Image } from "astro:assets";
             
             <div class="fade-in-element text-xs text-neutral/70 leading-relaxed mb-6">
               <p class="mb-4">
-                Built a modern and responsive portfolio website with Next.js and Tailwind CSS for a graduate student. 
+                Built a modern and responsive portfolio website with Next.js and Tailwind CSS for a prospective grad student. 
                 Features included optimised performance, smooth animations, and a clean, academia and research-oriented design that showcases work effectively.
               </p>
-              
-              <div class="mb-4">
-                <h4 class="text-xs font-medium text-neutral/60 mb-2">technologies used:</h4>
-                <div class="flex flex-wrap gap-2">
+            </div>
+          </div>
+          
+          {/* Right Column - Website Preview */}
+          <div class="lg:col-span-2">
+            <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg mb-4">
+              <iframe 
+                src="https://obedbabington.vercel.app" 
+                class="w-full h-[300px]"
+                loading="lazy"
+                title="Obed Babington Portfolio Preview"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
+            </div>
+            
+            {/* Technologies and Visit Live Site */}
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <h4 class="text-xs font-medium text-neutral/60">technologies used:</h4>
+                <div class="flex gap-2">
                   {/* Next.js Icon */}
                   <div class="w-6 h-6 bg-black rounded flex items-center justify-center">
                     <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -98,19 +114,6 @@ import { Image } from "astro:assets";
               </a>
             </div>
           </div>
-          
-          {/* Right Column - Website Preview */}
-          <div class="lg:col-span-2">
-            <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg">
-              <iframe 
-                src="https://obedbabington.vercel.app" 
-                class="w-full h-[300px]"
-                loading="lazy"
-                title="Obed Babington Portfolio Preview"
-                sandbox="allow-scripts allow-same-origin"
-              ></iframe>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -126,7 +129,7 @@ import { Image } from "astro:assets";
           
           {/* Right Column - Testimonial Content */}
           <div class="lg:col-span-2">
-            <div class="fade-in-element bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative overflow-hidden">
+            <div class="fade-in-element bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative overflow-hidden h-[200px]">
               {/* Background pattern */}
               <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
               
@@ -171,12 +174,10 @@ import { Image } from "astro:assets";
         </p>
         
         <a 
-          href="mailto:shifa.gabbey@ashesi.edu.gh" 
-          class="fade-in-element bg-primary text-black px-6 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2 inline-flex"
+          href="https://forms.gle/sqDJL1oFx2auLvkm9" 
+          target="_blank"
+          class="fade-in-element bg-primary text-black px-6 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors inline-flex"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
           Get In Touch
         </a>
       </div>
