@@ -59,13 +59,13 @@ const beyondEngineeringItems = [
   <Section text="beyond engineering" href="beyond-engineering">
     <div class="relative">
       {/* Navigation Arrows */}
-      <button id="beyondPrevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button id="beyondPrevBtn" class="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation backdrop-blur-sm border border-primary/10" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="beyondNextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button id="beyondNextBtn" class="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation backdrop-blur-sm border border-primary/10" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -74,12 +74,12 @@ const beyondEngineeringItems = [
       {/* Beyond Engineering Container */}
       <div 
         id="beyondContainer" 
-        class="flex overflow-x-hidden scroll-smooth space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none"
-        style="touch-action: pan-x; -webkit-overflow-scrolling: touch;"
+        class="flex overflow-x-auto scroll-smooth space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none snap-x snap-mandatory"
+        style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
       >
         {
           beyondEngineeringItems.map(({ name, image, linkPreview }) => (
-            <div class="group relative flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20">
+            <div class="group relative flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 snap-center">
               <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
               
               <a href={linkPreview} class="relative z-20 block w-full h-full">
@@ -105,6 +105,83 @@ const beyondEngineeringItems = [
   
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
 
+  <style>
+    /* Hide scrollbars for Beyond Engineering container */
+    #beyondContainer::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Improve mobile touch interactions */
+    @media (max-width: 640px) {
+      #beyondContainer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      #beyondPrevBtn, #beyondNextBtn {
+        display: none; /* Hide arrows on mobile for cleaner look */
+      }
+      
+      /* Ensure proper spacing on mobile */
+      #beyondContainer > div:first-child {
+        margin-left: 0;
+      }
+      
+      #beyondContainer > div:last-child {
+        margin-right: 0;
+      }
+    }
+    
+    /* Improve touch targets on mobile */
+    @media (max-width: 640px) {
+      #beyondContainer > div {
+        min-width: 12rem; /* w-48 */
+        min-height: 12rem; /* h-48 */
+      }
+    }
+    
+    /* Smooth snap scrolling */
+    #beyondContainer {
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+    
+    /* Better focus states for accessibility */
+    #beyondContainer > div:focus-within {
+      outline: 2px solid #E1AD01;
+      outline-offset: 2px;
+    }
+    
+    /* Prevent text selection during drag on mobile */
+    #beyondContainer.active {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    
+    /* Improve mobile performance */
+    @media (max-width: 640px) {
+      #beyondContainer {
+        will-change: scroll-position;
+        transform: translateZ(0); /* Force hardware acceleration */
+      }
+      
+      #beyondContainer > div {
+        will-change: transform;
+        transform: translateZ(0);
+      }
+    }
+    
+    /* Better mobile spacing */
+    @media (max-width: 640px) {
+      #beyondContainer {
+        margin: 0 -1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const beyondContainer = document.getElementById('beyondContainer');
@@ -124,6 +201,10 @@ const beyondEngineeringItems = [
           return 256 + 24; // w-64 (256px) + space-x-6 (24px)
         }
       };
+      
+      // Enhanced mobile detection
+      const isMobile = () => window.innerWidth < 640;
+      const isTablet = () => window.innerWidth >= 640 && window.innerWidth < 768;
       
       let itemWidth = getItemWidth();
 
@@ -145,12 +226,21 @@ const beyondEngineeringItems = [
         }
       });
 
-      // Hide arrows when at edges
+      // Hide arrows when at edges (only on desktop/tablet)
       const checkBeyondArrows = () => {
+        if (isMobile()) {
+          // Hide arrows completely on mobile
+          beyondPrevBtn.style.display = 'none';
+          beyondNextBtn.style.display = 'none';
+          return;
+        }
+        
         const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
         const isAtStart = scrollLeft <= 5;
         const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
         
+        beyondPrevBtn.style.display = 'block';
+        beyondNextBtn.style.display = 'block';
         beyondPrevBtn.style.opacity = isAtStart ? '0.5' : '1';
         beyondNextBtn.style.opacity = isAtEnd ? '0.5' : '1';
         
@@ -185,6 +275,8 @@ const beyondEngineeringItems = [
       let beyondLastX: number;
       let beyondLastTime: number;
       let beyondIsScrolling = false;
+      let beyondTouchStartX: number;
+      let beyondTouchStartY: number;
 
       const snapToBeyondItem = () => {
         const currentItemWidth = getItemWidth();
@@ -198,7 +290,7 @@ const beyondEngineeringItems = [
         });
       };
 
-      const handleBeyondStart = (clientX: number) => {
+      const handleBeyondStart = (clientX: number, clientY?: number) => {
         beyondIsDown = true;
         beyondIsScrolling = false;
         beyondStartX = clientX - beyondContainer.offsetLeft;
@@ -209,6 +301,12 @@ const beyondEngineeringItems = [
         beyondVelocity = 0;
         beyondContainer.classList.add('active');
         beyondContainer.style.scrollBehavior = 'auto';
+        
+        // Store touch start position for mobile
+        if (clientY !== undefined) {
+          beyondTouchStartX = clientX;
+          beyondTouchStartY = clientY;
+        }
       };
 
       const handleBeyondMove = (clientX: number) => {
@@ -313,7 +411,7 @@ const beyondEngineeringItems = [
           const deltaY = Math.abs(touch.clientY - beyondTouchStartY);
           
           // More sensitive touch detection for mobile
-          if (deltaX > 5 && deltaX > deltaY) {
+          if (deltaX > 3 && deltaX > deltaY) {
             beyondTouchMoved = true;
             beyondIsTouchScrolling = true;
             e.preventDefault();
