@@ -204,7 +204,6 @@ const beyondEngineeringItems = [
       
       // Enhanced mobile detection
       const isMobile = () => window.innerWidth < 640;
-      const isTablet = () => window.innerWidth >= 640 && window.innerWidth < 768;
       
       let itemWidth = getItemWidth();
 
@@ -379,8 +378,6 @@ const beyondEngineeringItems = [
 
       // Enhanced touch events for Beyond Engineering
       let beyondTouchStartTime: number;
-      let beyondTouchStartX: number;
-      let beyondTouchStartY: number;
       let beyondIsTouchScrolling = false;
       let beyondTouchMoved = false;
 
