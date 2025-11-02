@@ -185,7 +185,7 @@ const beyondEngineeringItems = [
     @media (max-width: 640px) {
       #beyondContainer a {
         pointer-events: auto !important;
-        touch-action: manipulation;
+        touch-action: manipulation !important;
         -webkit-tap-highlight-color: rgba(225, 173, 1, 0.3);
         cursor: pointer;
         position: relative;
@@ -197,6 +197,8 @@ const beyondEngineeringItems = [
         display: block;
         width: 100%;
         height: 100%;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
       }
     }
   </style>
@@ -426,9 +428,8 @@ const beyondEngineeringItems = [
           const deltaX = Math.abs(touch.clientX - beyondTouchStartX);
           const deltaY = Math.abs(touch.clientY - beyondTouchStartY);
           
-          // Less sensitive touch detection to allow link clicks (matching projects)
-          // Only treat as scrolling if movement is significant (more than 10px)
-          if (deltaX > 10 && deltaX > deltaY) {
+          // Match projects sensitivity - only treat as scrolling if movement is significant
+          if (deltaX > 5 && deltaX > deltaY) {
             beyondTouchMoved = true;
             beyondIsTouchScrolling = true;
             e.preventDefault();
@@ -437,10 +438,6 @@ const beyondEngineeringItems = [
               handleBeyondStart(touch.clientX);
             }
             handleBeyondMove(touch.clientX);
-          } else if (deltaX > 5 || deltaY > 5) {
-            // Small movement - might be a tap, don't prevent default yet
-            // Just mark as potentially moved
-            beyondTouchMoved = deltaX > 8 || deltaY > 8;
           }
         }
       }, { passive: false });
@@ -454,12 +451,10 @@ const beyondEngineeringItems = [
         beyondContainer.style.cursor = 'grab';
         
         // If it was a quick tap with minimal movement, allow link clicks (matching projects logic)
-        // More lenient threshold for taps - allow up to 20px movement
-        if (touchDuration < 400 && deltaX < 20 && deltaY < 20 && !beyondTouchMoved) {
+        if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !beyondTouchMoved) {
           const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-          const link = element && element.closest('a');
-          if (link) {
-            // Don't prevent default - let the link handle the click naturally
+          if (element && (element.closest('a') || element.closest('button'))) {
+            // Let the link/button handle the click
             if (beyondIsDown) {
               handleBeyondEnd();
             }
@@ -471,7 +466,7 @@ const beyondEngineeringItems = [
         }
         
         // Only prevent default if user was actually scrolling (not just a tap)
-        if (beyondIsTouchScrolling || (beyondTouchMoved && (deltaX > 15 || deltaY > 15))) {
+        if (beyondIsTouchScrolling || beyondTouchMoved) {
           e.preventDefault();
           beyondContainer.style.scrollBehavior = 'smooth';
           handleBeyondEnd();
@@ -491,7 +486,6 @@ const beyondEngineeringItems = [
       }, { passive: true });
 
       // Explicit click handler for mobile - ensures links are clickable
-      // This works as a fallback if touch events somehow interfere
       beyondContainer.addEventListener('click', (e: MouseEvent) => {
         const element = e.target as Element;
         // If clicking on a link, let it handle naturally
@@ -500,129 +494,6 @@ const beyondEngineeringItems = [
           return;
         }
       }, true); // Use capture phase to catch clicks early
-    let startX: number;
-    let scrollLeft: number;
-    let isDown = false;
-    let startTime: number;
-    let velocity = 0;
-    let lastX: number;
-    let lastTime: number;
-    let isScrolling = false;
-
-    const snapToItem = () => {
-      const currentItemWidth = getItemWidth();
-      const currentScroll = beyondContainer.scrollLeft;
-      const targetIndex = Math.round(currentScroll / currentItemWidth);
-      const targetScroll = targetIndex * currentItemWidth;
-
-      beyondContainer.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-    };
-
-    const handleStart = (clientX: number) => {
-      isDown = true;
-      isScrolling = false;
-      startX = clientX - beyondContainer.offsetLeft;
-      scrollLeft = beyondContainer.scrollLeft;
-      startTime = Date.now();
-      lastX = clientX;
-      lastTime = startTime;
-      velocity = 0;
-      beyondContainer.classList.add('active');
-      beyondContainer.style.scrollBehavior = 'auto';
-    };
-
-    const handleMove = (clientX: number) => {
-      if (!isDown) return;
-
-      isScrolling = true;
-      const x = clientX - beyondContainer.offsetLeft;
-      const walk = (x - startX) * 1.2; // Reduced sensitivity for better control
-      beyondContainer.scrollLeft = scrollLeft - walk;
-
-      // Calculate velocity for momentum
-      const currentTime = Date.now();
-      const deltaX = clientX - lastX;
-      const deltaTime = currentTime - lastTime;
-
-      if (deltaTime > 0) {
-        velocity = deltaX / deltaTime;
-      }
-
-      lastX = clientX;
-      lastTime = currentTime;
-    };
-
-    const handleEnd = () => {
-      if (!isDown) return;
-
-      isDown = false;
-      beyondContainer.classList.remove('active');
-      beyondContainer.style.scrollBehavior = 'smooth';
-
-      // Only apply momentum if user was actually scrolling
-      if (isScrolling && Math.abs(velocity) > 0.3) {
-        const momentum = velocity * 150; // Reduced momentum for better control
-        const currentScroll = beyondContainer.scrollLeft;
-        const targetScroll = currentScroll - momentum;
-
-        beyondContainer.scrollTo({
-          left: targetScroll,
-          behavior: 'smooth'
-        });
-
-        // Snap to item after momentum
-        setTimeout(snapToItem, 250);
-      } else if (isScrolling) {
-        // Snap to nearest item
-        snapToItem();
-      }
-    };
-
-    // Mouse events
-    beyondContainer.addEventListener('mousedown', (e: MouseEvent) => {
-      e.preventDefault();
-      handleStart(e.clientX);
-    });
-
-    beyondContainer.addEventListener('mouseleave', handleEnd);
-    beyondContainer.addEventListener('mouseup', handleEnd);
-
-    beyondContainer.addEventListener('mousemove', (e: MouseEvent) => {
-      e.preventDefault();
-      handleMove(e.clientX);
-    });
-
-    // Touch events with improved mobile handling
-    beyondContainer.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      handleStart(e.touches[0].clientX);
-    }, { passive: false });
-
-    beyondContainer.addEventListener('touchend', (e: TouchEvent) => {
-      e.preventDefault();
-      handleEnd();
-    }, { passive: false });
-
-    beyondContainer.addEventListener('touchmove', (e: TouchEvent) => {
-      e.preventDefault();
-      handleMove(e.touches[0].clientX);
-    }, { passive: false });
-
-    // Prevent default touch behaviors that interfere with scrolling
-    beyondContainer.addEventListener('touchstart', (e: TouchEvent) => {
-      // Allow single taps to work normally
-      if (e.touches.length === 1) {
-        const touch = e.touches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-        if (element && element.closest('a')) {
-          // Don't prevent default for links
-          return;
-        }
-      }
-    }, { passive: true });
     });
   </script>
 
