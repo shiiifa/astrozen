@@ -55,6 +55,84 @@ const galleryItems = [
           </div>
         </div>
       </section>
+
+      {/* Relevant Links */}
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Relevant Links</h2>
+        <div class="flex flex-wrap gap-6 items-center">
+          {/* Scripps Spelling Bee */}
+          <a 
+            href="https://www.spellingbee.com/node/1495" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 rounded-lg border border-neutral/20 bg-[#1c232d]/50 px-6 py-4 transition-all duration-300 hover:border-primary/50 hover:bg-[#1c232d]/80 hover:scale-105"
+          >
+            <svg class="w-12 h-12 flex-shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Bee icon on yellow background */}
+              <circle cx="50" cy="50" r="45" fill="#E1AD01"/>
+              {/* Bee body */}
+              <ellipse cx="50" cy="50" rx="15" ry="20" fill="#000"/>
+              {/* Bee stripes */}
+              <ellipse cx="50" cy="45" rx="12" ry="4" fill="#E1AD01"/>
+              <ellipse cx="50" cy="55" rx="12" ry="4" fill="#E1AD01"/>
+              {/* Wings */}
+              <ellipse cx="40" cy="45" rx="8" ry="12" fill="#fff" opacity="0.7"/>
+              <ellipse cx="60" cy="45" rx="8" ry="12" fill="#fff" opacity="0.7"/>
+              {/* Antenna */}
+              <circle cx="45" cy="35" r="3" fill="#000"/>
+              <circle cx="55" cy="35" r="3" fill="#000"/>
+              <line x1="45" y1="35" x2="42" y2="28" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              <line x1="55" y1="35" x2="58" y2="28" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="text-neutral hover:text-white transition-colors">Scripps National Spelling Bee</span>
+            <svg class="w-4 h-4 flex-shrink-0 text-neutral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+
+          {/* CNN */}
+          <a 
+            href="https://cnn.it/2mnhng1" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 rounded-lg border border-neutral/20 bg-[#1c232d]/50 px-6 py-4 transition-all duration-300 hover:border-primary/50 hover:bg-[#1c232d]/80 hover:scale-105"
+          >
+            <svg class="w-12 h-12 flex-shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* CNN red box */}
+              <rect x="10" y="30" width="80" height="40" rx="3" fill="#CC0000"/>
+              {/* CNN text */}
+              <text x="50" y="58" font-family="Arial Black, Arial, sans-serif" font-size="36" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="2">CNN</text>
+            </svg>
+            <span class="text-neutral hover:text-white transition-colors">CNN African Voices</span>
+            <svg class="w-4 h-4 flex-shrink-0 text-neutral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+
+          {/* Wikipedia */}
+          <a 
+            href="https://en.wikipedia.org/wiki/The_Spelling_Bee#History-making_Spellers" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 rounded-lg border border-neutral/20 bg-[#1c232d]/50 px-6 py-4 transition-all duration-300 hover:border-primary/50 hover:bg-[#1c232d]/80 hover:scale-105"
+          >
+            <svg class="w-12 h-12 flex-shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Wikipedia globe - puzzle pieces */}
+              <circle cx="50" cy="50" r="42" fill="#000" stroke="#fff" stroke-width="1"/>
+              {/* Puzzle pieces representing globe */}
+              <path d="M 25 30 Q 50 25 75 30 Q 75 50 65 65 Q 50 70 35 65 Q 25 50 25 30 Z" fill="#fff" opacity="0.3"/>
+              <path d="M 75 30 Q 75 50 75 70 Q 65 75 50 75 Q 65 65 75 50 Z" fill="#fff" opacity="0.2"/>
+              <path d="M 25 30 Q 35 20 50 20 Q 65 20 75 30" stroke="#fff" stroke-width="2" fill="none"/>
+              {/* Wikipedia W */}
+              <text x="50" y="70" font-family="Georgia, serif" font-size="50" font-weight="bold" fill="#fff" text-anchor="middle">W</text>
+            </svg>
+            <span class="text-neutral hover:text-white transition-colors">Wikipedia</span>
+            <svg class="w-4 h-4 flex-shrink-0 text-neutral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </section>
     </div>
   </article>
 
