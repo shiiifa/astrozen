@@ -180,6 +180,25 @@ const beyondEngineeringItems = [
         padding: 1rem;
       }
     }
+    
+    /* Ensure links are clickable on mobile */
+    @media (max-width: 640px) {
+      #beyondContainer a {
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(225, 173, 1, 0.3);
+        cursor: pointer;
+        position: relative;
+        z-index: 30;
+      }
+      
+      /* Make sure the link covers the tile */
+      #beyondContainer > div > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
   </style>
 
   <script>
@@ -407,8 +426,9 @@ const beyondEngineeringItems = [
           const deltaX = Math.abs(touch.clientX - beyondTouchStartX);
           const deltaY = Math.abs(touch.clientY - beyondTouchStartY);
           
-          // More sensitive touch detection for mobile
-          if (deltaX > 3 && deltaX > deltaY) {
+          // Less sensitive touch detection to allow link clicks (matching projects)
+          // Only treat as scrolling if movement is significant (more than 10px)
+          if (deltaX > 10 && deltaX > deltaY) {
             beyondTouchMoved = true;
             beyondIsTouchScrolling = true;
             e.preventDefault();
@@ -417,6 +437,10 @@ const beyondEngineeringItems = [
               handleBeyondStart(touch.clientX);
             }
             handleBeyondMove(touch.clientX);
+          } else if (deltaX > 5 || deltaY > 5) {
+            // Small movement - might be a tap, don't prevent default yet
+            // Just mark as potentially moved
+            beyondTouchMoved = deltaX > 8 || deltaY > 8;
           }
         }
       }, { passive: false });
@@ -429,18 +453,30 @@ const beyondEngineeringItems = [
         // Reset cursor
         beyondContainer.style.cursor = 'grab';
         
-        // If it was a quick tap with minimal movement, allow link clicks
-        if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !beyondTouchMoved) {
+        // If it was a quick tap with minimal movement, allow link clicks (matching projects logic)
+        // More lenient threshold for taps - allow up to 20px movement
+        if (touchDuration < 400 && deltaX < 20 && deltaY < 20 && !beyondTouchMoved) {
           const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-          if (element && (element.closest('a') || element.closest('button'))) {
-            // Let the link/button handle the click
+          const link = element && element.closest('a');
+          if (link) {
+            // Don't prevent default - let the link handle the click naturally
+            if (beyondIsDown) {
+              handleBeyondEnd();
+            }
+            // Reset flags to allow click to work
+            beyondTouchMoved = false;
+            beyondIsTouchScrolling = false;
             return;
           }
         }
         
-        if (beyondIsTouchScrolling || beyondTouchMoved) {
+        // Only prevent default if user was actually scrolling (not just a tap)
+        if (beyondIsTouchScrolling || (beyondTouchMoved && (deltaX > 15 || deltaY > 15))) {
           e.preventDefault();
           beyondContainer.style.scrollBehavior = 'smooth';
+          handleBeyondEnd();
+        } else if (beyondIsDown) {
+          // If not scrolling but mousedown was triggered, clean up
           handleBeyondEnd();
         }
        }, { passive: false });
@@ -453,6 +489,17 @@ const beyondEngineeringItems = [
           handleBeyondEnd();
         }
       }, { passive: true });
+
+      // Explicit click handler for mobile - ensures links are clickable
+      // This works as a fallback if touch events somehow interfere
+      beyondContainer.addEventListener('click', (e: MouseEvent) => {
+        const element = e.target as Element;
+        // If clicking on a link, let it handle naturally
+        if (element && element.closest('a')) {
+          // Don't prevent - allow link navigation
+          return;
+        }
+      }, true); // Use capture phase to catch clicks early
     let startX: number;
     let scrollLeft: number;
     let isDown = false;
