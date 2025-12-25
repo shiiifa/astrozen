@@ -48,6 +48,13 @@ export const SITE_CONTENT: SiteContent = {
   
   projects: [
     {
+      name: "Behaviour-Aware Access Controller",
+      summary: "An intelligent, standalone RFID access control system that uses a Finite State Machine (FSM) to detect and block behavioral anomalies in real-time without relying on external servers.",
+      linkPreview: "/projects/behaviour-aware-access-controller",
+      linkSource: "https://github.com/shiiifa/Behaviour-Aware-Access-Controller",
+      image: "/behavior-aware-access.png",
+    },
+    {
       name: "ARCLab Research Project: EMG-Based Prosthetic Control",
       summary: "Contributing to an award-winning prosthetic arm project under the Automation, Robotics and Controls Lab, Ashesi.",
       linkPreview: "/projects/arclab-research-project",

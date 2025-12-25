@@ -1,0 +1,113 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
+
+const project = SITE_CONTENT.projects.find(p => 
+  p.name === "Behaviour-Aware Access Controller"
+);
+
+// Fixed null check
+if (!project) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <header class="mb-12 text-center">
+      <div class="mb-8">
+        <Image
+          src={project.image}
+          alt={project.name}
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
+          width={800}
+          height={400}
+        />
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        {project.name}
+      </h1>
+      <p class="text-lg text-neutral">
+        {project.summary}
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
+        <p class="text-neutral leading-relaxed">
+          This project bridges the gap between embedded systems and control theory by creating an autonomous RFID security node that goes beyond simple identity verification. Built on a custom C++ Finite State Machine (FSM), the system evaluates RFID scan behavior in real-time to detect "silent" threats like brute-force attacks and temporal anomalies.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          It operates on a dynamic trust model, escalating from warnings to full lockdowns, and features a forensic data pipeline that exports logs for MATLAB analysis, enabling security auditing and predictive maintenance.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Features</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Autonomous Operation:</strong> Edge-based security system that operates independently without external servers</li>
+          <li><strong>Finite State Machine (FSM):</strong> Custom C++ implementation for real-time behavioral analysis</li>
+          <li><strong>Anomaly Detection:</strong> Identifies brute-force attacks and temporal behavioral anomalies</li>
+          <li><strong>Dynamic Trust Model:</strong> Escalating security responses from warnings to full system lockdowns</li>
+          <li><strong>Forensic Logging:</strong> MATLAB-compatible data export for security auditing and analysis</li>
+          <li><strong>RFID Integration:</strong> Real-time monitoring and control of RFID access attempts</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Hardware:</strong> Arduino-based system with RFID module integration</li>
+          <li><strong>Software:</strong> Custom C++ FSM implementation for behavior-aware access control</li>
+          <li><strong>Analytics:</strong> MATLAB scripts for forensic log analysis and visualization</li>
+          <li><strong>Real-time Processing:</strong> Edge computing approach for immediate threat detection</li>
+          <li><strong>State Management:</strong> Multi-state FSM design for complex behavioral pattern recognition</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Research & Development</h2>
+        <p class="text-neutral leading-relaxed">
+          This project demonstrates the application of control theory principles to cybersecurity, creating an intelligent access control system that adapts to user behavior patterns. The FSM-based approach enables the system to learn and respond to both known attack patterns and novel behavioral anomalies.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          The MATLAB analytics component provides comprehensive forensic capabilities, allowing for post-incident analysis and the development of predictive security models based on historical access patterns.
+        </p>
+      </section>
+
+      <div class="flex gap-4 justify-center flex-wrap">
+        {project.linkSource && (
+          <a 
+            href={project.linkSource} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors"
+          >
+            View on GitHub
+          </a>
+        )}
+        <a 
+          href="https://docs.google.com/document/d/1mZsXRCVSx-n41Z5lIp_r5_-K6xhNFr4F-oZ67ycgnB0/edit?usp=sharing" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors"
+        >
+          View Research Report
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
