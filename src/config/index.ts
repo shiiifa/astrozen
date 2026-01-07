@@ -20,7 +20,7 @@ export const SITE_CONFIG: SiteConfig = {
     { text: "Github", href: "https://github.com/shiiifa" },
     { text: "Email", href: "mailto:shifa.gabbey@ashesi.edu.gh" },
   ],
-  socialImage: "/zen-og.png",
+  socialImage: "/thumbnail.png",
   canonicalURL: "https://shifagabbey.vercel.app",
 };
 
