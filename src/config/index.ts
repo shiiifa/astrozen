@@ -102,6 +102,13 @@ export const SITE_CONTENT: SiteContent = {
       linkSource: "#",
       image: "/hydrogel-analysis.png",
     },
+    {
+      name: "Heart Rate Monitor Using Active Bandpass Filtering",
+      summary: "A non-invasive optical heart rate monitor based on Photoplethysmography (PPG) that detects blood volume changes, conditions analog signals with active bandpass filtering, and displays real-time BPM readings on an LCD screen.",
+      linkPreview: "/projects/heart-rate-monitor",
+      linkSource: "#",
+      image: "/heartbeat.png",
+    },
   ],
 
   freelanceProjects: [

@@ -1,0 +1,179 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
+
+const project = SITE_CONTENT.projects.find(p => 
+  p.name === "Heart Rate Monitor Using Active Bandpass Filtering"
+);
+
+// Fixed null check
+if (!project) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <header class="mb-12 text-center">
+      <div class="mb-8">
+        <Image
+          src={project.image}
+          alt={project.name}
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
+          width={800}
+          height={400}
+        />
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        Design and Implementation of a Heart Rate Monitor Using Active Bandpass Filtering
+      </h1>
+      <p class="text-lg text-neutral">
+        {project.summary}
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
+        <p class="text-neutral leading-relaxed">
+          This project demonstrates the design and construction of a non-invasive optical heart rate monitor based on the principle of Photoplethysmography (PPG). Unlike electrocardiography (ECG) which measures electrical activity, PPG is an optical method that detects volumetric changes in blood circulation through light absorption.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          The fundamental principle relies on the fact that blood absorbs infrared light; during systole (heart contraction), blood volume in the finger increases, absorbing more light, while during diastole (relaxation), volume decreases, allowing more light to reflect. This creates a detectable signal that can be processed to determine heart rate in Beats Per Minute (BPM).
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">System Architecture</h2>
+        <p class="text-neutral leading-relaxed">
+          The system follows a linear signal path, beginning with a phototransistor that detects variations in light absorption caused by blood flow. The raw signal contains a significant DC component from skin and tissue reflection, which is much larger than the AC signal of the actual heartbeat (approximately 2mV–5mV).
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          To isolate the heartbeat, the signal is passed through an active bandpass filter configuration designed to pass frequencies between 0.7 Hz (40 BPM) and 3.67 Hz (220 BPM), effectively rejecting both low-frequency DC offset and high-frequency noise. The active filter design, utilizing operational amplifiers, provides gain greater than one—crucial for upscaling the millivolt-level signal into a voltage range (0-5V) that the Arduino Uno can read accurately.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Features</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Active Bandpass Filtering:</strong> Custom-designed filter operating between 0.7 Hz and 3.67 Hz to isolate heartbeat signals</li>
+          <li><strong>Signal Amplification:</strong> Gain of 100 achieved through feedback resistor (100kΩ) and input resistor (100Ω) configuration</li>
+          <li><strong>Real-time Processing:</strong> 10-second sampling period with automatic BPM calculation and health status categorization</li>
+          <li><strong>LCD Display:</strong> 16x2 LCD module providing user instructions, countdown timer, and final BPM readings with health status</li>
+          <li><strong>Health Status Indicators:</strong> Categorizes heart rate into Resting, Normal, Light Activity, Moderate, Intense, Peak, and Danger ranges</li>
+          <li><strong>Non-invasive Design:</strong> Optical measurement method requiring only finger placement</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Hardware:</strong> Arduino Uno microcontroller, phototransistor sensor, operational amplifiers, 16x2 LCD module</li>
+          <li><strong>Signal Conditioning:</strong> High-pass filter (0.7 Hz cutoff) to remove DC offset, low-pass filter (3.67 Hz cutoff) to remove high-frequency noise</li>
+          <li><strong>Software:</strong> Custom Arduino code implementing real-time analog signal sampling, beat detection with thresholding, and BPM calculation</li>
+          <li><strong>Frequency Domain Analysis:</strong> Filter design based on human heart rate range (40-220 BPM) converted to frequency domain</li>
+          <li><strong>Analog-to-Digital Conversion:</strong> Analog Pin A0 with software threshold detection for reliable peak identification</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Research & Development</h2>
+        <p class="text-neutral leading-relaxed">
+          This project successfully demonstrates the principles of instrumentation by combining analog signal conditioning (active filtering) with digital processing to build a functional device capable of monitoring heart rate in real-time. The final design met all specifications, including the frequency bandwidth of 0.7Hz–4Hz and the user-friendly display of health data.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          Key challenges overcome during development included isolating the minute AC heartbeat signal from the large DC component, resolving initial Op-Amp output issues by switching to analog pin reading with software thresholding, and fine-tuning capacitor values to achieve the correct cutoff frequencies for optimal signal filtering.
+        </p>
+      </section>
+
+      {/* Download Section */}
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Project Resources</h2>
+        <div class="flex flex-col gap-4">
+          <a 
+            href="/Instrumentaton%20Final%20Project%20(Official%20Report)-1.pdf" 
+            download="Instrumentaton Final Project (Official Report)-1.pdf"
+            class="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 px-6 py-4 text-primary hover:bg-primary/10 transition-colors"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              <span class="font-medium">Official Project Report (PDF)</span>
+            </div>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+
+          <a 
+            href="/shifathandekacode-1.ino" 
+            download
+            class="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 px-6 py-4 text-primary hover:bg-primary/10 transition-colors"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <span class="font-medium">Arduino Source Code (.ino)</span>
+            </div>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+
+          <a 
+            href="/finalproject-1.asc" 
+            download
+            class="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 px-6 py-4 text-primary hover:bg-primary/10 transition-colors"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span class="font-medium">Circuit Schematic (.asc)</span>
+            </div>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Demo Video</h2>
+        <p class="text-neutral mb-4">
+          Watch the project demonstration video to see the heart rate monitor in action:
+        </p>
+        <a 
+          href="https://drive.google.com/file/d/1zedZ_Ot5jhOApdEGtXuRASHZWJLmzFal/view?usp=drive_link" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Watch Demo Video
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </section>
+    </div>
+  </article>
+</Layout>
+
