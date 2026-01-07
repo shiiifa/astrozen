@@ -39,6 +39,7 @@ export interface FreelanceProjectProps {
   linkPreview?: string;
   linkSource?: string;
   status?: string;
+  technologies?: string[];
 }
 
 export interface AboutProps {

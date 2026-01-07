@@ -113,6 +113,24 @@ export const SITE_CONTENT: SiteContent = {
 
   freelanceProjects: [
     {
+      name: "Elmir Portfolio Website",
+      summary: "A clean and elegant portfolio website built with HTML and CSS, featuring responsive design and smooth user experience across all devices.",
+      image: "/elmir-portfolio.png",
+      linkPreview: "#",
+      linkSource: "https://elmir-portfolio.vercel.app",
+      status: "Completed",
+      technologies: ["HTML", "CSS"]
+    },
+    {
+      name: "Obed Babington Portfolio",
+      summary: "Modern and responsive portfolio website built with Next.js and Tailwind CSS for a prospective grad student, featuring optimised performance and smooth animations.",
+      image: "/clone-ig.png",
+      linkPreview: "#",
+      linkSource: "https://obedbabington.vercel.app",
+      status: "Completed",
+      technologies: ["Next.js", "Tailwind CSS", "TypeScript"]
+    },
+    {
       name: "E-commerce Website Design",
       summary: "Custom Shopify theme development and branding for a local retail business, featuring responsive design and integrated payment systems.",
       image: "/shopify-clon.png",
