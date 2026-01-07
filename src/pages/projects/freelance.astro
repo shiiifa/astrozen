@@ -45,125 +45,67 @@ const completedProjects = SITE_CONTENT.freelanceProjects.filter(p => p.status ==
     <!-- Featured Projects -->
     <section class="py-8 px-6">
       <div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Left Column - Heading and Description */}
-          <div class="lg:col-span-1">
-            <h2 class="fade-in-element text-2xl font-serif font-bold text-primary mb-6">recent work</h2>
-            
-            <div class="fade-in-element text-xs text-neutral/70 leading-relaxed mb-6">
-              <p class="mb-4" id="projectDescription">
-                {completedProjects[0]?.summary || "Portfolio projects built with modern web technologies."}
-              </p>
-            </div>
-          </div>
-          
-          {/* Right Column - Projects Carousel */}
-          <div class="lg:col-span-2 relative">
-            {/* Navigation Buttons */}
-            {completedProjects.length > 1 && (
-              <>
-                <button 
-                  id="prevProjectBtn" 
-                  class="absolute left-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
-                >
-                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                
-                <button 
-                  id="nextProjectBtn" 
-                  class="absolute right-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
-                >
-                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </>
-            )}
+        <h2 class="fade-in-element text-2xl font-serif font-bold text-primary mb-6">recent work</h2>
+        
+        <div class="relative">
+          {/* Navigation Buttons */}
+          {completedProjects.length > 1 && (
+            <>
+              <button 
+                id="prevProjectBtn" 
+                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
+              >
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button 
+                id="nextProjectBtn" 
+                class="absolute right-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
+              >
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
 
-            {/* Projects Container */}
-            <div id="projectsCarousel" class="relative overflow-hidden rounded-lg">
-              {completedProjects.map((project, index) => (
-                <div 
-                  class={`project-tile ${index === 0 ? 'active' : 'hidden'}`}
-                  data-index={index}
-                >
-                  <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg mb-4">
-                    <iframe 
-                      src={project.linkSource} 
-                      class="w-full h-[300px]"
-                      loading="lazy"
-                      title={`${project.name} Preview`}
-                      sandbox="allow-scripts allow-same-origin"
-                    ></iframe>
-                  </div>
-                  
-                  {/* Technologies and Visit Live Site */}
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                      <h4 class="text-xs font-medium text-neutral/60">technologies used:</h4>
-                      <div class="flex gap-2" id={`techIcons-${index}`}>
-                        {project.technologies?.map((tech) => {
-                          if (tech === "HTML") {
-                            return (
-                              <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center" title="HTML">
-                                <span class="text-white text-xs font-bold">H</span>
-                              </div>
-                            );
-                          } else if (tech === "CSS") {
-                            return (
-                              <div class="w-6 h-6 bg-blue-500 rounded flex items-center justify-center" title="CSS">
-                                <span class="text-white text-xs font-bold">C</span>
-                              </div>
-                            );
-                          } else if (tech === "Next.js") {
-                            return (
-                              <div class="w-6 h-6 bg-black rounded flex items-center justify-center" title="Next.js">
-                                <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M11.572 0c-.176 0-.31.001-.358.007a6.03 6.03 0 0 0-.71.093c-.036.01-.07.02-.1.033a6.094 6.094 0 0 0-1.108.57c-.27.16-.515.342-.735.545a5.933 5.933 0 0 0-.622.806 6.017 6.017 0 0 0-.454 1.006 5.922 5.922 0 0 0-.2.59c-.01.04-.02.08-.028.12a5.956 5.956 0 0 0-.08.65c-.002.05-.003.1-.003.15v11.2c0 .05.001.1.003.15.002.22.01.44.03.65.01.04.02.08.03.12.02.2.05.4.09.59.01.04.02.08.03.12.05.2.11.4.18.59.01.04.03.08.04.12.08.19.17.38.27.56.01.02.03.04.04.06.1.17.22.34.35.5.01.02.03.04.04.06.13.16.27.31.43.45.01.02.03.04.05.06.16.14.33.27.51.38.01.01.03.03.05.04.18.11.37.21.57.29.01.01.03.02.04.03.2.08.41.14.63.18.01 0 .03.01.04.01.22.04.45.06.68.06h.01c.23 0 .46-.02.68-.06.01 0 .03-.01.04-.01.22-.04.43-.1.63-.18.01-.01.03-.02.04-.03.2-.08.39-.18.57-.29.02-.01.04-.03.05-.04.18-.11.35-.24.51-.38.02-.02.04-.04.05-.06.16-.14.3-.29.43-.45.01-.02.03-.04.04-.06.13-.16.25-.33.35-.5.01-.02.03-.04.04-.06.1-.18.19-.37.27-.56.01-.04.03-.08.04-.12.07-.19.13-.39.18-.59.01-.04.02-.08.03-.12.04-.19.07-.39.09-.59.01-.04.02-.08.03-.12.02-.21.03-.43.03-.65.002-.05.003-.1.003-.15V2.4c0-.05-.001-.1-.003-.15a5.956 5.956 0 0 0-.08-.65c-.008-.04-.018-.08-.028-.12a5.922 5.922 0 0 0-.2-.59 6.017 6.017 0 0 0-.454-1.006 5.933 5.933 0 0 0-.622-.806 5.933 5.933 0 0 0-.735-.545 6.094 6.094 0 0 0-1.108-.57c-.03-.013-.064-.023-.1-.033a6.03 6.03 0 0 0-.71-.093C11.882.001 11.748 0 11.572 0zm5.033 4.24c.23 0 .44.02.65.07.2.05.4.11.58.19.18.08.35.18.51.29.16.11.31.24.45.38.14.14.26.29.37.45.11.16.2.33.28.51.08.18.14.37.19.57.05.2.07.41.07.63v8.23c0 .22-.02.43-.07.63-.05.2-.11.39-.19.57-.08.18-.17.35-.28.51-.11.16-.23.31-.37.45-.14.14-.29.27-.45.38-.16.11-.33.21-.51.29-.18.08-.38.14-.58.19-.21.05-.42.07-.65.07H9.182c-.22 0-.43-.02-.63-.07-.2-.05-.39-.11-.57-.19-.18-.08-.35-.18-.51-.29-.16-.11-.31-.24-.45-.38-.14-.14-.26-.29-.37-.45-.11-.16-.2-.33-.28-.51-.08-.18-.14-.37-.19-.57-.05-.2-.07-.41-.07-.63V6.44c0-.22.02-.43.07-.63.05-.2.11-.39.19-.57.08-.18.17-.35.28-.51.11-.16.23-.31.37-.45.14-.14.29-.27.45-.38.16-.11.33-.21.51-.29.18-.08.38-.14.58-.19.21-.05.42-.07.65-.07h7.423z"/>
-                                </svg>
-                              </div>
-                            );
-                          } else if (tech === "Tailwind CSS") {
-                            return (
-                              <div class="w-6 h-6 bg-cyan-500 rounded flex items-center justify-center" title="Tailwind CSS">
-                                <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/>
-                                </svg>
-                              </div>
-                            );
-                          } else if (tech === "TypeScript") {
-                            return (
-                              <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center" title="TypeScript">
-                                <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/>
-                                </svg>
-                              </div>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
-                    </div>
-                    
-                    {project.linkSource && (
-                      <a 
-                        href={project.linkSource} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1 bg-primary text-black px-3 py-1 rounded text-xs font-medium hover:bg-primary/90 transition-colors"
-                      >
-                        Visit Live Site
-                        <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                        </svg>
-                      </a>
-                    )}
-                  </div>
+          {/* Projects Container */}
+          <div id="projectsCarousel" class="relative overflow-hidden rounded-lg">
+            {completedProjects.map((project, index) => (
+              <div 
+                class={`project-tile ${index === 0 ? 'active' : 'hidden'}`}
+                data-index={index}
+              >
+                <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg mb-4">
+                  <iframe 
+                    src={project.linkSource} 
+                    class="w-full h-[400px]"
+                    loading="lazy"
+                    title={`${project.name} Preview`}
+                    sandbox="allow-scripts allow-same-origin"
+                  ></iframe>
                 </div>
-              ))}
-            </div>
+                
+                {/* View Full Site Button */}
+                {project.linkSource && (
+                  <div class="flex justify-center">
+                    <a 
+                      href={project.linkSource} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-primary text-black px-6 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
+                    >
+                      View Full Site
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -178,54 +120,90 @@ const completedProjects = SITE_CONTENT.freelanceProjects.filter(p => p.status ==
             <h2 class="fade-in-element text-2xl font-serif font-bold text-primary mb-6">in their words</h2>
           </div>
           
-          {/* Right Column - Testimonial Content */}
-          <div class="lg:col-span-2">
-            <div class="fade-in-element bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative overflow-y-auto h-[400px] scrollbar-thin scrollbar-thumb-neutral/40 scrollbar-track-transparent">
-              {/* Background pattern */}
-              <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
-              
-              {/* Quote icon */}
-              <div class="relative z-10 mb-4">
-                <svg class="w-6 h-6 text-primary/60" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
-                </svg>
-              </div>
-              
-              {/* Testimonial content */}
-              <div class="relative z-10">
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-4 italic">
-                  "Shifa is a dynamic blend of intelligence, professionalism, and creativity. At a time when I was dissatisfied with my own portfolio site but lacked the time to improve it, I was relieved to discover her skill. Despite still being a student, she worked with the pace and quality of a full-time professional. The site speaks for itself."
-                </blockquote>
-                
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-4 italic">
-                  "She transformed my site from merely informative to genuinely classy. It achieved the goal of being a digital encapsulation of what I do – and in that regard, expectations were exceeded!"
-                </blockquote>
-                
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-4 italic">
-                  "Her ability to understand my vision, preferences, and feedback for the site, even with limited interaction, and to deliver quick, high-quality revisions was impressive."
-                </blockquote>
-                
-                {/* Client name */}
-                <div class="border-t border-neutral/20 pt-4 mb-6">
-                  <div class="font-medium text-white text-xs">Obed Allotey Babington</div>
-                </div>
+          {/* Right Column - Testimonial Carousel */}
+          <div class="lg:col-span-2 relative">
+            {/* Navigation Buttons */}
+            <button 
+              id="prevTestimonialBtn" 
+              class="absolute left-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button 
+              id="nextTestimonialBtn" 
+              class="absolute right-2 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary hover:bg-primary/30 transition-all duration-200 backdrop-blur-sm border border-primary/10"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
-                {/* New Testimonial */}
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-4 italic">
-                  "Shifa is an exceptionally professional and reliable individual. She consistently met deadlines and communicated through channels that fit my schedule, making the entire collaboration seamless. Her time consciousness and commitment to maintaining a high standard of work were truly impressive."
-                </blockquote>
-                
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-4 italic">
-                  "What stood out most was her flexibility; she was always willing to make adjustments to ensure the final result perfectly matched my vision. I would highly recommend Shifa for any project requiring strong web design skills and a professional touch."
-                </blockquote>
-                
-                <blockquote class="text-xs text-neutral/80 leading-relaxed mb-6 italic">
-                  "I loved how clean and well-structured the website was. The design was simple, elegant, and perfectly aligned with what I needed. The responsiveness was top-notch across all devices, and I encountered no issues with timelines or delivery. Everything was handled with a high level of professionalism from start to finish."
-                </blockquote>
-                
-                {/* Client name */}
-                <div class="border-t border-neutral/20 pt-4">
-                  <div class="font-medium text-white text-xs">Elmir</div>
+            {/* Testimonial Carousel Container */}
+            <div id="testimonialCarousel" class="relative overflow-hidden rounded-lg">
+              {/* Testimonial Slide 1 - Obed Part 1 */}
+              <div class="testimonial-slide active bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative min-h-[250px]">
+                <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
+                <div class="relative z-10">
+                  <svg class="w-6 h-6 text-primary/60 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                  </svg>
+                  <blockquote class="text-sm text-neutral/80 leading-relaxed mb-6 italic">
+                    "Shifa is a dynamic blend of intelligence, professionalism, and creativity. At a time when I was dissatisfied with my own portfolio site but lacked the time to improve it, I was relieved to discover her skill. Despite still being a student, she worked with the pace and quality of a full-time professional. The site speaks for itself."
+                  </blockquote>
+                  <div class="border-t border-neutral/20 pt-4">
+                    <div class="font-medium text-white text-sm">Obed Allotey Babington</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial Slide 2 - Obed Part 2 */}
+              <div class="testimonial-slide hidden bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative min-h-[250px]">
+                <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
+                <div class="relative z-10">
+                  <svg class="w-6 h-6 text-primary/60 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                  </svg>
+                  <blockquote class="text-sm text-neutral/80 leading-relaxed mb-6 italic">
+                    "She transformed my site from merely informative to genuinely classy. It achieved the goal of being a digital encapsulation of what I do – and in that regard, expectations were exceeded! Her ability to understand my vision, preferences, and feedback for the site, even with limited interaction, and to deliver quick, high-quality revisions was impressive."
+                  </blockquote>
+                  <div class="border-t border-neutral/20 pt-4">
+                    <div class="font-medium text-white text-sm">Obed Allotey Babington</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial Slide 3 - Elmir Part 1 */}
+              <div class="testimonial-slide hidden bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative min-h-[250px]">
+                <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
+                <div class="relative z-10">
+                  <svg class="w-6 h-6 text-primary/60 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                  </svg>
+                  <blockquote class="text-sm text-neutral/80 leading-relaxed mb-6 italic">
+                    "Shifa is an exceptionally professional and reliable individual. She consistently met deadlines and communicated through channels that fit my schedule, making the entire collaboration seamless. Her time consciousness and commitment to maintaining a high standard of work were truly impressive."
+                  </blockquote>
+                  <div class="border-t border-neutral/20 pt-4">
+                    <div class="font-medium text-white text-sm">Elmir</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial Slide 4 - Elmir Part 2 */}
+              <div class="testimonial-slide hidden bg-[#1c232d]/85 border border-neutral/20 rounded-lg p-6 relative min-h-[250px]">
+                <div class="absolute inset-0 opacity-[3%] bg-[url(/raja.png)] bg-[length:128px] bg-repeat"></div>
+                <div class="relative z-10">
+                  <svg class="w-6 h-6 text-primary/60 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                  </svg>
+                  <blockquote class="text-sm text-neutral/80 leading-relaxed mb-6 italic">
+                    "What stood out most was her flexibility; she was always willing to make adjustments to ensure the final result perfectly matched my vision. I would highly recommend Shifa for any project requiring strong web design skills and a professional touch. I loved how clean and well-structured the website was. The design was simple, elegant, and perfectly aligned with what I needed. The responsiveness was top-notch across all devices, and I encountered no issues with timelines or delivery. Everything was handled with a high level of professionalism from start to finish."
+                  </blockquote>
+                  <div class="border-t border-neutral/20 pt-4">
+                    <div class="font-medium text-white text-sm">Elmir</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -256,70 +234,103 @@ const completedProjects = SITE_CONTENT.freelanceProjects.filter(p => p.status ==
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const projects = [
-      { name: "Elmir Portfolio Website", summary: "A clean and elegant portfolio website built with HTML and CSS, featuring responsive design and smooth user experience across all devices.", linkSource: "https://elmir-portfolio.vercel.app" },
-      { name: "Obed Babington Portfolio", summary: "Modern and responsive portfolio website built with Next.js and Tailwind CSS for a prospective grad student, featuring optimised performance and smooth animations.", linkSource: "https://obedbabington.vercel.app" }
-    ];
-
-    let currentIndex = 0;
-    const prevBtn = document.getElementById('prevProjectBtn');
-    const nextBtn = document.getElementById('nextProjectBtn');
+    // Projects Carousel
     const projectTiles = document.querySelectorAll('.project-tile');
-    const projectDescription = document.getElementById('projectDescription');
+    const prevProjectBtn = document.getElementById('prevProjectBtn');
+    const nextProjectBtn = document.getElementById('nextProjectBtn');
+    let currentProjectIndex = 0;
 
-    if (projects.length <= 1) {
-      if (prevBtn) prevBtn.style.display = 'none';
-      if (nextBtn) nextBtn.style.display = 'none';
-      return;
+    if (projectTiles.length > 1) {
+      function showProject(index: number) {
+        projectTiles.forEach((tile, i) => {
+          if (i === index) {
+            tile.classList.remove('hidden');
+            tile.classList.add('active');
+          } else {
+            tile.classList.add('hidden');
+            tile.classList.remove('active');
+          }
+        });
+
+        if (prevProjectBtn) {
+          prevProjectBtn.style.opacity = index === 0 ? '0.5' : '1';
+          prevProjectBtn.style.pointerEvents = index === 0 ? 'none' : 'auto';
+        }
+        if (nextProjectBtn) {
+          nextProjectBtn.style.opacity = index === projectTiles.length - 1 ? '0.5' : '1';
+          nextProjectBtn.style.pointerEvents = index === projectTiles.length - 1 ? 'none' : 'auto';
+        }
+      }
+
+      if (prevProjectBtn) {
+        prevProjectBtn.addEventListener('click', () => {
+          if (currentProjectIndex > 0) {
+            currentProjectIndex--;
+            showProject(currentProjectIndex);
+          }
+        });
+      }
+
+      if (nextProjectBtn) {
+        nextProjectBtn.addEventListener('click', () => {
+          if (currentProjectIndex < projectTiles.length - 1) {
+            currentProjectIndex++;
+            showProject(currentProjectIndex);
+          }
+        });
+      }
+
+      showProject(0);
+    } else {
+      if (prevProjectBtn) prevProjectBtn.style.display = 'none';
+      if (nextProjectBtn) nextProjectBtn.style.display = 'none';
     }
 
-    function showProject(index: number) {
-      // Hide all tiles
-      projectTiles.forEach((tile, i) => {
+    // Testimonials Carousel
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const prevTestimonialBtn = document.getElementById('prevTestimonialBtn');
+    const nextTestimonialBtn = document.getElementById('nextTestimonialBtn');
+    let currentTestimonialIndex = 0;
+
+    function showTestimonial(index: number) {
+      testimonialSlides.forEach((slide, i) => {
         if (i === index) {
-          tile.classList.remove('hidden');
-          tile.classList.add('active');
+          slide.classList.remove('hidden');
+          slide.classList.add('active');
         } else {
-          tile.classList.add('hidden');
-          tile.classList.remove('active');
+          slide.classList.add('hidden');
+          slide.classList.remove('active');
         }
       });
 
-      // Update description
-      if (projectDescription) {
-        projectDescription.textContent = projects[index].summary;
+      if (prevTestimonialBtn) {
+        prevTestimonialBtn.style.opacity = index === 0 ? '0.5' : '1';
+        prevTestimonialBtn.style.pointerEvents = index === 0 ? 'none' : 'auto';
       }
-
-      // Update button states
-      if (prevBtn) {
-        prevBtn.style.opacity = index === 0 ? '0.5' : '1';
-        prevBtn.style.pointerEvents = index === 0 ? 'none' : 'auto';
-      }
-      if (nextBtn) {
-        nextBtn.style.opacity = index === projects.length - 1 ? '0.5' : '1';
-        nextBtn.style.pointerEvents = index === projects.length - 1 ? 'none' : 'auto';
+      if (nextTestimonialBtn) {
+        nextTestimonialBtn.style.opacity = index === testimonialSlides.length - 1 ? '0.5' : '1';
+        nextTestimonialBtn.style.pointerEvents = index === testimonialSlides.length - 1 ? 'none' : 'auto';
       }
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-          showProject(currentIndex);
+    if (prevTestimonialBtn) {
+      prevTestimonialBtn.addEventListener('click', () => {
+        if (currentTestimonialIndex > 0) {
+          currentTestimonialIndex--;
+          showTestimonial(currentTestimonialIndex);
         }
       });
     }
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        if (currentIndex < projects.length - 1) {
-          currentIndex++;
-          showProject(currentIndex);
+    if (nextTestimonialBtn) {
+      nextTestimonialBtn.addEventListener('click', () => {
+        if (currentTestimonialIndex < testimonialSlides.length - 1) {
+          currentTestimonialIndex++;
+          showTestimonial(currentTestimonialIndex);
         }
       });
     }
 
-    // Initialize
-    showProject(0);
+    showTestimonial(0);
   });
 </script>
