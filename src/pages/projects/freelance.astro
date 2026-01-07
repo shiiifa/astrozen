@@ -1,11 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { SITE_CONTENT } from "@config";
-import { Image } from "astro:assets";
 
 // Get completed freelance projects
 const completedProjects = SITE_CONTENT.freelanceProjects.filter(p => p.status === "Completed");
-let currentProjectIndex = 0;
 ---
 
 <Layout title="Freelance Work - Shifa Amankwa-Gabbey">
@@ -37,7 +35,7 @@ let currentProjectIndex = 0;
               alt="GitHub contribution graph for shiiifa"
               class="w-full h-auto max-w-full"
               loading="lazy"
-              onerror="this.src='https://ghchart.rshah.org/shiiifa'"
+              onerror="this.setAttribute('src', 'https://ghchart.rshah.org/shiiifa')"
             />
           </div>
         </div>
@@ -88,7 +86,6 @@ let currentProjectIndex = 0;
             <div id="projectsCarousel" class="relative overflow-hidden rounded-lg">
               {completedProjects.map((project, index) => (
                 <div 
-                  key={project.name}
                   class={`project-tile ${index === 0 ? 'active' : 'hidden'}`}
                   data-index={index}
                 >
