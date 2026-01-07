@@ -78,13 +78,14 @@ const completedProjects = SITE_CONTENT.freelanceProjects.filter(p => p.status ==
                 class={`project-tile ${index === 0 ? 'active' : 'hidden'}`}
                 data-index={index}
               >
-                <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg mb-4">
+                <div class="fade-in-element overflow-hidden rounded-lg border border-neutral/20 shadow-lg mb-4 bg-white" style="background-color: white;">
                   <iframe 
                     src={project.linkSource} 
                     class="w-full h-[400px]"
+                    style="background-color: white; display: block;"
                     loading="lazy"
                     title={`${project.name} Preview`}
-                    sandbox="allow-scripts allow-same-origin"
+                    sandbox="allow-scripts allow-same-origin allow-forms"
                   ></iframe>
                 </div>
                 
