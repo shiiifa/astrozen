@@ -48,6 +48,13 @@ export const SITE_CONTENT: SiteContent = {
   
   projects: [
     {
+      name: "Heart Rate Monitor Using Active Bandpass Filtering",
+      summary: "A non-invasive optical heart rate monitor based on Photoplethysmography (PPG) that detects blood volume changes, conditions analog signals with active bandpass filtering, and displays real-time BPM readings on an LCD screen.",
+      linkPreview: "/projects/heart-rate-monitor",
+      linkSource: "#",
+      image: "/heartbeat.png",
+    },
+    {
       name: "Behaviour-Aware Access Controller",
       summary: "An intelligent, standalone RFID access control system that uses a Finite State Machine (FSM) to detect and block behavioral anomalies in real-time without relying on external servers.",
       linkPreview: "/projects/behaviour-aware-access-controller",
@@ -101,13 +108,6 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/projects/hydrogel-soil-analysis",
       linkSource: "#",
       image: "/hydrogel-analysis.png",
-    },
-    {
-      name: "Heart Rate Monitor Using Active Bandpass Filtering",
-      summary: "A non-invasive optical heart rate monitor based on Photoplethysmography (PPG) that detects blood volume changes, conditions analog signals with active bandpass filtering, and displays real-time BPM readings on an LCD screen.",
-      linkPreview: "/projects/heart-rate-monitor",
-      linkSource: "#",
-      image: "/heartbeat.png",
     },
   ],
 
