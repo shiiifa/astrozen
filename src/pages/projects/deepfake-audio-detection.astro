@@ -1,0 +1,162 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
+
+const project = SITE_CONTENT.projects.find(p => 
+  p.name === "Deepfake Audio Detection"
+);
+
+if (!project) {
+  return Astro.redirect('/404');
+}
+
+const mediaItems = [
+  "/deepfake.png"
+];
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    <header class="mb-12 text-center">
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        {project.name}
+      </h1>
+      <p class="text-lg text-neutral">
+        {project.summary}
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
+        <p class="text-neutral">This project developed a machine learning pipeline for detecting deepfake audio and synthetic speech using both traditional and deep learning approaches. The system addresses the growing threat of voice spoofing and audio deepfakes by implementing multiple neural network architectures trained on the SceneFake dataset, achieving 98% accuracy with a CNN-based model.</p>
+        <p class="text-neutral mt-4">The project compared Random Forest baseline models with advanced deep learning approaches including CNN, LSTM, and hybrid CNN-LSTM architectures to identify the most effective method for distinguishing genuine speech from synthesized audio in real-world scenarios.</p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Objectives</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Design an accurate and robust system for automatic detection of deepfake audio using neural networks</li>
+          <li>Implement Random Forest classifier as a traditional machine learning baseline for comparison</li>
+          <li>Develop hybrid CNN-LSTM approach combining spatial and temporal feature learning</li>
+          <li>Address dataset imbalance using Synthetic Minority Over-sampling Technique (SMOTE)</li>
+          <li>Evaluate model generalization across realistic and challenging audio environments</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Model Performance</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>CNN Model:</strong> 98% accuracy, 98.48% precision, 99.64% AUC-ROC (best performer)</li>
+          <li><strong>Random Forest:</strong> 95% accuracy, 92.86% precision, 95% AUC-ROC</li>
+          <li><strong>LSTM Model:</strong> 90.50% accuracy, 90.10% precision, 95.04% AUC-ROC</li>
+          <li><strong>Hybrid CNN-LSTM:</strong> Attempted feature fusion but faced convergence issues</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Approach</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Feature Extraction:</strong> 39-dimensional MFCC features and 128-band log Mel-spectrograms</li>
+          <li><strong>Audio Preprocessing:</strong> 16 kHz resampling, silence removal, 5-second padding/truncation</li>
+          <li><strong>CNN Architecture:</strong> Three convolutional blocks with batch normalization and dropout (16.3M parameters)</li>
+          <li><strong>Training:</strong> Adam optimizer, binary cross-entropy loss, 40 epochs with early stopping on Google Colab</li>
+          <li><strong>Dataset:</strong> SceneFake dataset (6GB) selected for realistic scenarios and computational efficiency over Fake-or-Real (16GB)</li>
+        </ul>
+      </section>
+
+      <!-- MEDIA GALLERY SECTION -->
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Interface Visualization</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {mediaItems.map((media, index) => (
+            <div 
+              class="relative overflow-hidden rounded-lg cursor-pointer" 
+              onclick={`openImageModal('${media}', 'Deepfake Audio Detector Interface')`}
+            >
+              <img 
+                src={media} 
+                alt="Deepfake Audio Detector Interface" 
+                class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" 
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Findings</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li>Deep learning models significantly outperformed traditional machine learning methods</li>
+          <li>CNN-based spectrogram analysis proved most effective for audio deepfake detection</li>
+          <li>LSTM alone captured temporal information but underperformed compared to CNN</li>
+          <li>Simple feature fusion in hybrid models requires careful tuning; initial implementation showed poor convergence</li>
+          <li>Dataset selection and preprocessing critically impact model performance and training efficiency</li>
+        </ul>
+      </section>
+
+      <div class="flex gap-4 justify-center">
+        <a href={project.linkSource} target="_blank" class="rounded-full bg-primary px-6 py-3 text-white hover:bg-primary/90 transition-colors">
+          View GitHub Repository
+        </a>
+        <a href="https://drive.google.com/file/d/1mmjEHjP2pM6RXkHctXp6hJIMHfH7tG2k/view?usp=sharing" target="_blank" class="rounded-full border border-primary px-6 py-3 text-primary hover:bg-primary/10 transition-colors">
+          View Full Technical Report
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+      <button 
+        id="closeModal" 
+        class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+        onclick="closeImageModal()"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function openImageModal(src: string, alt: string) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+    
+    if (!modal || !modalImage) return;
+    
+    modalImage.src = src;
+    modalImage.alt = alt;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  document.addEventListener('click', (e: Event) => {
+    const modal = document.getElementById('imageModal');
+    const modalElement = e.target as HTMLElement;
+    
+    if (modal && modalElement && modalElement.id === 'imageModal') {
+      closeImageModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      closeImageModal();
+    }
+  });
+</script>

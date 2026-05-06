@@ -103,6 +103,13 @@ export const SITE_CONTENT: SiteContent = {
       linkSource: "#",
       image: "/hydrogel-analysis.png",
     },
+    {
+      name: "Deepfake Audio Detection",
+      summary: "A machine learning pipeline for detecting synthetic speech and audio deepfakes using CNN, LSTM, and hybrid models with 98% accuracy.",
+      linkPreview: "/projects/deepfake-audio-detection",
+      linkSource: "https://github.com/shiiifa/Deepfake-Audio-Detection",
+      image: "/deepfake.png",
+    },
   ],
 
   freelanceProjects: [
