@@ -59,13 +59,13 @@ const beyondEngineeringItems = [
   <Section text="beyond engineering" href="beyond-engineering">
     <div class="relative">
       {/* Navigation Arrows */}
-      <button id="beyondPrevBtn" class="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation backdrop-blur-sm border border-primary/10" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="beyondPrevBtn" aria-label="Previous items" class="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation backdrop-blur-sm border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="beyondNextBtn" class="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation backdrop-blur-sm border border-primary/10" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="beyondNextBtn" aria-label="Next items" class="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation backdrop-blur-sm border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -74,7 +74,7 @@ const beyondEngineeringItems = [
       {/* Beyond Engineering Container */}
       <div 
         id="beyondContainer" 
-        class="flex overflow-x-auto scroll-smooth space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none snap-x snap-mandatory"
+        class="flex overflow-x-auto space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory max-sm:-mx-4 max-sm:px-4"
         style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
       >
         {
@@ -82,7 +82,7 @@ const beyondEngineeringItems = [
             <div class="group relative flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/85 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 snap-center">
               <div class="absolute inset-0 z-0 rounded-2xl bg-[url(/raja.png)] bg-[length:128px] bg-repeat opacity-[3%] group-hover:opacity-[5%] transition-opacity duration-500"></div>
               
-              <a href={linkPreview} class="relative z-20 block w-full h-full">
+              <a href={linkPreview} class="relative z-20 block w-full h-full" draggable="false">
                 <Image
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
                   src={image}
@@ -90,6 +90,7 @@ const beyondEngineeringItems = [
                   width={256}
                   height={256}
                   loading="lazy"
+                  draggable="false"
                 />
               </a>
               
@@ -106,406 +107,151 @@ const beyondEngineeringItems = [
   <Connect socialLinks={SITE_CONFIG.socialLinks} />
 
   <style>
-    /* Hide scrollbars for Beyond Engineering container */
     #beyondContainer::-webkit-scrollbar {
       display: none;
     }
-    
-    /* Improve mobile touch interactions */
-    @media (max-width: 640px) {
-      #beyondContainer {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      
-      #beyondPrevBtn, #beyondNextBtn {
-        display: none; /* Hide arrows on mobile for cleaner look */
-      }
-      
-      /* Ensure proper spacing on mobile */
-      #beyondContainer > div:first-child {
-        margin-left: 0;
-      }
-      
-      #beyondContainer > div:last-child {
-        margin-right: 0;
-      }
+
+    #beyondContainer.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
     }
-    
-    /* Improve touch targets on mobile */
-    @media (max-width: 640px) {
-      #beyondContainer > div {
-        min-width: 12rem; /* w-48 */
-        min-height: 12rem; /* h-48 */
-      }
+
+    #beyondContainer.is-dragging a {
+      pointer-events: none;
     }
-    
-    /* Smooth snap scrolling */
-    #beyondContainer {
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-    }
-    
-    /* Better focus states for accessibility */
+
     #beyondContainer > div:focus-within {
       outline: 2px solid #E1AD01;
       outline-offset: 2px;
-    }
-    
-    /* Prevent text selection during drag on mobile */
-    #beyondContainer.active {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-    
-    /* Improve mobile performance */
-    @media (max-width: 640px) {
-      #beyondContainer {
-        will-change: scroll-position;
-        transform: translateZ(0); /* Force hardware acceleration */
-      }
-      
-      #beyondContainer > div {
-        will-change: transform;
-        transform: translateZ(0);
-      }
-    }
-    
-    /* Better mobile spacing */
-    @media (max-width: 640px) {
-      #beyondContainer {
-        margin: 0 -1rem;
-        padding: 1rem;
-      }
-    }
-    
-    /* Ensure links are clickable on mobile */
-    @media (max-width: 640px) {
-      #beyondContainer a {
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
-        -webkit-tap-highlight-color: rgba(225, 173, 1, 0.3);
-        cursor: pointer;
-        position: relative;
-        z-index: 30;
-      }
-      
-      /* Make sure the link covers the tile */
-      #beyondContainer > div > a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        pointer-events: auto !important;
-        touch-action: manipulation !important;
-      }
     }
   </style>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const beyondContainer = document.getElementById('beyondContainer');
-      const beyondPrevBtn = document.getElementById('beyondPrevBtn');
-      const beyondNextBtn = document.getElementById('beyondNextBtn');
-      
+      const beyondPrevBtn = document.getElementById('beyondPrevBtn') as HTMLButtonElement | null;
+      const beyondNextBtn = document.getElementById('beyondNextBtn') as HTMLButtonElement | null;
+
       if (!beyondContainer || !beyondPrevBtn || !beyondNextBtn) return;
 
-      // Calculate responsive item width based on screen size
-      const getItemWidth = () => {
-        const screenWidth = window.innerWidth;
-        if (screenWidth < 640) { // Mobile
-          return 192 + 12; // w-48 (192px) + space-x-3 (12px)
-        } else if (screenWidth < 768) { // Small tablet
-          return 224 + 24; // w-56 (224px) + space-x-6 (24px)
-        } else { // Desktop
-          return 256 + 24; // w-64 (256px) + space-x-6 (24px)
-        }
+      let animating = false;
+      let unlockTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const getStep = () => {
+        const item = beyondContainer.querySelector(':scope > *') as HTMLElement | null;
+        if (!item) return 280;
+        const styles = getComputedStyle(beyondContainer);
+        const gap = parseFloat(styles.columnGap || styles.gap) || 24;
+        return item.offsetWidth + gap;
       };
-      
-      // Enhanced mobile detection
-      const isMobile = () => window.innerWidth < 640;
-      
-      let itemWidth = getItemWidth();
 
-      // Scroll to next item
-      beyondNextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+      const updateArrows = () => {
         const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
-        if (scrollLeft < scrollWidth - clientWidth - 5) {
-          beyondContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
-        }
-      });
+        const maxScroll = Math.max(0, scrollWidth - clientWidth);
+        beyondPrevBtn.disabled = scrollLeft <= 2;
+        beyondNextBtn.disabled = scrollLeft >= maxScroll - 2;
+      };
 
-      // Scroll to previous item
+      const scrollByStep = (direction: number) => {
+        if (animating) return;
+        const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
+        const maxScroll = Math.max(0, scrollWidth - clientWidth);
+        const step = getStep();
+        const target = Math.max(0, Math.min(maxScroll, scrollLeft + direction * step));
+        if (Math.abs(target - scrollLeft) < 1) return;
+
+        animating = true;
+        beyondContainer.scrollTo({ left: target, behavior: 'smooth' });
+
+        const unlock = () => {
+          animating = false;
+          updateArrows();
+          if (unlockTimer) clearTimeout(unlockTimer);
+        };
+
+        beyondContainer.addEventListener('scrollend', unlock, { once: true });
+        if (unlockTimer) clearTimeout(unlockTimer);
+        unlockTimer = setTimeout(unlock, 450);
+      };
+
       beyondPrevBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const { scrollLeft } = beyondContainer;
-        if (scrollLeft > 5) {
-          beyondContainer.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-        }
+        scrollByStep(-1);
       });
 
-      // Hide arrows when at edges (only on desktop/tablet)
-      const checkBeyondArrows = () => {
-        if (isMobile()) {
-          // Hide arrows completely on mobile
-          beyondPrevBtn.style.display = 'none';
-          beyondNextBtn.style.display = 'none';
-          return;
-        }
-        
-        const { scrollLeft, scrollWidth, clientWidth } = beyondContainer;
-        const isAtStart = scrollLeft <= 5;
-        const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
-        
-        beyondPrevBtn.style.display = 'block';
-        beyondNextBtn.style.display = 'block';
-        beyondPrevBtn.style.opacity = isAtStart ? '0.5' : '1';
-        beyondNextBtn.style.opacity = isAtEnd ? '0.5' : '1';
-        
-        beyondPrevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
-        beyondNextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
-      };
-
-      beyondContainer.addEventListener('scroll', checkBeyondArrows);
-      checkBeyondArrows(); // Initial check
-
-      // Update item width on resize
-      window.addEventListener('resize', () => {
-        itemWidth = getItemWidth();
-        checkBeyondArrows();
-      });
-
-      // Add keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          beyondContainer.scrollBy({ left: -getItemWidth(), behavior: 'smooth' });
-        } else if (e.key === 'ArrowRight') {
-          beyondContainer.scrollBy({ left: getItemWidth(), behavior: 'smooth' });
-        }
-      });
-
-      // Enhanced touch and mouse sliding functionality for Beyond Engineering
-      let beyondStartX: number;
-      let beyondScrollLeft: number;
-      let beyondIsDown = false;
-      let beyondStartTime: number;
-      let beyondVelocity = 0;
-      let beyondLastX: number;
-      let beyondLastTime: number;
-      let beyondIsScrolling = false;
-      let beyondTouchStartX: number;
-      let beyondTouchStartY: number;
-
-      const snapToBeyondItem = () => {
-        const currentItemWidth = getItemWidth();
-        const currentScroll = beyondContainer.scrollLeft;
-        const targetIndex = Math.round(currentScroll / currentItemWidth);
-        const targetScroll = targetIndex * currentItemWidth;
-        
-        beyondContainer.scrollTo({
-          left: targetScroll,
-          behavior: 'smooth'
-        });
-      };
-
-      const handleBeyondStart = (clientX: number, clientY?: number) => {
-        beyondIsDown = true;
-        beyondIsScrolling = false;
-        beyondStartX = clientX - beyondContainer.offsetLeft;
-        beyondScrollLeft = beyondContainer.scrollLeft;
-        beyondStartTime = Date.now();
-        beyondLastX = clientX;
-        beyondLastTime = beyondStartTime;
-        beyondVelocity = 0;
-        beyondContainer.classList.add('active');
-        beyondContainer.style.scrollBehavior = 'auto';
-        
-        // Store touch start position for mobile
-        if (clientY !== undefined) {
-          beyondTouchStartX = clientX;
-          beyondTouchStartY = clientY;
-        }
-      };
-
-      const handleBeyondMove = (clientX: number) => {
-        if (!beyondIsDown) return;
-        
-        beyondIsScrolling = true;
-        const x = clientX - beyondContainer.offsetLeft;
-        const walk = (x - beyondStartX) * 1.2;
-        beyondContainer.scrollLeft = beyondScrollLeft - walk;
-        
-        // Calculate velocity for momentum
-        const currentTime = Date.now();
-        const deltaX = clientX - beyondLastX;
-        const deltaTime = currentTime - beyondLastTime;
-        
-        if (deltaTime > 0) {
-          beyondVelocity = deltaX / deltaTime;
-        }
-        
-        beyondLastX = clientX;
-        beyondLastTime = currentTime;
-      };
-
-      const handleBeyondEnd = () => {
-        if (!beyondIsDown) return;
-        
-        beyondIsDown = false;
-        beyondContainer.classList.remove('active');
-        beyondContainer.style.scrollBehavior = 'smooth';
-        
-        // Only apply momentum if user was actually scrolling
-        if (beyondIsScrolling && Math.abs(beyondVelocity) > 0.3) {
-          const momentum = beyondVelocity * 150;
-          const currentScroll = beyondContainer.scrollLeft;
-          const targetScroll = currentScroll - momentum;
-          
-          beyondContainer.scrollTo({
-            left: targetScroll,
-            behavior: 'smooth'
-          });
-          
-          // Snap to item after momentum
-          setTimeout(snapToBeyondItem, 250);
-        } else if (beyondIsScrolling) {
-          // Snap to nearest item
-          snapToBeyondItem();
-        }
-      };
-
-      // Mouse events for Beyond Engineering
-      beyondContainer.addEventListener('mousedown', (e: MouseEvent) => {
-        // Only prevent default if not clicking on a link
-        const element = e.target as Element;
-        if (element && element.closest('a')) {
-          return; // Let the link handle the click
-        }
+      beyondNextBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        handleBeyondStart(e.clientX);
+        scrollByStep(1);
       });
 
-      beyondContainer.addEventListener('mouseleave', handleBeyondEnd);
-      beyondContainer.addEventListener('mouseup', handleBeyondEnd);
+      let scrollRaf = 0;
+      beyondContainer.addEventListener('scroll', () => {
+        if (scrollRaf) return;
+        scrollRaf = requestAnimationFrame(() => {
+          scrollRaf = 0;
+          updateArrows();
+        });
+      }, { passive: true });
 
-      beyondContainer.addEventListener('mousemove', (e: MouseEvent) => {
-        if (beyondIsDown) {
-          e.preventDefault();
-          handleBeyondMove(e.clientX);
-        }
+      updateArrows();
+      window.addEventListener('resize', updateArrows, { passive: true });
+
+      // Mouse / pen drag-to-slide (touch uses native pan-x scrolling)
+      let dragging = false;
+      let moved = false;
+      let startX = 0;
+      let startScroll = 0;
+      let pointerId: number | null = null;
+
+      const snapToNearest = () => {
+        const step = getStep();
+        if (step <= 0) return;
+        const index = Math.round(beyondContainer.scrollLeft / step);
+        const maxScroll = Math.max(0, beyondContainer.scrollWidth - beyondContainer.clientWidth);
+        const target = Math.max(0, Math.min(maxScroll, index * step));
+        beyondContainer.scrollTo({ left: target, behavior: 'smooth' });
+      };
+
+      beyondContainer.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (e.pointerType === 'touch' || e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        startScroll = beyondContainer.scrollLeft;
+        beyondContainer.classList.add('is-dragging');
+        beyondContainer.setPointerCapture(pointerId);
       });
 
-      // Enhanced touch events for Beyond Engineering
-      let beyondTouchStartTime: number;
-      let beyondIsTouchScrolling = false;
-      let beyondTouchMoved = false;
+      beyondContainer.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!dragging || e.pointerId !== pointerId) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 4) moved = true;
+        beyondContainer.scrollLeft = startScroll - dx;
+      });
 
-      beyondContainer.addEventListener('touchstart', (e: TouchEvent) => {
-        if (e.touches.length === 1) {
-          const touch = e.touches[0];
-          const element = document.elementFromPoint(touch.clientX, touch.clientY);
-          
-          // If touching a link or button, don't interfere with the click
-          if (element && (element.closest('a') || element.closest('button'))) {
-            return;
-          }
-          
-          beyondTouchStartTime = Date.now();
-          beyondTouchStartX = touch.clientX;
-          beyondTouchStartY = touch.clientY;
-          beyondIsTouchScrolling = false;
-          beyondTouchMoved = false;
-          beyondContainer.style.scrollBehavior = 'auto';
-          beyondContainer.style.cursor = 'grabbing';
-        }
-      }, { passive: true });
-
-      beyondContainer.addEventListener('touchmove', (e: TouchEvent) => {
-        if (e.touches.length === 1) {
-          const touch = e.touches[0];
-          const deltaX = Math.abs(touch.clientX - beyondTouchStartX);
-          const deltaY = Math.abs(touch.clientY - beyondTouchStartY);
-          
-          // Match projects sensitivity - only treat as scrolling if movement is significant
-          if (deltaX > 5 && deltaX > deltaY) {
-            beyondTouchMoved = true;
-            beyondIsTouchScrolling = true;
-            e.preventDefault();
-            
-            if (!beyondIsDown) {
-              handleBeyondStart(touch.clientX);
-            }
-            handleBeyondMove(touch.clientX);
-          }
-        }
-      }, { passive: false });
-
-      beyondContainer.addEventListener('touchend', (e: TouchEvent) => {
-        const touchDuration = Date.now() - beyondTouchStartTime;
-        const deltaX = Math.abs(e.changedTouches[0].clientX - beyondTouchStartX);
-        const deltaY = Math.abs(e.changedTouches[0].clientY - beyondTouchStartY);
-        
-        // Reset cursor
-        beyondContainer.style.cursor = 'grab';
-        
-        // If it was a quick tap with minimal movement, allow link clicks (matching projects logic)
-        if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !beyondTouchMoved) {
-          const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-          if (element && (element.closest('a') || element.closest('button'))) {
-            // Let the link/button handle the click
-            if (beyondIsDown) {
-              handleBeyondEnd();
-            }
-            // Reset flags to allow click to work
-            beyondTouchMoved = false;
-            beyondIsTouchScrolling = false;
-            return;
-          }
-        }
-        
-        // Only prevent default if user was actually scrolling (not just a tap)
-        if (beyondIsTouchScrolling || beyondTouchMoved) {
+      const endDrag = (e: PointerEvent) => {
+        if (!dragging || e.pointerId !== pointerId) return;
+        dragging = false;
+        pointerId = null;
+        beyondContainer.classList.remove('is-dragging');
+        if (moved) {
           e.preventDefault();
-          beyondContainer.style.scrollBehavior = 'smooth';
-          handleBeyondEnd();
-        } else if (beyondIsDown) {
-          // If not scrolling but mousedown was triggered, clean up
-          handleBeyondEnd();
+          snapToNearest();
         }
-       }, { passive: false });
+        updateArrows();
+      };
 
-      // Add touch cancel event for better mobile handling
-      beyondContainer.addEventListener('touchcancel', () => {
-        beyondContainer.style.cursor = 'grab';
-        beyondContainer.style.scrollBehavior = 'smooth';
-        if (beyondIsDown) {
-          handleBeyondEnd();
-        }
-      }, { passive: true });
+      beyondContainer.addEventListener('pointerup', endDrag);
+      beyondContainer.addEventListener('pointercancel', endDrag);
 
-      // Explicit click handler for mobile - ensures links are clickable
       beyondContainer.addEventListener('click', (e: MouseEvent) => {
-        const element = e.target as Element;
-        // If clicking on a link, let it handle naturally
-        if (element && element.closest('a')) {
-          // Don't prevent - allow link navigation
-          return;
-        }
-      }, true); // Use capture phase to catch clicks early
+        if (!moved) return;
+        e.preventDefault();
+        e.stopPropagation();
+        moved = false;
+      }, true);
     });
   </script>
-
-  <style>
-    /* Hide scrollbar but keep functionality */
-    #beyondContainer {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    
-    #beyondContainer::-webkit-scrollbar {
-      display: none;
-    }
-  </style>
 </Layout>

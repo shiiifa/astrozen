@@ -20,26 +20,31 @@ const { projects } = Astro.props;
        </div>
 
       {/* Navigation Arrows */}
-      <button id="prevBtn" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="prevBtn" aria-label="Previous projects" class="absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation disabled:opacity-40 disabled:pointer-events-none" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button id="nextBtn" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-all duration-200 will-change-transform touch-manipulation" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="nextBtn" aria-label="Next projects" class="absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation disabled:opacity-40 disabled:pointer-events-none" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
       {/* Academic Projects Container */}
-      <div id="projectsContainer" class="flex overflow-x-hidden scroll-smooth space-x-6 py-4 cursor-grab active:cursor-grabbing touch-pan-x select-none" style="touch-action: pan-x; -webkit-overflow-scrolling: touch;">
+      <div
+        id="projectsContainer"
+        class="flex overflow-x-auto space-x-6 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
+        style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
+      >
          {/* Academic Projects Preview */}
          {
            projects.map(({ name, summary, image, linkPreview }) => (
              <a
                href={linkPreview}
-               class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20"
+               class="group fade-in-tile relative flex-shrink-0 w-80 overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 snap-start"
+               draggable="false"
              >
               {/* ORIGINAL ASH BACKGROUND RESTORED */}
               <div class="bg-difu absolute inset-0 z-0 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-[length:128px] before:bg-repeat before:opacity-[5%] before:content-['']"></div>
@@ -55,6 +60,7 @@ const { projects } = Astro.props;
                     width={400}
                     height={300}
                     loading="lazy"
+                    draggable="false"
                   />
                 </div>
                 
@@ -160,267 +166,146 @@ const { projects } = Astro.props;
     opacity: 1;
   }
 
-  /* Hide scrollbar but keep functionality */
-  #projectsContainer {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    /* Enhanced mobile touch scrolling */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-  }
-  
   #projectsContainer::-webkit-scrollbar {
     display: none;
   }
 
-  /* Mobile-specific optimizations */
-  @media (max-width: 768px) {
-    #projectsContainer {
-      /* More responsive touch handling on mobile */
-      scroll-snap-type: x mandatory;
-      scroll-padding: 0 1rem;
-    }
-    
-    #projectsContainer > * {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-    }
+  #projectsContainer.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+
+  #projectsContainer.is-dragging a {
+    pointer-events: none;
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('projectsContainer');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const projectWidth = 320; // Width of each project card + gap
+    const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement | null;
 
     if (!container || !prevBtn || !nextBtn) return;
 
-    // Scroll to next project
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      if (scrollLeft < scrollWidth - clientWidth - 5) {
-        container.scrollBy({ left: projectWidth, behavior: 'smooth' });
-      }
-    });
+    let animating = false;
+    let unlockTimer: ReturnType<typeof setTimeout> | null = null;
 
-    // Scroll to previous project
+    const getStep = () => {
+      const item = container.querySelector(':scope > *') as HTMLElement | null;
+      if (!item) return 320;
+      const styles = getComputedStyle(container);
+      const gap = parseFloat(styles.columnGap || styles.gap) || 24;
+      return item.offsetWidth + gap;
+    };
+
+    const updateArrows = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const maxScroll = Math.max(0, scrollWidth - clientWidth);
+      prevBtn.disabled = scrollLeft <= 2;
+      nextBtn.disabled = scrollLeft >= maxScroll - 2;
+    };
+
+    const scrollByStep = (direction: number) => {
+      if (animating) return;
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const maxScroll = Math.max(0, scrollWidth - clientWidth);
+      const step = getStep();
+      const target = Math.max(0, Math.min(maxScroll, scrollLeft + direction * step));
+      if (Math.abs(target - scrollLeft) < 1) return;
+
+      animating = true;
+      container.scrollTo({ left: target, behavior: 'smooth' });
+
+      const unlock = () => {
+        animating = false;
+        updateArrows();
+        if (unlockTimer) clearTimeout(unlockTimer);
+      };
+
+      container.addEventListener('scrollend', unlock, { once: true });
+      if (unlockTimer) clearTimeout(unlockTimer);
+      unlockTimer = setTimeout(unlock, 450);
+    };
+
     prevBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const { scrollLeft } = container;
-      if (scrollLeft > 5) {
-        container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
-      }
+      scrollByStep(-1);
     });
 
-    // Hide arrows when at edges
-    const checkArrows = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      const isAtStart = scrollLeft <= 5;
-      const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 5;
-      
-      prevBtn.style.opacity = isAtStart ? '0.5' : '1';
-      nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
-      
-      prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
-      nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
-    };
-
-    container.addEventListener('scroll', checkArrows);
-    checkArrows(); // Initial check
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        container.scrollBy({ left: -projectWidth, behavior: 'smooth' });
-      } else if (e.key === 'ArrowRight') {
-        container.scrollBy({ left: projectWidth, behavior: 'smooth' });
-      }
-    });
-
-    // Enhanced touch and mouse sliding functionality
-    let startX: number;
-    let scrollLeft: number;
-    let isDown = false;
-    let startTime: number;
-    let velocity = 0;
-    let lastX: number;
-    let lastTime: number;
-    let isScrolling = false;
-
-    const snapToItem = () => {
-      const currentScroll = container.scrollLeft;
-      const targetIndex = Math.round(currentScroll / projectWidth);
-      const targetScroll = targetIndex * projectWidth;
-      
-      container.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-    };
-
-    const handleStart = (clientX: number) => {
-      isDown = true;
-      isScrolling = false;
-      startX = clientX - container.offsetLeft;
-      scrollLeft = container.scrollLeft;
-      startTime = Date.now();
-      lastX = clientX;
-      lastTime = startTime;
-      velocity = 0;
-      container.classList.add('active');
-      container.style.scrollBehavior = 'auto';
-    };
-
-    const handleMove = (clientX: number) => {
-      if (!isDown) return;
-      
-      isScrolling = true;
-      const x = clientX - container.offsetLeft;
-      const walk = (x - startX) * 1.2;
-      container.scrollLeft = scrollLeft - walk;
-      
-      // Calculate velocity for momentum
-      const currentTime = Date.now();
-      const deltaX = clientX - lastX;
-      const deltaTime = currentTime - lastTime;
-      
-      if (deltaTime > 0) {
-        velocity = deltaX / deltaTime;
-      }
-      
-      lastX = clientX;
-      lastTime = currentTime;
-    };
-
-    const handleEnd = () => {
-      if (!isDown) return;
-      
-      isDown = false;
-      container.classList.remove('active');
-      container.style.scrollBehavior = 'smooth';
-      
-      // Only apply momentum if user was actually scrolling
-      if (isScrolling && Math.abs(velocity) > 0.3) {
-        const momentum = velocity * 150;
-        const currentScroll = container.scrollLeft;
-        const targetScroll = currentScroll - momentum;
-        
-        container.scrollTo({
-          left: targetScroll,
-          behavior: 'smooth'
-        });
-        
-        // Snap to item after momentum
-        setTimeout(snapToItem, 250);
-      } else if (isScrolling) {
-        // Snap to nearest item
-        snapToItem();
-      }
-    };
-
-    // Mouse events
-    container.addEventListener('mousedown', (e: MouseEvent) => {
-      // Only prevent default if not clicking on a link
-      const element = e.target as Element;
-      if (element && element.closest('a')) {
-        return; // Let the link handle the click
-      }
+    nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      handleStart(e.clientX);
+      scrollByStep(1);
     });
 
-    container.addEventListener('mouseleave', handleEnd);
-    container.addEventListener('mouseup', handleEnd);
+    let scrollRaf = 0;
+    container.addEventListener('scroll', () => {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        updateArrows();
+      });
+    }, { passive: true });
 
-    container.addEventListener('mousemove', (e: MouseEvent) => {
-      if (isDown) {
-        e.preventDefault();
-        handleMove(e.clientX);
-      }
+    updateArrows();
+    window.addEventListener('resize', updateArrows, { passive: true });
+
+    // Mouse / pen drag-to-slide (touch uses native pan-x scrolling)
+    let dragging = false;
+    let moved = false;
+    let startX = 0;
+    let startScroll = 0;
+    let pointerId: number | null = null;
+
+    const snapToNearest = () => {
+      const step = getStep();
+      if (step <= 0) return;
+      const index = Math.round(container.scrollLeft / step);
+      const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+      const target = Math.max(0, Math.min(maxScroll, index * step));
+      container.scrollTo({ left: target, behavior: 'smooth' });
+    };
+
+    container.addEventListener('pointerdown', (e: PointerEvent) => {
+      if (e.pointerType === 'touch' || e.button !== 0) return;
+      dragging = true;
+      moved = false;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startScroll = container.scrollLeft;
+      container.classList.add('is-dragging');
+      container.setPointerCapture(pointerId);
     });
 
-    // Enhanced touch events for better mobile sliding (matching beyond engineering)
-    let touchStartTime: number;
-    let touchStartX: number;
-    let touchStartY: number;
-    let isTouchScrolling = false;
-    let touchMoved = false;
+    container.addEventListener('pointermove', (e: PointerEvent) => {
+      if (!dragging || e.pointerId !== pointerId) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      container.scrollLeft = startScroll - dx;
+    });
 
-    container.addEventListener('touchstart', (e: TouchEvent) => {
-      if (e.touches.length === 1) {
-        const touch = e.touches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-        
-        // If touching a link or button, don't interfere with the click
-        if (element && (element.closest('a') || element.closest('button'))) {
-          return;
-        }
-        
-        touchStartTime = Date.now();
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        isTouchScrolling = false;
-        touchMoved = false;
-        container.style.scrollBehavior = 'auto';
-        container.style.cursor = 'grabbing';
-      }
-    }, { passive: true });
-
-    container.addEventListener('touchmove', (e: TouchEvent) => {
-      if (e.touches.length === 1) {
-        const touch = e.touches[0];
-        const deltaX = Math.abs(touch.clientX - touchStartX);
-        const deltaY = Math.abs(touch.clientY - touchStartY);
-        
-        // More sensitive touch detection for mobile
-        if (deltaX > 5 && deltaX > deltaY) {
-          touchMoved = true;
-          isTouchScrolling = true;
-          e.preventDefault();
-          
-          if (!isDown) {
-            handleStart(touch.clientX);
-          }
-          handleMove(touch.clientX);
-        }
-      }
-    }, { passive: false });
-
-    container.addEventListener('touchend', (e: TouchEvent) => {
-      const touchDuration = Date.now() - touchStartTime;
-      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
-      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
-      
-      // Reset cursor
-      container.style.cursor = 'grab';
-      
-      // If it was a quick tap with minimal movement, allow link clicks
-      if (touchDuration < 300 && deltaX < 15 && deltaY < 15 && !touchMoved) {
-        const element = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-        if (element && (element.closest('a') || element.closest('button'))) {
-          // Let the link/button handle the click
-          return;
-        }
-      }
-      
-      if (isTouchScrolling || touchMoved) {
+    const endDrag = (e: PointerEvent) => {
+      if (!dragging || e.pointerId !== pointerId) return;
+      dragging = false;
+      pointerId = null;
+      container.classList.remove('is-dragging');
+      if (moved) {
         e.preventDefault();
-        container.style.scrollBehavior = 'smooth';
-        handleEnd();
+        snapToNearest();
       }
-     }, { passive: false });
+      updateArrows();
+    };
 
-    // Add touch cancel event for better mobile handling
-    container.addEventListener('touchcancel', () => {
-      container.style.cursor = 'grab';
-      container.style.scrollBehavior = 'smooth';
-      if (isDown) {
-        handleEnd();
-      }
-    }, { passive: true });
-   });
+    container.addEventListener('pointerup', endDrag);
+    container.addEventListener('pointercancel', endDrag);
 
- </script>
+    // Prevent accidental navigation after a drag
+    container.addEventListener('click', (e: MouseEvent) => {
+      if (!moved) return;
+      e.preventDefault();
+      e.stopPropagation();
+      moved = false;
+    }, true);
+  });
+</script>

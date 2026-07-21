@@ -60,7 +60,7 @@ if (!project) {
           The system follows a linear signal path, beginning with a phototransistor that detects variations in light absorption caused by blood flow. The raw signal contains a significant DC component from skin and tissue reflection, which is much larger than the AC signal of the actual heartbeat (approximately 2mV–5mV).
         </p>
         <p class="text-neutral leading-relaxed mt-4">
-          To isolate the heartbeat, the signal is passed through an active bandpass filter configuration designed to pass frequencies between 0.7 Hz (40 BPM) and 3.67 Hz (220 BPM), effectively rejecting both low-frequency DC offset and high-frequency noise. The active filter design, utilizing operational amplifiers, provides gain greater than one—crucial for upscaling the millivolt-level signal into a voltage range (0-5V) that the Arduino Uno can read accurately.
+          To isolate the heartbeat, the signal is passed through an active bandpass filter configuration designed to pass frequencies between 0.7 Hz (40 BPM) and 3.67 Hz (220 BPM), effectively rejecting both low-frequency DC offset and high-frequency noise. The active filter design, utilising operational amplifiers, provides gain greater than one—crucial for upscaling the millivolt-level signal into a voltage range (0-5V) that the Arduino Uno can read accurately.
         </p>
       </section>
 

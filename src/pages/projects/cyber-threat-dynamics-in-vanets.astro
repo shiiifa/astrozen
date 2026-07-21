@@ -36,33 +36,33 @@ const mediaItems = [
     <div class="prose prose-invert max-w-none">
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Research Overview</h2>
-        <p class="text-neutral">Modeled malware spread in Vehicular Ad-Hoc Networks (VANETs) using an SEIR-S framework, analyzing key parameters and wireless transmission modes (Wi-Fi, Bluetooth, Cellular). The research identified critical vulnerabilities in connected vehicle systems like Tesla and developed strategies for enhanced vehicular cybersecurity.</p>
+        <p class="text-neutral">Modelled malware spread in Vehicular Ad-Hoc Networks (VANETs) using an SEIR-S framework, analysing key parameters and wireless transmission modes (Wi-Fi, Bluetooth, Cellular). The research identified critical vulnerabilities in connected vehicle systems like Tesla and developed strategies for enhanced vehicular cybersecurity.</p>
         <p class="text-neutral mt-4">Through comprehensive analysis of differential equations, ODE solvers, and precise figure replications, the project provided actionable insights into network security vulnerabilities and mitigation approaches for modern intelligent transportation systems.</p>
       </section>
 
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Key Findings</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li>SEIR-S epidemiological framework for accurate malware spread modeling</li>
+          <li>SEIR-S epidemiological framework for accurate malware spread modelling</li>
           <li>Comparative analysis of wireless transmission vulnerabilities across Wi-Fi, Bluetooth, and Cellular networks</li>
           <li>Identification of critical security flaws in connected vehicle architectures</li>
-          <li>Development of proactive cybersecurity defense strategies</li>
+          <li>Development of proactive cybersecurity defence strategies</li>
           <li>Comprehensive risk assessment framework for modern vehicular networks</li>
         </ul>
       </section>
 
       <!-- MEDIA GALLERY SECTION -->
       <section class="mb-12">
-        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Research Visualizations</h2>
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Research Visualisations</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {mediaItems.map((media, index) => (
             <div 
               class="relative overflow-hidden rounded-lg cursor-pointer" 
-              onclick={`openImageModal('${media}', 'Research visualization ${index + 1}')`}
+              onclick={`openImageModal('${media}', 'Research visualisation ${index + 1}')`}
             >
               <img 
                 src={media} 
-                alt={`Research visualization ${index + 1}`} 
+                alt={`Research visualisation ${index + 1}`} 
                 class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105" 
               />
             </div>
@@ -73,7 +73,7 @@ const mediaItems = [
       <section class="mb-12">
         <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Methodology & Technical Approach</h2>
         <ul class="text-neutral list-disc list-inside space-y-2">
-          <li><strong>Mathematical Modeling:</strong> SEIR-S compartmental framework for epidemic spread analysis</li>
+          <li><strong>Mathematical Modelling:</strong> SEIR-S compartmental framework for epidemic spread analysis</li>
           <li><strong>Computational Simulations:</strong> MATLAB-based network analysis and precise figure replication</li>
           <li><strong>Numerical Methods:</strong> Advanced ODE solvers for differential equation systems</li>
           <li><strong>Security Analysis:</strong> Comprehensive vulnerability assessment techniques</li>

@@ -4,8 +4,8 @@ export const SITE_CONFIG: SiteConfig = {
   title: "Shifa Amankwa-Gabbey - Official Portfolio",
   author: "Shifa Amankwa-Gabbey",
   description:
-    "I'm a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
-  lang: "en",
+    "I'm a Computer Engineering student with a passion for visual design, where I combine creativity, customisation, and technology to bring clarity and impact to digital projects.",
+  lang: "en-GB",
   siteLogo: "/alejandro-small.jpg",
   navLinks: [
     { text: "profile", href: "/#profile" },
@@ -29,7 +29,7 @@ export const SITE_CONTENT: SiteContent = {
     name: "Shifa Amankwa-Gabbey",
     specialty: "Technology | Creativity",
     summary:
-      "I'm a Computer Engineering student with a passion for visual design, where I combine creativity, customization, and technology to bring clarity and impact to digital projects.",
+      "I'm a Computer Engineering student with a passion for visual design, where I combine creativity, customisation, and technology to bring clarity and impact to digital projects.",
     email: "shifa.gabbey@ashesi.edu.gh",
   },
   experience: [
@@ -56,7 +56,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       name: "Behaviour-Aware Access Controller",
-      summary: "An intelligent, standalone RFID access control system that uses a Finite State Machine (FSM) to detect and block behavioral anomalies in real-time without relying on external servers.",
+      summary: "An intelligent, standalone RFID access control system that uses a Finite State Machine (FSM) to detect and block behavioural anomalies in real-time without relying on external servers.",
       linkPreview: "/projects/behaviour-aware-access-controller",
       linkSource: "https://github.com/shiiifa/Behaviour-Aware-Access-Controller",
       image: "/behavior-aware-access.png",
@@ -70,14 +70,14 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       name: "Cyber Threat Dynamics in VANETs",
-      summary: "A mathematical modeling of malware spread in vehicular networks using SEIR-S framework and wireless analysis.",
+      summary: "A mathematical modelling of malware spread in vehicular networks using SEIR-S framework and wireless analysis.",
       linkPreview: "/projects/cyber-threat-dynamics-in-vanets",
       linkSource: "https://github.com/shiiifa/MalwareSimulation",
       image: "/vanets.png",
     },
     {
       name: "Ashesi Student Information System",
-      summary: "A propositional logic-based CAMU-inspired prototype for automated course enrollment decisions.",
+      summary: "A propositional logic-based CAMU-inspired prototype for automated course enrolment decisions.",
       linkPreview: "/projects/ashesi-student-information-system",
       linkSource: "https://github.com/shiiifa?tab=repositories",
       image: "/asis.jpg",
@@ -108,7 +108,7 @@ export const SITE_CONTENT: SiteContent = {
       summary: "A machine learning pipeline for detecting synthetic speech and audio deepfakes using CNN, LSTM, and hybrid models with 98% accuracy.",
       linkPreview: "/projects/deepfake-audio-detection",
       linkSource: "https://github.com/shiiifa/Deepfake-Audio-Detection",
-      image: "/deepfake.jpeg",
+      image: "/deepfake_thumbnail.png",
     },
   ],
 
@@ -141,7 +141,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       name: "Portfolio Website Development", 
-      summary: "Modern, responsive portfolio website built with Astro and Tailwind CSS, featuring custom animations and optimized performance.",
+      summary: "Modern, responsive portfolio website built with Astro and Tailwind CSS, featuring custom animations and optimised performance.",
       image: "/clone-ig.png",
       linkPreview: "#",
       linkSource: "#",
@@ -160,7 +160,7 @@ export const SITE_CONTENT: SiteContent = {
   skills: [
     {
       category: "Technical Skills",
-      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nData Analysis & Visualization: Excel, MATLAB\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad\nPrototyping & Hardware: 3D Printing, Arduino (UNO)",
+      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nData Analysis & Visualisation: Excel, MATLAB\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad\nPrototyping & Hardware: 3D Printing, Arduino (UNO)",
       proficiency: "Intermediate"
     },
     {
@@ -178,7 +178,7 @@ export const SITE_CONTENT: SiteContent = {
   about: {
     description: `I am a BSc. Computer Engineering student at Ashesi University with a strong passion for visual design.
 
-My work lies at the intersection of creativity, customization, and technology, where I focus on bringing clarity and impact to digital projects. In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment.
+My work lies at the intersection of creativity, customisation, and technology, where I focus on bringing clarity and impact to digital projects. In my space, technologies are constantly evolving, and I am eager to learn, adapt, and experiment.
 
 From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
 
