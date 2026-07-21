@@ -7,7 +7,7 @@ type Props = AboutProps & Pick<HeroProps, "name">;
 const { image, name } = Astro.props;
 ---
 
-<div class="flex flex-col items-center gap-12 md:flex-row md:gap-12">
+<div class="flex flex-col items-center gap-12 md:flex-row md:items-start md:gap-12">
   <div class="w-full text-base text-neutral md:w-2/3 md:pr-8">
 
     <p class="fade-in-element mb-4">
@@ -26,10 +26,10 @@ const { image, name } = Astro.props;
 
   <div class="flex-shrink-0">
     <Image
-      class="fade-in-image h-96 w-80 object-cover rounded-lg"
+      class="fade-in-image h-[32rem] w-[26rem] object-cover object-top rounded-lg"
       src={image}
-      width="400"
-      height="480"
+      width="480"
+      height="580"
       alt={name}
     />
   </div>
