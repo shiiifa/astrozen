@@ -7,8 +7,8 @@ type Props = AboutProps & Pick<HeroProps, "name">;
 const { image, name } = Astro.props;
 ---
 
-<div class="flex flex-col items-center gap-12 md:flex-row md:items-start md:gap-12">
-  <div class="w-full text-base text-neutral md:w-2/3 md:pr-8">
+<div class="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-8">
+  <div class="w-full text-base leading-[1.65] text-neutral md:w-[58%] md:shrink-0">
 
     <p class="fade-in-element mb-4">
       I’m a Computer Engineering student at Ashesi University interested in building systems that combine software, hardware, and thoughtful user experience design. My work focuses on creating clear and structured digital solutions that make complex technical ideas more accessible and usable.
@@ -24,9 +24,9 @@ const { image, name } = Astro.props;
 
   </div>
 
-  <div class="flex-shrink-0">
+  <div class="flex w-full justify-center md:w-[42%] md:justify-end">
     <Image
-      class="fade-in-image h-[32rem] w-[26rem] object-cover object-top rounded-lg"
+      class="fade-in-image h-[32rem] w-full max-w-[26rem] object-cover object-top rounded-lg"
       src={image}
       width="480"
       height="580"
