@@ -183,6 +183,6 @@ My work lies at the intersection of creativity, customization, and technology, w
 From coursework to team projects, I've gained hands-on experience in both engineering principles and digital tools, sharpening my skills in turning complex ideas into accessible and engaging outputs.
 
 Through my ongoing projects and exploration of new technologies, I am building not only technical competence but also a mindset of curiosity, problem-solving, and innovation that will continue to guide my journey as a designer and engineer.`,
-    image: "/alejandro-big.jpg",
+    image: "/new-photo.png",
   },
 };
