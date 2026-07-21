@@ -132,6 +132,33 @@ export const SITE_CONTENT: SiteContent = {
       technologies: ["Next.js", "Tailwind CSS", "TypeScript"]
     },
     {
+      name: "Senators' Montessori School",
+      summary: "School website for Senators' Montessori, showcasing programmes, achievements, and admissions information with a clear, family-friendly design.",
+      image: "/elmir-portfolio.png",
+      linkPreview: "#",
+      linkSource: "https://senatorsmontessori.com",
+      status: "Completed",
+      technologies: ["Web Design", "Responsive Design"]
+    },
+    {
+      name: "Selasi Nukpe Portfolio",
+      summary: "Professional portfolio website for a career coach and higher-education leader, highlighting experience, mentorship work, and career services impact.",
+      image: "/clone-ig.png",
+      linkPreview: "#",
+      linkSource: "https://selasinukpe.vercel.app",
+      status: "Completed",
+      technologies: ["Next.js", "Tailwind CSS"]
+    },
+    {
+      name: "Gifty Asiedu Portfolio",
+      summary: "Personal website for the Director of the Girls' Education Unit, presenting career timeline, advocacy work, research, and contact information.",
+      image: "/spotifu.png",
+      linkPreview: "#",
+      linkSource: "https://giftyasiedu.com",
+      status: "Completed",
+      technologies: ["Web Design", "Responsive Design"]
+    },
+    {
       name: "E-commerce Website Design",
       summary: "Custom Shopify theme development and branding for a local retail business, featuring responsive design and integrated payment systems.",
       image: "/shopify-clon.png",
