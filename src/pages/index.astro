@@ -28,6 +28,16 @@ const beyondEngineeringItems = [
     linkPreview: "/beyond-engineering/spelling-bee"
   },
   {
+    name: "BGILD Summer Institute Speaker",
+    image: "/BGILD.png",
+    linkPreview: "/beyond-engineering/bgild-summer-institute"
+  },
+  {
+    name: "IEEE Ashesi Social Media Manager",
+    image: "/ieeeashesi.png",
+    linkPreview: "/beyond-engineering/ieee-ashesi"
+  },
+  {
     name: "Sage Literacy Foundation",
     image: "/sage4.jpg",
     linkPreview: "/beyond-engineering/sage-foundation"
@@ -197,9 +207,12 @@ const beyondEngineeringItems = [
       updateArrows();
       window.addEventListener('resize', updateArrows, { passive: true });
 
-      // Mouse / pen drag-to-slide (touch uses native pan-x scrolling)
+      // Mouse / pen drag-to-slide — only activates after a real drag threshold
+      // so simple clicks on tiles still navigate.
+      const DRAG_THRESHOLD = 8;
+      let pointerActive = false;
       let dragging = false;
-      let moved = false;
+      let suppressClick = false;
       let startX = 0;
       let startScroll = 0;
       let pointerId: number | null = null;
@@ -213,44 +226,59 @@ const beyondEngineeringItems = [
         beyondContainer.scrollTo({ left: target, behavior: 'smooth' });
       };
 
-      beyondContainer.addEventListener('pointerdown', (e: PointerEvent) => {
-        if (e.pointerType === 'touch' || e.button !== 0) return;
+      const beginDrag = (e: PointerEvent) => {
         dragging = true;
-        moved = false;
-        pointerId = e.pointerId;
-        startX = e.clientX;
-        startScroll = beyondContainer.scrollLeft;
+        suppressClick = true;
         beyondContainer.classList.add('is-dragging');
-        beyondContainer.setPointerCapture(pointerId);
-      });
+        try {
+          beyondContainer.setPointerCapture(e.pointerId);
+        } catch {
+          // ignore capture failures
+        }
+      };
 
-      beyondContainer.addEventListener('pointermove', (e: PointerEvent) => {
-        if (!dragging || e.pointerId !== pointerId) return;
-        const dx = e.clientX - startX;
-        if (Math.abs(dx) > 4) moved = true;
-        beyondContainer.scrollLeft = startScroll - dx;
-      });
-
-      const endDrag = (e: PointerEvent) => {
-        if (!dragging || e.pointerId !== pointerId) return;
+      const endPointer = () => {
+        if (!pointerActive) return;
+        const wasDragging = dragging;
+        pointerActive = false;
         dragging = false;
         pointerId = null;
         beyondContainer.classList.remove('is-dragging');
-        if (moved) {
-          e.preventDefault();
-          snapToNearest();
-        }
+        if (wasDragging) snapToNearest();
         updateArrows();
       };
 
-      beyondContainer.addEventListener('pointerup', endDrag);
-      beyondContainer.addEventListener('pointercancel', endDrag);
+      beyondContainer.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (e.pointerType === 'touch' || e.button !== 0) return;
+        pointerActive = true;
+        dragging = false;
+        suppressClick = false;
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        startScroll = beyondContainer.scrollLeft;
+      });
+
+      beyondContainer.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!pointerActive || e.pointerId !== pointerId) return;
+        const dx = e.clientX - startX;
+        if (!dragging) {
+          if (Math.abs(dx) < DRAG_THRESHOLD) return;
+          beginDrag(e);
+        }
+        beyondContainer.scrollLeft = startScroll - dx;
+      });
+
+      beyondContainer.addEventListener('pointerup', endPointer);
+      beyondContainer.addEventListener('pointercancel', endPointer);
+      beyondContainer.addEventListener('lostpointercapture', () => {
+        if (pointerActive) endPointer();
+      });
 
       beyondContainer.addEventListener('click', (e: MouseEvent) => {
-        if (!moved) return;
+        if (!suppressClick) return;
         e.preventDefault();
         e.stopPropagation();
-        moved = false;
+        suppressClick = false;
       }, true);
     });
   </script>

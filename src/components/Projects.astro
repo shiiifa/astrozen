@@ -174,6 +174,7 @@ const { projects } = Astro.props;
     cursor: grabbing;
     scroll-snap-type: none;
     scroll-behavior: auto;
+    user-select: none;
   }
 
   #projectsContainer.is-dragging a {
@@ -251,9 +252,12 @@ const { projects } = Astro.props;
     updateArrows();
     window.addEventListener('resize', updateArrows, { passive: true });
 
-    // Mouse / pen drag-to-slide (touch uses native pan-x scrolling)
+    // Mouse / pen drag-to-slide — only activates after a real drag threshold
+    // so simple clicks on project tiles still navigate.
+    const DRAG_THRESHOLD = 8;
+    let pointerActive = false;
     let dragging = false;
-    let moved = false;
+    let suppressClick = false;
     let startX = 0;
     let startScroll = 0;
     let pointerId: number | null = null;
@@ -267,45 +271,60 @@ const { projects } = Astro.props;
       container.scrollTo({ left: target, behavior: 'smooth' });
     };
 
-    container.addEventListener('pointerdown', (e: PointerEvent) => {
-      if (e.pointerType === 'touch' || e.button !== 0) return;
+    const beginDrag = (e: PointerEvent) => {
       dragging = true;
-      moved = false;
-      pointerId = e.pointerId;
-      startX = e.clientX;
-      startScroll = container.scrollLeft;
+      suppressClick = true;
       container.classList.add('is-dragging');
-      container.setPointerCapture(pointerId);
-    });
+      try {
+        container.setPointerCapture(e.pointerId);
+      } catch {
+        // ignore capture failures
+      }
+    };
 
-    container.addEventListener('pointermove', (e: PointerEvent) => {
-      if (!dragging || e.pointerId !== pointerId) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 4) moved = true;
-      container.scrollLeft = startScroll - dx;
-    });
-
-    const endDrag = (e: PointerEvent) => {
-      if (!dragging || e.pointerId !== pointerId) return;
+    const endPointer = () => {
+      if (!pointerActive) return;
+      const wasDragging = dragging;
+      pointerActive = false;
       dragging = false;
       pointerId = null;
       container.classList.remove('is-dragging');
-      if (moved) {
-        e.preventDefault();
-        snapToNearest();
-      }
+      if (wasDragging) snapToNearest();
       updateArrows();
     };
 
-    container.addEventListener('pointerup', endDrag);
-    container.addEventListener('pointercancel', endDrag);
+    container.addEventListener('pointerdown', (e: PointerEvent) => {
+      if (e.pointerType === 'touch' || e.button !== 0) return;
+      pointerActive = true;
+      dragging = false;
+      suppressClick = false;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startScroll = container.scrollLeft;
+    });
 
-    // Prevent accidental navigation after a drag
+    container.addEventListener('pointermove', (e: PointerEvent) => {
+      if (!pointerActive || e.pointerId !== pointerId) return;
+      const dx = e.clientX - startX;
+      if (!dragging) {
+        if (Math.abs(dx) < DRAG_THRESHOLD) return;
+        beginDrag(e);
+      }
+      container.scrollLeft = startScroll - dx;
+    });
+
+    container.addEventListener('pointerup', endPointer);
+    container.addEventListener('pointercancel', endPointer);
+    container.addEventListener('lostpointercapture', () => {
+      if (pointerActive) endPointer();
+    });
+
+    // Only block navigation after an actual drag, not a normal click
     container.addEventListener('click', (e: MouseEvent) => {
-      if (!moved) return;
+      if (!suppressClick) return;
       e.preventDefault();
       e.stopPropagation();
-      moved = false;
+      suppressClick = false;
     }, true);
   });
 </script>
