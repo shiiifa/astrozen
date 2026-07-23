@@ -73,6 +73,12 @@ export const SITE_CONTENT: SiteContent = {
       image: "/behavior-aware-access.png",
     },
     {
+      name: "Coin-Operated Washing Machine Digital Control System",
+      summary: "A finite state machine–based digital control system for a coin-operated washing machine that accepts 1 and 2 GHC coins, accumulates payment to a 5 GHC charge, and runs timed wash, rinse, and spin cycles with seven-segment display feedback.",
+      linkPreview: "/projects/coin-operated-washing-machine",
+      image: "/dsdproject2.png",
+    },
+    {
       name: "Ashesi Multipurpose Reservation System",
       summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/projects/ashesi-multipurpose-reservation-system",

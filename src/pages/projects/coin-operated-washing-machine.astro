@@ -1,0 +1,107 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SITE_CONTENT } from "@config";
+import { Image } from "astro:assets";
+
+const project = SITE_CONTENT.projects.find(p => 
+  p.name === "Coin-Operated Washing Machine Digital Control System"
+);
+
+if (!project) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    {/* Back Arrow */}
+    <div class="mb-8">
+      <a href="/" class="inline-flex items-center text-primary hover:text-white transition-colors">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <header class="mb-12 text-center">
+      <div class="mb-8">
+        <Image
+          src="/dsdproject.png"
+          alt={project.name}
+          class="w-full max-w-4xl mx-auto h-64 object-cover rounded-2xl border border-neutral/20"
+          width={800}
+          height={400}
+        />
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">
+        {project.name}
+      </h1>
+      <p class="text-lg text-neutral">
+        {project.summary}
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project Overview</h2>
+        <p class="text-neutral leading-relaxed">
+          This project involves designing and implementing a digital control system for a coin-operated washing machine. The system accepts only 1 GHC and 2 GHC coins, inserted one at a time, and accumulates payment until a fixed charge of 5 GHC is reached. Once the required amount is fully received, the machine automatically begins its washing cycle. Any excess amount beyond 5 GHC is not refunded.
+        </p>
+        <p class="text-neutral leading-relaxed mt-4">
+          A four-digit seven-segment display communicates system status to the user. During payment, the display shows the remaining amount needed to complete the transaction. After full payment is reached, the system transitions into automatic operation without further user input.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Washing Cycle Phases</h2>
+        <p class="text-neutral leading-relaxed mb-4">
+          The washing process is divided into three sequential phases. Each phase uses the same timing mechanism, with the display resetting to 00 at the start of each stage and showing elapsed time as the cycle progresses.
+        </p>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Wash:</strong> Runs for 55 time units</li>
+          <li><strong>Rinse:</strong> Runs for 15 time units</li>
+          <li><strong>Spin:</strong> Runs for 5 time units</li>
+        </ul>
+        <p class="text-neutral leading-relaxed mt-4">
+          Upon completion of all cycles, the system returns to an idle state and displays “End” on the seven-segment display. An LED or buzzer is then activated at one-unit intervals as a completion indicator, and the system waits for a user reset input.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">SS Push Button Control</h2>
+        <p class="text-neutral leading-relaxed">
+          A push button labeled “SS” controls system behaviour after initialisation. When pressed at the end of the full cycle, it resets the system back to the initial idle state. When pressed during any active cycle (wash, rinse, or spin), it pauses the timing operation without resetting the system. The button has no effect during coin insertion beyond its defined pause/reset behaviour.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Technical Implementation</h2>
+        <ul class="text-neutral list-disc list-inside space-y-2">
+          <li><strong>Architecture:</strong> Finite state machine (FSM) driven by a 1000 Hz clock source</li>
+          <li><strong>Hardware Design:</strong> Logisim implementation using JK flip-flops</li>
+          <li><strong>HDL:</strong> Verilog implementation with proper seven-segment display control</li>
+          <li><strong>Verification:</strong> Custom testbench covering state transitions, especially at cycle boundaries</li>
+          <li><strong>User Interface:</strong> Four-digit seven-segment display for payment remaining, elapsed cycle time, and End status</li>
+        </ul>
+      </section>
+
+      <!-- VERILOG TESTBENCH VIDEO -->
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Verilog Testbench</h2>
+        <div class="overflow-hidden rounded-lg border border-neutral/20 bg-black/40">
+          <video
+            class="w-full h-auto"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/dsdproject.png"
+          >
+            <source src="/Verilog%20Testbench.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+    </div>
+  </article>
+</Layout>
