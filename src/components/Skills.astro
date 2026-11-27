@@ -10,7 +10,7 @@ const { skills } = Astro.props;
 ---
 
 <Section text="skills" href="skills">
-  <div class="grid grid-cols-1 justify-items-center gap-16 px-4 md:grid-cols-3 md:gap-8">
+  <div class="skills-layout grid grid-cols-1 justify-items-center gap-16 px-4 md:grid-cols-3 md:gap-8">
     {skills.map((skill) => (
       <details class="skill-orbit">
         <summary class="skill-orbit__trigger">
@@ -37,25 +37,31 @@ const { skills } = Astro.props;
     z-index: 0;
   }
 
+  .skills-layout {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 8rem;
+  }
+
   .skill-orbit:hover,
   .skill-orbit:focus-within,
   .skill-orbit[open] {
-    z-index: 20;
+    z-index: 50;
   }
 
   .skill-orbit__trigger {
     display: grid;
-    width: clamp(9rem, 15vw, 11rem);
+    width: clamp(7.5rem, 12vw, 9rem);
     aspect-ratio: 1;
     place-items: center;
-    padding: 2rem;
+    padding: 1rem;
     border: 1px solid var(--color-primary);
     border-radius: 9999px;
     background: transparent;
     color: var(--color-primary);
     cursor: pointer;
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.25;
     list-style: none;
@@ -82,15 +88,18 @@ const { skills } = Astro.props;
 
   .skill-orbit__popup {
     position: absolute;
+    z-index: 60;
     top: calc(100% + 1rem);
     left: 50%;
-    width: min(22rem, 88vw);
-    padding: 1.25rem 1.5rem;
+    width: min(20rem, 88vw);
+    padding: 1rem 1.25rem;
     border: 1px solid rgb(225 173 1 / 40%);
     border-radius: 1rem;
     background: rgb(28 35 45 / 98%);
     box-shadow: 0 18px 48px rgb(0 0 0 / 40%);
     color: var(--color-neutral);
+    font-size: 0.9375rem;
+    line-height: 1.45;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -0.25rem);
