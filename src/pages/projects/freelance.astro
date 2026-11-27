@@ -5,20 +5,29 @@ import { SITE_CONTENT } from "@config";
 const completedProjects = SITE_CONTENT.freelanceProjects.filter((project) => project.status === "Completed");
 const testimonials = [
   {
-    author: "Obed Allotey Babington",
+    author: "Obed Allotey Babington, Ashesi C'2025",
     quote: "Shifa is a dynamic blend of intelligence, professionalism, and creativity. At a time when I was dissatisfied with my own portfolio site but lacked the time to improve it, I was relieved to discover her skill. Despite still being a student, she worked with the pace and quality of a full-time professional. The site speaks for itself.",
   },
   {
-    author: "Obed Allotey Babington",
+    author: "Obed Allotey Babington, Ashesi C'2025",
     quote: "She transformed my site from merely informative to genuinely classy. It achieved the goal of being a digital encapsulation of what I do – and in that regard, expectations were exceeded! Her ability to understand my vision, preferences, and feedback for the site, even with limited interaction, and to deliver quick, high-quality revisions was impressive.",
   },
   {
-    author: "Elmir",
+    author: "Elmir Mohammed, Ashesi C'2024",
     quote: "Shifa is an exceptionally professional and reliable individual. She consistently met deadlines and communicated through channels that fit my schedule, making the entire collaboration seamless. Her time consciousness and commitment to maintaining a high standard of work were truly impressive.",
   },
   {
-    author: "Elmir",
+    author: "Elmir Mohammed, Ashesi C'2024",
     quote: "What stood out most was her flexibility; she was always willing to make adjustments to ensure the final result perfectly matched my vision. I would highly recommend Shifa for any project requiring strong web design skills and a professional touch. I loved how clean and well-structured the website was. The design was simple, elegant, and perfectly aligned with what I needed. The responsiveness was top-notch across all devices, and I encountered no issues with timelines or delivery. Everything was handled with a high level of professionalism from start to finish.",
+  },
+  {
+    author: "Selasi Nukpe, Assistant Director of Career Services",
+    quote: "It has been an amazing experience working with Shifa. In fact, she challenges me to sit it up and be focused:",
+    points: [
+      "I reached out to her because I was impressed with the portfolio she built for herself.",
+      "The process was smooth and easy to understand.",
+      "Her communication was very professional and I liked how she followed up to ensure I stayed on track.",
+    ],
   },
 ];
 ---
@@ -56,7 +65,7 @@ const testimonials = [
 
     <section class="px-6 py-8">
       <h2 class="fade-in-element mb-6 text-2xl font-serif font-bold text-primary">recent work</h2>
-      <div class="freelance-marquee rounded-lg" aria-label="Recent freelance projects">
+      <div class="freelance-marquee rounded-lg" data-draggable-carousel aria-label="Recent freelance projects">
         <div class="freelance-marquee__track">
           {[0, 1].map((copy) => (
             <div class="freelance-marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
@@ -66,20 +75,18 @@ const testimonials = [
                   target="_blank"
                   rel="noopener noreferrer"
                   tabindex={copy === 1 ? -1 : undefined}
-                  class="freelance-project-card group"
-                  aria-label={`View ${project.name} website`}
+                  class="freelance-project-card"
+                  aria-label={`Open ${project.name} website in a new tab`}
                 >
-                  <img src={project.image} alt="" loading="lazy" class="freelance-project-card__image" onerror="this.onerror=null; this.src='/clone-ig.png'" />
-                  <div class="p-5">
-                    <h3 class="font-serif text-lg font-semibold text-white transition-colors group-hover:text-primary">{project.name}</h3>
-                    <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-neutral/80">{project.summary}</p>
-                    <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                      Visit website
-                      <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </span>
-                  </div>
+                  <iframe
+                    src={project.linkSource}
+                    title="Website preview"
+                    loading="lazy"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    sandbox="allow-scripts allow-same-origin"
+                    class="freelance-project-card__preview"
+                  />
                 </a>
               ))}
             </div>
@@ -91,7 +98,7 @@ const testimonials = [
     <section class="px-6 py-8">
       <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
         <h2 class="fade-in-element mb-6 text-2xl font-serif font-bold text-primary lg:col-span-1">in their words</h2>
-        <div class="freelance-marquee freelance-marquee--testimonials rounded-lg lg:col-span-2" aria-label="Client testimonials">
+        <div class="freelance-marquee freelance-marquee--testimonials rounded-lg lg:col-span-2" data-draggable-carousel aria-label="Client testimonials">
           <div class="freelance-marquee__track">
             {[0, 1].map((copy) => (
               <div class="freelance-marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
@@ -100,7 +107,14 @@ const testimonials = [
                     <svg class="mb-4 h-6 w-6 text-primary/60" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                     </svg>
-                    <blockquote class="mb-6 text-sm italic leading-relaxed text-neutral/80">&ldquo;{testimonial.quote}&rdquo;</blockquote>
+                    <blockquote class="mb-6 text-sm leading-relaxed text-neutral/80">
+                      <p>{testimonial.quote}</p>
+                      {testimonial.points && (
+                        <ul class="mt-4 list-disc space-y-3 pl-5">
+                          {testimonial.points.map((point) => <li>{point}</li>)}
+                        </ul>
+                      )}
+                    </blockquote>
                     <div class="border-t border-neutral/20 pt-4 text-sm font-medium text-white">{testimonial.author}</div>
                   </article>
                 ))}
@@ -130,17 +144,73 @@ const testimonials = [
   </main>
 </Layout>
 
+<script>
+  document.querySelectorAll<HTMLElement>("[data-draggable-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>(".freelance-marquee__track");
+    if (!track) return;
+
+    let pointerStart = 0;
+    let offsetStart = 0;
+    let dragged = false;
+
+    carousel.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      pointerStart = event.clientX;
+      offsetStart = Number.parseFloat(track.style.getPropertyValue("--drag-offset")) || 0;
+      dragged = false;
+      carousel.setPointerCapture(event.pointerId);
+      track.style.animationPlayState = "paused";
+    });
+
+    carousel.addEventListener("pointermove", (event) => {
+      if (!carousel.hasPointerCapture(event.pointerId)) return;
+      const distance = event.clientX - pointerStart;
+      if (Math.abs(distance) > 5) dragged = true;
+      if (dragged) track.style.setProperty("--drag-offset", `${offsetStart + distance}px`);
+    });
+
+    const finishDrag = (event: PointerEvent) => {
+      if (carousel.hasPointerCapture(event.pointerId)) carousel.releasePointerCapture(event.pointerId);
+      track.style.animationPlayState = "";
+    };
+
+    carousel.addEventListener("pointerup", finishDrag);
+    carousel.addEventListener("pointercancel", finishDrag);
+    carousel.addEventListener("click", (event) => {
+      if (!dragged) return;
+      event.preventDefault();
+      event.stopPropagation();
+      dragged = false;
+    }, true);
+  });
+</script>
+
 <style>
   .freelance-marquee {
     --marquee-gap: 1.25rem;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
     mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .freelance-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .freelance-marquee:active {
+    cursor: grabbing;
   }
 
   .freelance-marquee__track {
     display: flex;
     width: max-content;
+    translate: var(--drag-offset, 0px) 0;
     animation: freelance-marquee-scroll 55s linear infinite;
+    will-change: transform;
   }
 
   .freelance-marquee__group {
@@ -152,7 +222,7 @@ const testimonials = [
 
   .freelance-project-card,
   .freelance-testimonial-card {
-    flex: 0 0 20rem;
+    flex: 0 0 34rem;
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 12%);
     border-radius: 1rem;
@@ -161,6 +231,7 @@ const testimonials = [
 
   .freelance-project-card {
     display: block;
+    height: 23rem;
     color: inherit;
     text-decoration: none;
     transition: border-color 200ms ease, transform 200ms ease;
@@ -177,19 +248,21 @@ const testimonials = [
     outline-offset: 4px;
   }
 
-  .freelance-project-card__image {
+  .freelance-project-card__preview {
     display: block;
     width: 100%;
-    height: 12rem;
-    object-fit: cover;
+    height: 100%;
+    border: 0;
     background: white;
+    pointer-events: none;
   }
 
   .freelance-testimonial-card {
     display: flex;
-    min-height: 15rem;
+    min-height: 19rem;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1.75rem;
+    white-space: normal;
   }
 
   .freelance-testimonial-card blockquote {
@@ -212,15 +285,19 @@ const testimonials = [
     }
 
     .freelance-marquee {
-      overflow-x: auto;
       mask-image: none;
     }
   }
 
   @media (max-width: 640px) {
-    .freelance-project-card,
+    .freelance-project-card {
+      flex-basis: 84vw;
+      height: 18rem;
+    }
+
     .freelance-testimonial-card {
-      flex-basis: min(82vw, 20rem);
+      flex-basis: 84vw;
+      min-height: 18rem;
     }
 
     .freelance-marquee--testimonials {
