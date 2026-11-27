@@ -19,23 +19,10 @@ const { projects } = Astro.props;
          <h3 class="text-primary text-xl font-bold opacity-80">academic</h3>
        </div>
 
-      {/* Navigation Arrows */}
-      <button type="button" id="prevBtn" aria-label="Previous projects" class="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary transition-opacity duration-200 hover:bg-primary/30 touch-manipulation disabled:pointer-events-none disabled:opacity-40 lg:flex lg:p-3" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
-      <button type="button" id="nextBtn" aria-label="Next projects" class="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 transform rounded-full bg-primary/20 p-2 text-primary transition-opacity duration-200 hover:bg-primary/30 touch-manipulation disabled:pointer-events-none disabled:opacity-40 lg:flex lg:p-3" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-        <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
       {/* Academic Projects Container */}
       <div
         id="projectsContainer"
-        class="flex gap-6 overflow-x-auto px-14 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
+        class="flex gap-6 overflow-x-auto px-4 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
         style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
       >
          {/* Academic Projects Preview */}
@@ -165,13 +152,8 @@ const { projects } = Astro.props;
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('projectsContainer');
-    const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement | null;
-    const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement | null;
 
-    if (!container || !prevBtn || !nextBtn) return;
-
-    let animating = false;
-    let unlockTimer: ReturnType<typeof setTimeout> | null = null;
+    if (!container) return;
 
     const getStep = () => {
       const item = container.querySelector(':scope > *') as HTMLElement | null;
@@ -181,56 +163,6 @@ const { projects } = Astro.props;
       return item.offsetWidth + gap;
     };
 
-    const updateArrows = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      const maxScroll = Math.max(0, scrollWidth - clientWidth);
-      prevBtn.disabled = scrollLeft <= 2;
-      nextBtn.disabled = scrollLeft >= maxScroll - 2;
-    };
-
-    const scrollByStep = (direction: number) => {
-      if (animating) return;
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      const maxScroll = Math.max(0, scrollWidth - clientWidth);
-      const step = getStep();
-      const target = Math.max(0, Math.min(maxScroll, scrollLeft + direction * step));
-      if (Math.abs(target - scrollLeft) < 1) return;
-
-      animating = true;
-      container.scrollTo({ left: target, behavior: 'smooth' });
-
-      const unlock = () => {
-        animating = false;
-        updateArrows();
-        if (unlockTimer) clearTimeout(unlockTimer);
-      };
-
-      container.addEventListener('scrollend', unlock, { once: true });
-      if (unlockTimer) clearTimeout(unlockTimer);
-      unlockTimer = setTimeout(unlock, 450);
-    };
-
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollByStep(-1);
-    });
-
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollByStep(1);
-    });
-
-    let scrollRaf = 0;
-    container.addEventListener('scroll', () => {
-      if (scrollRaf) return;
-      scrollRaf = requestAnimationFrame(() => {
-        scrollRaf = 0;
-        updateArrows();
-      });
-    }, { passive: true });
-
-    updateArrows();
-    window.addEventListener('resize', updateArrows, { passive: true });
 
     // Mouse / pen drag-to-slide — only activates after a real drag threshold
     // so simple clicks on project tiles still navigate.
@@ -270,7 +202,6 @@ const { projects } = Astro.props;
       pointerId = null;
       container.classList.remove('is-dragging');
       if (wasDragging) snapToNearest();
-      updateArrows();
     };
 
     container.addEventListener('pointerdown', (e: PointerEvent) => {

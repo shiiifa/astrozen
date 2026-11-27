@@ -11,7 +11,7 @@ const isHomepage = Astro.url.pathname === '/';
 ---
 
 <header
-  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-4 py-4 sm:px-5 sm:py-6"
+  class="sticky top-0 z-50 flex w-full animate-slide-in justify-between bg-[#240C2C] px-4 py-4 sm:px-5 sm:py-6"
 >
   {/* Function syntax with yellow color and classic typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
@@ -50,7 +50,7 @@ const isHomepage = Astro.url.pathname === '/';
                   aria-haspopup="true"
                 >
                   {link.text}
-                  <svg class="inline-block w-3 h-3 ml-1 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="inline-block w-3 h-3 ml-1 text-white transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -130,7 +130,7 @@ const isHomepage = Astro.url.pathname === '/';
 
   /* Make original text invisible - only pseudo-element shows */
   .typing-header-name .typing-container {
-    color: #E1AD01;
+    color: transparent;
   }
 
 
@@ -299,11 +299,6 @@ const isHomepage = Astro.url.pathname === '/';
 </script>
 
 <style>
-  header {
-    animation-timeline: scroll();
-    animation-range: 0 650px;
-  }
-
   @media (max-width: 1023px) {
     header {
       padding: 0.75rem 1rem;
