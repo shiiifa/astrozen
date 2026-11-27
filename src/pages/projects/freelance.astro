@@ -80,7 +80,7 @@ const testimonials = [
                 >
                   <iframe
                     src={project.linkSource}
-                    title="Website preview"
+                    title={`${project.name} desktop website preview`}
                     loading="lazy"
                     tabindex="-1"
                     aria-hidden="true"
@@ -106,7 +106,7 @@ const testimonials = [
                   <svg class="mb-4 h-6 w-6 text-primary/60" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                   </svg>
-                  <blockquote class="mb-6 text-sm leading-relaxed text-neutral/80">
+                  <blockquote class="mb-6 text-xs leading-relaxed text-neutral/80">
                     <p>{testimonial.quote}</p>
                     {testimonial.paragraphs?.map((paragraph) => <p class="mt-3">{paragraph}</p>)}
                   </blockquote>
@@ -142,6 +142,18 @@ const testimonials = [
   document.querySelectorAll<HTMLElement>("[data-draggable-carousel]").forEach((carousel) => {
     const track = carousel.querySelector<HTMLElement>(".freelance-marquee__track");
     if (!track) return;
+
+    carousel.querySelectorAll<HTMLElement>(".freelance-project-card").forEach((card) => {
+      const preview = card.querySelector<HTMLIFrameElement>(".freelance-project-card__preview");
+      if (!preview) return;
+
+      const resizePreview = () => {
+        preview.style.setProperty("--preview-scale", `${card.clientWidth / 1440}`);
+      };
+
+      new ResizeObserver(resizePreview).observe(card);
+      resizePreview();
+    });
 
     const getGroupWidth = () => track.querySelector<HTMLElement>(".freelance-marquee__group")?.offsetWidth ?? carousel.clientWidth;
     const wrapOffset = (offset: number) => {
@@ -234,16 +246,21 @@ const testimonials = [
 
   .freelance-project-card,
   .freelance-testimonial-card {
-    flex: 0 0 52rem;
+    flex: 0 0 34rem;
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 12%);
     border-radius: 1rem;
     background: rgb(28 35 45 / 88%);
   }
 
+  .freelance-testimonial-card {
+    flex-basis: 28rem;
+  }
+
   .freelance-project-card {
+    position: relative;
     display: block;
-    height: 24rem;
+    aspect-ratio: 16 / 10;
     color: inherit;
     text-decoration: none;
     transition: border-color 200ms ease, transform 200ms ease;
@@ -261,12 +278,22 @@ const testimonials = [
   }
 
   .freelance-project-card__preview {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 1440px;
+    max-width: none;
+    height: 900px;
     border: 0;
     background: white;
     pointer-events: none;
+    transform: scale(var(--preview-scale, 0.5));
+    transform-origin: top left;
+  }
+
+  .freelance-marquee--testimonials .freelance-marquee__track {
+    animation: none;
   }
 
   .freelance-testimonial-card {
@@ -304,13 +331,12 @@ const testimonials = [
   @media (max-width: 640px) {
     .freelance-project-card {
       flex-basis: 88vw;
-      height: 17rem;
     }
 
     .freelance-testimonial-card {
-      flex-basis: 88vw;
+      flex-basis: 82vw;
       height: auto;
-      min-height: 22rem;
+      min-height: 20rem;
     }
   }
 </style>

@@ -256,10 +256,10 @@ const isHomepage = Astro.url.pathname === '/';
               const href = item.getAttribute("href");
               const sectionId = entry.target.id;
               // Check for both hash links and full URLs
-              if (href === `#${sectionId}` || href === `/#${sectionId}`) {
-                item.classList.add("text-white", "md:after:opacity-100");
+              if (href === `#${sectionId}` || href === `/#${sectionId}` || (item.id === "projects-dropdown-btn" && sectionId === "projects")) {
+item.classList.add("text-white", "after:opacity-100");
               } else {
-                item.classList.remove("text-white", "md:after:opacity-100");
+item.classList.remove("text-white", "after:opacity-100");
               }
             });
           }
