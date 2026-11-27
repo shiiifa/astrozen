@@ -33,7 +33,7 @@ const testimonials = [
 ---
 
 <Layout title="Freelance Work - Shifa Amankwa-Gabbey">
-  <main class="freelance-page-shell min-h-screen bg-black text-white">
+  <main class="min-h-screen bg-black text-white">
     <section class="px-6 py-16">
       <div class="text-center">
         <h1 class="fade-in-element mb-6 text-4xl font-serif font-bold text-white md:text-5xl">
@@ -63,7 +63,7 @@ const testimonials = [
       </div>
     </section>
 
-    <section class="freelance-carousel-section px-5 py-10 md:px-8 xl:px-14">
+    <section class="freelance-carousel-section py-10">
       <h2 class="fade-in-element mb-6 text-2xl font-serif font-bold text-primary">recent work</h2>
       <div class="freelance-marquee rounded-lg" data-draggable-carousel aria-label="Recent freelance projects">
         <div class="freelance-marquee__track">
@@ -95,7 +95,7 @@ const testimonials = [
       </div>
     </section>
 
-    <section class="freelance-carousel-section px-5 py-10 md:px-8 xl:px-14">
+    <section class="freelance-carousel-section py-10">
       <h2 class="fade-in-element mb-6 text-2xl font-serif font-bold text-primary">in their words</h2>
       <div class="freelance-marquee freelance-marquee--testimonials rounded-lg" data-draggable-carousel aria-label="Client testimonials">
         <div class="freelance-marquee__track">
@@ -185,12 +185,17 @@ const testimonials = [
 </script>
 
 <style>
-  .freelance-page-shell {
+  .freelance-carousel-section {
     position: relative;
     left: 50%;
     width: 100vw;
-    max-width: none;
     margin-left: -50vw;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .freelance-carousel-section h2 {
+    max-width: 48rem;
+    margin-inline: auto;
   }
 
   .freelance-marquee {
