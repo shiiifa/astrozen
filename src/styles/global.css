@@ -6,9 +6,9 @@
 
   --color-primary: #E1AD01;
   --color-neutral: #94a3b8;
-  --color-white: #e2e8f0;
-  --color-black: #240C2C;
-  --color-background: #240C2C;
+  --color-white: #F5F3F7;
+  --color-black: #360038;
+  --color-background: #360038;
   --color-surface: #1c232d;
   --color-foreground: #e2e8f0;
   --color-muted: #94a3b8;
@@ -175,6 +175,12 @@ header *:not(.typing-header-name):not(.typing-container), footer * {
 
   .group {
     touch-action: manipulation;
+  }
+}
+
+@layer utilities {
+  .bg-primary.text-white {
+    color: var(--color-black);
   }
 }
 

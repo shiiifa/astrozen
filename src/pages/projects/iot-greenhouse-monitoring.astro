@@ -1,0 +1,178 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const projectTitle = "IoT Greenhouse Monitoring System";
+const projectDescription =
+  "An ESP32 greenhouse monitoring prototype that tracks temperature, humidity, light, soil moisture, and gas readings through an MQTT-to-InfluxDB pipeline and a live PHP dashboard.";
+const coverImage =
+  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-09%20at%2017.31.55-0szuw58iuGvu6FlfEWxfE65QBP9fM8.jpeg";
+const reportUrl =
+  "https://blobs.vusercontent.net/blob/IoT_Greenhouse_Report-fNlbJUuRqswFj1TsiyfsmQ33OUUK4Q.pdf";
+const gallery = [
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Influx%20Cloud-u8eNvDnLKDds8sWopgIwrjUfdz1oVS.jpeg",
+    alt: "InfluxDB Cloud Data Explorer with greenhouse sensor measurements plotted over time",
+    caption: "InfluxDB Cloud Data Explorer. The report identifies cloud mirroring as planned work.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Influx%20Local-1lDSpPDz2TgbtKP19ZuYjlslBYrrz5.jpeg",
+    alt: "Local InfluxDB Data Explorer showing greenhouse sensor series and query controls",
+    caption: "Local InfluxDB Data Explorer showing the greenhouse measurement series.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Greenhouse%20Flow-Uebdw0KO1Ut1BiIR9h96S1F1muVAlJ.jpeg",
+    alt: "Node-RED flow connecting greenhouse MQTT messages to local InfluxDB and an InfluxDB Cloud destination",
+    caption: "Node-RED flow for handling MQTT readings and routing them to time-series storage.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/System_Architecture_Diagram_Greenhouse-c6rGPIXFqi5trjrsiGOkMtks89r8BO.png",
+    alt: "System architecture diagram from sensors and ESP32 through MQTT, Node-RED, InfluxDB, and a PHP dashboard",
+    caption: "System architecture and data path, including the planned cloud mirror.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Greenhouse_Screenshot1-0fmhVE1qWLX27iijTnYoR3wcs4TkDR.jpeg",
+    alt: "Wiring diagram connecting an ESP32 to greenhouse sensors and an I2C LCD",
+    caption: "Circuit diagram for the ESP32, four physical sensors, and the I²C display.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174246-RLhOOfZraIwr38hNy3KRC9Moj2ksey.png",
+    alt: "Greenhouse dashboard statistics and sensor history charts",
+    caption: "Dashboard history charts and per-sensor statistics from an earlier test capture.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174228-XhgpEVi1PQCVwLac7iLAZtkAwCHMBM.png",
+    alt: "Smart Greenhouse Dashboard showing latest sensor readings and history charts",
+    caption: "Live dashboard view with latest readings, sensor status, and history charts.",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174955-mviOVIKZvYC1VQ5VogIraDZF2A3qIq.png",
+    alt: "Greenhouse dashboard showing current readings and sensor history on 9 November 2026",
+    caption: "Dashboard capture from 9 November 2026, including current readings and sensor history.",
+  },
+];
+---
+
+<Layout title={projectTitle} description={projectDescription}>
+  <article class="mx-auto max-w-5xl px-5 py-12 sm:py-16">
+    <a
+      href="/projects"
+      class="mb-8 inline-flex items-center gap-2 text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to projects
+    </a>
+
+    <header class="mb-12">
+      <figure class="mb-8 overflow-hidden rounded-2xl border border-neutral/20 bg-surface">
+        <img
+          src={coverImage}
+          alt="ESP32 greenhouse monitoring prototype on a breadboard, with a live LCD and connected sensors"
+          class="aspect-[4/3] w-full object-cover sm:aspect-[16/9]"
+          width="1080"
+          height="810"
+          fetchpriority="high"
+        />
+        <figcaption class="px-4 py-3 text-sm text-neutral">The working sensor prototype with LCD readout.</figcaption>
+      </figure>
+
+      <div class="max-w-3xl">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Internet of Things · 2026</p>
+        <h1 class="mb-5 font-serif text-4xl font-bold text-white sm:text-5xl">{projectTitle}</h1>
+        <p class="text-lg leading-relaxed text-neutral">{projectDescription}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://github.com/shiiifa/iotgreenhouse"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-black transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            View source code
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
+          <a
+            href={reportUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-primary/50 px-5 py-3 font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            Read the project report
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
+      <div class="space-y-10">
+        <section>
+          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Project overview</h2>
+          <p class="leading-relaxed text-neutral">
+            Greenhouse conditions can shift between manual checks. This prototype makes those changes easier to observe by logging air temperature, relative humidity, light level, soil moisture, and a gas-sensor signal. It combines an ESP32 sensor node and local display with a Raspberry Pi data pipeline and a browser-based dashboard.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Hardware and readings</h2>
+          <p class="mb-4 leading-relaxed text-neutral">
+            Four physical sensors produce five readings: the DHT22 measures temperature and humidity, while an LDR, soil-moisture probe, and MQ-3 provide the remaining channels. The ESP32 samples at a nominal five-second interval and updates a 16×2 I²C LCD with alternating reading pages.
+          </p>
+          <ul class="grid gap-3 sm:grid-cols-2">
+            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Temperature</strong><span class="mt-1 block text-sm">DHT22 · °C</span></li>
+            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Relative humidity</strong><span class="mt-1 block text-sm">DHT22 · % RH</span></li>
+            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Light level</strong><span class="mt-1 block text-sm">LDR · scaled percentage</span></li>
+            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Soil moisture</strong><span class="mt-1 block text-sm">Probe · scaled percentage</span></li>
+            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral sm:col-span-2"><strong class="text-white">Gas-sensor signal</strong><span class="mt-1 block text-sm">MQ-3 · raw ADC counts</span></li>
+          </ul>
+          <p class="mt-4 text-sm leading-relaxed text-neutral">
+            The light value is a relative scaled signal (the MQTT topic is named <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/lux</code>); it is not calibrated lux. The report also notes that soil-moisture and MQ-3 responses still need to be verified against changing conditions.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Data pipeline</h2>
+          <p class="leading-relaxed text-neutral">
+            The ESP32 publishes numeric text readings over Wi-Fi and MQTT to Mosquitto on the Raspberry Pi. Node-RED subscribes to the <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/+</code> topics, parses each value, and writes timestamped measurements to local InfluxDB. The PHP dashboard, served from a laptop with XAMPP, queries the local InfluxDB HTTP API and presents current values, history charts, summary statistics, and CSV export.
+          </p>
+          <p class="mt-4 leading-relaxed text-neutral">
+            The official report describes the InfluxDB Cloud destination as planned work, not as a completed mirror. It also notes that the class brief set a 14-day operating target; the report still needed to document the actual recording period and any gaps.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Project media</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            {gallery.map((item) => (
+              <figure class="overflow-hidden rounded-2xl border border-neutral/20 bg-surface">
+                <a href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size image: ${item.alt}`}>
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    class="max-h-[28rem] w-full bg-black/20 object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+                <figcaption class="px-4 py-3 text-sm leading-relaxed text-neutral">{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <aside class="h-fit rounded-2xl border border-neutral/20 bg-surface/70 p-5 lg:sticky lg:top-24">
+        <h2 class="mb-4 font-serif text-xl font-semibold text-primary">Project details</h2>
+        <dl class="space-y-4 text-sm">
+          <div><dt class="font-semibold text-white">Controller</dt><dd class="mt-1 text-neutral">ESP32</dd></div>
+          <div><dt class="font-semibold text-white">Messaging</dt><dd class="mt-1 text-neutral">MQTT · Mosquitto</dd></div>
+          <div><dt class="font-semibold text-white">Processing</dt><dd class="mt-1 text-neutral">Node-RED</dd></div>
+          <div><dt class="font-semibold text-white">Storage</dt><dd class="mt-1 text-neutral">Local InfluxDB</dd></div>
+          <div><dt class="font-semibold text-white">Dashboard</dt><dd class="mt-1 text-neutral">PHP · XAMPP · Chart.js</dd></div>
+          <div><dt class="font-semibold text-white">Sampling</dt><dd class="mt-1 text-neutral">Nominally every 5 seconds</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </article>
+</Layout>
