@@ -49,9 +49,9 @@ const { skills } = Astro.props;
     aspect-ratio: 1;
     place-items: center;
     padding: 2rem;
-    border: 1px solid rgb(225 173 1 / 45%);
+    border: 1px solid var(--color-primary);
     border-radius: 9999px;
-    background: radial-gradient(circle at 50% 30%, rgb(225 173 1 / 12%), rgb(28 35 45 / 92%) 70%);
+    background: transparent;
     color: var(--color-primary);
     cursor: pointer;
     font-family: var(--font-serif);
@@ -76,7 +76,7 @@ const { skills } = Astro.props;
   .skill-orbit[open] .skill-orbit__trigger {
     transform: translateY(-3px);
     border-color: var(--color-primary);
-    background: radial-gradient(circle at 50% 30%, rgb(225 173 1 / 26%), rgb(28 35 45 / 96%) 72%);
+    background: transparent;
     box-shadow: 0 0 16px rgb(225 173 1 / 48%), 0 0 42px rgb(225 173 1 / 24%);
   }
 
