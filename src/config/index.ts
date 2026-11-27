@@ -37,7 +37,7 @@ export const SITE_CONTENT: SiteContent = {
       company: "Smart Technologies Lab, Ashesi University",
       position: "Undergraduate Research Assistant",
       startDate: "January 2026",
-      endDate: "Present",
+      endDate: "September 2026",
       summary: [
         "Conducting research on deploying trained spiking neural networks (SNNs) onto FPGA hardware for energy-efficient, noise-robust speech recognition.",
         "Conducting a systematic literature review across neuromorphic computing, hardware-software co-design, and speech processing to identify and validate a novel research gap in gradient-trained SNN deployment via automated FPGA porting frameworks.",
