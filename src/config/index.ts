@@ -203,17 +203,17 @@ export const SITE_CONTENT: SiteContent = {
 
   skills: [
     {
-      category: "Technical Skills",
+      category: "Technical",
       tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nSoftware: VS Code\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad, Wokwi\nPrototyping: 3D Printing, Laser Cutting\nHardware: Arduino (UNO), ESP32, STM32FO91RC, Artix-7 Basys 3, Raspberry Pi",
       proficiency: "Intermediate"
     },
     {
-      category: "Design & Creative Skills", 
+      category: "Design & Creative",
       tools: "Graphic Design & Video Editing: Canva, CapCut\nUI/UX & Web Tools: Wix, Wordpress, Vercel, Canva, Netlify, v0\nCreative Writing: Freelance writing, Content development",
       proficiency: "Intermediate"
     },
     {
-      category: "Professional Skills",
+      category: "Professional",
       tools: "Microsoft Office Suite: Word, Excel, PowerPoint\nResearch: Technical Writing & Documentation\nCollaboration and Project Management Tools: Slack, Notion, Microsoft Teams, Google Workspace",
       proficiency: "Advanced"
     }
