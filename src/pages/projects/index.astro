@@ -99,14 +99,26 @@ import { SITE_CONTENT } from "@config";
               
               <div class="relative z-10 p-6">
                 <div class="mb-4 overflow-hidden rounded-xl">
-                  <Image
-                    class="w-full h-32 object-cover transition-transform duration-700 group-hover:scale-110"
-                    src={image}
-                    alt={name}
-                    width={300}
-                    height={128}
-                    loading="lazy"
-                  />
+                  {image.startsWith("https://") ? (
+                    <img
+                      class="w-full h-32 object-cover transition-transform duration-700 group-hover:scale-110"
+                      src={image}
+                      alt={name}
+                      width="300"
+                      height="128"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <Image
+                      class="w-full h-32 object-cover transition-transform duration-700 group-hover:scale-110"
+                      src={image}
+                      alt={name}
+                      width={300}
+                      height={128}
+                      loading="lazy"
+                    />
+                  )}
                 </div>
                 
                 <h3 class="font-serif text-lg font-medium text-primary mb-2 group-hover:text-white transition-colors">

@@ -59,6 +59,13 @@ export const SITE_CONTENT: SiteContent = {
   
   projects: [
     {
+      name: "IoT Greenhouse Monitoring System",
+      summary: "An ESP32 greenhouse monitor streams five sensor readings over MQTT through a Raspberry Pi pipeline into local InfluxDB and a PHP dashboard with live status, history charts, and CSV export.",
+      linkPreview: "/projects/iot-greenhouse-monitoring",
+      linkSource: "https://github.com/shiiifa/iotgreenhouse",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-09%20at%2017.31.55-0szuw58iuGvu6FlfEWxfE65QBP9fM8.jpeg",
+    },
+    {
       name: "Heart Rate Monitor Using Active Bandpass Filtering",
       summary: "A non-invasive optical heart rate monitor based on Photoplethysmography (PPG) that detects blood volume changes, conditions analog signals with active bandpass filtering, and displays real-time BPM readings on an LCD screen.",
       linkPreview: "/projects/heart-rate-monitor",
