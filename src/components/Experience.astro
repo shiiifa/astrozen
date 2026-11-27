@@ -12,8 +12,8 @@ const { experience } = Astro.props;
 <Section text="experience" href="experience">
   {
     experience.map(({ company, position, startDate, endDate, summary }) => (
-      <details class="experience-item fade-in-element mb-5 rounded-xl border border-white/10 bg-white/[0.02] transition-colors open:border-primary/40 open:bg-white/[0.04]">
-        <summary class="cursor-pointer list-none rounded-xl px-4 py-4 marker:content-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:px-5">
+      <details class="experience-item fade-in-element mb-5">
+        <summary class="cursor-pointer list-none py-4 marker:content-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
           <span class="flex flex-col items-start gap-0.5 pr-6">
             <span class="font-serif text-lg font-semibold text-white sm:text-xl">{company}</span>
             <span class="font-serif text-base font-medium text-primary sm:text-lg">{position}</span>
