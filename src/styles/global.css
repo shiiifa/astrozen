@@ -155,7 +155,7 @@ h4 {
 }
 
 /* Exclude header and footer completely */
-header *, footer *, .typing-header-name, .typing-container {
+header *:not(.typing-header-name):not(.typing-container), footer * {
   animation: none !important;
   opacity: 1 !important;
 }
