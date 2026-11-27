@@ -26,7 +26,7 @@ const ogImgUrl = canonicalURL + socialImage;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/png" href="/new-photo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -42,9 +42,9 @@ const ogImgUrl = canonicalURL + socialImage;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImgUrl} />
   </head>
-  <body class="bg-[#240C2C] font-sans">
+  <body class="bg-background font-sans">
     <Header siteLogo={siteLogo} navLinks={navLinks} />
-    <main class="mx-auto max-w-3xl px-5">
+    <main class="mx-auto w-full min-w-0 max-w-3xl px-4 sm:px-5">
       <slot />
     </main>
     <Footer author={author} />

@@ -8,6 +8,10 @@
   --color-neutral: #94a3b8;
   --color-white: #e2e8f0;
   --color-black: #240C2C;
+  --color-background: #240C2C;
+  --color-surface: #1c232d;
+  --color-foreground: #e2e8f0;
+  --color-muted: #94a3b8;
 
   --text-xs: 0.875rem;
   --text-xs--line-height: 1.125rem;
@@ -52,8 +56,38 @@
   }
 }
 
+html {
+  scroll-padding-top: 5rem;
+}
+
 body {
-  background-color: #240C2C;
+  min-width: 320px;
+  overflow-x: clip;
+  background-color: var(--color-background);
+}
+
+img,
+picture,
+video,
+canvas {
+  max-width: 100%;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+pre,
+code {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
 }
 
 /* Scroll-triggered fade-in animation for all content */
@@ -128,24 +162,35 @@ header *, footer *, .typing-header-name, .typing-container {
 
 /* Mobile touch improvements */
 @media (max-width: 768px) {
-  a, button {
+  a,
+  button {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
   }
-  
-  /* Ensure project tiles are clickable on mobile */
+
+  button,
+  .nav-item {
+    min-height: 44px;
+  }
+
   .group {
     touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
   }
-  
-  /* Improve touch targets */
-  a {
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+}
+
+@media (max-width: 639px) {
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    line-height: 1.12;
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 6.6vw, 2rem);
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: clamp(1.15rem, 5.4vw, 1.5rem);
+    line-height: 1.3;
   }
 }
