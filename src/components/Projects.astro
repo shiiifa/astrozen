@@ -13,7 +13,7 @@ const { projects } = Astro.props;
 <Section text="projects and research" href="projects">
   <div class="space-y-12">
     {/* Academic Projects Section */}
-    <div class="relative">
+      <div class="relative left-1/2 w-screen max-w-7xl -translate-x-1/2">
        {/* Academic Subtitle */}
        <div class="mb-6 text-center">
          <h3 class="text-primary text-xl font-bold opacity-80">academic</h3>
@@ -35,7 +35,7 @@ const { projects } = Astro.props;
       {/* Academic Projects Container */}
       <div
         id="projectsContainer"
-        class="flex overflow-x-auto space-x-6 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
+        class="flex gap-6 overflow-x-auto px-14 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory"
         style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
       >
          {/* Academic Projects Preview */}
@@ -43,7 +43,7 @@ const { projects } = Astro.props;
            projects.map(({ name, summary, image, linkPreview }) => (
              <a
                href={linkPreview}
-               class="group fade-in-tile relative flex w-[min(85vw,20rem)] flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-500 hover:scale-105 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 snap-start sm:w-80"
+               class="group fade-in-tile relative flex h-[24rem] w-[min(86vw,30rem)] flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-neutral/20 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 snap-start"
                draggable="false"
              >
               {/* ORIGINAL ASH BACKGROUND RESTORED */}
@@ -52,9 +52,9 @@ const { projects } = Astro.props;
               {/* Content */}
               <div class="relative z-10 flex h-full flex-col p-6">
                 {/* Image */}
-                <div class="mb-6 overflow-hidden rounded-xl -mt-8">
+                <div class="mb-5 overflow-hidden rounded-xl">
                   <Image
-                    class="fade-in-image h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    class="fade-in-image h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     src={image}
                     alt={name}
                     width={400}
@@ -142,28 +142,8 @@ const { projects } = Astro.props;
 </Section>
 
 <style>
-  /* Custom animations */
-  .group {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-  
-  .group:hover {
-    transform: translateY(-4px) scale(1.02);
-  }
-  
-  .group::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, transparent, var(--color-primary)/10, transparent);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    border-radius: 1rem;
-  }
-  
-  .group:hover::before {
-    opacity: 1;
+  #projectsContainer {
+    scroll-padding-inline: 3.5rem;
   }
 
   #projectsContainer::-webkit-scrollbar {

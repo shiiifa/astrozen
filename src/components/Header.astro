@@ -107,13 +107,13 @@ const isHomepage = Astro.url.pathname === '/';
   }
 
   /* Typing container */
-  .typing-container {
+  .typing-header-name .typing-container {
     display: inline-block;
     position: relative;
   }
 
   /* Create classic typewriter effect */
-  .typing-container::before {
+  .typing-header-name .typing-container::before {
     content: 'shifa_amankwa_gabbey();';
     position: absolute;
     top: 0;
@@ -129,13 +129,10 @@ const isHomepage = Astro.url.pathname === '/';
   }
 
   /* Make original text invisible - only pseudo-element shows */
-  .typing-container {
+  .typing-header-name .typing-container {
     color: #E1AD01;
   }
 
-  .typing-container::before {
-    display: none;
-  }
 
   @keyframes typing {
     /* Type for 3s (0% to 33.3%) */

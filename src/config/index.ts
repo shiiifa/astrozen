@@ -204,17 +204,17 @@ export const SITE_CONTENT: SiteContent = {
   skills: [
     {
       category: "Technical Skills",
-      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nData Analysis & Visualisation: Excel, MATLAB\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad\nPrototyping & Hardware: 3D Printing, Arduino (UNO)",
+      tools: "Programming Languages: Python, Java, HTML, MATLAB, C\nComputer-Aided Design (CAD) Software: SolidWorks, Proteus, Autodesk Fusion 360, KiCad, Wokwi\nPrototyping: 3D Printing, Laser Cutting\nHardware: Arduino (UNO), ESP32, STM32FO91RC, Artix-7 Basys 3, Raspberry Pi",
       proficiency: "Intermediate"
     },
     {
       category: "Design & Creative Skills", 
-      tools: "Graphic Design & Video Editing: Canva, CapCut\nUI/UX & Web Tools: Wix, Wordpress, Vercel, Canva\nCreative Writing: Freelance writing, Content Development",
+      tools: "Graphic Design & Video Editing: Canva, CapCut\nUI/UX & Web Tools: Wix, Wordpress, Vercel, Canva, Netlify, v0\nCreative Writing: Freelance writing, content development",
       proficiency: "Intermediate"
     },
     {
       category: "Professional & Collaboration Skills",
-      tools: "Microsoft Office Suite: Word, Excel, PowerPoint\nTechnical Writing & Documentation\nCollaboration Tools: Slack, Notion, Microsoft Teams, Google Workspace",
+      tools: "Microsoft Office Suite: Word, Excel, PowerPoint\nResearch: Technical Writing & Documentation\nCollaboration and Project Management Tools: Slack, Notion, Microsoft Teams, Google Workspace",
       proficiency: "Advanced"
     }
   ],
