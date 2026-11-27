@@ -11,7 +11,7 @@ const isHomepage = Astro.url.pathname === '/';
 ---
 
 <header
-  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-5 py-6"
+  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-[#240C2C] px-4 py-4 sm:px-5 sm:py-6"
 >
   {/* Function syntax with yellow color and classic typing effect */}
   <a href="/" aria-label="Home link" class="typing-header-name text-2xl font-bold tracking-tight">
@@ -21,7 +21,8 @@ const isHomepage = Astro.url.pathname === '/';
   <button
     type="button"
     id="menu-button"
-    class="px-1.5 text-neutral sm:hidden"
+    class="px-1.5 text-neutral lg:hidden"
+    aria-label="Toggle navigation menu"
     aria-expanded="false"
     aria-controls="main-menu"
   >
@@ -29,10 +30,10 @@ const isHomepage = Astro.url.pathname === '/';
   </button>
 
   <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-[#240C2C] px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
+    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-[#240C2C] px-4 py-5 text-neutral lg:static lg:block lg:border-0 lg:bg-transparent lg:p-0"
     id="main-menu"
   >
-    <ul class="gap-2 sm:flex">
+    <ul class="gap-2 lg:flex">
       {
         navLinks.map((link) => {
           // Use hash links on homepage, full URLs on other pages
@@ -100,7 +101,7 @@ const isHomepage = Astro.url.pathname === '/';
     font-weight: bold;
     color: #E1AD01;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: clamp(0.875rem, 4.5vw, 1.5rem);
     letter-spacing: -0.5px;
     display: inline-block;
   }
@@ -129,7 +130,11 @@ const isHomepage = Astro.url.pathname === '/';
 
   /* Make original text invisible - only pseudo-element shows */
   .typing-container {
-    color: transparent;
+    color: #E1AD01;
+  }
+
+  .typing-container::before {
+    display: none;
   }
 
   @keyframes typing {
@@ -300,6 +305,48 @@ const isHomepage = Astro.url.pathname === '/';
   header {
     animation-timeline: scroll();
     animation-range: 0 650px;
+  }
+
+  @media (max-width: 1023px) {
+    header {
+      padding: 0.75rem 1rem;
+    }
+
+    .typing-header-name {
+      max-width: calc(100vw - 5.75rem);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    #menu-button {
+      display: inline-flex;
+      flex: 0 0 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #main-menu {
+      top: calc(100% - 0.25rem);
+      right: 1rem;
+      width: min(20rem, calc(100vw - 2rem));
+      max-height: calc(100dvh - 5.5rem);
+      overflow-y: auto;
+    }
+
+    #main-menu > ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    #main-menu li {
+      width: 100%;
+    }
+
+    #projects-dropdown {
+      left: 0;
+      width: min(16rem, calc(100vw - 4rem));
+    }
   }
 </style>
 </header>
