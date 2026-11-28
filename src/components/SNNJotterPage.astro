@@ -1,35 +1,10 @@
 ---
 const sections = [
-  {
-    number: "01",
-    title: "Why hearts and wearables care",
-    description: "The everyday story behind ECG signals and event-driven computing.",
-    href: "/projects/snnjotter/everyday-story",
-  },
-  {
-    number: "02",
-    title: "The real engineering puzzle",
-    description: "Fitting a useful model onto a small FPGA without losing the important details.",
-    href: "/projects/snnjotter/engineering-puzzle",
-  },
-  {
-    number: "03",
-    title: "How the pipeline works",
-    description: "Follow the path from heartbeat recordings to a configurable chip.",
-    href: "/projects/snnjotter/pipeline",
-  },
-  {
-    number: "04",
-    title: "What those words actually mean",
-    description: "A pocket glossary for the signals, neurons, and hardware in this project.",
-    href: "/projects/snnjotter/glossary",
-  },
-  {
-    number: "05",
-    title: "A flexible road to May",
-    description: "The broad milestones guiding the capstone as it develops.",
-    href: "/projects/snnjotter/roadmap",
-  },
+  { label: "Everyday story", href: "/projects/snnjotter/everyday-story" },
+  { label: "Engineering puzzle", href: "/projects/snnjotter/engineering-puzzle" },
+  { label: "Pipeline", href: "/projects/snnjotter/pipeline" },
+  { label: "Glossary", href: "/projects/snnjotter/glossary" },
+  { label: "Roadmap", href: "/projects/snnjotter/roadmap" },
 ];
 ---
 
@@ -41,30 +16,29 @@ const sections = [
     </p>
   </header>
 
+  <section class="mt-8 rounded-2xl border border-white/10 bg-white/[0.035] p-5 sm:p-6" aria-labelledby="preface-title">
+    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Preface</p>
+    <h2 id="preface-title" class="mt-2 font-serif text-xl font-bold text-white">Why I opened the notebook</h2>
+    <p class="mt-3 text-sm leading-relaxed text-white/75">When friends or connections ask what I’m working on, I don’t want to hand them a long explanation full of jargon. So I made SNNJotter: a peek into my notebook while I figure things out, one idea at a time.</p>
+    <p class="mt-3 text-sm leading-relaxed text-white/75">As an undergrad exploring Spiking Neural Networks, the word “spikes” has become a constant buzzword in my world. And because this project works with human heartbeat data, I want the big picture to make sense to everyday people too—not just people who already speak chip-design.</p>
+  </section>
+
   <section class="mt-8" aria-labelledby="contents-title">
-    <div class="mb-4 px-1">
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">SNNJotter notebook</p>
-      <h2 id="contents-title" class="mt-2 font-serif text-2xl font-bold text-white sm:text-3xl">Table of contents</h2>
-      <p class="mt-2 text-sm leading-relaxed text-white/70">Choose a section to open its own page.</p>
-    </div>
-    <ol class="space-y-3">
-      {sections.map((section) => (
-        <li>
-          <a
-            href={section.href}
-            class="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-5 transition-colors hover:border-primary/45 hover:bg-primary/[0.07] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:items-center sm:p-6"
-          >
-            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/35 bg-primary/10 text-sm font-bold text-primary" aria-hidden="true">{section.number}</span>
-            <span class="min-w-0 flex-1">
-              <span class="block font-serif text-lg font-bold text-white group-hover:text-primary sm:text-xl">{section.title}</span>
-              <span class="mt-1 block text-sm leading-relaxed text-white/70">{section.description}</span>
-            </span>
-            <span class="mt-2 shrink-0 text-lg text-primary transition-transform group-hover:translate-x-1 sm:mt-0" aria-hidden="true">→</span>
-            <span class="sr-only">Open {section.title}</span>
-          </a>
-        </li>
-      ))}
-    </ol>
+    <h2 id="contents-title" class="font-serif text-2xl font-bold text-white sm:text-3xl">Table of contents</h2>
+    <nav class="mt-4" aria-label="Table of contents">
+      <ul class="divide-y divide-white/10 border-y border-white/10">
+        {sections.map((section) => (
+          <li>
+            <a
+              href={section.href}
+              class="block py-3 text-base font-medium text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {section.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </section>
 
   <p class="mt-8 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/60">
