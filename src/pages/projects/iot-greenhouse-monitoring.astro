@@ -12,42 +12,34 @@ const gallery = [
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Influx%20Cloud-u8eNvDnLKDds8sWopgIwrjUfdz1oVS.jpeg",
     alt: "InfluxDB Cloud Data Explorer with greenhouse sensor measurements plotted over time",
-    caption: "InfluxDB Cloud Data Explorer. The report identifies cloud mirroring as planned work.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Influx%20Local-1lDSpPDz2TgbtKP19ZuYjlslBYrrz5.jpeg",
     alt: "Local InfluxDB Data Explorer showing greenhouse sensor series and query controls",
-    caption: "Local InfluxDB Data Explorer showing the greenhouse measurement series.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Greenhouse%20Flow-Uebdw0KO1Ut1BiIR9h96S1F1muVAlJ.jpeg",
     alt: "Node-RED flow connecting greenhouse MQTT messages to local InfluxDB and an InfluxDB Cloud destination",
-    caption: "Node-RED flow for handling MQTT readings and routing them to time-series storage.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/System_Architecture_Diagram_Greenhouse-c6rGPIXFqi5trjrsiGOkMtks89r8BO.png",
     alt: "System architecture diagram from sensors and ESP32 through MQTT, Node-RED, InfluxDB, and a PHP dashboard",
-    caption: "System architecture and data path, including the planned cloud mirror.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Greenhouse_Screenshot1-0fmhVE1qWLX27iijTnYoR3wcs4TkDR.jpeg",
     alt: "Wiring diagram connecting an ESP32 to greenhouse sensors and an I2C LCD",
-    caption: "Circuit diagram for the ESP32, four physical sensors, and the I²C display.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174246-RLhOOfZraIwr38hNy3KRC9Moj2ksey.png",
     alt: "Greenhouse dashboard statistics and sensor history charts",
-    caption: "Dashboard history charts and per-sensor statistics from an earlier test capture.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174228-XhgpEVi1PQCVwLac7iLAZtkAwCHMBM.png",
     alt: "Smart Greenhouse Dashboard showing latest sensor readings and history charts",
-    caption: "Live dashboard view with latest readings, sensor status, and history charts.",
   },
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-11-09%20174955-mviOVIKZvYC1VQ5VogIraDZF2A3qIq.png",
     alt: "Greenhouse dashboard showing current readings and sensor history on 9 November 2026",
-    caption: "Dashboard capture from 9 November 2026, including current readings and sensor history.",
   },
 ];
 ---
@@ -114,16 +106,6 @@ const gallery = [
           <p class="mb-4 leading-relaxed text-neutral">
             Four physical sensors produce five readings: the DHT22 measures temperature and humidity, while an LDR, soil-moisture probe, and MQ-3 provide the remaining channels. The ESP32 samples at a nominal five-second interval and updates a 16×2 I²C LCD with alternating reading pages.
           </p>
-          <ul class="grid gap-3 sm:grid-cols-2">
-            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Temperature</strong><span class="mt-1 block text-sm">DHT22 · °C</span></li>
-            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Relative humidity</strong><span class="mt-1 block text-sm">DHT22 · % RH</span></li>
-            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Light level</strong><span class="mt-1 block text-sm">LDR · scaled percentage</span></li>
-            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral"><strong class="text-white">Soil moisture</strong><span class="mt-1 block text-sm">Probe · scaled percentage</span></li>
-            <li class="rounded-xl border border-neutral/15 bg-surface/70 p-4 text-neutral sm:col-span-2"><strong class="text-white">Gas-sensor signal</strong><span class="mt-1 block text-sm">MQ-3 · raw ADC counts</span></li>
-          </ul>
-          <p class="mt-4 text-sm leading-relaxed text-neutral">
-            The light value is a relative scaled signal (the MQTT topic is named <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/lux</code>); it is not calibrated lux. The report also notes that soil-moisture and MQ-3 responses still need to be verified against changing conditions.
-          </p>
         </section>
 
       <section class="mb-12">
@@ -150,11 +132,17 @@ const gallery = [
                     decoding="async"
                   />
                 </a>
-                <figcaption class="px-4 py-3 text-sm leading-relaxed text-neutral">{item.caption}</figcaption>
               </figure>
             ))}
           </div>
         </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Sensor readings</h2>
+        <p class="leading-relaxed text-neutral">
+          Temperature: DHT22 · °C. Relative humidity: DHT22 · % RH. Light level: LDR · scaled percentage. Soil moisture: probe · scaled percentage. Gas-sensor signal: MQ-3 · raw ADC counts. The light value is a relative scaled signal (the MQTT topic is named <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/lux</code>), not calibrated lux. Soil-moisture and MQ-3 responses still need to be verified against changing conditions.
+        </p>
+      </section>
     </div>
   </article>
 </Layout>
