@@ -197,11 +197,8 @@ const testimonials = [
 
 <style>
   .freelance-carousel-section {
-    position: relative;
-    left: 50%;
-    width: 100vw;
-    margin-left: -50vw;
-    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+    width: 100%;
+    padding-inline: clamp(1rem, 4vw, 3.5rem);
   }
 
   .freelance-carousel-section h2 {
@@ -327,13 +324,21 @@ const testimonials = [
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 767px) {
+    .freelance-marquee {
+      mask-image: none;
+    }
+
+    .freelance-marquee__track {
+      animation: none;
+    }
+
     .freelance-project-card {
-      flex-basis: 88vw;
+      flex-basis: min(88vw, 28rem);
     }
 
     .freelance-testimonial-card {
-      flex-basis: 82vw;
+      flex-basis: min(84vw, 24rem);
       height: auto;
       min-height: 20rem;
     }
