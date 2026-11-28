@@ -1,10 +1,10 @@
 ---
 const displayStatuses = [
-  { code: "N", category: "Normal Sinus Rhythm", display: "NO-L", level: "Normal", message: "Heart rhythm is normal." },
-  { code: "S", category: "Supraventricular Ectopic", display: "LO", level: "Mild", message: "Mild irregularity detected — early upper-heart beat." },
-  { code: "F", category: "Fusion Beat", display: "CAUt", level: "Moderate caution", message: "Moderate caution — overlapping beat pattern." },
-  { code: "V", category: "Ventricular Ectopic", display: "HI", level: "High", message: "High-risk irregularity detected — lower-heart beat." },
-  { code: "Q", category: "Unknown / Unclassifiable", display: "Err", level: "Signal check", message: "Poor signal — sensor adjustment needed." },
+  { code: "N", category: "Normal Sinus Rhythm", display: "NO-L", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2810%29-2ym9C7HzlhOBRVprf6a1OCVEny6Yoi.png", level: "Normal", message: "Heart rhythm is normal." },
+  { code: "S", category: "Supraventricular Ectopic", display: "LO", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2811%29-U74CZE4b8NcJZZC5J6DzLtAjkLJoYD.png", level: "Mild", message: "Mild irregularity detected — early upper-heart beat." },
+  { code: "F", category: "Fusion Beat", display: "CAUt", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2813%29-jtCbimYa2GkNB2TyWunoCKLSFYZmur.png", level: "Moderate caution", message: "Moderate caution — overlapping beat pattern." },
+  { code: "V", category: "Ventricular Ectopic", display: "HI", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2812%29-KUo7JbCYJF77mGXNsjVZgNGfywZ6zI.png", level: "High", message: "High-risk irregularity detected — lower-heart beat." },
+  { code: "Q", category: "Unknown / Unclassifiable", display: "Err", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2814%29-AsZHZw5TzlSAD027ifDXpP3uI9HivU.png", level: "Signal check", message: "Poor signal — sensor adjustment needed." },
 ];
 ---
 
@@ -23,6 +23,15 @@ const displayStatuses = [
           </div>
           <div class="flex w-fit items-center gap-2 justify-self-end sm:justify-self-auto">
             <span class="text-white/40" aria-hidden="true">→</span>
+            <img
+              src={item.image}
+              alt={`7-segment display showing ${item.display} for ${item.category}`}
+              width="1500"
+              height="1500"
+              loading="lazy"
+              decoding="async"
+              class="h-20 w-20 rounded-lg border border-white/10 bg-black object-contain"
+            />
             <code class="rounded-lg border border-primary/25 bg-primary/10 px-2.5 py-1.5 font-mono text-base font-bold text-primary">{item.display}</code>
           </div>
         </li>
