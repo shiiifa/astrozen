@@ -1,0 +1,23 @@
+<section class="mt-7" aria-label="Why hearts and wearables care">
+  <section class="rounded-2xl border border-primary/25 bg-[#fff7e7] p-6 text-[#2c002e] sm:p-8" aria-labelledby="open-notebook-title">
+    <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#6a4d00]">A note before the notes</p>
+    <h2 id="open-notebook-title" class="mt-2 font-serif text-2xl font-bold sm:text-3xl">Why I opened the notebook</h2>
+    <p class="mt-4 leading-relaxed">When friends or connections ask what I’m working on, I don’t want to hand them a long explanation full of jargon. So I made SNNJotter: a peek into my notebook while I figure things out, one idea at a time.</p>
+    <p class="mt-4 leading-relaxed">As an undergrad exploring Spiking Neural Networks, the word “spikes” has become a constant buzzword in my world. And because this project works with human heartbeat data, I want the big picture to make sense to everyday people too—not just people who already speak chip-design.</p>
+  </section>
+
+  <p class="mt-7 leading-relaxed text-white/80">A heart monitor or wearable can look at an <strong class="text-white">ECG</strong>—a trace of the heart’s electrical activity. A heartbeat creates a brief burst of activity, followed by quieter stretches. The signal is not equally busy every moment.</p>
+  <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <article class="rounded-2xl border border-white/10 bg-white/[0.035] p-5 sm:p-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-neutral">Conventional neural networks</p>
+      <h2 class="mt-2 font-serif text-xl font-bold text-white">Keep calculating</h2>
+      <p class="mt-3 text-sm leading-relaxed text-white/75">Many conventional AI designs keep processing values at each step, even when the input is changing very little. On a small, battery-powered device, that steady activity can be a power challenge.</p>
+    </article>
+    <article class="rounded-2xl border border-primary/30 bg-primary/[0.07] p-5 sm:p-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Spiking neural networks</p>
+      <h2 class="mt-2 font-serif text-xl font-bold text-white">Listen for a change</h2>
+      <p class="mt-3 text-sm leading-relaxed text-white/75">SNNs take inspiration from how biological neurons communicate with brief electrical pulses, or “spikes.” An event-driven design can stay quieter between meaningful changes—but actual power savings depend on how the network is built and measured on hardware.</p>
+    </article>
+  </div>
+  <p class="mt-4 rounded-xl border-l-2 border-primary px-4 py-3 text-sm leading-relaxed text-white/70">That difference is the idea, not a result claim: this project still needs real hardware measurements before anyone can say how much energy it uses.</p>
+</section>
