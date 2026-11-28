@@ -1,0 +1,32 @@
+---
+const faqs = [
+  {
+    question: "What is a spiking neural network?",
+    answer: "It is a type of neural network that communicates with brief events called spikes, inspired by how neurons send signals.",
+  },
+  {
+    question: "Why use an FPGA?",
+    answer: "An FPGA can run a design in dedicated hardware, making it useful to explore real-time performance and resource tradeoffs beyond a software-only model.",
+  },
+  {
+    question: "What does the project classify?",
+    answer: "The capstone explores five heartbeat categories using ECG signals: normal, supraventricular ectopic, ventricular ectopic, fusion, and unknown or unclassifiable.",
+  },
+  {
+    question: "Is this a medical diagnostic tool?",
+    answer: "No. This is an educational capstone project, not a medical device or a substitute for advice from a qualified healthcare professional.",
+  },
+];
+---
+
+<section class="mt-7" aria-label="Frequently asked questions">
+  <p class="leading-relaxed text-white/80">A few quick answers to common questions about the capstone.</p>
+  <dl class="mt-5 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] px-5">
+    {faqs.map((faq) => (
+      <div class="py-4">
+        <dt class="font-semibold text-white">{faq.question}</dt>
+        <dd class="mt-2 text-sm leading-relaxed text-white/70">{faq.answer}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
