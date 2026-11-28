@@ -86,6 +86,13 @@ export const SITE_CONTENT: SiteContent = {
       image: "/dsdproject2.png",
     },
     {
+      name: "Deepfake Audio Detection",
+      summary: "A machine learning pipeline for detecting synthetic speech and audio deepfakes using CNN, LSTM, and hybrid models with 98% accuracy.",
+      linkPreview: "/projects/deepfake-audio-detection",
+      linkSource: "https://github.com/shiiifa/Deepfake-Audio-Detection",
+      image: "/deepfake_thumbnail.png",
+    },
+    {
       name: "Ashesi Multipurpose Reservation System",
       summary: "A centralised platform streamlining student access to campus resources with secure login validation.",
       linkPreview: "/projects/ashesi-multipurpose-reservation-system",
@@ -126,13 +133,6 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/projects/hydrogel-soil-analysis",
       linkSource: "#",
       image: "/hydrogel-analysis.png",
-    },
-    {
-      name: "Deepfake Audio Detection",
-      summary: "A machine learning pipeline for detecting synthetic speech and audio deepfakes using CNN, LSTM, and hybrid models with 98% accuracy.",
-      linkPreview: "/projects/deepfake-audio-detection",
-      linkSource: "https://github.com/shiiifa/Deepfake-Audio-Detection",
-      image: "/deepfake_thumbnail.png",
     },
   ],
 

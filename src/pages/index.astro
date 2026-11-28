@@ -67,15 +67,15 @@ const beyondEngineeringItems = [
   
   <!-- BEYOND ENGINEERING SECTION -->
   <Section text="beyond engineering" href="beyond-engineering">
-    <div class="relative">
+    <div class="relative left-1/2 grid w-screen max-w-5xl -translate-x-1/2 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-5 sm:gap-4">
       {/* Navigation Arrows */}
-      <button type="button" id="beyondPrevBtn" aria-label="Previous items" class="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation backdrop-blur-sm border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="beyondPrevBtn" aria-label="Previous items" class="relative z-10 col-start-1 row-start-1 rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       
-      <button type="button" id="beyondNextBtn" aria-label="Next items" class="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation backdrop-blur-sm border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+      <button type="button" id="beyondNextBtn" aria-label="Next items" class="relative z-10 col-start-3 row-start-1 rounded-full bg-primary/20 p-2 sm:p-3 text-primary hover:bg-primary/30 transition-opacity duration-200 touch-manipulation border border-primary/10 disabled:opacity-40 disabled:pointer-events-none max-sm:hidden" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
         <svg class="h-4 w-4 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -84,7 +84,7 @@ const beyondEngineeringItems = [
       {/* Beyond Engineering Container */}
       <div 
         id="beyondContainer" 
-        class="flex overflow-x-auto space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory max-sm:-mx-4 max-sm:px-4"
+        class="col-start-2 row-start-1 flex min-w-0 overflow-x-auto space-x-3 sm:space-x-6 py-4 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory max-sm:-mx-4 max-sm:px-4"
         style="touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
       >
         {
