@@ -27,7 +27,8 @@ const sections = [
       muted
       loop
       playsinline
-      preload="metadata"
+      webkit-playsinline
+      preload="auto"
       tabindex="-1"
     >
       <source src="/snnjotter-banner.mp4" type="video/mp4" />
@@ -70,6 +71,30 @@ const sections = [
 
 </article>
 
+<script>
+  const bannerVideo = document.querySelector<HTMLVideoElement>("[data-snnjotter-banner]");
+
+  if (bannerVideo) {
+    bannerVideo.muted = true;
+    bannerVideo.defaultMuted = true;
+    bannerVideo.playsInline = true;
+    bannerVideo.loop = true;
+
+    const startBannerPlayback = () => {
+      if (document.visibilityState === "visible" && bannerVideo.paused) {
+        void bannerVideo.play().catch(() => {});
+      }
+    };
+
+    if (bannerVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      startBannerPlayback();
+    } else {
+      bannerVideo.addEventListener("canplay", startBannerPlayback, { once: true });
+    }
+
+    document.addEventListener("visibilitychange", startBannerPlayback);
+  }
+</script>
 
 <style>
   .snnjotter-header {
