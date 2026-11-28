@@ -67,7 +67,7 @@ const testimonials = [
       <div class="freelance-marquee rounded-lg" data-draggable-carousel aria-label="Recent freelance projects">
         <div class="freelance-marquee__track">
           {[0, 1, 2].map((copy) => (
-            <div class="freelance-marquee__group" aria-hidden={copy > 0 ? "true" : undefined}>
+            <div class="freelance-marquee__group" data-copy={copy} aria-hidden={copy > 0 ? "true" : undefined}>
               {completedProjects.map((project) => (
                 <a
                   href={project.linkSource}
@@ -164,7 +164,7 @@ const testimonials = [
     let dragged = false;
 
     carousel.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0 || (carousel.matches(".freelance-marquee--testimonials") && window.matchMedia("(max-width: 767px)").matches)) return;
+      if (event.pointerType === "touch" || event.button !== 0 || (carousel.matches(".freelance-marquee--testimonials") && window.matchMedia("(max-width: 767px)").matches)) return;
       pointerStart = event.clientX;
       offsetStart = Number.parseFloat(track.style.getPropertyValue("--drag-offset")) || 0;
       dragged = false;
@@ -331,6 +331,19 @@ const testimonials = [
   @media (max-width: 767px) {
     .freelance-marquee {
       mask-image: none;
+      touch-action: pan-x pan-y;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .freelance-marquee:not(.freelance-marquee--testimonials) .freelance-marquee__group:nth-child(n + 2) {
+      display: none;
+    }
+
+    .freelance-project-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
 
     .freelance-marquee__track {
