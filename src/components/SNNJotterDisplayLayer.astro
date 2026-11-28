@@ -9,36 +9,102 @@ const displayStatuses = [
 ---
 
 <section class="mt-7" aria-label="The display layer">
-  <p class="leading-relaxed text-white/80">A regular person wearing a health monitor shouldn&apos;t have to decode intimidating clinical terms like “Supraventricular Ectopic” or “Ventricular Ectopic.”</p>
-  <div class="mt-6 rounded-2xl border border-primary/20 bg-surface p-5 sm:p-6">
-    <h2 class="font-serif text-xl font-bold text-white">The display layer</h2>
-    <p class="mt-3 text-sm leading-relaxed text-white/75">As a design plan for this prototype, the Basys 3 board&apos;s built-in 4-digit 7-segment display will map the five technical AAMI heartbeat categories into short, severity-graded status alerts:</p>
-    <ul class="mt-4 space-y-3" aria-label="Planned AAMI status display mappings">
-      {displayStatuses.map((item) => (
-        <li class="grid grid-cols-1 gap-2 rounded-xl border border-white/10 bg-transparent p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:p-4">
-          <div class="min-w-0">
-            <p class="text-xs font-semibold uppercase tracking-wide text-primary">{item.level} · AAMI {item.code}</p>
-            <h3 class="mt-1 text-sm font-semibold text-white">{item.category} <span class="font-normal text-white/60">({item.code})</span></h3>
-            <p class="mt-1 text-sm leading-relaxed text-white/70">{item.message}</p>
-          </div>
-          <div class="flex w-fit items-center gap-2 justify-self-end sm:justify-self-auto">
-            <span class="text-white/40" aria-hidden="true">→</span>
-            <img
-              src={item.image}
-              alt={`7-segment display showing ${item.display} for ${item.category}`}
-              width="1500"
-              height="1500"
-              loading="lazy"
-              decoding="async"
-              class:list={[
-                "rounded-lg border border-white/10 bg-black object-contain",
-                item.display === "LO" || item.display === "HI" ? "h-16 w-16" : "h-20 w-20",
-              ]}
-            />
-          </div>
-        </li>
-      ))}
-    </ul>
-    <p class="mt-4 text-sm leading-relaxed text-white/75">A physical push button on the board is also planned so a user can clear an alert and reset the system for a fresh reading.</p>
+  <div
+    class="grid grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] items-stretch gap-2 sm:grid-cols-[4rem_minmax(0,1fr)_4rem] sm:gap-3"
+  >
+    <div
+      class="flex flex-col items-center justify-around gap-16 py-12"
+      aria-hidden="true"
+    >
+      <img
+        class="size-8 rotate-[-10deg] object-contain opacity-75 mix-blend-screen sm:size-16"
+        src="/snnjotter-doodle-gold.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="min-w-0">
+      <p class="leading-relaxed text-white/80">
+        A regular person wearing a health monitor shouldn&apos;t have to decode
+        intimidating clinical terms like “Supraventricular Ectopic” or
+        “Ventricular Ectopic.”
+      </p>
+      <div class="mt-6">
+        <h2 class="font-serif text-xl font-bold text-white">
+          The display layer
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-white/75">
+          As a design plan for this prototype, the Basys 3 board&apos;s built-in
+          4-digit 7-segment display will map the five technical AAMI heartbeat
+          categories into short, severity-graded status alerts:
+        </p>
+        <ul
+          class="mt-4 space-y-3"
+          aria-label="Planned AAMI status display mappings"
+        >
+          {
+            displayStatuses.map((item) => (
+              <li class="grid grid-cols-1 gap-2 rounded-xl border border-white/10 bg-transparent p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:p-4">
+                <div class="min-w-0">
+                  <p class="text-xs font-semibold tracking-wide text-primary uppercase">
+                    {item.level} · AAMI {item.code}
+                  </p>
+                  <h3 class="mt-1 text-sm font-semibold text-white">
+                    {item.category}{" "}
+                    <span class="font-normal text-white/60">({item.code})</span>
+                  </h3>
+                  <p class="mt-1 text-sm leading-relaxed text-white/70">
+                    {item.message}
+                  </p>
+                </div>
+                <div class="flex w-fit items-center gap-2 justify-self-end sm:justify-self-auto">
+                  <span class="text-white/40" aria-hidden="true">
+                    →
+                  </span>
+                  <img
+                    src={item.image}
+                    alt={`7-segment display showing ${item.display} for ${item.category}`}
+                    width="1500"
+                    height="1500"
+                    loading="lazy"
+                    decoding="async"
+                    class:list={[
+                      "rounded-lg border border-white/10 bg-black object-contain",
+                      item.display === "LO" || item.display === "HI"
+                        ? "h-16 w-16"
+                        : "h-20 w-20",
+                    ]}
+                  />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-4 text-sm leading-relaxed text-white/75">
+          A physical push button on the board is also planned so a user can
+          clear an alert and reset the system for a fresh reading.
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex flex-col items-center justify-around gap-16 py-12"
+      aria-hidden="true"
+    >
+      <img
+        class="size-8 rotate-12 object-contain opacity-80 mix-blend-screen sm:size-16"
+        src="/snnjotter-doodle-star.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="size-8 rotate-[-8deg] object-contain opacity-70 mix-blend-screen sm:size-16"
+        src="/snnjotter-doodle-lavender.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
   </div>
 </section>
