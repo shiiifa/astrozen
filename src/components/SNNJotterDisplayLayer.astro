@@ -15,7 +15,7 @@ const displayStatuses = [
     <p class="mt-3 text-sm leading-relaxed text-white/75">As a design plan for this prototype, the Basys 3 board&apos;s built-in 4-digit 7-segment display will map the five technical AAMI heartbeat categories into short, severity-graded status alerts:</p>
     <ul class="mt-4 space-y-3" aria-label="Planned AAMI status display mappings">
       {displayStatuses.map((item) => (
-        <li class="grid grid-cols-1 gap-2 rounded-xl border border-white/10 bg-white/[0.035] p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:p-4">
+        <li class="grid grid-cols-1 gap-2 rounded-xl border border-white/10 bg-transparent p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:p-4">
           <div class="min-w-0">
             <p class="text-xs font-semibold uppercase tracking-wide text-primary">{item.level} · AAMI {item.code}</p>
             <h3 class="mt-1 text-sm font-semibold text-white">{item.category} <span class="font-normal text-white/60">({item.code})</span></h3>
@@ -30,14 +30,15 @@ const displayStatuses = [
               height="1500"
               loading="lazy"
               decoding="async"
-              class="h-20 w-20 rounded-lg border border-white/10 bg-black object-contain"
+              class:list={[
+                "rounded-lg border border-white/10 bg-black object-contain",
+                item.display === "LO" || item.display === "HI" ? "h-16 w-16" : "h-20 w-20",
+              ]}
             />
-            <code class="rounded-lg border border-primary/25 bg-primary/10 px-2.5 py-1.5 font-mono text-base font-bold text-primary">{item.display}</code>
           </div>
         </li>
       ))}
     </ul>
     <p class="mt-4 text-sm leading-relaxed text-white/75">A physical push button on the board is also planned so a user can clear an alert and reset the system for a fresh reading.</p>
-    <p class="mt-3 rounded-xl border border-white/10 px-4 py-3 text-xs leading-relaxed text-white/60">This is a proposed prototype interface, not a finished or clinically validated product or a diagnosis. The alerts are not a substitute for professional medical care.</p>
   </div>
 </section>

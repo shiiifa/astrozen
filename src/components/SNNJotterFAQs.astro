@@ -2,11 +2,11 @@
 const faqs = [
   {
     question: 'What are "spikes" in this project?',
-    answer: "Instead of measuring every tiny moment nonstop, a spiking neural network reacts to brief pulses (\"spikes\") when meaningful voltage changes happen—inspired by how real neurons communicate.",
+    answer: "Instead of measuring every tiny moment nonstop, a spiking neural network reacts to brief pulses (\"spikes\") when meaningful voltage changes happen. This is inspired by how real neurons communicate.",
   },
   {
     question: "Are you testing on real people or live patients?",
-    answer: "No—the project uses established, open-access ECG heartbeat datasets (like MIT-BIH) rather than live patient testing, focusing on how efficiently a compact model can classify beat patterns on hardware.",
+    answer: "No. The project uses established, open-access ECG heartbeat datasets (like MIT-BIH) rather than live patient testing, focusing on how efficiently a compact model can classify beat patterns on hardware.",
   },
   {
     question: "Why use an FPGA chip instead of a regular computer or phone?",
@@ -20,7 +20,6 @@ const faqs = [
 ---
 
 <section class="mt-7" aria-label="Frequently asked questions">
-  <p class="leading-relaxed text-white/80">A few quick answers to common questions about the capstone.</p>
   <dl class="mt-5 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] px-5">
     {faqs.map((faq) => (
       <div class="py-4">
