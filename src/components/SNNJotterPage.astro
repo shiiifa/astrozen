@@ -3,22 +3,22 @@ import SNNJotterEverydayStory from "./SNNJotterEverydayStory.astro";
 import SNNJotterEngineeringPuzzle from "./SNNJotterEngineeringPuzzle.astro";
 import SNNJotterPipeline from "./SNNJotterPipeline.astro";
 import SNNJotterGlossary from "./SNNJotterGlossary.astro";
-import SNNJotterRoadmap from "./SNNJotterRoadmap.astro";
+import SNNJotterDisplayLayer from "./SNNJotterDisplayLayer.astro";
 import SNNJotterFAQs from "./SNNJotterFAQs.astro";
 import SNNJotterPhotoCredits from "./SNNJotterPhotoCredits.astro";
 
 const sections = [
   { number: "1", label: "everyday story", component: SNNJotterEverydayStory },
-  { number: "2", label: "engineering puzzle", component: SNNJotterEngineeringPuzzle },
+  { number: "2", label: "engineering puzzle + my objective", component: SNNJotterEngineeringPuzzle },
   { number: "3", label: "pipeline", component: SNNJotterPipeline },
   { number: "4", label: "glossary", component: SNNJotterGlossary },
-  { number: "5", label: "roadmap", component: SNNJotterRoadmap },
+  { number: "5", label: "the display layer", component: SNNJotterDisplayLayer },
   { number: "6", label: "faqs", component: SNNJotterFAQs },
-  { number: "7", label: "photo credits", component: SNNJotterPhotoCredits },
+  { number: "7", label: "creds + references", component: SNNJotterPhotoCredits },
 ];
 ---
 
-<article class="mx-auto max-w-3xl py-10 sm:py-14">
+<article class="mx-auto max-w-4xl py-10 sm:py-14">
   <div class="overflow-hidden rounded-[1.5rem] bg-surface" aria-hidden="true">
     <video
       class="aspect-[5.12/1] w-full object-cover"
@@ -57,7 +57,7 @@ const sections = [
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </summary>
-              <div class="pb-5 pl-14 pr-1">
+              <div class:list={["pb-5 pr-1", (section.label === "glossary" || section.label === "the display layer") ? "pl-0 sm:pl-14" : "pl-14"]}>
                 <SectionContent />
               </div>
             </details>

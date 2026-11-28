@@ -12,8 +12,8 @@ const glossary = [
 ---
 
 <section class="mt-7" aria-label="Notebook glossary">
-  <div class="overflow-x-auto rounded-2xl border border-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" role="region" aria-label="Glossary table" tabindex="0">
-    <table class="w-full min-w-[680px] border-collapse text-left">
+  <div class="glossary-table-container overflow-x-auto rounded-2xl border border-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" role="region" aria-label="Glossary table" tabindex="0">
+    <table class="glossary-table w-full min-w-0 table-fixed border-collapse text-left">
       <caption class="sr-only">Glossary of signal, neuron, and hardware terms</caption>
       <thead class="bg-white/[0.035] text-xs uppercase tracking-[0.1em] text-primary">
         <tr>
@@ -26,11 +26,83 @@ const glossary = [
         {glossary.map((item) => (
           <tr class="border-t border-white/10 align-top">
             <th class="px-4 py-4 text-sm font-semibold text-white sm:px-5" scope="row">{item.term}</th>
-            <td class="px-4 py-4 text-sm font-medium text-primary sm:px-5">{item.label}</td>
-            <td class="px-4 py-4 text-sm leading-relaxed text-white/75 sm:px-5">{item.definition}</td>
+            <td class="px-4 py-4 text-sm font-medium text-primary sm:px-5" data-label="In other words">{item.label}</td>
+            <td class="px-4 py-4 text-sm leading-relaxed text-white/75 sm:px-5" data-label="Meaning">{item.definition}</td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
 </section>
+
+<style>
+  .glossary-table {
+    table-layout: fixed;
+  }
+
+  .glossary-table :is(th, td):nth-child(1) {
+    width: 18%;
+  }
+
+  .glossary-table :is(th, td):nth-child(2) {
+    width: 29%;
+  }
+
+  .glossary-table :is(th, td):nth-child(3) {
+    width: 53%;
+  }
+
+  @media (max-width: 639px) {
+    .glossary-table-container {
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .glossary-table,
+    .glossary-table tbody {
+      display: block;
+      width: 100%;
+    }
+
+    .glossary-table thead {
+      display: none;
+    }
+
+    .glossary-table tr {
+      display: grid;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid rgb(255 255 255 / 14%);
+      border-radius: 1rem;
+      background: rgb(255 255 255 / 2%);
+    }
+
+    .glossary-table tr + tr {
+      margin-top: 0.75rem;
+    }
+
+    .glossary-table :is(th, td):nth-child(n) {
+      width: auto;
+    }
+
+    .glossary-table th,
+    .glossary-table td {
+      display: block;
+      width: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    .glossary-table td::before {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      content: attr(data-label);
+    }
+  }
+</style>

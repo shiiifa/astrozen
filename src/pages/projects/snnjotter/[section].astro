@@ -4,7 +4,7 @@ import SNNJotterEverydayStory from "../../../components/SNNJotterEverydayStory.a
 import SNNJotterEngineeringPuzzle from "../../../components/SNNJotterEngineeringPuzzle.astro";
 import SNNJotterGlossary from "../../../components/SNNJotterGlossary.astro";
 import SNNJotterPipeline from "../../../components/SNNJotterPipeline.astro";
-import SNNJotterRoadmap from "../../../components/SNNJotterRoadmap.astro";
+import SNNJotterDisplayLayer from "../../../components/SNNJotterDisplayLayer.astro";
 
 export function getStaticPaths() {
   const sections = [
@@ -17,7 +17,7 @@ export function getStaticPaths() {
     {
       slug: "engineering-puzzle",
       number: "02",
-      title: "The real engineering puzzle",
+      title: "Engineering puzzle + my objective",
       description: "Fitting a useful model onto a small FPGA without losing the important details.",
     },
     {
@@ -33,10 +33,10 @@ export function getStaticPaths() {
       description: "A pocket glossary for the signals, neurons, and hardware in this project.",
     },
     {
-      slug: "roadmap",
+      slug: "display-layer",
       number: "05",
-      title: "A flexible road to May",
-      description: "The broad milestones guiding the capstone as it develops.",
+      title: "The display layer: translating technical outputs",
+      description: "A planned prototype interface for translating AAMI heartbeat classes into readable Basys 3 alerts.",
     },
   ];
 
@@ -52,7 +52,7 @@ const sectionComponents = {
   "engineering-puzzle": SNNJotterEngineeringPuzzle,
   pipeline: SNNJotterPipeline,
   glossary: SNNJotterGlossary,
-  roadmap: SNNJotterRoadmap,
+  "display-layer": SNNJotterDisplayLayer,
 };
 const SectionContent = sectionComponents[section.slug as keyof typeof sectionComponents];
 ---
@@ -64,7 +64,7 @@ const SectionContent = sectionComponents[section.slug as keyof typeof sectionCom
 >
   <article class:list={[
     "mx-auto py-10 sm:py-14",
-    section.slug === "glossary" ? "max-w-[52rem]" : "max-w-3xl",
+    section.slug === "glossary" ? "max-w-4xl" : "max-w-3xl",
   ]}>
     <a
       href="/projects/snnjotter"
