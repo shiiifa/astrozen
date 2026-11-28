@@ -35,7 +35,7 @@ export const SITE_CONTENT: SiteContent = {
   experience: [
     {
       company: "Smart Technologies Lab, Ashesi University",
-      logo: "/ashesi-university-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%284%29-NPQ5nn995P6oJgdWGXH5tdTyZgk4Ot.png",
       position: "Undergraduate Research Assistant",
       startDate: "January 2026",
       endDate: "September 2026",
@@ -47,7 +47,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       company: "Kuapa Kokoo Limited",
-      logo: "/kuapa-kokoo-logo.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%283%29-2vJtixHfhFmuihegPssNcl37N5lTNp.png",
       position: "Management Information Systems Intern",
       startDate: "June 2025",
       endDate: "August 2025",
@@ -62,35 +62,35 @@ export const SITE_CONTENT: SiteContent = {
   projects: [
     {
       name: "STM32 Remote-Controlled Robotic Vehicle",
-      summary: "A dual-STM32 robot car controlled from a 4×4 keypad over USART3, with L293D motor drive, LCD status, buzzer cues, headlamps, and a six-stage self-test.",
+      summary: "A dual-STM32 robot car controlled by a keypad, with motor drive, LCD status, buzzer, lights, and self-test.",
       linkPreview: "/projects/stm32-robotic-vehicle",
       linkSource: "https://github.com/shiiifa/robovehicle",
       image: "/robovehicle-cover.jpeg",
     },
     {
       name: "IoT Greenhouse Monitoring System",
-      summary: "An ESP32 greenhouse monitor streams five sensor readings over MQTT through a Raspberry Pi pipeline into local InfluxDB and a PHP dashboard with live status, history charts, and CSV export.",
+      summary: "An ESP32 greenhouse monitor sends five sensor readings over MQTT to a Raspberry Pi dashboard for live status, charts, and CSV export.",
       linkPreview: "/projects/iot-greenhouse-monitoring",
       linkSource: "https://github.com/shiiifa/iotgreenhouse",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-09%20at%2017.31.55-0szuw58iuGvu6FlfEWxfE65QBP9fM8.jpeg",
     },
     {
       name: "Heart Rate Monitor Using Active Bandpass Filtering",
-      summary: "A non-invasive optical heart rate monitor based on Photoplethysmography (PPG) that detects blood volume changes, conditions analog signals with active bandpass filtering, and displays real-time BPM readings on an LCD screen.",
+      summary: "A PPG-based monitor filters optical pulse signals and displays real-time heart rate on an LCD.",
       linkPreview: "/projects/heart-rate-monitor",
       linkSource: "#",
       image: "/heartbeat.png",
     },
     {
       name: "Behaviour-Aware Access Controller",
-      summary: "An intelligent, standalone RFID access control system that uses a Finite State Machine (FSM) to detect and block behavioural anomalies in real-time without relying on external servers.",
+      summary: "A standalone RFID controller uses a finite state machine to detect and block unusual access behavior.",
       linkPreview: "/projects/behaviour-aware-access-controller",
       linkSource: "https://github.com/shiiifa/Behaviour-Aware-Access-Controller",
       image: "/behavior-aware-access.png",
     },
     {
       name: "Coin-Operated Washing Machine Digital Control System",
-      summary: "A finite state machine–based digital control system for a coin-operated washing machine that accepts 1 and 2 GHC coins, accumulates payment to a 5 GHC charge, and runs timed wash, rinse, and spin cycles with seven-segment display feedback.",
+      summary: "A coin-operated washer controller runs timed wash, rinse, and spin cycles with payment and display feedback.",
       linkPreview: "/projects/coin-operated-washing-machine",
       image: "/dsdproject2.png",
     },
