@@ -1,30 +1,15 @@
 ---
 const displayStatuses = [
-  { code: "N", category: "Normal Sinus Rhythm", display: "NO-L", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2810%29-2ym9C7HzlhOBRVprf6a1OCVEny6Yoi.png", level: "Normal", message: "Heart rhythm is normal." },
-  { code: "S", category: "Supraventricular Ectopic", display: "LO", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2811%29-U74CZE4b8NcJZZC5J6DzLtAjkLJoYD.png", level: "Mild", message: "Mild irregularity detected — early upper-heart beat." },
-  { code: "F", category: "Fusion Beat", display: "CAUt", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2813%29-jtCbimYa2GkNB2TyWunoCKLSFYZmur.png", level: "Moderate caution", message: "Moderate caution — overlapping beat pattern." },
-  { code: "V", category: "Ventricular Ectopic", display: "HI", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2812%29-KUo7JbCYJF77mGXNsjVZgNGfywZ6zI.png", level: "High", message: "High-risk irregularity detected — lower-heart beat." },
-  { code: "Q", category: "Unknown / Unclassifiable", display: "Err", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2814%29-AsZHZw5TzlSAD027ifDXpP3uI9HivU.png", level: "Signal check", message: "Poor signal — sensor adjustment needed." },
+  { code: "N", category: "Normal Sinus Rhythm", display: "NO-L", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2810%29-2ym9C7HzlhOBRVprf6a1OCVEny6Yoi.png", message: "Heart rhythm is normal." },
+  { code: "S", category: "Supraventricular Ectopic", display: "LO", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2811%29-U74CZE4b8NcJZZC5J6DzLtAjkLJoYD.png", message: "Mild irregularity detected: early upper-heart beat." },
+  { code: "F", category: "Fusion Beat", display: "CAUt", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2813%29-jtCbimYa2GkNB2TyWunoCKLSFYZmur.png", message: "Moderate caution: overlapping beat pattern." },
+  { code: "V", category: "Ventricular Ectopic", display: "HI", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2812%29-KUo7JbCYJF77mGXNsjVZgNGfywZ6zI.png", message: "High-risk irregularity detected: lower-heart beat." },
+  { code: "Q", category: "Unknown / Unclassifiable", display: "Err", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2814%29-AsZHZw5TzlSAD027ifDXpP3uI9HivU.png", message: "Poor signal: sensor adjustment needed." },
 ];
 ---
 
 <section class="mt-7" aria-label="The display layer">
-  <div
-    class="grid grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] items-stretch gap-2 sm:grid-cols-[4rem_minmax(0,1fr)_4rem] sm:gap-3"
-  >
-    <div
-      class="flex flex-col items-center justify-around gap-16 py-12"
-      aria-hidden="true"
-    >
-      <img
-        class="size-8 rotate-[-10deg] object-contain opacity-75 mix-blend-screen sm:size-16"
-        src="/snnjotter-doodle-gold.png"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
-    <div class="min-w-0">
+  <div class="min-w-0">
       <p class="leading-relaxed text-white/80">
         A regular person wearing a health monitor shouldn&apos;t have to decode
         intimidating clinical terms like “Supraventricular Ectopic” or
@@ -45,11 +30,8 @@ const displayStatuses = [
         >
           {
             displayStatuses.map((item) => (
-              <li class="grid grid-cols-1 gap-2 rounded-xl border border-white/10 bg-transparent p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:p-4">
+              <li class="grid grid-cols-1 gap-2 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:py-4">
                 <div class="min-w-0">
-                  <p class="text-xs font-semibold tracking-wide text-primary uppercase">
-                    {item.level} · AAMI {item.code}
-                  </p>
                   <h3 class="mt-1 text-sm font-semibold text-white">
                     {item.category}{" "}
                     <span class="font-normal text-white/60">({item.code})</span>
@@ -70,7 +52,7 @@ const displayStatuses = [
                     loading="lazy"
                     decoding="async"
                     class:list={[
-                      "rounded-lg border border-white/10 bg-black object-contain",
+                      "object-contain",
                       item.display === "LO" || item.display === "HI"
                         ? "h-16 w-16"
                         : "h-20 w-20",
@@ -82,25 +64,6 @@ const displayStatuses = [
           }
         </ul>
       </div>
-    </div>
-    <div
-      class="flex flex-col items-center justify-around gap-16 py-12"
-      aria-hidden="true"
-    >
-      <img
-        class="size-8 rotate-12 object-contain opacity-80 mix-blend-screen sm:size-16"
-        src="/snnjotter-doodle-star.png"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
-      <img
-        class="size-8 rotate-[-8deg] object-contain opacity-70 mix-blend-screen sm:size-16"
-        src="/snnjotter-doodle-lavender.png"
-        alt=""
-        loading="lazy"
-        decoding="async"
-      />
     </div>
   </div>
 </section>
