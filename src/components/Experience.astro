@@ -15,9 +15,9 @@ const { experience } = Astro.props;
       <details class="experience-item fade-in-element mb-5">
         <summary class="cursor-pointer list-none py-4 marker:content-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
           <span class="flex flex-col items-start gap-0.5 pr-6">
-            <span class="font-serif text-lg font-semibold text-white sm:text-xl">{company}</span>
-            <span class="font-serif text-base font-medium text-primary sm:text-lg">{position}</span>
-            <span class="text-xs text-white/70 sm:text-sm">{startDate} — {endDate}</span>
+            <span class="font-serif text-base font-semibold text-white sm:text-lg">{company}</span>
+            <span class="font-serif text-sm font-medium text-primary sm:text-base">{position}</span>
+            <span class="text-xs text-white/70">{startDate} — {endDate}</span>
           </span>
           <span aria-hidden="true" class="experience-item__chevron">⌄</span>
         </summary>
