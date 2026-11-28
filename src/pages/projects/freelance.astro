@@ -96,10 +96,10 @@ const testimonials = [
 
     <section class="freelance-carousel-section py-10">
       <h2 class="fade-in-element mb-6 text-center text-2xl font-serif font-bold text-primary">in their words</h2>
-      <div class="freelance-marquee freelance-marquee--testimonials rounded-lg" data-draggable-carousel aria-label="Client testimonials">
+      <div class="freelance-marquee freelance-marquee--testimonials rounded-lg" data-draggable-carousel role="region" aria-label="Client testimonials" tabindex="0">
         <div class="freelance-marquee__track">
           {[0, 1, 2].map((copy) => (
-            <div class="freelance-marquee__group" aria-hidden={copy > 0 ? "true" : undefined}>
+            <div class="freelance-marquee__group" data-copy={copy} aria-hidden={copy > 0 ? "true" : undefined}>
               {testimonials.map((testimonial) => (
                 <article class="freelance-testimonial-card">
                   <svg class="mb-4 h-6 w-6 text-primary/60" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,7 +164,7 @@ const testimonials = [
     let dragged = false;
 
     carousel.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0) return;
+      if (event.button !== 0 || (carousel.matches(".freelance-marquee--testimonials") && window.matchMedia("(max-width: 767px)").matches)) return;
       pointerStart = event.clientX;
       offsetStart = Number.parseFloat(track.style.getPropertyValue("--drag-offset")) || 0;
       dragged = false;
@@ -197,9 +197,10 @@ const testimonials = [
 
 <style>
   .freelance-carousel-section {
+    --carousel-gutter: clamp(1rem, 4vw, 3.5rem);
     width: 100vw;
     margin-inline: calc(50% - 50vw);
-    padding-inline: clamp(1rem, 4vw, 3.5rem);
+    padding-inline: var(--carousel-gutter);
   }
 
   .freelance-carousel-section h2 {
@@ -252,6 +253,8 @@ const testimonials = [
 
   .freelance-testimonial-card {
     flex-basis: 28rem;
+    border-color: rgb(255 255 255 / 24%);
+    background: transparent;
   }
 
   .freelance-project-card {
@@ -338,10 +341,32 @@ const testimonials = [
       flex-basis: min(88vw, 28rem);
     }
 
+    .freelance-marquee--testimonials {
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      touch-action: pan-x pan-y;
+    }
+
+    .freelance-marquee--testimonials .freelance-marquee__group[data-copy="1"],
+    .freelance-marquee--testimonials .freelance-marquee__group[data-copy="2"] {
+      display: none;
+    }
+
+    .freelance-marquee--testimonials .freelance-marquee__group {
+      align-items: flex-start;
+    }
+
     .freelance-testimonial-card {
-      flex-basis: min(84vw, 24rem);
+      flex-basis: calc(100vw - 2 * var(--carousel-gutter));
       height: auto;
-      min-height: 20rem;
+      min-height: 18rem;
+      padding: 1.25rem;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .freelance-testimonial-card blockquote {
+      flex: 0 1 auto;
     }
   }
 </style>

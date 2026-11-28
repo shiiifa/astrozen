@@ -141,6 +141,13 @@ h4 {
   transform: translateY(0) scale(1);
 }
 
+details[open] .fade-in-element,
+details[open] .fade-in-image,
+details[open] .fade-in-tile {
+  opacity: 1;
+  transform: none;
+}
+
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .fade-in-element {
