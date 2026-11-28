@@ -1,0 +1,31 @@
+---
+const pipeline = [
+  { number: "01", title: "Start with heartbeat recordings", term: "MIT-BIH Arrhythmia Database", text: "The project uses established, open-access ECG recordings with beat labels. This is benchmark data, not a live-patient test." },
+  { number: "02", title: "Turn the wave into events", term: "Preprocessing + Level-Crossing encoding", text: "The signal is normalized, then a spike is produced when the waveform crosses a meaningful threshold. That gives the network a more event-focused view than sending every sample as a constant stream." },
+  { number: "03", title: "Choose the little building blocks", term: "SNN architecture", text: "A network of simplified neurons processes those spikes. The SLIF model keeps the neuron math lightweight, while synaptic delays give signals time to arrive in useful order." },
+  { number: "04", title: "Teach the model from examples", term: "Training", text: "The network learns patterns from labeled heartbeat examples in the dataset. Training is a development step; it does not make the result a medical diagnostic tool." },
+  { number: "05", title: "Make the design smaller", term: "Compression", text: "The model is reduced to fit the board’s limited memory and logic. The trade-off matters: making a model smaller can also remove useful detail, so the fit and the classification quality need to be checked together." },
+  { number: "06", title: "Map it onto a configurable chip", term: "FPGA synthesis", text: "The design is prepared for the Digilent Basys 3 board, which uses an Artix-7 FPGA. Vivado/HLS tools help translate the design into hardware logic; synthesis is a step toward testing on the board, not a performance result by itself." },
+  { number: "07", title: "Compare the practical trade-offs", term: "Evaluation", text: "The planned checks include classification accuracy, power, latency (how long an answer takes), and board resources such as LUTs, BRAM, and DSPs. No measurements or accuracy claims are reported here yet." },
+];
+---
+
+<section class="mt-7" aria-label="How the pipeline works">
+  <p class="leading-relaxed text-white/80">Here’s the seven-step route, with the technical names translated as we go.</p>
+  <ol class="mt-6 space-y-3">
+    {pipeline.map((step) => (
+      <li class="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-4 sm:p-5">
+        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary/35 bg-primary/10 text-sm font-bold text-primary" aria-hidden="true">{step.number}</span>
+        <div>
+          <h2 class="font-serif text-lg font-bold text-white">{step.title}</h2>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-primary">{step.term}</p>
+          <p class="mt-2 text-sm leading-relaxed text-white/75">{step.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+  <aside class="mt-5 rounded-2xl border border-primary/25 bg-primary/[0.06] p-5" aria-label="Prototype output note">
+    <h2 class="font-serif text-lg font-bold text-white">What might show up on the board?</h2>
+    <p class="mt-2 text-sm leading-relaxed text-white/75">During prototyping, a classification could be mapped to a simple status readout—such as a normal or irregular indicator on the board’s display. That would be a demonstration output, not a clinical diagnosis or advice about anyone’s health.</p>
+  </aside>
+</section>
