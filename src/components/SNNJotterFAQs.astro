@@ -20,12 +20,48 @@ const faqs = [
 ---
 
 <section class="mt-7" aria-label="Frequently asked questions">
-  <dl class="mt-5 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] px-5">
-    {faqs.map((faq) => (
-      <div class="py-4">
-        <dt class="font-semibold text-white">{faq.question}</dt>
-        <dd class="mt-2 text-sm leading-relaxed text-white/70">{faq.answer}</dd>
-      </div>
-    ))}
-  </dl>
+  <div
+    class="mt-5 grid grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] items-stretch gap-2 sm:grid-cols-[4rem_minmax(0,1fr)_4rem] sm:gap-3"
+  >
+    <div
+      class="flex flex-col items-center justify-around gap-12 py-4"
+      aria-hidden="true"
+    >
+      <img
+        class="size-8 rotate-[-12deg] object-contain opacity-80 mix-blend-screen sm:size-16"
+        src="/snnjotter-doodle-star.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        class="size-7 rotate-[-8deg] object-contain opacity-75 mix-blend-screen sm:size-14"
+        src="/snnjotter-doodle-lavender.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <dl class="divide-y divide-white/10">
+      {
+        faqs.map((faq) => (
+          <div class="py-4">
+            <dt class="font-semibold text-white">{faq.question}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-white/70">
+              {faq.answer}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <div class="flex items-center justify-center" aria-hidden="true">
+      <img
+        class="size-8 rotate-12 object-contain opacity-75 mix-blend-screen sm:size-16"
+        src="/snnjotter-doodle-gold.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
 </section>
