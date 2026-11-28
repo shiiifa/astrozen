@@ -10,57 +10,51 @@ const displayStatuses = [
 
 <section class="mt-7" aria-label="The display layer">
   <div class="min-w-0">
-      <p class="leading-relaxed text-white/80">
-        A regular person wearing a health monitor shouldn&apos;t have to decode
-        intimidating clinical terms like “Supraventricular Ectopic” or
-        “Ventricular Ectopic.”
-      </p>
-      <div class="mt-6">
-        <p class="text-sm leading-relaxed text-white/75">
-          As a design plan for this prototype, the Basys 3 board&apos;s built-in
-          4-digit 7-segment display will map the five technical AAMI heartbeat
-          categories into short, severity-graded status alerts:
-        </p>
-        <ul
-          class="mt-4 space-y-3"
-          aria-label="Planned AAMI status display mappings"
-        >
-          {
-            displayStatuses.map((item) => (
-              <li class="grid grid-cols-1 gap-2 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:py-4">
-                <div class="min-w-0">
-                  <h3 class="mt-1 text-sm font-semibold text-white">
-                    {item.category}{" "}
-                    <span class="font-normal text-white/60">({item.code})</span>
-                  </h3>
-                  <p class="mt-1 text-sm leading-relaxed text-white/70">
-                    {item.message}
-                  </p>
-                </div>
-                <div class="flex w-fit items-center gap-2 justify-self-end sm:justify-self-auto">
-                  <span class="text-white/40" aria-hidden="true">
-                    →
-                  </span>
-                  <img
-                    src={item.image}
-                    alt={`7-segment display showing ${item.display} for ${item.category}`}
-                    width="1500"
-                    height="1500"
-                    loading="lazy"
-                    decoding="async"
-                    class:list={[
-                      "object-contain",
-                      item.display === "LO" || item.display === "HI"
-                        ? "h-16 w-16"
-                        : "h-20 w-20",
-                    ]}
-                  />
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
+    <p class="leading-relaxed text-white/80">
+      A regular person wearing a health monitor shouldn&apos;t have to decode
+      intimidating clinical terms like “Supraventricular Ectopic” or
+      “Ventricular Ectopic.” As a design plan for this prototype, the Basys 3
+      board&apos;s built-in 4-digit 7-segment display will map the five technical
+      AAMI heartbeat categories into short, severity-graded status alerts:
+    </p>
+    <ul
+      class="mt-4 space-y-3"
+      aria-label="Planned AAMI status display mappings"
+    >
+      {
+        displayStatuses.map((item) => (
+          <li class="grid grid-cols-1 gap-2 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3 sm:py-4">
+            <div class="min-w-0">
+              <h3 class="mt-1 text-sm font-semibold text-white">
+                {item.category}{" "}
+                <span class="font-normal text-white/60">({item.code})</span>
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-white/70">
+                {item.message}
+              </p>
+            </div>
+            <div class="flex w-fit items-center gap-2 justify-self-end sm:justify-self-auto">
+              <span class="text-white/40" aria-hidden="true">
+                →
+              </span>
+              <img
+                src={item.image}
+                alt={`7-segment display showing ${item.display} for ${item.category}`}
+                width="1500"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+                class:list={[
+                  "object-contain",
+                  item.display === "LO" || item.display === "HI"
+                    ? "h-16 w-16"
+                    : "h-20 w-20",
+                ]}
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
