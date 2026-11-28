@@ -9,7 +9,20 @@ const sections = [
 ---
 
 <article class="mx-auto max-w-3xl py-10 sm:py-14">
-  <header class="rounded-[1.75rem] border border-primary/25 bg-surface px-6 py-9 text-center sm:px-10 sm:py-12">
+  <div class="overflow-hidden rounded-[1.5rem] bg-surface" aria-hidden="true">
+    <video
+      class="aspect-[5.12/1] w-full object-cover"
+      data-snnjotter-banner
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      tabindex="-1"
+    >
+      <source src="/snnjotter-banner.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <header class="px-2 py-7 text-center sm:py-9">
     <h1 class="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl">SNNJotter</h1>
     <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
       A friendly notebook for my capstone: <span class="font-semibold text-white">FPGA-Accelerated Spiking Neural Networks for Real-Time Biomedical Signal Inference.</span>
@@ -41,7 +54,21 @@ const sections = [
     </nav>
   </section>
 
-  <p class="mt-8 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/60">
-    These are learning notes about a capstone workflow—not medical advice, a clinical tool, or a report of experimental results.
-  </p>
 </article>
+
+<script>
+  const bannerVideo = document.querySelector<HTMLVideoElement>("[data-snnjotter-banner]");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const syncBannerPlayback = () => {
+    if (!bannerVideo) return;
+    if (prefersReducedMotion.matches) {
+      bannerVideo.pause();
+      return;
+    }
+    void bannerVideo.play().catch(() => {});
+  };
+
+  syncBannerPlayback();
+  prefersReducedMotion.addEventListener("change", syncBannerPlayback);
+</script>
