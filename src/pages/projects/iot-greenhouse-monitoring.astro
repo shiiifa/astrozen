@@ -69,37 +69,11 @@ const gallery = [
       </div>
       <h1 class="mb-6 font-serif text-4xl font-bold text-white">{projectTitle}</h1>
       <p class="text-lg text-neutral">{projectDescription}</p>
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <a
-            href="https://github.com/shiiifa/iotgreenhouse"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-black transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-          >
-            View source code
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-            </svg>
-          </a>
-          <a
-            href={reportUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-primary/50 px-5 py-3 font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-          >
-            Read the project report
-          </a>
-        </div>
       </div>
     </header>
 
     <div class="prose prose-invert max-w-none">
-      <section class="mb-12">
-          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Project overview</h2>
-          <p class="leading-relaxed text-neutral">
-            Greenhouse conditions can shift between manual checks. This prototype makes those changes easier to observe by logging air temperature, relative humidity, light level, soil moisture, and a gas-sensor signal. It combines an ESP32 sensor node and local display with a Raspberry Pi data pipeline and a browser-based dashboard.
-          </p>
-        </section>
+
 
       <section class="mb-12">
           <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Hardware and readings</h2>
@@ -117,6 +91,20 @@ const gallery = [
             The official report describes the InfluxDB Cloud destination as planned work, not as a completed mirror. It also notes that the class brief set a 14-day operating target; the report still needed to document the actual recording period and any gaps.
           </p>
         </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Sensor readings</h2>
+        <ul class="ml-6 list-disc space-y-2 leading-relaxed text-neutral">
+          <li>Temperature — DHT22, measured in °C.</li>
+          <li>Relative humidity — DHT22, measured in % RH.</li>
+          <li>Light level — LDR, reported as a scaled percentage on the greenhouse/lux MQTT topic.</li>
+          <li>Soil moisture — probe, reported as a scaled percentage.</li>
+          <li>Gas-sensor signal — MQ-3, reported as raw ADC counts.</li>
+        </ul>
+        <p class="mt-4 leading-relaxed text-neutral">
+          The light reading is a relative scaled signal, not calibrated lux. Soil-moisture and MQ-3 responses still need to be verified against changing conditions.
+        </p>
+      </section>
 
       <section class="mb-12">
           <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project media</h2>
@@ -137,12 +125,27 @@ const gallery = [
           </div>
         </section>
 
-      <section class="mb-12">
-        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Sensor readings</h2>
-        <p class="leading-relaxed text-neutral">
-          Temperature: DHT22 · °C. Relative humidity: DHT22 · % RH. Light level: LDR · scaled percentage. Soil moisture: probe · scaled percentage. Gas-sensor signal: MQ-3 · raw ADC counts. The light value is a relative scaled signal (the MQTT topic is named <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/lux</code>), not calibrated lux. Soil-moisture and MQ-3 responses still need to be verified against changing conditions.
-        </p>
-      </section>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href="https://github.com/shiiifa/iotgreenhouse"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-black transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        >
+          View source code
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+          </svg>
+        </a>
+        <a
+          href={reportUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-primary/50 px-5 py-3 font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        >
+          Read the project report
+        </a>
+      </div>
     </div>
   </article>
 </Layout>
