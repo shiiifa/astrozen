@@ -9,11 +9,13 @@ import Footer from "@components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  contentWidth?: "default" | "wide";
 }
 
 const {
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
+  contentWidth = "default",
 } = Astro.props;
 const { siteLogo, navLinks, lang, author, socialImage } = SITE_CONFIG;
 const canonicalURL = new URL(Astro.url.pathname, SITE_CONFIG.canonicalURL ?? Astro.site).href;
@@ -45,7 +47,10 @@ const ogImgUrl = new URL(socialImage, canonicalURL).href;
   </head>
   <body class="bg-background font-sans">
     <Header siteLogo={siteLogo} navLinks={navLinks} />
-    <main class="mx-auto w-full min-w-0 max-w-3xl px-4 sm:px-5">
+    <main class:list={[
+      "mx-auto w-full min-w-0 px-4 sm:px-5",
+      contentWidth === "wide" ? "max-w-4xl" : "max-w-3xl",
+    ]}>
       <slot />
     </main>
     <Footer author={author} />
