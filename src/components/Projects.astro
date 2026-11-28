@@ -19,6 +19,31 @@ const { projects } = Astro.props;
          <h3 class="text-primary text-xl font-bold opacity-80">academic</h3>
        </div>
 
+      <div class="mb-2 flex justify-end gap-2 px-4">
+        <button
+          id="projectsPrevious"
+          type="button"
+          aria-label="Previous project"
+          aria-controls="projectsContainer"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral/30 bg-[#1c232d] text-neutral transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+        </button>
+        <button
+          id="projectsNext"
+          type="button"
+          aria-label="Next project"
+          aria-controls="projectsContainer"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral/30 bg-[#1c232d] text-neutral transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+
       {/* Academic Projects Container */}
       <div
         id="projectsContainer"
@@ -109,6 +134,11 @@ const { projects } = Astro.props;
     scroll-padding-inline: 3.5rem;
   }
 
+  #projectsPrevious:disabled,
+  #projectsNext:disabled {
+    pointer-events: none;
+  }
+
   #projectsContainer::-webkit-scrollbar {
     display: none;
   }
@@ -139,6 +169,24 @@ const { projects } = Astro.props;
       return item.offsetWidth + gap;
     };
 
+    const previousButton = document.getElementById('projectsPrevious') as HTMLButtonElement | null;
+    const nextButton = document.getElementById('projectsNext') as HTMLButtonElement | null;
+    const updateNavigation = () => {
+      const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+      if (previousButton) previousButton.disabled = container.scrollLeft <= 1;
+      if (nextButton) nextButton.disabled = container.scrollLeft >= maxScroll - 1;
+    };
+    const scrollToAdjacentProject = (direction: -1 | 1) => {
+      container.scrollBy({
+        left: getStep() * direction,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    };
+
+    previousButton?.addEventListener('click', () => scrollToAdjacentProject(-1));
+    nextButton?.addEventListener('click', () => scrollToAdjacentProject(1));
+    container.addEventListener('scroll', updateNavigation, { passive: true });
+    updateNavigation();
 
     // Mouse / pen drag-to-slide — only activates after a real drag threshold
     // so simple clicks on project tiles still navigate.
