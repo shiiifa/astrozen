@@ -1,10 +1,16 @@
 ---
+import SNNJotterEverydayStory from "./SNNJotterEverydayStory.astro";
+import SNNJotterEngineeringPuzzle from "./SNNJotterEngineeringPuzzle.astro";
+import SNNJotterPipeline from "./SNNJotterPipeline.astro";
+import SNNJotterGlossary from "./SNNJotterGlossary.astro";
+import SNNJotterRoadmap from "./SNNJotterRoadmap.astro";
+
 const sections = [
-  { number: "1", label: "everyday story", href: "/projects/snnjotter/everyday-story" },
-  { number: "2", label: "engineering puzzle", href: "/projects/snnjotter/engineering-puzzle" },
-  { number: "3", label: "pipeline", href: "/projects/snnjotter/pipeline" },
-  { number: "4", label: "glossary", href: "/projects/snnjotter/glossary" },
-  { number: "5", label: "roadmap", href: "/projects/snnjotter/roadmap" },
+  { number: "1", label: "everyday story", component: SNNJotterEverydayStory },
+  { number: "2", label: "engineering puzzle", component: SNNJotterEngineeringPuzzle },
+  { number: "3", label: "pipeline", component: SNNJotterPipeline },
+  { number: "4", label: "glossary", component: SNNJotterGlossary },
+  { number: "5", label: "roadmap", component: SNNJotterRoadmap },
 ];
 ---
 
@@ -39,17 +45,23 @@ const sections = [
     <h2 id="contents-title" class="font-serif text-2xl font-bold lowercase text-white sm:text-3xl">table of contents</h2>
     <nav class="mt-4" aria-label="table of contents">
       <ol class="divide-y divide-white/10 border-y border-white/10">
-        {sections.map((section) => (
-          <li>
-            <a
-              href={section.href}
-              class="group flex items-center gap-4 py-4 text-base font-medium text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-primary/45 bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">{section.number}</span>
-              <span class="underline decoration-primary/40 underline-offset-4">{section.label}</span>
-            </a>
-          </li>
-        ))}
+        {sections.map((section) => {
+          const SectionContent = section.component;
+          return (
+            <li>
+              <details class="group">
+                <summary class="flex cursor-pointer list-none items-center gap-4 py-4 text-base font-medium text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <span class="grid size-10 shrink-0 place-items-center rounded-full border border-primary/45 bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">{section.number}</span>
+                  <span class="underline decoration-primary/40 underline-offset-4">{section.label}</span>
+                  <span class="ml-auto text-xl text-primary transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <div class="pb-5 pl-14 pr-1">
+                  <SectionContent />
+                </div>
+              </details>
+            </li>
+          );
+        })}
       </ol>
     </nav>
   </section>
