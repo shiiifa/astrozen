@@ -53,7 +53,7 @@ const gallery = [
 ---
 
 <Layout title={projectTitle} description={projectDescription}>
-  <article class="mx-auto max-w-5xl px-5 py-12 sm:py-16">
+  <article class="mx-auto max-w-4xl px-5 py-16">
     <a
       href="/projects"
       class="mb-8 inline-flex items-center gap-2 text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
@@ -64,24 +64,20 @@ const gallery = [
       Back to projects
     </a>
 
-    <header class="mb-12">
-      <figure class="mb-8 overflow-hidden rounded-2xl border border-neutral/20 bg-surface">
+    <header class="mb-12 text-center">
+      <div class="mb-8">
         <img
           src={coverImage}
           alt="ESP32 greenhouse monitoring prototype on a breadboard, with a live LCD and connected sensors"
-          class="aspect-[4/3] w-full object-cover sm:aspect-[16/9]"
+          class="mx-auto h-64 w-full max-w-4xl rounded-2xl border border-neutral/20 object-cover"
           width="1080"
           height="810"
           fetchpriority="high"
         />
-        <figcaption class="px-4 py-3 text-sm text-neutral">The working sensor prototype with LCD readout.</figcaption>
-      </figure>
-
-      <div class="max-w-3xl">
-        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Internet of Things · 2026</p>
-        <h1 class="mb-5 font-serif text-4xl font-bold text-white sm:text-5xl">{projectTitle}</h1>
-        <p class="text-lg leading-relaxed text-neutral">{projectDescription}</p>
-        <div class="mt-6 flex flex-wrap gap-3">
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">{projectTitle}</h1>
+      <p class="text-lg text-neutral">{projectDescription}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
           <a
             href="https://github.com/shiiifa/iotgreenhouse"
             target="_blank"
@@ -105,17 +101,16 @@ const gallery = [
       </div>
     </header>
 
-    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
-      <div class="space-y-10">
-        <section>
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
           <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Project overview</h2>
           <p class="leading-relaxed text-neutral">
             Greenhouse conditions can shift between manual checks. This prototype makes those changes easier to observe by logging air temperature, relative humidity, light level, soil moisture, and a gas-sensor signal. It combines an ESP32 sensor node and local display with a Raspberry Pi data pipeline and a browser-based dashboard.
           </p>
         </section>
 
-        <section>
-          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Hardware and readings</h2>
+      <section class="mb-12">
+          <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Hardware and readings</h2>
           <p class="mb-4 leading-relaxed text-neutral">
             Four physical sensors produce five readings: the DHT22 measures temperature and humidity, while an LDR, soil-moisture probe, and MQ-3 provide the remaining channels. The ESP32 samples at a nominal five-second interval and updates a 16×2 I²C LCD with alternating reading pages.
           </p>
@@ -131,8 +126,8 @@ const gallery = [
           </p>
         </section>
 
-        <section>
-          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Data pipeline</h2>
+      <section class="mb-12">
+          <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Data pipeline</h2>
           <p class="leading-relaxed text-neutral">
             The ESP32 publishes numeric text readings over Wi-Fi and MQTT to Mosquitto on the Raspberry Pi. Node-RED subscribes to the <code class="rounded bg-surface px-1.5 py-0.5 text-white">greenhouse/+</code> topics, parses each value, and writes timestamped measurements to local InfluxDB. The PHP dashboard, served from a laptop with XAMPP, queries the local InfluxDB HTTP API and presents current values, history charts, summary statistics, and CSV export.
           </p>
@@ -141,8 +136,8 @@ const gallery = [
           </p>
         </section>
 
-        <section>
-          <h2 class="mb-3 font-serif text-2xl font-semibold text-primary">Project media</h2>
+      <section class="mb-12">
+          <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project media</h2>
           <div class="grid gap-5 sm:grid-cols-2">
             {gallery.map((item) => (
               <figure class="overflow-hidden rounded-2xl border border-neutral/20 bg-surface">
@@ -160,19 +155,6 @@ const gallery = [
             ))}
           </div>
         </section>
-      </div>
-
-      <aside class="h-fit rounded-2xl border border-neutral/20 bg-surface/70 p-5 lg:sticky lg:top-24">
-        <h2 class="mb-4 font-serif text-xl font-semibold text-primary">Project details</h2>
-        <dl class="space-y-4 text-sm">
-          <div><dt class="font-semibold text-white">Controller</dt><dd class="mt-1 text-neutral">ESP32</dd></div>
-          <div><dt class="font-semibold text-white">Messaging</dt><dd class="mt-1 text-neutral">MQTT · Mosquitto</dd></div>
-          <div><dt class="font-semibold text-white">Processing</dt><dd class="mt-1 text-neutral">Node-RED</dd></div>
-          <div><dt class="font-semibold text-white">Storage</dt><dd class="mt-1 text-neutral">Local InfluxDB</dd></div>
-          <div><dt class="font-semibold text-white">Dashboard</dt><dd class="mt-1 text-neutral">PHP · XAMPP · Chart.js</dd></div>
-          <div><dt class="font-semibold text-white">Sampling</dt><dd class="mt-1 text-neutral">Nominally every 5 seconds</dd></div>
-        </dl>
-      </aside>
     </div>
   </article>
 </Layout>
