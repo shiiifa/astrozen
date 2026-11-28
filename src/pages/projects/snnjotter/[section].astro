@@ -57,8 +57,15 @@ const sectionComponents = {
 const SectionContent = sectionComponents[section.slug as keyof typeof sectionComponents];
 ---
 
-<Layout title={`${section.title} | SNNJotter`} description={section.description}>
-  <article class="mx-auto max-w-3xl py-10 sm:py-14">
+<Layout
+  title={`${section.title} | SNNJotter`}
+  description={section.description}
+  contentWidth={section.slug === "glossary" ? "wide" : "default"}
+>
+  <article class:list={[
+    "mx-auto py-10 sm:py-14",
+    section.slug === "glossary" ? "max-w-[52rem]" : "max-w-3xl",
+  ]}>
     <a
       href="/projects/snnjotter"
       class="inline-flex items-center gap-2 text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
