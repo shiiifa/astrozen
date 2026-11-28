@@ -1,0 +1,145 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "STM32 Remote-Controlled Robotic Vehicle";
+const description =
+  "A two-board STM32F091RC robot car controlled by a 4×4 keypad over USART3, with L293D motor control, LCD feedback, buzzer tones, LEDs, and a self-test sequence.";
+
+const media = [
+  {
+    src: "/robovehicle-chassis.jpeg",
+    alt: "Robotic vehicle chassis with dual wheels, battery holder, and controller wiring",
+    caption: "Chassis, motor, and power assembly",
+  },
+  {
+    src: "/robovehicle-assembly.jpeg",
+    alt: "Robotic vehicle assembly showing the transparent chassis and connected electronics",
+    caption: "Vehicle assembly in progress",
+  },
+  {
+    src: "/robovehicle-overhead.jpeg",
+    alt: "Overhead view of the robot car with STM32 board, LCD, wheels, and jumper wires",
+    caption: "Top view of the embedded system",
+  },
+];
+
+const commands = [
+  { key: "2", action: "Forward", byte: "F" },
+  { key: "8", action: "Reverse", byte: "B" },
+  { key: "4", action: "Turn left", byte: "L" },
+  { key: "6", action: "Turn right", byte: "R" },
+  { key: "5 / 0 / *", action: "Stop", byte: "S" },
+  { key: "# / A", action: "Self-test", byte: "T" },
+];
+---
+
+<Layout title={`${title} | Shifa Amankwa-Gabbey`} description={description}>
+  <article class="mx-auto max-w-4xl px-5 py-16">
+    <a
+      href="/#projects"
+      class="mb-8 inline-flex items-center gap-2 text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to projects
+    </a>
+
+    <header class="mb-12 text-center">
+      <div class="mb-8">
+        <img
+          src="/robovehicle-cover.jpeg"
+          alt="Close view of the robotic vehicle with STM32 wiring, LCD modules, breadboard, and yellow wheel"
+          class="mx-auto h-64 w-full max-w-4xl rounded-2xl border border-neutral/20 object-cover"
+          width="1834"
+          height="1368"
+          fetchpriority="high"
+        />
+      </div>
+      <h1 class="mb-6 font-serif text-4xl font-bold text-white">{title}</h1>
+      <p class="text-lg text-neutral">
+        A two-board STM32F091RC system: one board reads a handheld keypad and sends commands over UART; the second drives a two-motor vehicle and reports its state through an LCD, buzzer, LEDs, and headlamps.
+      </p>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project overview</h2>
+        <p class="leading-relaxed text-neutral">
+          The remote controller scans a 4×4 keypad and transmits one-character commands to the vehicle over USART3 at 9600 baud. The vehicle firmware translates those commands into left- and right-wheel motion through an L293D motor driver, while both boards provide clear status and feedback. A dedicated self-test runs a six-stage sequence across the vehicle systems.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Keypad controls</h2>
+        <div class="not-prose grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {commands.map(({ key, action, byte }) => (
+            <div class="rounded-xl border border-neutral/20 bg-surface/60 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-neutral">Key {key}</p>
+              <p class="mt-1 font-semibold text-white">{action}</p>
+              <p class="mt-2 text-sm text-neutral">UART command: <span class="font-mono text-primary">{byte}</span></p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="mb-12 grid gap-10 sm:grid-cols-2">
+        <div>
+          <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Remote controller</h2>
+          <ul class="ml-6 list-disc space-y-2 leading-relaxed text-neutral">
+            <li>STM32F091RC scans keypad rows PB0–PB3 and reads columns PB5–PB8 with pull-ups.</li>
+            <li>USART3 on PC10/PC11 sends the motion and self-test commands at 9600 baud.</li>
+            <li>A 16×2 LCD, buzzer, heartbeat LED, and active-move indicator provide local feedback.</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Vehicle controller</h2>
+          <ul class="ml-6 list-disc space-y-2 leading-relaxed text-neutral">
+            <li>An L293D drives the left and right motors; PA8 and PA9 enable the two channels.</li>
+            <li>PB0, PB1, PB10, and PB11 set motor direction for forward, reverse, and pivot turns.</li>
+            <li>The LCD, buzzer, heartbeat pattern, and headlamps signal commands and test stages.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Feedback and self-test</h2>
+        <p class="leading-relaxed text-neutral">
+          Movement modes trigger directional tones and clear visual status. Stop disables the motor inputs and returns the display to a waiting state. The self-test exercises the LCD, headlamps, tones, and motor outputs in a six-stage cycle, while a timer-driven heartbeat indicates that the boards are still running.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="mb-6 font-serif text-2xl font-semibold text-primary">Project media</h2>
+        <div class="not-prose grid items-start gap-5 sm:grid-cols-2">
+          {media.map((item) => (
+            <figure class="overflow-hidden rounded-2xl border border-neutral/20">
+              <img
+                src={item.src}
+                alt={item.alt}
+                class="block max-h-[28rem] w-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="px-3 py-2 text-sm text-neutral">{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href="https://github.com/shiiifa/robovehicle"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-black transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        >
+          View source code
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>

@@ -10,7 +10,7 @@ const { skills } = Astro.props;
 ---
 
 <Section text="skills" href="skills">
-  <div class="skills-layout grid grid-cols-1 justify-items-center gap-16 px-4 md:grid-cols-3 md:gap-8">
+  <div class="skills-layout grid grid-cols-3 justify-items-center gap-2 px-1 md:gap-8">
     {skills.map((skill) => (
       <details class="skill-orbit">
         <summary class="skill-orbit__trigger">
@@ -51,7 +51,7 @@ const { skills } = Astro.props;
 
   .skill-orbit__trigger {
     display: grid;
-    width: clamp(7.5rem, 12vw, 9rem);
+    width: clamp(5.5rem, 22vw, 9rem);
     aspect-ratio: 1;
     place-items: center;
     padding: 1rem;
@@ -67,6 +67,13 @@ const { skills } = Astro.props;
     list-style: none;
     text-align: center;
     transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease, transform 220ms ease;
+  }
+
+  @media (max-width: 767px) {
+    .skill-orbit__trigger {
+      padding: 0.25rem;
+      font-size: 0.75rem;
+    }
   }
 
   .skill-orbit__trigger::-webkit-details-marker {

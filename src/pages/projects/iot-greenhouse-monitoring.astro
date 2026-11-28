@@ -108,18 +108,16 @@ const gallery = [
 
       <section class="mb-12">
           <h2 class="mb-4 font-serif text-2xl font-semibold text-primary">Project media</h2>
-          <div class="grid gap-5 sm:grid-cols-2">
+          <div class="grid items-start gap-5 sm:grid-cols-2">
             {gallery.map((item) => (
-              <figure class="overflow-hidden rounded-2xl border border-neutral/20 bg-surface">
-                <a href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size image: ${item.alt}`}>
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    class="max-h-[28rem] w-full bg-black/20 object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
+              <figure class="overflow-hidden rounded-2xl border border-neutral/20">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  class="block max-h-[28rem] w-full object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
               </figure>
             ))}
           </div>

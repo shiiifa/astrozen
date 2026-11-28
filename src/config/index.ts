@@ -35,6 +35,7 @@ export const SITE_CONTENT: SiteContent = {
   experience: [
     {
       company: "Smart Technologies Lab, Ashesi University",
+      logo: "/ashesi-university-logo.png",
       position: "Undergraduate Research Assistant",
       startDate: "January 2026",
       endDate: "September 2026",
@@ -46,6 +47,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       company: "Kuapa Kokoo Limited",
+      logo: "/kuapa-kokoo-logo.png",
       position: "Management Information Systems Intern",
       startDate: "June 2025",
       endDate: "August 2025",
@@ -58,6 +60,13 @@ export const SITE_CONTENT: SiteContent = {
   ],
   
   projects: [
+    {
+      name: "STM32 Remote-Controlled Robotic Vehicle",
+      summary: "A dual-STM32 robot car controlled from a 4×4 keypad over USART3, with L293D motor drive, LCD status, buzzer cues, headlamps, and a six-stage self-test.",
+      linkPreview: "/projects/stm32-robotic-vehicle",
+      linkSource: "https://github.com/shiiifa/robovehicle",
+      image: "/robovehicle-cover.jpeg",
+    },
     {
       name: "IoT Greenhouse Monitoring System",
       summary: "An ESP32 greenhouse monitor streams five sensor readings over MQTT through a Raspberry Pi pipeline into local InfluxDB and a PHP dashboard with live status, history charts, and CSV export.",

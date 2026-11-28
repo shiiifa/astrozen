@@ -30,8 +30,9 @@ const isHomepage = Astro.url.pathname === '/';
   </button>
 
   <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-[#2c002e] px-4 py-5 text-neutral lg:static lg:block lg:border-0 lg:bg-transparent lg:p-0"
+    class="absolute top-20 right-5 rounded-xl border border-neutral/40 bg-[#2c002e] px-4 py-5 text-neutral lg:static lg:block lg:border-0 lg:bg-transparent lg:p-0"
     id="main-menu"
+    data-open="false"
   >
     <ul class="gap-2 lg:flex">
       {
@@ -180,15 +181,28 @@ const isHomepage = Astro.url.pathname === '/';
 <script>
   // Toggle mobile menu
   const button = document.querySelector("#menu-button");
-  const menu = document.querySelector("#main-menu");
+  const menu = document.querySelector<HTMLElement>("#main-menu");
   const navItems = document.querySelectorAll("#main-menu > ul > li > a, #main-menu > ul > li > button");
 
-  const toggleMenu = () => {
-    menu?.classList.toggle("hidden");
-    const isHidden = menu?.classList.contains("hidden");
-    button?.setAttribute("aria-expanded", `${!isHidden}`);
+  const mobileBreakpoint = window.matchMedia("(max-width: 1023px)");
+  const setMenuOpen = (isOpen: boolean) => {
+    if (!menu || !button) return;
+    menu.dataset.open = `${isOpen}`;
+    button.setAttribute("aria-expanded", `${isOpen}`);
+    if (mobileBreakpoint.matches) {
+      menu.setAttribute("aria-hidden", `${!isOpen}`);
+    } else {
+      menu.removeAttribute("aria-hidden");
+    }
   };
 
+  const toggleMenu = () => {
+    if (!mobileBreakpoint.matches || !menu) return;
+    setMenuOpen(menu.dataset.open !== "true");
+  };
+
+  if (mobileBreakpoint.matches) menu?.setAttribute("aria-hidden", "true");
+  mobileBreakpoint.addEventListener("change", () => setMenuOpen(false));
   button?.addEventListener("click", toggleMenu);
   navItems.forEach((item) => {
     // Don't close menu when clicking dropdown buttons
@@ -323,6 +337,26 @@ item.classList.remove("text-white", "after:opacity-100");
       width: min(20rem, calc(100vw - 2rem));
       max-height: calc(100dvh - 5.5rem);
       overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-0.5rem);
+      transform-origin: top right;
+    }
+
+    #main-menu[data-open="true"] {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #main-menu,
+      #main-menu[data-open="true"] {
+        transition: none;
+      }
     }
 
     #main-menu > ul {

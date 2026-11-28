@@ -56,6 +56,12 @@
   }
 }
 
+html,
+body {
+  background-color: var(--color-background);
+  color-scheme: dark;
+}
+
 html {
   scroll-padding-top: 5rem;
 }
@@ -63,7 +69,6 @@ html {
 body {
   min-width: 320px;
   overflow-x: clip;
-  background-color: var(--color-background);
 }
 
 img,
