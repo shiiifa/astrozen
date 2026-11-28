@@ -70,22 +70,6 @@ const sections = [
 
 </article>
 
-<script>
-  const bannerVideo = document.querySelector<HTMLVideoElement>("[data-snnjotter-banner]");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  const syncBannerPlayback = () => {
-    if (!bannerVideo) return;
-    if (prefersReducedMotion.matches) {
-      bannerVideo.pause();
-      return;
-    }
-    void bannerVideo.play().catch(() => {});
-  };
-
-  syncBannerPlayback();
-  prefersReducedMotion.addEventListener("change", syncBannerPlayback);
-</script>
 
 <style>
   .snnjotter-header {
