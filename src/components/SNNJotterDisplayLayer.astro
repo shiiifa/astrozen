@@ -30,7 +30,10 @@ const displayStatuses = [
               height="1500"
               loading="lazy"
               decoding="async"
-              class="h-20 w-20 rounded-lg border border-white/10 bg-black object-contain"
+              class:list={[
+                "rounded-lg border border-white/10 bg-black object-contain",
+                item.display === "LO" || item.display === "HI" ? "h-16 w-16" : "h-20 w-20",
+              ]}
             />
           </div>
         </li>
