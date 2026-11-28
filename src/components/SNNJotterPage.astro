@@ -29,7 +29,7 @@ const sections = [
     </video>
   </div>
   <header class="px-2 py-7 text-center sm:py-9">
-    <h1 class="mx-auto max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+    <h1 class="snnjotter-subtitle mx-auto max-w-2xl text-white/60">
       Friendly notebook for my capstone: <span class="font-medium text-white/75">FPGA-Accelerated Spiking Neural Networks for Real-Time Biomedical Signal Inference.</span>
     </h1>
   </header>
@@ -81,3 +81,10 @@ const sections = [
   syncBannerPlayback();
   prefersReducedMotion.addEventListener("change", syncBannerPlayback);
 </script>
+
+<style>
+  .snnjotter-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+</style>

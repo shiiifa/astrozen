@@ -13,13 +13,25 @@ const glossary = [
 
 <section class="mt-7" aria-label="Notebook glossary">
   <p class="leading-relaxed text-white/80">Quick, plain-language translations for the terms you’ll meet throughout the notebook.</p>
-  <dl class="mt-6 grid gap-3 sm:grid-cols-2">
-    {glossary.map((item) => (
-      <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-5">
-        <dt class="font-serif text-lg font-bold text-white">{item.term}</dt>
-        <dd class="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-primary">{item.label}</dd>
-        <dd class="mt-3 text-sm leading-relaxed text-white/75">{item.definition}</dd>
-      </div>
-    ))}
-  </dl>
+  <div class="mt-6 overflow-x-auto rounded-2xl border border-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" role="region" aria-label="Glossary table" tabindex="0">
+    <table class="w-full min-w-[680px] border-collapse text-left">
+      <caption class="sr-only">Glossary of signal, neuron, and hardware terms</caption>
+      <thead class="bg-white/[0.035] text-xs uppercase tracking-[0.1em] text-primary">
+        <tr>
+          <th class="px-4 py-3 font-semibold sm:px-5" scope="col">Term</th>
+          <th class="px-4 py-3 font-semibold sm:px-5" scope="col">In other words</th>
+          <th class="px-4 py-3 font-semibold sm:px-5" scope="col">Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        {glossary.map((item) => (
+          <tr class="border-t border-white/10 align-top">
+            <th class="px-4 py-4 text-sm font-semibold text-white sm:px-5" scope="row">{item.term}</th>
+            <td class="px-4 py-4 text-sm font-medium text-primary sm:px-5">{item.label}</td>
+            <td class="px-4 py-4 text-sm leading-relaxed text-white/75 sm:px-5">{item.definition}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </section>
