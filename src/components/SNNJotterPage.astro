@@ -1,10 +1,16 @@
 ---
+import SNNJotterEverydayStory from "./SNNJotterEverydayStory.astro";
+import SNNJotterEngineeringPuzzle from "./SNNJotterEngineeringPuzzle.astro";
+import SNNJotterPipeline from "./SNNJotterPipeline.astro";
+import SNNJotterGlossary from "./SNNJotterGlossary.astro";
+import SNNJotterRoadmap from "./SNNJotterRoadmap.astro";
+
 const sections = [
-  { label: "Everyday story", href: "/projects/snnjotter/everyday-story" },
-  { label: "Engineering puzzle", href: "/projects/snnjotter/engineering-puzzle" },
-  { label: "Pipeline", href: "/projects/snnjotter/pipeline" },
-  { label: "Glossary", href: "/projects/snnjotter/glossary" },
-  { label: "Roadmap", href: "/projects/snnjotter/roadmap" },
+  { number: "1", label: "everyday story", component: SNNJotterEverydayStory },
+  { number: "2", label: "engineering puzzle", component: SNNJotterEngineeringPuzzle },
+  { number: "3", label: "pipeline", component: SNNJotterPipeline },
+  { number: "4", label: "glossary", component: SNNJotterGlossary },
+  { number: "5", label: "roadmap", component: SNNJotterRoadmap },
 ];
 ---
 
@@ -24,33 +30,39 @@ const sections = [
   </div>
   <header class="px-2 py-7 text-center sm:py-9">
     <h1 class="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl">SNNJotter</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
-      A friendly notebook for my capstone: <span class="font-semibold text-white">FPGA-Accelerated Spiking Neural Networks for Real-Time Biomedical Signal Inference.</span>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
+      Friendly notebook for my capstone: <span class="font-medium text-white/75">FPGA-Accelerated Spiking Neural Networks for Real-Time Biomedical Signal Inference.</span>
     </p>
   </header>
 
   <section class="mt-8 rounded-2xl border border-white/10 bg-white/[0.035] p-5 sm:p-6" aria-labelledby="preface-title">
     <p class="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Preface</p>
     <h2 id="preface-title" class="mt-2 font-serif text-xl font-bold text-white">Why I opened the notebook</h2>
-    <p class="mt-3 text-sm leading-relaxed text-white/75">When friends or connections ask what I’m working on, I don’t want to hand them a long explanation full of jargon. So I made SNNJotter: a peek into my notebook while I figure things out, one idea at a time.</p>
-    <p class="mt-3 text-sm leading-relaxed text-white/75">As an undergrad exploring Spiking Neural Networks, the word “spikes” has become a constant buzzword in my world. And because this project works with human heartbeat data, I want the big picture to make sense to everyday people too—not just people who already speak chip-design.</p>
+    <p class="mt-3 text-sm leading-relaxed text-white/75">If you’re building technology for people, they should be able to understand what you’re doing for them. When people ask what I’m working on for my capstone, I often catch myself dishing out acronyms and long explanations. SNNJotter is a peek into my notebook so everyday people can grasp the big picture: a clearer window into my work on Spiking Neural Networks</p>
   </section>
 
   <section class="mt-8" aria-labelledby="contents-title">
-    <h2 id="contents-title" class="font-serif text-2xl font-bold text-white sm:text-3xl">Table of contents</h2>
-    <nav class="mt-4" aria-label="Table of contents">
-      <ul class="divide-y divide-white/10 border-y border-white/10">
-        {sections.map((section) => (
-          <li>
-            <a
-              href={section.href}
-              class="block py-3 text-base font-medium text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              {section.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <h2 id="contents-title" class="font-serif text-2xl font-bold lowercase text-white sm:text-3xl">table of contents</h2>
+    <nav class="mt-4" aria-label="table of contents">
+      <ol class="divide-y divide-white/10 border-y border-white/10">
+        {sections.map((section) => {
+          const SectionContent = section.component;
+          return (
+            <li>
+              <details class="group">
+                <summary class="flex cursor-pointer list-none items-center gap-4 py-4 text-base font-medium text-primary transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <span class="grid size-10 shrink-0 place-items-center rounded-full border border-primary/45 bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">{section.number}</span>
+                  <span class="underline decoration-primary/40 underline-offset-4">{section.label}</span>
+                  <span class="ml-auto text-xl text-primary transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <div class="pb-5 pl-14 pr-1">
+                  <SectionContent />
+                </div>
+              </details>
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   </section>
 
