@@ -1,4 +1,10 @@
 ---
+const pipelineDoodles = [
+  "/snnjotter-doodle-gold.png",
+  "/snnjotter-doodle-lavender.png",
+  "/snnjotter-doodle-star.png",
+];
+
 const pipeline = [
   { number: "01", title: "Start with heartbeat recordings", shortTitle: "Data", term: "MIT-BIH Arrhythmia Database", text: "The project uses established, open-access ECG recordings with beat labels. This is benchmark data, not a live-patient test." },
   { number: "02", title: "Turn the wave into events", shortTitle: "Events", term: "Preprocessing + Level-Crossing encoding", text: "The signal is normalized, then a spike is produced when the waveform crosses a meaningful threshold. That gives the network a more event-focused view than sending every sample as a constant stream." },
@@ -37,15 +43,6 @@ const pipeline = [
         >
           <div class="pipeline__dialog-header">
             <p class="pipeline__step-number">STEP {step.number}</p>
-            <img
-              class="pipeline__doodle"
-              style="transform: rotate(-12deg) scaleY(-1)"
-              src="/snnjotter-doodle-gold.png"
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-            />
             <button
               class="pipeline__close"
               type="button"
@@ -55,6 +52,16 @@ const pipeline = [
               <span aria-hidden="true">×</span>
             </button>
           </div>
+          <img
+            class="pipeline__doodle"
+            src={pipelineDoodles[index % pipelineDoodles.length]}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="56"
+            height="56"
+          />
           <h3 id={`pipeline-heading-${index}`} class="pipeline__dialog-title">{step.title}</h3>
           <p class="pipeline__term">{step.term}</p>
           <p class="pipeline__text">{step.text}</p>
@@ -66,7 +73,7 @@ const pipeline = [
 
 <style>
   .pipeline__track {
-    --pipeline-node-size: clamp(1.5rem, 5.2vw, 3rem);
+    --pipeline-node-size: clamp(1.5rem, 7.3vw, 3.5rem);
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
     align-items: start;
@@ -155,7 +162,7 @@ const pipeline = [
     color: var(--color-white);
     font-family: var(--font-serif);
     font-size: clamp(0.65rem, 1.25vw, 0.875rem);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.25;
     overflow-wrap: anywhere;
   }
@@ -232,10 +239,12 @@ const pipeline = [
   }
 
   .pipeline__doodle {
-    width: 2rem;
-    height: 2rem;
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 auto 0.5rem;
     object-fit: contain;
-    opacity: 0.8;
+    opacity: 0.9;
   }
 
   .pipeline__close {
@@ -282,7 +291,7 @@ const pipeline = [
     line-height: 1.6;
   }
 
-  @media (min-width: 40rem) {
+  @media (min-width: 48rem) {
     .pipeline__label-short {
       display: none;
     }
