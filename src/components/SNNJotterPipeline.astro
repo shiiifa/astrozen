@@ -10,11 +10,10 @@ const pipeline = [
 ];
 ---
 
-<section class="mt-7" aria-label="How the pipeline works">
-  <p class="leading-relaxed text-white/80">Here’s the seven-step route, with the technical names translated as we go.</p>
-  <ol class="mt-6 space-y-3">
+<section class="relative mt-7" aria-label="How the pipeline works">
+  <ol class="relative mt-2 space-y-3 sm:mt-4">
     {pipeline.map((step) => (
-      <li class="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-4 sm:p-5">
+      <li class="flex gap-4 py-4 sm:py-5">
         <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary/35 bg-primary/10 text-sm font-bold text-primary" aria-hidden="true">{step.number}</span>
         <div>
           <h2 class="font-serif text-lg font-bold text-white">{step.title}</h2>
@@ -24,4 +23,28 @@ const pipeline = [
       </li>
     ))}
   </ol>
+  <img
+    class="pointer-events-none absolute -left-6 top-28 hidden size-12 -rotate-12 object-contain opacity-75 sm:block"
+    src="/snnjotter-doodle-gold.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class="pointer-events-none absolute -right-5 top-[42%] hidden size-14 rotate-12 object-contain opacity-75 sm:block"
+    src="/snnjotter-doodle-star.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class="pointer-events-none absolute -left-5 bottom-12 hidden size-12 rotate-6 object-contain opacity-70 sm:block"
+    src="/snnjotter-doodle-lavender.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
 </section>
