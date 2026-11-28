@@ -1,26 +1,18 @@
 ---
-const classes = [
-  { code: "N", name: "Normal", detail: "A beat in the normal category." },
-  { code: "S", name: "Supraventricular ectopic", detail: "A beat that starts above the ventricles." },
-  { code: "V", name: "Ventricular ectopic", detail: "A beat that starts in the ventricles." },
-  { code: "F", name: "Fusion", detail: "A beat combining normal and ventricular activity." },
-  { code: "Q", name: "Unknown / unclassifiable", detail: "A beat that does not fit the other listed groups." },
-];
-
 ---
 
 <section class="mt-7" aria-label="Engineering puzzle + my objective">
-  <p class="leading-relaxed text-white/80">A model that fits comfortably on a laptop may be too large for a compact chip. The Digilent Basys 3 uses an Artix-7 FPGA, and the design has to work within limited on-board memory—especially <strong class="text-white">BRAM</strong>, the chip’s built-in block memory—while still learning to distinguish five heartbeat categories.</p>
-  <div class="mt-6 rounded-2xl border border-white/10 bg-surface p-5 sm:p-6">
-    <h2 class="font-serif text-xl font-bold text-white">The five labels in the benchmark</h2>
-    <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-      {classes.map((item) => (
-        <li class="flex gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3">
-          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary" aria-label={`Class ${item.code}`}>{item.code}</span>
-          <span><strong class="block text-sm text-white">{item.name}</strong><span class="mt-1 block text-sm leading-relaxed text-white/70">{item.detail}</span></span>
-        </li>
-      ))}
-    </ul>
-  </div>
-  <p class="mt-4 leading-relaxed text-white/80">Shrinking or compressing a model can help it fit, but it can also remove detail the model needs. The work is about finding a sensible balance on the actual hardware—not assuming a smaller model is automatically good enough.</p>
+  <p class="leading-relaxed text-white/80">A model that fits comfortably on a laptop may be too large for a compact chip. The Digilent Basys 3 uses an Artix-7 FPGA, and the design has to work within limited on-board memory (especially <strong class="text-white">BRAM</strong>, the chip’s built-in block memory) while still learning to distinguish five heartbeat categories.</p>
+  <figure class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 sm:p-6">
+    <img
+      class="mx-auto max-h-[26rem] w-full max-w-3xl object-contain"
+      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hello%2C%20i%E2%80%99m%20shifa%21%20%2815%29-obbkuc8fqUsZeSPQ74LtdYkfWGUPel.png"
+      alt="Digilent Basys 3 FPGA development board with switches, buttons, and seven-segment display"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption class="mt-3 text-center text-sm text-white/65">The Digilent Basys 3 board used for the FPGA implementation.</figcaption>
+  </figure>
+  <p class="mt-4 leading-relaxed text-white/80">Shrinking or compressing a model can help it fit, but it can also remove detail the model needs. The work is about finding a sensible balance on the actual hardware, not just assuming a smaller model is automatically good enough.</p>
+  <p class="mt-4 leading-relaxed text-white/80">My objective, therefore, is to design and deploy a compressed, pure Spiking Neural Network on a Basys 3 FPGA that classifies heartbeats into all five AAMI arrhythmia categories in real time while balancing strict memory limits against high accuracy.</p>
 </section>
